@@ -24,6 +24,9 @@ class TicketSearchTests(unittest.TestCase):
         description_matches = {ticket.id for ticket in self.service.search_tickets("OWNERship")}
         self.assertIn("T-102", description_matches)
 
+        tag_matches = {ticket.id for ticket in self.service.search_tickets("UI")}
+        self.assertIn("T-100", tag_matches)
+
     def test_blank_query_returns_all_tickets(self) -> None:
         self.assertEqual(len(self.service.search_tickets("   ")), 3)
 

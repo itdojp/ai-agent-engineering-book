@@ -5,22 +5,26 @@ from dataclasses import replace
 from .models import Ticket
 
 
+def _clone_ticket(ticket: Ticket) -> Ticket:
+    return replace(ticket, tags=list(ticket.tags), history=list(ticket.history))
+
+
 class InMemoryTicketStore:
     def __init__(self, tickets: list[Ticket] | None = None) -> None:
-        self._tickets = {ticket.id: replace(ticket) for ticket in (tickets or [])}
+        self._tickets = {ticket.id: _clone_ticket(ticket) for ticket in (tickets or [])}
 
     def list(self) -> list[Ticket]:
-        return [replace(ticket) for ticket in self._tickets.values()]
+        return [_clone_ticket(ticket) for ticket in self._tickets.values()]
 
     def get(self, ticket_id: str) -> Ticket:
         ticket = self._tickets.get(ticket_id)
         if ticket is None:
             raise KeyError(ticket_id)
-        return replace(ticket)
+        return _clone_ticket(ticket)
 
     def save(self, ticket: Ticket) -> Ticket:
-        self._tickets[ticket.id] = replace(ticket)
-        return replace(ticket)
+        self._tickets[ticket.id] = _clone_ticket(ticket)
+        return _clone_ticket(ticket)
 
 
 def seed_store() -> InMemoryTicketStore:

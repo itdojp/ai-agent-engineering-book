@@ -94,7 +94,7 @@ def validate_rubric(rubric: dict[str, Any]) -> None:
 def main() -> int:
     required = [
         *PROMPTS.values(),
-        ROOT / "evals" / "prompt-contract-cases.yaml",
+        ROOT / "evals" / "prompt-contract-cases.json",
         ROOT / "evals" / "rubrics" / "feature-spec.json",
     ]
     missing = [str(p.relative_to(ROOT)) for p in required if not p.exists()]
@@ -105,7 +105,7 @@ def main() -> int:
         return 1
 
     validate_prompt_contracts()
-    cases_doc = load_json(ROOT / "evals" / "prompt-contract-cases.yaml")
+    cases_doc = load_json(ROOT / "evals" / "prompt-contract-cases.json")
     rubric = load_json(ROOT / "evals" / "rubrics" / "feature-spec.json")
     validate_cases(cases_doc)
     validate_rubric(rubric)

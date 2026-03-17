@@ -1,0 +1,34 @@
+id: ch09
+title: Harness Engineering の基礎
+part: part-03-harness
+goal: Harness Engineering の導入として、coding agent を動かす single-agent harness を定義し、実行境界・権限・完了条件・再試行の考え方を導入する。
+reader_outcomes:
+  - single-agent harness の構成要素を説明できる
+  - permission policy と escalation の必要性を理解する
+  - done criteria を明文化できる
+dependencies:
+  - ch05
+  - ch06
+  - ch07
+  - ch08
+sections:
+  - single-agent harness の全体像
+  - init、権限、作業境界
+  - completion criteria と exit rule
+  - 安全な retry と rollback
+  - coding agent に仕事を最後までさせる条件
+exercises:
+  - バグ修正タスク向けの single-agent runbook を設計する。
+  - permission policy と escalation rule を定義する。
+artifacts:
+  - scripts/init.sh
+  - scripts/verify-sample.sh
+  - sample-repo/docs/harness/single-agent-runbook.md
+  - sample-repo/docs/harness/permission-policy.md
+  - sample-repo/docs/harness/done-criteria.md
+acceptance_criteria:
+  - 章本文が標準章構成に従う
+  - bad / good example を最低 1 組含む
+  - 演習を 2 問含む
+  - brief で参照する artifact が repo 上に存在する
+  - verify が通る

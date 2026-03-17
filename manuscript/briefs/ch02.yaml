@@ -1,0 +1,29 @@
+id: ch02
+title: プロンプトを契約として設計する
+part: part-01-prompt
+goal: Prompt Engineering を『命令文の工夫』ではなく『入出力契約の設計』として定義し、再利用可能な artifact として Prompt Contract を作る。
+reader_outcomes:
+  - 目的・制約・完了条件・禁止事項を分離して書ける
+  - bad prompt / good prompt を評価軸付きで比較できる
+  - feature と bugfix で異なる Prompt Contract を作れる
+dependencies:
+  - ch01
+sections:
+  - prompt は命令文ではなく入出力契約
+  - 目的・制約・完了条件・禁止事項の分離
+  - 仮定の置き方と不足情報の扱い
+  - bad prompt / good prompt の比較
+  - プロンプトレビューの観点
+exercises:
+  - 『検索を追加して』を contract prompt に書き換える。
+  - バグ修正タスクについて『done』を 5 項目で明文化する。
+artifacts:
+  - prompts/bugfix-contract.md
+  - prompts/feature-contract.md
+  - checklists/prompt-contract-review.md
+acceptance_criteria:
+  - 章本文が標準章構成に従う
+  - bad / good example を最低 1 組含む
+  - 演習を 2 問含む
+  - brief で参照する artifact が repo 上に存在する
+  - verify が通る

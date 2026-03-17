@@ -1,0 +1,6 @@
+id: app-a
+title: Prompt テンプレート集
+goal: 書籍全体で再利用するテンプレートまたは定義を提供する。
+artifacts:
+  - templates/prompt-contract.md
+  - templates/prompt-rubric.md

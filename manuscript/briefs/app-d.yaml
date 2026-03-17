@@ -1,0 +1,5 @@
+id: app-d
+title: 用語集
+goal: 書籍全体で再利用するテンプレートまたは定義を提供する。
+artifacts:
+  - docs/glossary.md

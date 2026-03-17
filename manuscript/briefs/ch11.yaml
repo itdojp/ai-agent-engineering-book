@@ -1,0 +1,31 @@
+id: ch11
+title: Long-running Task と Multi-agent
+part: part-03-harness
+goal: 長時間タスクで必要な feature list・restart protocol・progress notes を定義し、必要時のみ multi-agent に分割する。
+reader_outcomes:
+  - 長時間タスクが壊れる理由を説明できる
+  - restart protocol を設計できる
+  - single-agent と multi-agent の使い分けを判断できる
+dependencies:
+  - ch09
+  - ch10
+sections:
+  - 長時間タスクで壊れる点
+  - feature list と進捗記録
+  - restart protocol
+  - planner / coder / reviewer の分離
+  - multi-agent を使う条件、使わない条件
+exercises:
+  - ケースCを planner / coder / reviewer に分解する。
+  - 途中で失敗した長時間タスクを restart protocol で再開する。
+artifacts:
+  - sample-repo/docs/harness/feature-list.md
+  - sample-repo/docs/harness/restart-protocol.md
+  - sample-repo/docs/harness/multi-agent-playbook.md
+  - sample-repo/tasks/FEATURE-002-plan.md
+acceptance_criteria:
+  - 章本文が標準章構成に従う
+  - bad / good example を最低 1 組含む
+  - 演習を 2 問含む
+  - brief で参照する artifact が repo 上に存在する
+  - verify が通る

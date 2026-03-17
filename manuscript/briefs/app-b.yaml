@@ -1,0 +1,7 @@
+id: app-b
+title: Context テンプレート集
+goal: 書籍全体で再利用するテンプレートまたは定義を提供する。
+artifacts:
+  - templates/task-brief.md
+  - templates/progress-note.md
+  - templates/context-pack.md

@@ -1,0 +1,240 @@
+{
+  "issues": [
+    {
+      "id": "REPO-01",
+      "title": "REPO-01 Bootstrap book repository skeleton",
+      "labels": [
+        "type/scaffold",
+        "area/manuscript",
+        "area/sample-repo"
+      ],
+      "milestone": "M0-scaffold",
+      "body_file": "issue-drafts/repo_01.md"
+    },
+    {
+      "id": "REPO-02",
+      "title": "REPO-02 Create sample-repo baseline and seed issues",
+      "labels": [
+        "type/scaffold",
+        "area/sample-repo"
+      ],
+      "milestone": "M0-scaffold",
+      "body_file": "issue-drafts/repo_02.md"
+    },
+    {
+      "id": "REPO-03",
+      "title": "REPO-03 Add AGENTS layering for root/manuscript/sample-repo",
+      "labels": [
+        "type/scaffold",
+        "area/manuscript",
+        "area/sample-repo"
+      ],
+      "milestone": "M0-scaffold",
+      "body_file": "issue-drafts/repo_03.md"
+    },
+    {
+      "id": "REPO-04",
+      "title": "REPO-04 Add root skills and sample-repo skills",
+      "labels": [
+        "type/scaffold",
+        "area/manuscript",
+        "area/sample-repo"
+      ],
+      "milestone": "M0-scaffold",
+      "body_file": "issue-drafts/repo_04.md"
+    },
+    {
+      "id": "REPO-05",
+      "title": "REPO-05 Add verify scripts and CI stubs",
+      "labels": [
+        "type/scaffold",
+        "area/manuscript",
+        "area/sample-repo"
+      ],
+      "milestone": "M0-scaffold",
+      "body_file": "issue-drafts/repo_05.md"
+    },
+    {
+      "id": "REPO-06",
+      "title": "REPO-06 Add chapter briefs and appendix briefs",
+      "labels": [
+        "type/scaffold",
+        "area/manuscript"
+      ],
+      "milestone": "M0-scaffold",
+      "body_file": "issue-drafts/repo_06.md"
+    },
+    {
+      "id": "CH01",
+      "title": "CH01 Define the failure model and case-study scope",
+      "labels": [
+        "type/chapter",
+        "area/manuscript"
+      ],
+      "milestone": "M1-prompt",
+      "body_file": "issue-drafts/ch01.md"
+    },
+    {
+      "id": "CH02",
+      "title": "CH02 Write prompt-as-contract chapter and prompt artifacts",
+      "labels": [
+        "type/chapter",
+        "area/manuscript",
+        "part/prompt"
+      ],
+      "milestone": "M1-prompt",
+      "body_file": "issue-drafts/ch02.md"
+    },
+    {
+      "id": "CH03",
+      "title": "CH03 Write requirements-and-design chapter and spec artifacts",
+      "labels": [
+        "type/chapter",
+        "area/manuscript",
+        "part/prompt"
+      ],
+      "milestone": "M1-prompt",
+      "body_file": "issue-drafts/ch03.md"
+    },
+    {
+      "id": "CH04",
+      "title": "CH04 Write prompt-evals chapter and eval artifacts",
+      "labels": [
+        "type/chapter",
+        "area/manuscript",
+        "part/prompt"
+      ],
+      "milestone": "M1-prompt",
+      "body_file": "issue-drafts/ch04.md"
+    },
+    {
+      "id": "CH05",
+      "title": "CH05 Write context-engineering fundamentals chapter",
+      "labels": [
+        "type/chapter",
+        "area/manuscript",
+        "part/context"
+      ],
+      "milestone": "M2-context",
+      "body_file": "issue-drafts/ch05.md"
+    },
+    {
+      "id": "CH06",
+      "title": "CH06 Write repo-context chapter and AGENTS/repo-map artifacts",
+      "labels": [
+        "type/chapter",
+        "area/manuscript",
+        "part/context"
+      ],
+      "milestone": "M2-context",
+      "body_file": "issue-drafts/ch06.md"
+    },
+    {
+      "id": "CH07",
+      "title": "CH07 Write task-context-and-memory chapter",
+      "labels": [
+        "type/chapter",
+        "area/manuscript",
+        "part/context"
+      ],
+      "milestone": "M2-context",
+      "body_file": "issue-drafts/ch07.md"
+    },
+    {
+      "id": "CH08",
+      "title": "CH08 Write skills-and-context-pack chapter",
+      "labels": [
+        "type/chapter",
+        "area/manuscript",
+        "part/context"
+      ],
+      "milestone": "M2-context",
+      "body_file": "issue-drafts/ch08.md"
+    },
+    {
+      "id": "CH09",
+      "title": "CH09 Write harness fundamentals chapter",
+      "labels": [
+        "type/chapter",
+        "area/manuscript",
+        "part/harness"
+      ],
+      "milestone": "M3-harness",
+      "body_file": "issue-drafts/ch09.md"
+    },
+    {
+      "id": "CH10",
+      "title": "CH10 Write verification-harness chapter and CI artifacts",
+      "labels": [
+        "type/chapter",
+        "area/manuscript",
+        "part/harness"
+      ],
+      "milestone": "M3-harness",
+      "body_file": "issue-drafts/ch10.md"
+    },
+    {
+      "id": "CH11",
+      "title": "CH11 Write long-running-and-multi-agent chapter",
+      "labels": [
+        "type/chapter",
+        "area/manuscript",
+        "part/harness"
+      ],
+      "milestone": "M3-harness",
+      "body_file": "issue-drafts/ch11.md"
+    },
+    {
+      "id": "CH12",
+      "title": "CH12 Write operating-model chapter",
+      "labels": [
+        "type/chapter",
+        "area/manuscript",
+        "part/harness"
+      ],
+      "milestone": "M3-harness",
+      "body_file": "issue-drafts/ch12.md"
+    },
+    {
+      "id": "APP-01",
+      "title": "APP-01 Draft appendices A-D",
+      "labels": [
+        "type/appendix",
+        "area/manuscript"
+      ],
+      "milestone": "M4-polish",
+      "body_file": "issue-drafts/app_01.md"
+    },
+    {
+      "id": "POLISH-01",
+      "title": "POLISH-01 Normalize terminology and glossary",
+      "labels": [
+        "type/polish",
+        "area/manuscript"
+      ],
+      "milestone": "M4-polish",
+      "body_file": "issue-drafts/polish_01.md"
+    },
+    {
+      "id": "POLISH-02",
+      "title": "POLISH-02 Cross-reference, figure, and artifact consistency pass",
+      "labels": [
+        "type/polish",
+        "area/manuscript",
+        "area/sample-repo"
+      ],
+      "milestone": "M4-polish",
+      "body_file": "issue-drafts/polish_02.md"
+    },
+    {
+      "id": "POLISH-03",
+      "title": "POLISH-03 Technical accuracy and editorial pass",
+      "labels": [
+        "type/polish",
+        "area/manuscript"
+      ],
+      "milestone": "M4-polish",
+      "body_file": "issue-drafts/polish_03.md"
+    }
+  ]
+}

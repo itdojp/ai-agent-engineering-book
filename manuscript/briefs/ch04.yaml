@@ -1,0 +1,30 @@
+id: ch04
+title: プロンプトを評価する
+part: part-01-prompt
+goal: Prompt Engineering を評価可能な artifact にし、prompt versioning と回帰テストの考え方を導入する。
+reader_outcomes:
+  - eval case と rubric を分けて設計できる
+  - prompt の回帰テストを自動実行できる
+  - モデル更新時の比較観点を列挙できる
+dependencies:
+  - ch02
+  - ch03
+sections:
+  - 良い prompt は評価できる
+  - eval set の作り方
+  - rubric と golden の違い
+  - prompt の回帰テスト
+  - versioning と比較運用
+exercises:
+  - 5 件の eval case を自作する。
+  - v1/v2 prompt を比較し、どちらが安定するか記録する。
+artifacts:
+  - evals/prompt-contract-cases.yaml
+  - evals/rubrics/feature-spec.json
+  - scripts/run-prompt-evals.py
+acceptance_criteria:
+  - 章本文が標準章構成に従う
+  - bad / good example を最低 1 組含む
+  - 演習を 2 問含む
+  - brief で参照する artifact が repo 上に存在する
+  - verify が通る

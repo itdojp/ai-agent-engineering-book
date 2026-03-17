@@ -11,6 +11,7 @@ root_required=(
 )
 
 sample_required=(
+  "AGENTS.md"
   "docs/repo-map.md"
   "docs/architecture.md"
   "docs/harness/single-agent-runbook.md"

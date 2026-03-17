@@ -1,0 +1,32 @@
+id: ch06
+title: Repo Context を設計する
+part: part-02-context
+goal: AGENTS.md、repo-map、architecture docs を用いて、Codex CLI 上の coding agent が repo を理解しやすい形にする。
+reader_outcomes:
+  - 巨大 AGENTS.md を避ける理由を説明できる
+  - Codex CLI 向けに root / manuscript / sample-repo の instruction layering を設計できる
+  - repo-map と architecture doc の責務を分けられる
+dependencies:
+  - ch05
+sections:
+  - AGENTS.md は百科事典ではなく地図
+  - repo-map と architecture の役割分担
+  - coding standards と docs の更新境界
+  - ownership と変更影響範囲
+  - instruction layering を Codex CLI 向けにどう作るか
+exercises:
+  - root AGENTS.md と sample-repo/AGENTS.md を分離設計する。
+  - repo-map を作成し、変更の多い箇所を特定する。
+artifacts:
+  - AGENTS.md
+  - manuscript/AGENTS.md
+  - sample-repo/AGENTS.md
+  - sample-repo/docs/repo-map.md
+  - sample-repo/docs/architecture.md
+  - sample-repo/docs/coding-standards.md
+acceptance_criteria:
+  - 章本文が標準章構成に従う
+  - bad / good example を最低 1 組含む
+  - 演習を 2 問含む
+  - brief で参照する artifact が repo 上に存在する
+  - verify が通る

@@ -1,0 +1,32 @@
+id: ch05
+title: Context Engineering の基礎
+part: part-02-context
+goal: Prompt Engineering と Context Engineering の境界を明確にし、永続・タスク・セッション・ツールの context 設計を導入する。
+reader_outcomes:
+  - Prompt Engineering と Context Engineering の違いを説明できる
+  - context budget を設計できる
+  - stale context と live context を分離できる
+dependencies:
+  - ch01
+  - ch02
+  - ch03
+  - ch04
+sections:
+  - Prompt Engineering と Context Engineering の違い
+  - 永続・タスク・セッション・ツールコンテキスト
+  - context budget の考え方
+  - stale context と live context
+  - context poisoning と drift
+exercises:
+  - 15 個の情報片を 4 種類の context に分類する。
+  - 何を要約し、何を原文で残すかポリシーを作る。
+artifacts:
+  - docs/context-model.md
+  - docs/context-budget.md
+  - docs/context-risk-register.md
+acceptance_criteria:
+  - 章本文が標準章構成に従う
+  - bad / good example を最低 1 組含む
+  - 演習を 2 問含む
+  - brief で参照する artifact が repo 上に存在する
+  - verify が通る

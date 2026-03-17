@@ -1,0 +1,30 @@
+id: ch10
+title: Verification Harness を作る
+part: part-03-harness
+goal: テスト・lint・typecheck・証跡収集・CI をまとめて verification harness として設計する。
+reader_outcomes:
+  - local verify と CI verify の役割を分けられる
+  - UI 変更時の evidence bundle を設計できる
+  - human approval をどこに置くか説明できる
+dependencies:
+  - ch09
+sections:
+  - テストを書いてから触る
+  - lint / typecheck / unit / e2e の順序
+  - UI 変更の証跡
+  - CI と local verify の分担
+  - human approval の位置
+exercises:
+  - failing test を先に足してから修正する。
+  - UI変更に対する evidence bundle を作る。
+artifacts:
+  - .github/workflows/verify.yml
+  - checklists/verification.md
+  - sample-repo/tests/test_ticket_search.py
+  - artifacts/evidence/README.md
+acceptance_criteria:
+  - 章本文が標準章構成に従う
+  - bad / good example を最低 1 組含む
+  - 演習を 2 問含む
+  - brief で参照する artifact が repo 上に存在する
+  - verify が通る

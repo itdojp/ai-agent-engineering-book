@@ -1,0 +1,33 @@
+id: ch08
+title: Skills と Context Pack を再利用する
+part: part-02-context
+goal: repeatable な作業を skill 化し、context pack と組み合わせて再利用可能な作業単位を設計する。
+reader_outcomes:
+  - skill と通常 prompt の境界を説明できる
+  - SKILL.md の標準構成を定義できる
+  - context pack を粒度別に設計できる
+dependencies:
+  - ch05
+  - ch06
+  - ch07
+sections:
+  - prompt が skill に昇格する条件
+  - SKILL.md の構成
+  - repo skill と user skill の分離
+  - context pack の組み立て
+  - skill versioning と破壊的変更
+exercises:
+  - issue → plan 変換 skill を作る。
+  - PR review skill を作り、チェック観点を固定する。
+artifacts:
+  - .agents/skills/draft-chapter/SKILL.md
+  - .agents/skills/review-chapter/SKILL.md
+  - sample-repo/.agents/skills/issue-to-plan/SKILL.md
+  - sample-repo/.agents/skills/verification/SKILL.md
+  - sample-repo/context-packs/ticket-search.md
+acceptance_criteria:
+  - 章本文が標準章構成に従う
+  - bad / good example を最低 1 組含む
+  - 演習を 2 問含む
+  - brief で参照する artifact が repo 上に存在する
+  - verify が通る

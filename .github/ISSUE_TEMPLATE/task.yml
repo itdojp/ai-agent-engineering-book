@@ -1,0 +1,27 @@
+name: Task
+description: Chapter, scaffold, appendix, or polish task
+title: "[TASK] "
+labels:
+  - type/chapter
+body:
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal
+      description: この issue で達成すること
+    validations:
+      required: true
+  - type: textarea
+    id: deliverables
+    attributes:
+      label: Deliverables
+      description: 変更対象ファイル
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance Criteria
+      description: 完了条件
+    validations:
+      required: true

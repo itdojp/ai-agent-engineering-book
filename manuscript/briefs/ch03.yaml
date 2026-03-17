@@ -1,0 +1,30 @@
+id: ch03
+title: ChatGPTで要件と設計を固める
+part: part-01-prompt
+goal: 曖昧要求を product spec と design decision に変換し、ChatGPT を要件定義・設計レビューに使う方法を示す。
+reader_outcomes:
+  - 曖昧な依頼を acceptance criteria 付き仕様に変換できる
+  - 代替案比較から ADR を書ける
+  - 人間が残す判断点と AI に委ねる判断点を分けられる
+dependencies:
+  - ch01
+  - ch02
+sections:
+  - 曖昧要求を仕様に変える
+  - 受け入れ条件の分解
+  - 代替案比較と設計判断
+  - ADR を残す理由
+  - 人間が止めるべき判断点
+exercises:
+  - 『検索を使いやすくしたい』を product spec に変換する。
+  - 検索実装案を 2 案比較し、ADR を 1 本書く。
+artifacts:
+  - sample-repo/docs/product-specs/ticket-search.md
+  - sample-repo/docs/design-docs/ticket-search-adr.md
+  - sample-repo/docs/acceptance-criteria/ticket-search.md
+acceptance_criteria:
+  - 章本文が標準章構成に従う
+  - bad / good example を最低 1 組含む
+  - 演習を 2 問含む
+  - brief で参照する artifact が repo 上に存在する
+  - verify が通る

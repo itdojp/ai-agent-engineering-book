@@ -1,0 +1,7 @@
+id: app-c
+title: Harness テンプレート集
+goal: 書籍全体で再利用するテンプレートまたは定義を提供する。
+artifacts:
+  - templates/verify-checklist.md
+  - templates/restart-protocol.md
+  - templates/permission-policy.md

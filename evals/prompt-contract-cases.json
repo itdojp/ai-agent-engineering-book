@@ -1,0 +1,81 @@
+{
+  "suite": "prompt-contract-regression",
+  "description": "Prompt-level regression checks for bugfix and feature contracts used in sample-repo tasks.",
+  "rubric": "feature-spec",
+  "cases": [
+    {
+      "id": "feature-001-scope",
+      "prompt": "feature-contract",
+      "task": "FEATURE-001",
+      "input": "sample-repo の検索を使いやすくしたい",
+      "must_include": [
+        "product spec",
+        "acceptance criteria",
+        "docs と tests を同時に更新する",
+        "仕様外の UI / API 変更をしない"
+      ],
+      "must_not_include": [
+        "ranking を今回の必須要件とみなす",
+        "typo correction を今回の必須要件とみなす"
+      ]
+    },
+    {
+      "id": "feature-001-missing-info",
+      "prompt": "feature-contract",
+      "task": "FEATURE-001",
+      "input": "検索改善をしたいが仕様はまだ粗い",
+      "must_include": [
+        "不足情報を列挙して停止する",
+        "Open Questions",
+        "曖昧な要件を推測で確定しない"
+      ],
+      "must_not_include": [
+        "未確認の要件を確定した事実として扱う"
+      ]
+    },
+    {
+      "id": "feature-001-artifact-sync",
+      "prompt": "feature-contract",
+      "task": "FEATURE-001",
+      "input": "検索仕様を整えて実装準備まで進めたい",
+      "must_include": [
+        "docs/product-specs/ticket-search.md",
+        "docs/acceptance-criteria/ticket-search.md",
+        "docs/design-docs/ticket-search-adr.md",
+        "Files Changed"
+      ],
+      "must_not_include": [
+        "コード変更だけで完了扱いにする"
+      ]
+    },
+    {
+      "id": "bugfix-001-regression-guard",
+      "prompt": "bugfix-contract",
+      "task": "BUG-001",
+      "input": "ステータス更新後に一覧へ戻ると古い状態が表示される",
+      "must_include": [
+        "failing test を先に追加または更新する",
+        "public interface を変更しない",
+        "Verification"
+      ],
+      "must_not_include": [
+        "failing test を削除して green にする",
+        "無関係なリファクタリング"
+      ]
+    },
+    {
+      "id": "bugfix-001-reporting",
+      "prompt": "bugfix-contract",
+      "task": "BUG-001",
+      "input": "不具合修正の結果をレビューしやすい形で返してほしい",
+      "must_include": [
+        "Root Cause",
+        "Files Changed",
+        "Remaining Risk"
+      ],
+      "must_not_include": [
+        "verify を省略して完了扱いにする"
+      ]
+    }
+  ]
+}

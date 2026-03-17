@@ -1,0 +1,31 @@
+id: ch07
+title: Task Context と Session Memory
+part: part-02-context
+goal: issue を task brief に変換し、coding agent の progress note と handoff を設計してセッションをまたぐ作業を成立させる。
+reader_outcomes:
+  - GitHub issue を task brief に変換できる
+  - coding agent の progress note に最低限必要な項目を理解する
+  - summary drift を防ぐ手順を設計できる
+dependencies:
+  - ch05
+  - ch06
+sections:
+  - issue を task brief に変換する
+  - coding agent の progress note の書式
+  - handoff と resume の設計
+  - summary drift を避ける
+  - セッション再開時の最低入力
+exercises:
+  - GitHub issue を task brief に変換する。
+  - 中断した作業に対して、progress note を起点に task brief と verify 結果を含む resume packet を作る。
+artifacts:
+  - sample-repo/tasks/FEATURE-001-brief.md
+  - sample-repo/tasks/FEATURE-001-progress.md
+  - docs/session-memory-policy.md
+  - .github/ISSUE_TEMPLATE/task.yml
+acceptance_criteria:
+  - 章本文が標準章構成に従う
+  - bad / good example を最低 1 組含む
+  - 演習を 2 問含む
+  - brief で参照する artifact が repo 上に存在する
+  - verify が通る

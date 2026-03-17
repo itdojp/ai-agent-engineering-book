@@ -3,16 +3,27 @@ name: verify
 on:
   push:
   pull_request:
+  workflow_dispatch:
 
 jobs:
-  verify:
+  verify-book:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
-      - name: Verify scaffold
+          python-version: "3.12"
+      - name: Verify book scaffold
         run: ./scripts/verify-book.sh
+
+  verify-sample:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
       - name: Verify sample repo
         run: ./scripts/verify-sample.sh

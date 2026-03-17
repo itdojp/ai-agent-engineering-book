@@ -17,6 +17,13 @@ class TicketSearchTests(unittest.TestCase):
         tags = {ticket.id for ticket in self.service.search_tickets("ui")}
         self.assertIn("T-100", tags)
 
+    def test_search_is_case_insensitive(self) -> None:
+        title_matches = {ticket.id for ticket in self.service.search_tickets("SEARCH")}
+        self.assertIn("T-101", title_matches)
+
+        description_matches = {ticket.id for ticket in self.service.search_tickets("OWNERship")}
+        self.assertIn("T-102", description_matches)
+
     def test_blank_query_returns_all_tickets(self) -> None:
         self.assertEqual(len(self.service.search_tickets("   ")), 3)
 

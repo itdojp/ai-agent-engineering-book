@@ -4,13 +4,15 @@
 - stale docs を更新したか
 - 参照パス切れがないか
 - verify script と実態がずれていないか
-- glossary と本文で表記がぶれていないか
+- glossary を source of truth として表記を揃えたか
+- `Prompt Contract`、`Progress Note`、`verification harness` の固有表記がぶれていないか
 
 ## Weekly Cleanup
 - orphaned task brief がないか
-- progress note が古い状態で残っていないか
-- 使われていない AI-generated docs が積み上がっていないか
+- `Progress Note` が古い状態で残っていないか
+- `AI slop` に当たる stale docs や未使用 artifact が積み上がっていないか
 - 同じ説明を別名で持つ artifact が増えていないか
+- `repo hygiene` と `entropy cleanup` の担当と cadence が曖昧になっていないか
 
 ## Escalate When
 - source of truth が衝突している

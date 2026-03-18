@@ -1,5 +1,5 @@
 ## Goal
-本文と glossary の表記を統一する。
+`docs/glossary.md` を canonical source of truth として、terminology drift を減らす。
 
 ## Reader Outcome
 この issue の成果により、後続の執筆または sample-repo 実装を進められる状態にする。
@@ -7,23 +7,27 @@
 ## Inputs
 - `AGENTS.md`
 - 関連する local `AGENTS.md`
+- `docs/glossary.md`
+- `checklists/repo-hygiene.md`
 - 関連 brief / docs / existing artifacts
 
 ## Deliverables
 - `docs/glossary.md`
 - `checklists/repo-hygiene.md`
-- `issue-drafts/`
+- `issue-drafts/polish_01.md`
 
 
 ## Acceptance Criteria
-- deliverables が存在する
-- 関連 artifact の drift がない
+- glossary に canonical term と表記方針が揃っている
+- `checklists/repo-hygiene.md` で terminology drift を review できる
+- `issue-drafts/polish_01.md` の wording が glossary と矛盾しない
 - verify が通る
 - 残課題がある場合は明記する
 
 ## Out of Scope
 - この issue に直接関係しない章や artifact の大規模な再編
 - 用語定義の全面的変更
+- cross-reference 切れや absolute path 修正
 
 ## Verification
 - `./scripts/verify-book.sh`

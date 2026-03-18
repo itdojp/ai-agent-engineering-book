@@ -1,5 +1,5 @@
 ## Goal
-`docs/glossary.md` を canonical source of truth として、terminology drift を減らす。
+`docs/glossary.md` を source of truth として、terminology drift を減らす。
 
 ## Reader Outcome
 この issue の成果により、後続の執筆または sample-repo 実装を進められる状態にする。
@@ -18,9 +18,9 @@
 
 
 ## Acceptance Criteria
-- glossary に canonical term と表記方針が揃っている
-- `checklists/repo-hygiene.md` で terminology drift を review できる
-- `issue-drafts/polish_01.md` の wording が glossary と矛盾しない
+- `docs/glossary.md` に主要用語と表記ルールが揃っている
+- `checklists/repo-hygiene.md` で `docs/glossary.md` を参照しながら terminology drift を review できる
+- `issue-drafts/polish_01.md` の wording が `docs/glossary.md` と矛盾しない
 - verify が通る
 - 残課題がある場合は明記する
 

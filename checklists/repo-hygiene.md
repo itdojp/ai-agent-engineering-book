@@ -4,7 +4,7 @@
 - stale docs を更新したか
 - 参照パス切れがないか
 - verify script と実態がずれていないか
-- glossary を source of truth として表記を揃えたか
+- `docs/glossary.md` を source of truth として表記を揃えたか
 - `Prompt Contract`、`Progress Note`、`verification harness` の固有表記がぶれていないか
 
 ## Weekly Cleanup

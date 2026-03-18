@@ -14,7 +14,7 @@
 | acceptance criteria | 機能または変更が満たすべき受け入れ条件。spec と tests の橋渡しに使う |
 | task brief | issue を coding agent 実行向けに構造化したタスク仕様 |
 | context pack | 特定タスクのために集約した参照情報一式 |
-| Session Memory | セッションを跨いで再開するために残す task brief、Progress Note、verify 根拠の組 |
+| session memory | セッションを跨いで再開するために残す task brief、Progress Note、verify 根拠の組。章タイトルや doc title では `Session Memory` と表記することがある |
 | source of truth | もっとも優先される正本の artifact。矛盾時の判断基準になる |
 | verification harness | テスト、lint、typecheck、証跡収集、CI を束ねた検証系 |
 | done criteria | harness 上で完了扱いにする条件。verify、artifact 更新、approval の要否を含む |
@@ -28,7 +28,7 @@
 | entropy cleanup | stale docs、孤立 artifact、表記ゆれ、不要差分を定期的に整理する運用 |
 | restart packet | 中断後の再開に必要な最小入力。plan、最新 Progress Note、verify、open questions の組 |
 | permission policy | coding agent が自律で進めてよい変更と human approval が必要な変更を分ける規則 |
-| Skill | 再利用可能な instructions / resources / scripts の単位 |
+| skill | 再利用可能な instructions / resources / scripts の単位。章タイトルや file 名では `Skills` や `SKILL.md` と表記することがある |
 | work package | 1 回の session または 1 人の担当で安全に進められる最小作業単位 |
 | review budget | reviewer が一定期間に深く確認できる変更量の上限 |
 | AI slop | 高スループットな生成で repo に蓄積する質の低い差分や docs |

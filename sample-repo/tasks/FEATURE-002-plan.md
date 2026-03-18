@@ -36,6 +36,6 @@ assignee filter の振る舞い整理と assignment change の監査ログ強化
 
 ## Restart Anchor
 - read `docs/harness/restart-protocol.md`
-- read latest Progress Note
+- read latest progress note
 - read latest verify result
 - confirm current track and owner before resuming

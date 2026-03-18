@@ -1,6 +1,6 @@
 ## Goal
 
-## Scope And Non-goals
+## Scope and Non-goals
 
 ## Changed Files
 

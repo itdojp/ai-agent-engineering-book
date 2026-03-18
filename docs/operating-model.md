@@ -27,7 +27,7 @@ AIエージェントをチーム運用へ載せるための最小 operating mode
 1. issue を 1 work package に切る
 2. task brief と関連 artifact を揃える
 3. agent が実装と verify を進める
-4. human が review / approval を行う
+4. Human が review / approval を行う
 5. merge 後に metrics と learnings を記録する
 
 ## Rollout Stages

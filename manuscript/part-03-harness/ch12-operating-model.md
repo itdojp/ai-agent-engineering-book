@@ -29,7 +29,7 @@ CH12 では、AIエージェントをチームへ導入するための operating
 
 ## 小見出し
 ### 1. 人間が残す責務
-AIエージェントを導入しても、人間の責務は消えない。消えるのは定型作業の一部であり、責務そのものではない。`docs/operating-model.md` では、`Human Responsibilities` と `Agent Responsibilities` を分けているが、実務で重要なのは次の 5 点を人間側に残すことである。
+AIエージェントを導入しても、人間の責務は消えない。消えるのは定型作業の一部であり、責務そのものではない。`docs/operating-model.md` では、`Responsibilities` の下に `Human` と `Agent` を分けているが、実務で重要なのは次の 5 点を人間側に残すことである。
 
 1. 目的と優先順位の決定
 2. 破壊的変更と境界条件の承認

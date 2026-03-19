@@ -2,7 +2,7 @@
 
 | ID | Japanese Source | English Target | Status |
 |---|---|---|---|
-| CH01 | `manuscript/part-00/ch01-failure-model.md` | `manuscript-en/part-00/ch01-failure-model.md` | scaffolded |
+| CH01 | `manuscript/part-00/ch01-failure-model.md` | `manuscript-en/part-00/ch01-failure-model.md` | drafted |
 | CH02 | `manuscript/part-01-prompt/ch02-prompt-as-contract.md` | `manuscript-en/part-01-prompt/ch02-prompt-as-contract.md` | drafted |
 | CH03 | `manuscript/part-01-prompt/ch03-requirements-and-design.md` | `manuscript-en/part-01-prompt/ch03-requirements-and-design.md` | drafted |
 | CH04 | `manuscript/part-01-prompt/ch04-prompt-evals.md` | `manuscript-en/part-01-prompt/ch04-prompt-evals.md` | drafted |

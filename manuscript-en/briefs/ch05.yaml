@@ -1,0 +1,32 @@
+id: ch05
+title: Foundations of Context Engineering
+part: part-02-context
+goal: Clarify the boundary between Prompt Engineering and Context Engineering and introduce persistent, task, session, and tool context design.
+reader_outcomes:
+  - Explain the difference between Prompt Engineering and Context Engineering
+  - Design a context budget
+  - Separate stale context from live context
+dependencies:
+  - ch01
+  - ch02
+  - ch03
+  - ch04
+sections:
+  - Prompt Engineering versus Context Engineering
+  - Persistent, task, session, and tool context
+  - Thinking in context budgets
+  - Stale context and live context
+  - Context poisoning and drift
+exercises:
+  - Sort 15 information fragments into four context types.
+  - Write a policy for what to summarize and what to keep verbatim.
+artifacts:
+  - docs/context-model.md
+  - docs/context-budget.md
+  - docs/context-risk-register.md
+acceptance_criteria:
+  - The chapter follows the standard chapter contract
+  - It includes at least one bad / good example pair
+  - It includes exactly two exercises
+  - All referenced artifacts exist in the repo
+  - verify passes

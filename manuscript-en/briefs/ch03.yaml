@@ -1,0 +1,30 @@
+id: ch03
+title: Use ChatGPT to Shape Requirements and Design
+part: part-01-prompt
+goal: Show how to convert ambiguous requests into product specs and design decisions, and how to use ChatGPT for requirements shaping and design review.
+reader_outcomes:
+  - Turn ambiguous requests into specs with acceptance criteria
+  - Write an ADR from alternative comparisons
+  - Separate decisions that must stay with humans from decisions that AI can assist
+dependencies:
+  - ch01
+  - ch02
+sections:
+  - Turn ambiguous requests into specs
+  - Break work into acceptance criteria
+  - Compare alternatives and make design decisions
+  - Why ADRs matter
+  - Decisions humans still need to stop and own
+exercises:
+  - Turn “make search easier to use” into a product spec.
+  - Compare two search implementation options and write one ADR.
+artifacts:
+  - sample-repo/docs/product-specs/ticket-search.md
+  - sample-repo/docs/design-docs/ticket-search-adr.md
+  - sample-repo/docs/acceptance-criteria/ticket-search.md
+acceptance_criteria:
+  - The chapter follows the standard chapter contract
+  - It includes at least one bad / good example pair
+  - It includes exactly two exercises
+  - All referenced artifacts exist in the repo
+  - verify passes

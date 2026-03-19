@@ -1,0 +1,7 @@
+id: app-b
+title: Context Templates
+goal: Provide reusable templates or definitions used across the whole book.
+artifacts:
+  - templates/task-brief.md
+  - templates/progress-note.md
+  - templates/context-pack.md

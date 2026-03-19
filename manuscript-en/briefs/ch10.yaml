@@ -1,0 +1,30 @@
+id: ch10
+title: Build a Verification Harness
+part: part-03-harness
+goal: Design tests, lint, typecheck, evidence collection, and CI together as a verification harness.
+reader_outcomes:
+  - Separate the roles of local verify and CI verify
+  - Design an evidence bundle for UI changes
+  - Explain where human approval should sit
+dependencies:
+  - ch09
+sections:
+  - Write tests before changing behavior
+  - Order lint / typecheck / unit / e2e
+  - Evidence for UI changes
+  - Dividing work between CI and local verify
+  - Where human approval belongs
+exercises:
+  - Add a failing test before fixing the behavior.
+  - Create an evidence bundle for a UI change.
+artifacts:
+  - .github/workflows/verify.yml
+  - checklists/verification.md
+  - sample-repo/tests/test_ticket_search.py
+  - artifacts/evidence/README.md
+acceptance_criteria:
+  - The chapter follows the standard chapter contract
+  - It includes at least one bad / good example pair
+  - It includes exactly two exercises
+  - All referenced artifacts exist in the repo
+  - verify passes

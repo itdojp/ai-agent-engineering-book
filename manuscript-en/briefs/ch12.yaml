@@ -1,0 +1,32 @@
+id: ch12
+title: Operating Model and Organizational Adoption
+part: part-03-harness
+goal: Define the operating model and hygiene needed to introduce AI agents into a team.
+reader_outcomes:
+  - Make human responsibilities explicit
+  - Explain the tradeoff between review budget and throughput
+  - Design repo hygiene and entropy cleanup operations
+dependencies:
+  - ch09
+  - ch10
+  - ch11
+sections:
+  - Human responsibilities that remain
+  - Review budget and throughput
+  - Repo hygiene and AI slop control
+  - Metrics and retrospectives
+  - Adoption roadmap
+exercises:
+  - Define an operating model for a three-person team.
+  - Create a weekly entropy cleanup checklist.
+artifacts:
+  - docs/operating-model.md
+  - docs/metrics.md
+  - checklists/repo-hygiene.md
+  - .github/pull_request_template.md
+acceptance_criteria:
+  - The chapter follows the standard chapter contract
+  - It includes at least one bad / good example pair
+  - It includes exactly two exercises
+  - All referenced artifacts exist in the repo
+  - verify passes

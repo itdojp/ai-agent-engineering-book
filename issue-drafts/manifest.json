@@ -235,6 +235,15 @@
       ],
       "milestone": "M4-polish",
       "body_file": "issue-drafts/polish_03.md"
+    },
+    {
+      "id": "EN-01",
+      "title": "EN-01 Bootstrap English manuscript scaffold and parity tracker",
+      "labels": [
+        "type/scaffold",
+        "area/manuscript"
+      ],
+      "body_file": "issue-drafts/en_01.md"
     }
   ]
 }

@@ -8,6 +8,7 @@ artifacts:
   - sample-repo/docs/domain-overview.md
   - sample-repo/docs/seed-issues.md
 dependencies:
+  - none
 ---
 
 # Where AI Agents Fail

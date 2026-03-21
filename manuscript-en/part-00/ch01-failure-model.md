@@ -78,7 +78,7 @@ The stages stack. Prompt Engineering does not become unnecessary when Context En
 That order is both a learning order and an engineering order. If the prompt is still vague, more context only gives the agent more room to be wrong. If the context is stable but the harness is weak, the agent can still ship a broken or incomplete change.
 
 ### 4. The recurring cases, the sample-repo, ChatGPT, and Codex CLI
-This book uses `support-hub` as its running case study. As `sample-repo/docs/domain-overview.md` shows, the current system centers on `Ticket`, `TicketStore`, and `SupportHubService`, with behaviors such as listing tickets, updating status, keyword search, and filtering by assignee. The repo is small, but it is large enough to show practical concerns: requirements shaping, change impact, verification, and long-running work.
+This book uses `support-hub` as its running case study. As `sample-repo/docs/domain-overview.md` shows, the current system centers on `Ticket`, `InMemoryTicketStore`, and `SupportHubService`, with behaviors such as listing tickets, updating status, keyword search, and filtering by assignee. The repo is small, but it is large enough to show practical concerns: requirements shaping, change impact, verification, and long-running work.
 
 The recurring cases in `sample-repo/docs/seed-issues.md` are the spine of the book:
 

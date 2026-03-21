@@ -108,15 +108,32 @@ approval が必要な変更は `checklists/verification.md` で分離する。
 
 この worked example で重要なのは、verification harness が test だけでも CI だけでもないことだ。仕様の guard、実行順序、証跡、approval をまとめて設計して初めて、変更が review-ready になる。
 
+## 紙面で押さえる exhibit
+### Verification Pipeline
+
+| 段階 | 何を確認するか | 主な artifact / command | 読者が見るべきポイント |
+|---|---|---|---|
+| failing test | 壊れている仕様を executable にしたか | `sample-repo/tests/test_ticket_search.py` | acceptance criteria が regression guard に変わっているか |
+| local verify | 手元で再現可能な最小合格ラインを満たすか | `./scripts/verify-sample.sh` | 変更直後に高速で回せるか |
+| CI | branch 上で同じ検証を再実行できるか | `.github/workflows/verify.yml` | local と共有合格ラインがずれていないか |
+| evidence | reviewer が差分を再確認できるか | `artifacts/evidence/README.md` | 何を確認し、何を残すかが明示されているか |
+| approval | 人間が判断すべき論点だけ残っているか | `checklists/verification.md` | verify で自動化しない判断が分離されているか |
+
+この表の狙いは、verification harness を「test の話」だけに縮めないことである。`failing test` で仕様 guard を作り、`local verify` と `CI` で再現性を担保し、最後に `evidence` と `approval` で review-ready にする。読者はこの 5 段階を紙面上で追えば、repo を開かなくても harness の全体像を把握できる。
+
 ## 演習
 1. failing test を先に足してから修正する。
 2. UI変更に対する evidence bundle を作る。
 
 ## 参照する artifact
 - `.github/workflows/verify.yml`
+  book 側と sample 側の job 分離を見る。CI が local verify をどう共有合格ラインに変えるかを確認する。
 - `checklists/verification.md`
+  verify と approval を同じ checklist 上でどう分離しているかを見る。CH10 の最終段に対応する。
 - `sample-repo/tests/test_ticket_search.py`
+  acceptance criteria を regression guard に変換した例として読む。worked example の起点になる。
 - `artifacts/evidence/README.md`
+  evidence bundle の最低構成を確認する。UI 変更時に何を残すべきかの参照先である。
 
 
 ## 章末まとめ

@@ -39,7 +39,7 @@ CH02 の Prompt Contract が単一タスクの Objective、Constraints、Complet
 実務では、再利用回数、入力の安定性、出力の安定性、失敗しやすい手順の固定需要を見ると判断しやすい。よくある候補は chapter drafting、issue-to-plan、verification、review である。
 
 ### 2. SKILL.md の構成
-良い `SKILL.md` は、抽象スローガンではなく作業契約を持つ。.agents 配下の [`draft-chapter/SKILL.md`](/home/devuser/work/CodeX/ai-agent-engineering-book/ai-agent-book/.agents/skills/draft-chapter/SKILL.md)、[`review-chapter/SKILL.md`](/home/devuser/work/CodeX/ai-agent-engineering-book/ai-agent-book/.agents/skills/review-chapter/SKILL.md)、`sample-repo/.agents/skills/issue-to-plan/SKILL.md`、`sample-repo/.agents/skills/verification/SKILL.md` は、いずれも Purpose、Use When、Required Inputs または Read First、Workflow または Steps、Output Contract、Guardrails を持っている。
+良い `SKILL.md` は、抽象スローガンではなく作業契約を持つ。`.agents/skills/draft-chapter/SKILL.md`、`.agents/skills/review-chapter/SKILL.md`、`sample-repo/.agents/skills/issue-to-plan/SKILL.md`、`sample-repo/.agents/skills/verification/SKILL.md` は、いずれも Purpose、Use When、Required Inputs または Read First、Workflow または Steps、Output Contract、Guardrails を持っている。
 
 この構成が有効なのは、skill を「便利メモ」ではなく operational artifact にできるからである。Purpose は何のための skill か、Use When は適用範囲、Read First は依存 artifact、Workflow は実行手順、Output Contract は期待成果、Guardrails はスコープ逸脱防止を定義する。どれかが欠けると、skill は長い prompt の別名になりやすい。
 

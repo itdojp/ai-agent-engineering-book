@@ -29,7 +29,7 @@ CH05 で Context Engineering の分類を導入した。次に必要なのは、
 
 ## 小見出し
 ### 1. AGENTS.md は百科事典ではなく地図
-`AGENTS.md` は、repo の全文説明を書く場所ではない。AI agent が「まず何を読み、何を守り、どの artifact を確認すべきか」を知るための地図である。root の [`AGENTS.md`](/home/devuser/work/CodeX/ai-agent-engineering-book/ai-agent-book/AGENTS.md) は repo 全体の不変条件だけを定義し、詳細は `manuscript/AGENTS.md` と `sample-repo/AGENTS.md` に委譲している。この分割が重要なのは、すべてを root に詰めると、対象ディレクトリに無関係な detail が常に混ざるからである。
+`AGENTS.md` は、repo の全文説明を書く場所ではない。AI agent が「まず何を読み、何を守り、どの artifact を確認すべきか」を知るための地図である。root の `AGENTS.md` は repo 全体の不変条件だけを定義し、詳細は `manuscript/AGENTS.md` と `sample-repo/AGENTS.md` に委譲している。この分割が重要なのは、すべてを root に詰めると、対象ディレクトリに無関係な detail が常に混ざるからである。
 
 たとえば原稿だけを触る作業では、`sample-repo` の domain constraint まで毎回読む必要はない。逆に `sample-repo` のコードを直すなら、原稿向けの文体ルールよりも verify と domain constraint の方が重要になる。layering があると、AI agent は「今いるディレクトリに必要な detail」だけを追加で読める。
 

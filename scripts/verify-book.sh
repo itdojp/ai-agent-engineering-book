@@ -9,6 +9,11 @@ required=(
   "README.md"
   "docs/glossary.md"
   "manuscript/AGENTS.md"
+  "manuscript/front-matter/00-はじめに.md"
+  "manuscript/front-matter/01-本書の読み方.md"
+  "manuscript/part-01-prompt/part-opener.md"
+  "manuscript/part-02-context/part-opener.md"
+  "manuscript/part-03-harness/part-opener.md"
   "sample-repo/AGENTS.md"
   ".github/ISSUE_TEMPLATE/task.yml"
   "issue-drafts/manifest.json"
@@ -42,6 +47,15 @@ root = Path(sys.argv[1])
 target = sys.argv[2]
 
 required_sections = ["## 学習目標", "## 小見出し", "## 演習", "## 参照する artifact"]
+required_frontmatter = {
+    "manuscript/front-matter/00-はじめに.md": ["## 本書の約束", "## 想定読者", "## 想定しない読者"],
+    "manuscript/front-matter/01-本書の読み方.md": ["## 3部構成", "## 3つの読み進め方", "## 読み終わりの到達点"],
+}
+required_part_openers = {
+    "manuscript/part-01-prompt/part-opener.md": ["## この Part の役割", "## この Part で増える artifact", "## 章の見取り図"],
+    "manuscript/part-02-context/part-opener.md": ["## この Part の役割", "## この Part で増える artifact", "## 章の見取り図"],
+    "manuscript/part-03-harness/part-opener.md": ["## この Part の役割", "## この Part で増える artifact", "## 章の見取り図"],
+}
 
 
 def parse_artifacts(brief: Path) -> list[str]:
@@ -80,6 +94,19 @@ def check_appendix(app_id: str, brief: Path):
     for artifact in parse_artifacts(brief):
         if not (root / artifact).exists():
             raise SystemExit(f"brief {brief.name} references missing artifact: {artifact}")
+
+
+for rel, sections in required_frontmatter.items():
+    text = (root / rel).read_text(encoding="utf-8")
+    missing = [item for item in sections if item not in text]
+    if missing:
+        raise SystemExit(f"front matter {rel} missing sections: {', '.join(missing)}")
+
+for rel, sections in required_part_openers.items():
+    text = (root / rel).read_text(encoding="utf-8")
+    missing = [item for item in sections if item not in text]
+    if missing:
+        raise SystemExit(f"part opener {rel} missing sections: {', '.join(missing)}")
 
 if target:
     brief = root / "manuscript" / "briefs" / f"{target}.yaml"

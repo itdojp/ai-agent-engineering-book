@@ -108,7 +108,7 @@ approval が必要な変更は `checklists/verification.md` で分離する。
 
 この worked example で重要なのは、verification harness が test だけでも CI だけでもないことだ。仕様の guard、実行順序、証跡、approval をまとめて設計して初めて、変更が review-ready になる。
 
-## 紙面で押さえる要点
+## 紙面で押さえるポイント
 ### Verification Pipeline
 
 | 段階 | 何を確認するか | 主な artifact / command | 読者が見るべきポイント |

@@ -1,0 +1,12 @@
+%% title: fig-02 context classes
+%% chapter: CH05
+%% caption: Context は永続、タスク、セッション、ツールの 4 種類に分かれ、鮮度と更新責任が異なる。
+flowchart TB
+    CTX[Context Engineering] --> R[永続コンテキスト<br/>AGENTS / architecture / glossary]
+    CTX --> T[タスクコンテキスト<br/>issue / brief / spec / ADR / AC]
+    CTX --> S[セッションコンテキスト<br/>Progress Note / open questions / next step]
+    CTX --> L[ツールコンテキスト<br/>grep / verify / terminal log]
+    R --> R1[stale-safe]
+    T --> T1[issue ごとの canonical]
+    S --> S1[再開用で mutable]
+    L --> L1[live で失効が早い]

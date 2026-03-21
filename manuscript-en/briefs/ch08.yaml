@@ -1,0 +1,33 @@
+id: ch08
+title: Reuse Skills and Context Packs
+part: part-02-context
+goal: Turn repeatable work into skills and combine them with context packs to define reusable units of work.
+reader_outcomes:
+  - Explain the boundary between a skill and a normal prompt
+  - Define a standard SKILL.md structure
+  - Design context packs at the right granularity
+dependencies:
+  - ch05
+  - ch06
+  - ch07
+sections:
+  - When a prompt becomes a skill
+  - The structure of SKILL.md
+  - Separating repo skills from user skills
+  - Building a context pack
+  - Skill versioning and breaking changes
+exercises:
+  - Create an issue-to-plan skill.
+  - Create a PR review skill and fix the review criteria.
+artifacts:
+  - .agents/skills/draft-chapter/SKILL.md
+  - .agents/skills/review-chapter/SKILL.md
+  - sample-repo/.agents/skills/issue-to-plan/SKILL.md
+  - sample-repo/.agents/skills/verification/SKILL.md
+  - sample-repo/context-packs/ticket-search.md
+acceptance_criteria:
+  - The chapter follows the standard chapter contract
+  - It includes at least one bad / good example pair
+  - It includes exactly two exercises
+  - All referenced artifacts exist in the repo
+  - verify passes

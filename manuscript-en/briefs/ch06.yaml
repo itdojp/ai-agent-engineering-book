@@ -1,0 +1,32 @@
+id: ch06
+title: Design Repo Context
+part: part-02-context
+goal: Use AGENTS.md, repo-map, and architecture docs to make a repo understandable to a coding agent running in Codex CLI.
+reader_outcomes:
+  - Explain why a giant AGENTS.md is a bad fit
+  - Design root / manuscript / sample-repo instruction layering for Codex CLI
+  - Separate the roles of a repo-map and an architecture doc
+dependencies:
+  - ch05
+sections:
+  - AGENTS.md is a map, not an encyclopedia
+  - Dividing work between repo-map and architecture
+  - Update boundaries for coding standards and docs
+  - Ownership and change impact
+  - Building instruction layering for Codex CLI
+exercises:
+  - Split a root AGENTS.md and a sample-repo AGENTS.md by responsibility.
+  - Draft a repo-map and identify high-change areas.
+artifacts:
+  - AGENTS.md
+  - manuscript/AGENTS.md
+  - sample-repo/AGENTS.md
+  - sample-repo/docs/repo-map.md
+  - sample-repo/docs/architecture.md
+  - sample-repo/docs/coding-standards.md
+acceptance_criteria:
+  - The chapter follows the standard chapter contract
+  - It includes at least one bad / good example pair
+  - It includes exactly two exercises
+  - All referenced artifacts exist in the repo
+  - verify passes

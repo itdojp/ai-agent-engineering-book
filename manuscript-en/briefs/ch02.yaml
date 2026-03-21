@@ -1,0 +1,29 @@
+id: ch02
+title: Design Prompts as Contracts
+part: part-01-prompt
+goal: Define Prompt Engineering as input/output contract design rather than prompt phrasing tricks, and build reusable Prompt Contract artifacts.
+reader_outcomes:
+  - Separate objective, constraints, completion criteria, and forbidden actions
+  - Compare weak prompts and operational prompts with explicit review criteria
+  - Build different Prompt Contracts for feature work and bugfix work
+dependencies:
+  - ch01
+sections:
+  - A prompt is an input/output contract, not a generic instruction
+  - Separate objective, constraints, completion criteria, and forbidden actions
+  - How to state assumptions and handle missing information
+  - Comparing bad prompts and good prompts
+  - How to review a prompt contract
+exercises:
+  - Rewrite “add search” as a contract prompt.
+  - Make `done` explicit for a bugfix task in five points.
+artifacts:
+  - prompts/bugfix-contract.md
+  - prompts/feature-contract.md
+  - checklists/prompt-contract-review.md
+acceptance_criteria:
+  - The chapter follows the standard chapter contract
+  - It includes at least one bad / good example pair
+  - It includes exactly two exercises
+  - All referenced artifacts exist in the repo
+  - verify passes

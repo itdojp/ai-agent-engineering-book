@@ -1,0 +1,31 @@
+id: ch11
+title: Long-running Tasks and Multi-agent Work
+part: part-03-harness
+goal: Define the feature list, restart protocol, and progress notes needed for long-running tasks, and split into multi-agent only when needed.
+reader_outcomes:
+  - Explain why long-running tasks break
+  - Design a restart protocol
+  - Decide when to use single-agent versus multi-agent work
+dependencies:
+  - ch09
+  - ch10
+sections:
+  - Where long-running tasks break
+  - Feature lists and progress tracking
+  - Restart protocol
+  - Separating planner / coder / reviewer
+  - When to use multi-agent and when not to
+exercises:
+  - Split case C into planner / coder / reviewer responsibilities.
+  - Restart a failed long-running task through a restart protocol.
+artifacts:
+  - sample-repo/docs/harness/feature-list.md
+  - sample-repo/docs/harness/restart-protocol.md
+  - sample-repo/docs/harness/multi-agent-playbook.md
+  - sample-repo/tasks/FEATURE-002-plan.md
+acceptance_criteria:
+  - The chapter follows the standard chapter contract
+  - It includes at least one bad / good example pair
+  - It includes exactly two exercises
+  - All referenced artifacts exist in the repo
+  - verify passes

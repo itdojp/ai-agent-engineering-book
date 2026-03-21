@@ -69,7 +69,7 @@ Task Context と Session Memory の設計ができると、AI agent は「前回
 
 
 
-## 紙面で押さえる exhibit
+## 紙面で押さえる要点
 ### Resume Packet 最小形
 
 | issue 側の入力 | task brief / session memory で増やすもの | 再開時に確認する要点 |

@@ -36,7 +36,7 @@
 ## FEATURE-001 チケット検索機能を仕様化し、改善したい
 - 現場の状況: 類似 ticket を見つけにくいと、再発問い合わせの対応速度が落ちる
 - 目的: product spec / ADR / acceptance criteria / context pack を説明する題材
-- 主な artifact: `docs/product-specs/ticket-search.md`, `docs/design-docs/ticket-search-adr.md`, `docs/acceptance-criteria/ticket-search.md`, `context-packs/ticket-search.md`
+- 主な artifact: `docs/product-specs/ticket-search.md`, `docs/design-docs/ticket-search-adr.md`, `docs/acceptance-criteria/ticket-search.md`, `context-packs/ticket-search.md`, `tests/test_ticket_search.py`
 
 ## FEATURE-002 assignee フィルタと監査ログを強化したい
 - 現場の状況: assignee の意味が曖昧だと handoff が崩れ、監査ログが弱いと変更理由を追えない

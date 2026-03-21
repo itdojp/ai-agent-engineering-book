@@ -76,7 +76,7 @@ AIエージェントの失敗は、多くの場合 4 類型に収まる。
 この順番は、学習順でもあり、実務で事故率を下げる順でもある。まず「何をやらせるか」を決め、次に「何を見せ続けるか」を決め、最後に「どう実行と検証を閉じるか」を決める。
 
 ### 4. 本書の貫通ケースと sample-repo の概要
-本書では、`support-hub` という小さなサポートチケット管理システムを `sample-repo` として使う。これは単なる toy app ではない。一次受け担当が ticket を triage し、当番リードが assignee と backlog を見て、実装担当や運用担当が再発問い合わせの検索と運用変更を判断する、という現場を簡略化した題材である。`sample-repo/docs/domain-overview.md` にある通り、中核は `Ticket`、`TicketStore`、`SupportHubService` であり、一覧取得、ステータス更新、キーワード検索、assignee での絞り込みが入っている。規模は小さいが、status の不整合、検索の弱さ、ownership の曖昧さ、verify 不足といった実務の痛みを一通り載せられる。
+本書では、`support-hub` という小さなサポートチケット管理システムを `sample-repo` として使う。これは単なる toy app ではない。一次受け担当が ticket を triage し、当番リードが assignee と backlog を見て、実装担当や運用担当が再発問い合わせの検索と運用変更を判断する、という現場を簡略化した題材である。`sample-repo/docs/domain-overview.md` にある通り、中核は `Ticket`、`InMemoryTicketStore`（概念として `TicketStore` と総称する）、`SupportHubService` であり、一覧取得、ステータス更新、キーワード検索、assignee での絞り込みが入っている。規模は小さいが、status の不整合、検索の弱さ、ownership の曖昧さ、verify 不足といった実務の痛みを一通り載せられる。
 
 さらに、本書では `sample-repo/docs/seed-issues.md` の 4 件を貫通ケースとして使う。
 

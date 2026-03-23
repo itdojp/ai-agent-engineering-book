@@ -17,13 +17,16 @@ python "$ROOT/scripts/build-pages.py" --output "$OUT"
 
 required=(
   "index.html"
-  "ja/index.html"
   "en/index.html"
-  "ja/front-matter/00.html"
-  "en/front-matter/00.html"
-  "ja/part-00/ch01.html"
-  "en/part-00/ch01.html"
-  "assets/book.css"
+  "introduction/01/index.html"
+  "chapters/ch01/index.html"
+  "en/chapters/ch01/index.html"
+  "assets/css/main.css"
+  "assets/css/mobile-responsive.css"
+  "assets/css/syntax-highlighting.css"
+  "assets/css/book-custom.css"
+  "assets/js/search.js"
+  "assets/js/theme.js"
   ".nojekyll"
 )
 
@@ -35,9 +38,20 @@ for path in "${required[@]}"; do
 done
 
 grep -q "AIエージェント実践" "$OUT/index.html"
-grep -q "日本語版" "$OUT/ja/index.html"
-grep -q "English Edition" "$OUT/en/index.html"
-grep -q "AIエージェントはどこで失敗するか" "$OUT/ja/part-00/ch01.html"
-grep -q "Where AI Agents Fail" "$OUT/en/part-00/ch01.html"
+grep -q "book-layout" "$OUT/index.html"
+grep -q "CH01 から読む" "$OUT/index.html"
+grep -q "Start with CH01" "$OUT/en/index.html"
+grep -q "AIエージェントはどこで失敗するか" "$OUT/chapters/ch01/index.html"
+grep -q "Chapter 1" "$OUT/en/chapters/ch01/index.html"
+
+if grep -q "Publishing Guide" "$OUT/index.html"; then
+  echo "public landing page still exposes operator publishing wording"
+  exit 1
+fi
+
+if grep -q "canonical source" "$OUT/index.html"; then
+  echo "public landing page still exposes canonical source wording"
+  exit 1
+fi
 
 echo "pages artifacts look consistent"

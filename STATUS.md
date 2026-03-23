@@ -9,7 +9,7 @@ book repo は日本語版 / 英語版の parity maintenance と polish を継続
 - 英語版は `manuscript-en/STATUS.md` の parity tracker に従って、front matter、CH01-CH12、appendices、backmatter、figures を drafted 状態で保持している
 - `sample-repo/`、`prompts/`、`checklists/`、`templates/`、`evals/`、`artifacts/evidence/`、`artifacts/en/evidence/` は本文参照と整合する状態に保たれている
 - 英語版 support artifact として `docs/en/`、`prompts/en/`、`checklists/en/`、`templates/en/`、`artifacts/en/` を継続保守している
-- `scripts/build-pages.py`、`scripts/verify-pages.sh`、`.github/workflows/pages.yml` により、book site を GitHub Pages へ公開できる構成を持つ
+- `scripts/build-pages.py`、`scripts/verify-pages.sh`、`.github/workflows/pages.yml` により、book-formatter shared assets に揃えた book site を GitHub Pages へ公開できる構成を持つ
 - `scripts/bootstrap-github.sh`、`scripts/create-issues.py`、`issue-drafts/` は、この運用を別 repo に移植するための reusable setup artifact として残している
 
 ## Next Recommended Action

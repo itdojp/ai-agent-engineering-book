@@ -16,7 +16,7 @@
 | CH12 | `manuscript/part-03-harness/ch12-operating-model.md` | `manuscript-en/part-03-harness/ch12-operating-model.md` | drafted |
 | APP-A | `manuscript/appendices/app-a-Prompt-テンプレート集.md` | `manuscript-en/appendices/app-a-prompt-templates.md` | drafted |
 | APP-B | `manuscript/appendices/app-b-Context-テンプレート集.md` | `manuscript-en/appendices/app-b-context-templates.md` | drafted |
-| APP-C | `manuscript/appendices/app-c-Harness-テンプレート集.md` | `manuscript-en/appendices/app-c-harness-templates.md` | scaffolded |
+| APP-C | `manuscript/appendices/app-c-Harness-テンプレート集.md` | `manuscript-en/appendices/app-c-harness-templates.md` | drafted |
 | APP-D | `manuscript/appendices/app-d-用語集.md` | `manuscript-en/appendices/app-d-glossary.md` | drafted |
 
 ## Status Meanings

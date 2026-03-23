@@ -87,7 +87,7 @@ This does not mean goldens are useless. A golden check is still a good fit for s
 ## 4. Prompt Regression Checks
 A one-line prompt change can break cases that used to pass. That is why prompts need regression checks in the same way code does. The workflow is simple: run the same eval set against prompt version 1 and version 2, then compare the differences.
 
-This repo includes `scripts/run-prompt-evals.py` as a minimal scaffold. At this stage it does not call a model. Instead, it verifies that the prompt-eval assets remain internally consistent:
+This repo includes `scripts/run-prompt-evals.py` as a lightweight consistency check. At this stage it does not call a model. Instead, it verifies that the prompt-eval artifacts remain internally consistent:
 
 - required Prompt Contract headings exist
 - `evals/prompt-contract-cases.json` is structurally valid

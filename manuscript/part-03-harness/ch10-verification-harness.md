@@ -136,6 +136,10 @@ approval が必要な変更は `checklists/verification.md` で分離する。
   evidence bundle の最低構成を確認する。UI 変更時に何を残すべきかの参照先である。
 
 
+## Source Notes / Further Reading
+- この章を探し直すときは、まず `.github/workflows/verify.yml`、`checklists/verification.md`、`sample-repo/tests/test_ticket_search.py`、`artifacts/evidence/README.md` を正本として見る。verification harness は test、CI、evidence、approval の流れで読む。
+- 次の一歩は `manuscript/backmatter/00-source-notes.md` の「CH10 Verification Harness を作る」と `manuscript/backmatter/01-読書案内.md` の「検証・信頼性・運用」を参照する。
+
 ## 章末まとめ
 - verification harness は、test、実行順序、evidence、CI、approval gate を束ねた検証系である。
 - local verify は iteration speed、CI verify は reproducibility を担当し、どちらも必要である。

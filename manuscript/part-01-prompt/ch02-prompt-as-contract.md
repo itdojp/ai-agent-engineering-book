@@ -187,6 +187,10 @@ Output Format:
 - `checklists/prompt-contract-review.md`
 
 
+## Source Notes / Further Reading
+- この章を探し直すときは、まず `prompts/bugfix-contract.md`、`prompts/feature-contract.md`、`checklists/prompt-contract-review.md` を正本として見る。Prompt Contract は会話のコツではなく repo に残す contract artifact である。
+- 次の一歩は `manuscript/backmatter/00-source-notes.md` の「CH02 プロンプトを契約として設計する」と `manuscript/backmatter/01-読書案内.md` の「Prompt と要求定義」を参照する。
+
 ## 章末まとめ
 - Prompt Engineering の出発点は、prompt を曖昧な命令文ではなく入出力契約として設計することにある。
 - single-task reliability を上げるには、Objective、Inputs、Constraints、Forbidden Actions、Completion Criteria、Output Format を分けて書く必要がある。

@@ -16,6 +16,9 @@
 | context pack | 特定タスクのために集約した参照情報一式 |
 | session memory | セッションを跨いで再開するために残す task brief、Progress Note、verify 根拠の組。章タイトルや doc title では `Session Memory` と表記することがある |
 | source of truth | もっとも優先される正本の artifact。矛盾時の判断基準になる |
+| source notes | 章末または後付けで、何を正本として信頼するかと次の一歩を短く示す案内 |
+| further reading | 章の理解を深めるために公式 docs、書籍、handbook へつなぐ導線 |
+| backmatter | source notes、読書案内、索引、図表一覧など、通読後の再参照装置 |
 | verification harness | テスト、lint、typecheck、証跡収集、CI を束ねた検証系 |
 | done criteria | harness 上で完了扱いにする条件。verify、artifact 更新、approval の要否を含む |
 | evidence bundle | reviewer が変更を検証できるように残す verify log、repro 手順、画像、summary の組 |

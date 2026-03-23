@@ -11,6 +11,10 @@ required=(
   "manuscript/AGENTS.md"
   "manuscript/front-matter/00-はじめに.md"
   "manuscript/front-matter/01-本書の読み方.md"
+  "manuscript/backmatter/00-source-notes.md"
+  "manuscript/backmatter/01-読書案内.md"
+  "manuscript/backmatter/02-索引seed.md"
+  "manuscript/backmatter/03-図表一覧方針.md"
   "manuscript/part-01-prompt/part-opener.md"
   "manuscript/part-02-context/part-opener.md"
   "manuscript/part-03-harness/part-opener.md"
@@ -46,10 +50,16 @@ import sys
 root = Path(sys.argv[1])
 target = sys.argv[2]
 
-required_sections = ["## 学習目標", "## 小見出し", "## 演習", "## 参照する artifact"]
+required_sections = ["## 学習目標", "## 小見出し", "## 演習", "## 参照する artifact", "## Source Notes / Further Reading"]
 required_frontmatter = {
     "manuscript/front-matter/00-はじめに.md": ["## 本書の約束", "## 想定読者", "## 想定しない読者"],
     "manuscript/front-matter/01-本書の読み方.md": ["## 3部構成", "## 3つの読み進め方", "## 読み終わりの到達点"],
+}
+required_backmatter = {
+    "manuscript/backmatter/00-source-notes.md": ["## この後付けの役割", "## Source Policy", "## 章別 Source Notes"],
+    "manuscript/backmatter/01-読書案内.md": ["## 使い方", "## Prompt と要求定義", "## 検証・信頼性・運用"],
+    "manuscript/backmatter/02-索引seed.md": ["## 使い方", "## 索引 seed"],
+    "manuscript/backmatter/03-図表一覧方針.md": ["## 役割", "## 図一覧の方針", "## 表一覧の方針"],
 }
 required_part_opener_sections = [
     "## この Part の役割",
@@ -167,6 +177,12 @@ for rel, sections in required_frontmatter.items():
     missing = [item for item in sections if item not in text]
     if missing:
         raise SystemExit(f"front matter {rel} missing sections: {', '.join(missing)}")
+
+for rel, sections in required_backmatter.items():
+    text = (root / rel).read_text(encoding="utf-8")
+    missing = [item for item in sections if item not in text]
+    if missing:
+        raise SystemExit(f"backmatter {rel} missing sections: {', '.join(missing)}")
 
 for rel, sections in required_part_openers.items():
     text = (root / rel).read_text(encoding="utf-8")

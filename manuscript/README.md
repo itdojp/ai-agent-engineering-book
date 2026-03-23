@@ -6,6 +6,7 @@
 - `part-00/`: 本文導入
 - `part-01-prompt/`, `part-02-context/`, `part-03-harness/`: 各 Part の opener と章本文
 - `appendices/`: テンプレート集と用語集
+- `backmatter/`: source notes、読書案内、索引 seed、図表一覧方針などの後付け
 - `figures/`: reader-facing な図版 source と figure plan
 
 ## 標準章構成
@@ -16,7 +17,8 @@
 4. bad / good example
 5. 演習 2 問
 6. 参照する artifact
-7. 章末のまとめ
+7. `Source Notes / Further Reading`
+8. 章末まとめ
 
 ## 原稿作成ルール
 
@@ -24,6 +26,8 @@
 - 章本文で言及した path は実在させる
 - 前提知識が増える章は dependencies を brief に記録する
 - 1 章につき 1 つの中核メッセージに絞る
+- source notes は「何を正本として信頼するか」と「次に何を読むか」を短く示し、本文の注釈化にはしない
+- glossary は語義、backmatter は探し直しの導線として役割を分ける
 - 図版 source を追加する場合は `figures/figure-plan.md` と同時に更新する
 
 ## front matter / Part opener の扱い

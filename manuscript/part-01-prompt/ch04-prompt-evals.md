@@ -173,6 +173,10 @@ good:
 - `scripts/run-prompt-evals.py`
 
 
+## Source Notes / Further Reading
+- この章を探し直すときは、まず `evals/prompt-contract-cases.json`、`evals/rubrics/feature-spec.json`、`scripts/run-prompt-evals.py` を正本として見る。prompt の良し悪しは雰囲気ではなく、case と rubric の差分で判断する。
+- 次の一歩は `manuscript/backmatter/00-source-notes.md` の「CH04 プロンプトを評価する」と `manuscript/backmatter/01-読書案内.md` の「Prompt と要求定義」を参照する。
+
 ## 章末まとめ
 - 良い prompt は、単発の成功ではなく eval case、rubric、回帰チェックで判断する。
 - prompt evaluation の中心は、再現可能な入力集合と、構造を判定する評価軸を持つことにある。

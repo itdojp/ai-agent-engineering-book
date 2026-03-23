@@ -195,6 +195,10 @@ done と言ってよいのは `sample-repo/docs/harness/done-criteria.md` を満
   `done / blocked / needs-human-approval` の exit state を確認する。報告フォーマットとのつながりもここで押さえる。
 
 
+## Source Notes / Further Reading
+- この章を探し直すときは、まず `scripts/init.sh`、`sample-repo/docs/harness/single-agent-runbook.md`、`sample-repo/docs/harness/permission-policy.md`、`sample-repo/docs/harness/done-criteria.md` を正本として見る。single-agent harness は prompt の言い換えではなく、開始条件と終了条件の束である。
+- 次の一歩は `manuscript/backmatter/00-source-notes.md` の「CH09 Harness Engineering の基礎」と `manuscript/backmatter/01-読書案内.md` の「検証・信頼性・運用」を参照する。
+
 ## 章末まとめ
 - Context Engineering が「何を見せるか」を決めるのに対し、Harness Engineering は「どう始め、どこで止まり、いつ done と言えるか」を決める。
 - single-agent harness の最小構成は、init、work boundary、permission policy、done criteria、verify command、retry rule である。

@@ -131,6 +131,10 @@ PR template で Goal / Changed Files / Verification / Evidence / Remaining Gaps 
 - `.github/pull_request_template.md`
 
 
+## Source Notes / Further Reading
+- この章を探し直すときは、まず `docs/operating-model.md`、`docs/metrics.md`、`checklists/repo-hygiene.md`、`.github/pull_request_template.md` を正本として見る。導入判断はモデル比較ではなく、役割、review budget、cadence、cleanup の設計で読む。
+- 次の一歩は `manuscript/backmatter/00-source-notes.md` の「CH12 運用モデルと組織導入」と `manuscript/backmatter/01-読書案内.md` の「検証・信頼性・運用」を参照する。
+
 ## 章末まとめ
 - AIエージェント導入で残る人間責務は、目的設定、承認、最終レビュー、repo hygiene である。
 - throughput を上げるには、モデルを速くするより review budget と work package を整える方が先である。

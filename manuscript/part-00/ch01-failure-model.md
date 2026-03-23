@@ -134,6 +134,10 @@ good:
 - `sample-repo/docs/seed-issues.md`
 
 
+## Source Notes / Further Reading
+- この章を探し直すときは、まず `sample-repo/README.md`、`sample-repo/docs/domain-overview.md`、`sample-repo/docs/seed-issues.md` を正本として見る。failure model は recurring case と切り離して一般論だけで理解しない。
+- 次の一歩は `manuscript/backmatter/00-source-notes.md` の「CH01 AIエージェントはどこで失敗するか」と `manuscript/backmatter/01-読書案内.md` の「Prompt と要求定義」「検証・信頼性・運用」を参照する。
+
 ## 章末まとめ
 - AIエージェントは、会話で賢く見えても、誤答・忘却・破壊・停止で簡単に失敗する。
 - 本書の対象は「もっともらしい出力」ではなく「artifact と verify を伴って仕事を完了させること」である。

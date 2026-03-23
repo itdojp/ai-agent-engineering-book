@@ -157,6 +157,10 @@ good:
 - `sample-repo/docs/acceptance-criteria/ticket-search.md`
 
 
+## Source Notes / Further Reading
+- この章を探し直すときは、まず `sample-repo/docs/product-specs/ticket-search.md`、`sample-repo/docs/design-docs/ticket-search-adr.md`、`sample-repo/docs/acceptance-criteria/ticket-search.md` を正本として見る。exploratory dialogue をそのまま仕様の source of truth にしない。
+- 次の一歩は `manuscript/backmatter/00-source-notes.md` の「CH03 ChatGPTで要件と設計を固める」と `manuscript/backmatter/01-読書案内.md` の「Prompt と要求定義」を参照する。
+
 ## 章末まとめ
 - ChatGPT の価値は、曖昧要求をそのまま実装させることではなく、論点を洗い出して product spec、acceptance criteria、ADR に収束させることにある。
 - 探索会話と実装準備ができた artifact は別であり、実装に渡すべきなのは確定した artifact である。

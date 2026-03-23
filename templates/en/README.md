@@ -1,6 +1,6 @@
 # English Templates Counterparts
 
-This directory contains the English counterparts of reusable templates referenced by the manuscript. These files are maintained as part of the published parity set, not as temporary placeholders.
+This directory contains the English counterparts of reusable templates referenced by the manuscript. The canonical contract for all templates is defined in `templates/` (Japanese), and the files in `templates/en/` are derived English counterparts that are kept in sync with those canonical templates, not temporary placeholders.
 
 ## Current Scope
 

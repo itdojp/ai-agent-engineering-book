@@ -7,6 +7,7 @@ TARGET="${1:-}"
 required=(
   "AGENTS.md"
   "README.md"
+  "STATUS.md"
   "docs/glossary.md"
   "docs/en/README.md"
   "docs/en/glossary.md"
@@ -296,7 +297,10 @@ def check_english_reader_entry(en_root: Path):
 
 def check_root_onboarding_docs():
     for rel, phrases in forbidden_root_onboarding_phrases.items():
-        text = (root / rel).read_text(encoding="utf-8")
+        path = root / rel
+        if not path.exists():
+            raise SystemExit(f"missing root onboarding doc: {rel}")
+        text = path.read_text(encoding="utf-8")
         for phrase in phrases:
             if phrase in text:
                 raise SystemExit(f"root onboarding doc still contains stale pre-bootstrap guidance in {rel}: {phrase}")

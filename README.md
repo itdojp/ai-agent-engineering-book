@@ -22,7 +22,7 @@ prompts/en/    # 英語版 Prompt artifact
 checklists/    # review / verify / hygiene checklist
 checklists/en/ # 英語版 checklist
 evals/         # Prompt 評価用ファイル
-artifacts/     # evidence bundle などの共有 artifact
+artifacts/     # `artifacts/evidence/` を含む共有 artifact
 .agents/       # Codex 向け skills
 scripts/       # verify / GitHub bootstrap 用スクリプト
 templates/     # 日本語版で参照する再利用テンプレート

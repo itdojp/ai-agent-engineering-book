@@ -9,6 +9,7 @@
 - 日本語版の chapter contract、artifact 参照、演習数を維持する
 - 日本語版にある具体例、bad / good example、artifact 参照を落とさない
 - 意訳で構成を崩さず、chapter / appendix / front matter / backmatter / figures の対応関係を守る
+- `docs/en/`、`prompts/en/`、`checklists/en/`、`templates/en/`、`artifacts/en/` の support artifact counterparts も追跡対象として扱う
 
 ## Chapter Contract
 英語版 chapter には次を含める。
@@ -31,5 +32,6 @@
 - chapter / appendix は日本語版 brief と対応させる
 - front matter / backmatter は対応する directory / file 構成と対応させる
 - figures は `manuscript/figures/figure-plan.md` と figure source 群と対応させる
+- support artifacts は `docs/`、`prompts/`、`checklists/`、`templates/`、`artifacts/` の対応する English counterpart と対応させる
 - 英語版の progress は `manuscript-en/STATUS.md` に反映する
 - 日本語版で artifact が増減したら、英語版 brief と status も追従させる

@@ -7,7 +7,7 @@
 | CH03 | `manuscript/part-01-prompt/ch03-requirements-and-design.md` | `manuscript-en/part-01-prompt/ch03-requirements-and-design.md` | drafted |
 | CH04 | `manuscript/part-01-prompt/ch04-prompt-evals.md` | `manuscript-en/part-01-prompt/ch04-prompt-evals.md` | drafted |
 | CH05 | `manuscript/part-02-context/ch05-context-fundamentals.md` | `manuscript-en/part-02-context/ch05-context-fundamentals.md` | drafted |
-| CH06 | `manuscript/part-02-context/ch06-repo-context.md` | `manuscript-en/part-02-context/ch06-repo-context.md` | scaffolded |
+| CH06 | `manuscript/part-02-context/ch06-repo-context.md` | `manuscript-en/part-02-context/ch06-repo-context.md` | drafted |
 | CH07 | `manuscript/part-02-context/ch07-task-context-and-memory.md` | `manuscript-en/part-02-context/ch07-task-context-and-memory.md` | scaffolded |
 | CH08 | `manuscript/part-02-context/ch08-skills-and-context-pack.md` | `manuscript-en/part-02-context/ch08-skills-and-context-pack.md` | scaffolded |
 | CH09 | `manuscript/part-03-harness/ch09-harness-fundamentals.md` | `manuscript-en/part-03-harness/ch09-harness-fundamentals.md` | scaffolded |

@@ -1,0 +1,7 @@
+id: app-c
+title: Harness Templates
+goal: Provide reusable templates or definitions used across the whole book.
+artifacts:
+  - templates/verify-checklist.md
+  - templates/restart-protocol.md
+  - templates/permission-policy.md

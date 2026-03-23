@@ -1,0 +1,34 @@
+id: ch09
+title: Foundations of Harness Engineering
+part: part-03-harness
+goal: Introduce Harness Engineering by defining a single-agent harness for coding agents and its execution boundary, permissions, completion criteria, and retry model.
+reader_outcomes:
+  - Explain the components of a single-agent harness
+  - Understand why permission policy and escalation matter
+  - Make done criteria explicit
+dependencies:
+  - ch05
+  - ch06
+  - ch07
+  - ch08
+sections:
+  - The shape of a single-agent harness
+  - Init, permissions, and work boundaries
+  - Completion criteria and exit rules
+  - Safe retry and rollback
+  - What lets a coding agent finish the work
+exercises:
+  - Design a single-agent runbook for a bugfix task.
+  - Define a permission policy and escalation rule.
+artifacts:
+  - scripts/init.sh
+  - scripts/verify-sample.sh
+  - sample-repo/docs/harness/single-agent-runbook.md
+  - sample-repo/docs/harness/permission-policy.md
+  - sample-repo/docs/harness/done-criteria.md
+acceptance_criteria:
+  - The chapter follows the standard chapter contract
+  - It includes at least one bad / good example pair
+  - It includes exactly two exercises
+  - All referenced artifacts exist in the repo
+  - verify passes

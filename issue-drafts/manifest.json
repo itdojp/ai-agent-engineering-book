@@ -244,15 +244,6 @@
         "area/manuscript"
       ],
       "body_file": "issue-drafts/en_01.md"
-    },
-    {
-      "id": "EN-02",
-      "title": "EN-02 Write full English draft for CH01",
-      "labels": [
-        "type/chapter",
-        "area/manuscript"
-      ],
-      "body_file": "issue-drafts/en_02.md"
     }
   ]
 }

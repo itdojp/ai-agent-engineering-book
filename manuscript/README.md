@@ -2,6 +2,7 @@
 
 ## 原稿構成
 
+- `briefs/`: 章 brief と appendix brief
 - `front-matter/`: はじめに、読み方ガイドなどの前付け
 - `part-00/`: 本文導入
 - `part-01-prompt/`, `part-02-context/`, `part-03-harness/`: 各 Part の opener と章本文

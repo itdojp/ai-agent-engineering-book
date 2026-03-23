@@ -1,5 +1,5 @@
 ## Goal
-`docs/glossary.md` を source of truth として、terminology drift を減らす。
+`docs/glossary.md` を source of truth として、terminology drift を減らし、出力契約の表記も揃える。
 
 ## Reader Outcome
 この issue の成果により、後続の執筆または sample-repo 実装を進められる状態にする。
@@ -21,6 +21,7 @@
 - `docs/glossary.md` に主要用語と表記ルールが揃っている
 - `checklists/repo-hygiene.md` が `docs/glossary.md` を参照して terminology drift を review できる
 - `issue-drafts/polish_01.md` の wording が `docs/glossary.md` と矛盾しない
+- `Remaining Gaps` が canonical な出力項目として扱われ、関連 artifact で drift していない
 - verify が通る
 - 残課題がある場合は明記する
 

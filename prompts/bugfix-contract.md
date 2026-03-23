@@ -34,10 +34,10 @@
 - 修正前は失敗し、修正後は成功する test がある
 - 既存 test と指定 verify が通る
 - 変更した code / docs / tests を列挙できる
-- 残リスクがあれば明記し、なければ `none` と書ける
+- 未解決 gap があれば明記し、なければ `none` と書ける
 
 ## Output Format
 1. Root Cause
 2. Files Changed
 3. Verification
-4. Remaining Risk
+4. Remaining Gaps

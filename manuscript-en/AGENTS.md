@@ -27,7 +27,9 @@
 - `## Referenced Artifacts`
 
 ## Parity Rules
-- `manuscript/` の対応 chapter / appendix / front-matter / backmatter / figure source を source とする
-- chapter / appendix は日本語版 brief と、front matter / backmatter / figures は対応する directory と figure plan と対応させる
+- `manuscript/` の対応 chapter / appendix / `manuscript/front-matter/` / `manuscript/backmatter/` / `manuscript/figures/` を source とする
+- chapter / appendix は日本語版 brief と対応させる
+- front matter / backmatter は対応する directory / file 構成と対応させる
+- figures は `manuscript/figures/figure-plan.md` と figure source 群と対応させる
 - 英語版の progress は `manuscript-en/STATUS.md` に反映する
 - 日本語版で artifact が増減したら、英語版 brief と status も追従させる

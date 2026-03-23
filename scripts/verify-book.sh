@@ -65,8 +65,8 @@ required_frontmatter = {
     "manuscript/front-matter/01-本書の読み方.md": ["## 3部構成", "## 3つの読み進め方", "## 読み終わりの到達点"],
 }
 required_frontmatter_en = {
-    "manuscript-en/front-matter/00-introduction.md": ["## What This Book Promises", "## Intended Reader", "## Not the Intended Reader"],
-    "manuscript-en/front-matter/01-how-to-read-this-book.md": ["## Three-Part Structure", "## Three Ways to Read This Book", "## What You Should Be Able to Do by the End"],
+    "front-matter/00-introduction.md": ["## What This Book Promises", "## Intended Reader", "## Not the Intended Reader"],
+    "front-matter/01-how-to-read-this-book.md": ["## Three-Part Structure", "## Three Ways to Read This Book", "## What You Should Be Able to Do by the End"],
 }
 required_backmatter = {
     "manuscript/backmatter/00-source-notes.md": ["## この後付けの役割", "## Source Policy", "## 章別 Source Notes"],
@@ -92,9 +92,9 @@ required_part_opener_sections_en = [
     "## What You Should Be Able to Do by the End of This Part",
 ]
 required_part_openers_en = {
-    "manuscript-en/part-01-prompt/part-opener.md": required_part_opener_sections_en,
-    "manuscript-en/part-02-context/part-opener.md": required_part_opener_sections_en,
-    "manuscript-en/part-03-harness/part-opener.md": required_part_opener_sections_en,
+    "part-01-prompt/part-opener.md": required_part_opener_sections_en,
+    "part-02-context/part-opener.md": required_part_opener_sections_en,
+    "part-03-harness/part-opener.md": required_part_opener_sections_en,
 }
 required_sections_en = ["## Learning Objectives", "## Outline", "## Exercises", "## Referenced Artifacts", "## Source Notes / Further Reading"]
 required_backmatter_en = {
@@ -203,16 +203,16 @@ def check_english_backmatter(en_root: Path):
 
 def check_english_reader_entry(en_root: Path):
     for rel, sections in required_frontmatter_en.items():
-        text = (root / rel).read_text(encoding="utf-8")
+        text = (en_root / rel).read_text(encoding="utf-8")
         missing = [item for item in sections if item not in text]
         if missing:
-            raise SystemExit(f"English front matter {rel} missing sections: {', '.join(missing)}")
+            raise SystemExit(f"English front matter manuscript-en/{rel} missing sections: {', '.join(missing)}")
 
     for rel, sections in required_part_openers_en.items():
-        text = (root / rel).read_text(encoding="utf-8")
+        text = (en_root / rel).read_text(encoding="utf-8")
         missing = [item for item in sections if item not in text]
         if missing:
-            raise SystemExit(f"English part opener {rel} missing sections: {', '.join(missing)}")
+            raise SystemExit(f"English part opener manuscript-en/{rel} missing sections: {', '.join(missing)}")
 
 
 def check_english_scaffold(target: str):

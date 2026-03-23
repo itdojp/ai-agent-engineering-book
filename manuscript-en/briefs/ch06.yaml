@@ -19,7 +19,7 @@ exercises:
   - Draft a repo-map and identify high-change areas.
 artifacts:
   - AGENTS.md
-  - manuscript/AGENTS.md
+  - manuscript-en/AGENTS.md
   - sample-repo/AGENTS.md
   - sample-repo/docs/repo-map.md
   - sample-repo/docs/architecture.md

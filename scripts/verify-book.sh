@@ -112,6 +112,14 @@ def check_appendix(app_id: str, brief: Path):
         if not (root / artifact).exists():
             raise SystemExit(f"brief {brief.name} references missing artifact: {artifact}")
 
+
+def chapter_title(ch_id: str) -> str:
+    chapter = expect_single_path(f"manuscript/**/{ch_id}-*.md", f"chapter file for {ch_id}")
+    for line in chapter.read_text(encoding="utf-8").splitlines():
+        if line.startswith("# "):
+            return line.removeprefix("# ").strip()
+    raise SystemExit(f"chapter {ch_id} is missing a title heading")
+
 def expect_single_path(pattern: str, label: str) -> Path:
     paths = sorted(root.glob(pattern))
     if not paths:
@@ -183,6 +191,12 @@ for rel, sections in required_backmatter.items():
     missing = [item for item in sections if item not in text]
     if missing:
         raise SystemExit(f"backmatter {rel} missing sections: {', '.join(missing)}")
+
+source_notes = (root / "manuscript/backmatter/00-source-notes.md").read_text(encoding="utf-8")
+for brief in sorted((root / "manuscript" / "briefs").glob("ch*.yaml")):
+    heading = f"### {brief.stem.upper()} {chapter_title(brief.stem)}"
+    if heading not in source_notes:
+        raise SystemExit(f"source notes missing chapter heading: {heading}")
 
 for rel, sections in required_part_openers.items():
     text = (root / rel).read_text(encoding="utf-8")

@@ -7,6 +7,8 @@
 - verify script と実態がずれていないか
 - `docs/glossary.md` を source of truth として表記を揃えたか
 - `Prompt Contract`、`Progress Note`、`verification harness` の固有表記がぶれていないか
+- 各章の `Source Notes / Further Reading` が `manuscript/backmatter/00-source-notes.md` と矛盾していないか
+- `manuscript/backmatter/00-source-notes.md` が CH01-CH12 を取りこぼしていないか
 - 出力契約の最終項目が `Remaining Gaps` に揃っているか
 
 ## Weekly Cleanup
@@ -15,6 +17,7 @@
 - `AI slop` に当たる stale docs や未使用 artifact が積み上がっていないか
 - 同じ説明を別名で持つ artifact が増えていないか
 - `repo hygiene` と `entropy cleanup` の担当と cadence が曖昧になっていないか
+- source notes、読書案内、索引 seed のどれかだけ更新されて backmatter 内 drift が起きていないか
 
 ## Escalate When
 - source of truth が衝突している

@@ -18,7 +18,11 @@ sample-repo/   # 書籍全体で使う support-hub サンプル
 docs/          # 全体方針と用語
 docs/en/       # 英語版 docs
 prompts/       # Prompt contract の例
+prompts/en/    # 英語版 Prompt artifact
+checklists/    # review / verify / hygiene checklist
+checklists/en/ # 英語版 checklist
 evals/         # Prompt 評価用ファイル
+artifacts/     # `artifacts/evidence/` を含む共有 artifact
 .agents/       # Codex 向け skills
 scripts/       # verify / GitHub bootstrap 用スクリプト
 templates/     # 日本語版で参照する再利用テンプレート

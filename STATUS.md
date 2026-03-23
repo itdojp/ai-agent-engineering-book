@@ -7,7 +7,8 @@ book repo は日本語版 / 英語版の parity maintenance と polish を継続
 - GitHub repository、labels、milestones、issue / PR 運用は `main` 上で稼働している
 - 日本語版は front matter、CH01-CH12、appendices、backmatter、figures を含めて drafted 状態にある
 - 英語版は `manuscript-en/STATUS.md` の parity tracker に従って、front matter、CH01-CH12、appendices、backmatter、figures を drafted 状態で保持している
-- `sample-repo/`、`prompts/`、`checklists/`、`templates/`、`evals/` は本文参照と整合する状態に保たれている
+- `sample-repo/`、`prompts/`、`checklists/`、`templates/`、`evals/`、`artifacts/evidence/` は本文参照と整合する状態に保たれている
+- 英語版 support artifact として `docs/en/`、`prompts/en/`、`checklists/en/`、`templates/en/` を継続保守している
 - `scripts/bootstrap-github.sh`、`scripts/create-issues.py`、`issue-drafts/` は、この運用を別 repo に移植するための reusable setup artifact として残している
 
 ## Next Recommended Action

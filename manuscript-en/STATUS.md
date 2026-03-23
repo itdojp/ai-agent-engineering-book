@@ -10,7 +10,7 @@
 | CH06 | `manuscript/part-02-context/ch06-repo-context.md` | `manuscript-en/part-02-context/ch06-repo-context.md` | drafted |
 | CH07 | `manuscript/part-02-context/ch07-task-context-and-memory.md` | `manuscript-en/part-02-context/ch07-task-context-and-memory.md` | drafted |
 | CH08 | `manuscript/part-02-context/ch08-skills-and-context-pack.md` | `manuscript-en/part-02-context/ch08-skills-and-context-pack.md` | drafted |
-| CH09 | `manuscript/part-03-harness/ch09-harness-fundamentals.md` | `manuscript-en/part-03-harness/ch09-harness-fundamentals.md` | scaffolded |
+| CH09 | `manuscript/part-03-harness/ch09-harness-fundamentals.md` | `manuscript-en/part-03-harness/ch09-harness-fundamentals.md` | drafted |
 | CH10 | `manuscript/part-03-harness/ch10-verification-harness.md` | `manuscript-en/part-03-harness/ch10-verification-harness.md` | scaffolded |
 | CH11 | `manuscript/part-03-harness/ch11-long-running-and-multi-agent.md` | `manuscript-en/part-03-harness/ch11-long-running-and-multi-agent.md` | scaffolded |
 | CH12 | `manuscript/part-03-harness/ch12-operating-model.md` | `manuscript-en/part-03-harness/ch12-operating-model.md` | scaffolded |

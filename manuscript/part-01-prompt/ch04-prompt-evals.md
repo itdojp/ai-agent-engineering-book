@@ -15,7 +15,7 @@ dependencies:
 # プロンプトを評価する
 
 ## この章の位置づけ
-CH02 で Prompt Contract を定義し、CH03 で曖昧要求を実装準備ができた artifact に変換した。ここで次の問題が出る。どの prompt が本当に良いのかを、どう判断するのか。1 回うまくいった prompt を「完成」とみなすのは、工学ではなく偶然に依存した運用である。
+昨日うまくいった prompt が、今日も同じように当たる保証はない。CH02 で Prompt Contract を定義し、CH03 で曖昧要求を実装準備ができた artifact に変換した。ここで次の問題が出る。どの prompt が本当に良いのかを、どう判断するのか。
 
 Prompt Engineering を実務にするには、prompt quality を評価対象にしなければならない。必要なのは、eval case、rubric、回帰チェック、version comparison である。CH04 では、prompt を folklore ではなく engineering artifact として扱うための最小評価系を説明する。
 
@@ -180,4 +180,4 @@ good:
 ## 章末まとめ
 - 良い prompt は、単発の成功ではなく eval case、rubric、回帰チェックで判断する。
 - prompt evaluation の中心は、再現可能な入力集合と、構造を判定する評価軸を持つことにある。
-- この章では prompt-level evaluation までを扱った。次章からは Context Engineering に入り、prompt だけでは足りない情報設計を扱う。
+- prompt が評価できるようになると、次に壊れるのは前提保持である。次章からは Context Engineering に入り、何を見せ続けるかを設計する。

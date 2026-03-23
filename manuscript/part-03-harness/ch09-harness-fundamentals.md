@@ -19,7 +19,7 @@ dependencies:
 # Harness Engineering の基礎
 
 ## この章の位置づけ
-CH05-CH08 では、AI agent に何を見せるかを整えてきた。だが、repo context、task brief、skill が揃っていても、coding agent はまだ失敗する。典型例は、作業境界を越える、verify 前に止まる、approval が必要な変更を勝手に進める、失敗時に同じ手順を盲目的に繰り返す、の 4 つである。
+repo context、task brief、skill が揃っていても、coding agent は verify 前に止まり、approval 境界を越え、同じ失敗を繰り返す。CH05-CH08 では、AI agent に何を見せるかを整えてきた。だが、それだけでは作業は閉じない。
 
 ここから必要になるのが Harness Engineering である。Context Engineering が「何を読むか」を設計するのに対し、Harness Engineering は「どう起動し、どこまで触れ、いつ done と言ってよいか」を設計する。本章では、その最小単位として single-agent harness を定義する。対象は verification harness 全体ではない。まずは 1 つの coding agent を安全に最後まで走らせる土台を固める。
 
@@ -202,4 +202,4 @@ done と言ってよいのは `sample-repo/docs/harness/done-criteria.md` を満
 ## 章末まとめ
 - Context Engineering が「何を見せるか」を決めるのに対し、Harness Engineering は「どう始め、どこで止まり、いつ done と言えるか」を決める。
 - single-agent harness の最小構成は、init、work boundary、permission policy、done criteria、verify command、retry rule である。
-- CH09 では verify を呼び出す枠組みを定義した。次章では verification harness として、test、CI、evidence をどう束ねるかを扱う。
+- 起動と終了条件が固まると、次に不足するのは reviewer が信じられる verify chain である。次章では test、CI、evidence を束ねる verification harness を扱う。

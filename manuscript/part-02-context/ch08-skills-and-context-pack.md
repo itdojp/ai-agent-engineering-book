@@ -18,7 +18,7 @@ dependencies:
 # Skills と Context Pack を再利用する
 
 ## この章の位置づけ
-CH05-CH07 で、永続コンテキスト、repo context、task brief、session memory を個別に設計してきた。だが実務では、同じ種類の作業を何度も繰り返す。毎回 prompt を書き直し、毎回参照 artifact を列挙し直していると、作業速度も一貫性も落ちる。ここで必要になるのが skill と context pack である。
+同じ verification prompt や issue-to-plan prompt を毎回貼り直していると、速くなるどころか再現性が落ちる。CH05-CH07 で、永続コンテキスト、repo context、task brief、session memory を個別に設計してきた。だが実務では、同じ種類の作業を何度も繰り返す。ここで必要になるのが skill と context pack である。
 
 この章では、repeatable な作業を skill に昇格させる条件、`SKILL.md` の標準構成、repo skill と user skill の分離、context pack の組み立て方、skill versioning と破壊的変更を扱う。目的は instructions を増やすことではなく、再利用可能な作業単位を artifact として管理することである。
 
@@ -129,4 +129,4 @@ canonical fact の source of truth として使う。
 ## 章末まとめ
 - skill は長い prompt の別名ではなく、再利用可能な workflow と output contract を持つ artifact である。
 - context pack は task brief を置き換えるものではなく、読む順序と canonical fact を束ねる task-specific context である。
-- repo skill と user skill を分け、破壊的変更を契約変更として扱うと再利用しやすい。次章からは Harness Engineering に入り、こうして整えた context を安全に実行し、verify する仕組みを扱う。
+- 再利用単位が揃うと、次に必要なのは安全に始め、止め、承認境界を守る実行枠である。次章からは Harness Engineering に入り、single-agent harness を扱う。

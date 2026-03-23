@@ -17,7 +17,7 @@ dependencies:
 # Repo Context を設計する
 
 ## この章の位置づけ
-CH05 で Context Engineering の分類を導入した。次に必要なのは、AI agent が repo に入った瞬間に迷わないための永続コンテキストを設計することである。Repo Context の役割は、すべてを説明することではない。root の不変条件、どこから読めばよいか、設計理由はどこにあるか、変更時にどの docs まで更新すべきかを短時間で伝えることにある。
+repo に入った直後の AI agent が `AGENTS.md` と `README` と `tests` を行き来し始めたら、入口設計は弱い。CH05 で Context Engineering の分類を導入した。次に必要なのは、AI agent が repo に入った瞬間に迷わないための永続コンテキストを設計することである。
 
 この章では、`AGENTS.md`、`repo-map`、`architecture`、`coding-standards` をどう分担させるかを扱う。対象は `Codex CLI` のような coding agent だが、人間のレビューにも同じ構造が効く。
 
@@ -138,4 +138,4 @@ root `AGENTS.md` には全体の不変条件だけを書く。
 ## 章末まとめ
 - Repo Context の仕事は、repo の全文を説明することではなく、AI agent が正しい起点と更新境界を素早く掴めるようにすることにある。
 - `AGENTS.md` は地図、repo-map は索引、architecture は設計理由、coding standards は変更規律として分離すると drift を防ぎやすい。
-- 次章では、repo 全体の永続コンテキストを前提に、issue を task brief に変換し、セッションを跨ぐための session memory を設計する。
+- repo の入口が整うと、次に必要なのは今回の task だけに縮めた context である。次章では issue を task brief と session memory に変換する。

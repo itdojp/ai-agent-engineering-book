@@ -15,7 +15,7 @@ dependencies:
 # ChatGPTで要件と設計を固める
 
 ## この章の位置づけ
-CH02 では、single-task reliability のために Prompt Contract を定義した。だが、契約がしっかりしていても、対象の要求そのものが曖昧なら、AIエージェントは正しく実装できない。CH03 の役割はそこにある。ChatGPT を使って、曖昧な依頼を product spec、acceptance criteria、design decision に変換する。
+「検索を使いやすくしたい」は会話の出発点にはなっても、実装の出発点にはならない。CH02 で Prompt Contract を固めても、対象の要求そのものが曖昧なら、AIエージェントは正しく実装できない。CH03 の役割はそこにある。
 
 ここで重要なのは、ChatGPT との対話そのものを成果物と勘違いしないことだ。探索的な会話は有用だが、実装準備ができた状態とは別である。実装準備ができた状態とは、repo に product spec、acceptance criteria、ADR が残り、人間が最終判断を説明できる状態を指す。この章では `sample-repo` の `FEATURE-001` を題材に、その変換過程を具体化する。
 
@@ -164,4 +164,4 @@ good:
 ## 章末まとめ
 - ChatGPT の価値は、曖昧要求をそのまま実装させることではなく、論点を洗い出して product spec、acceptance criteria、ADR に収束させることにある。
 - 探索会話と実装準備ができた artifact は別であり、実装に渡すべきなのは確定した artifact である。
-- 人間はスコープ、非目標、設計トレードオフの採否を残す必要がある。次章では、この仕様と設計 artifact を prompt 評価へつなげる。
+- 仕様 artifact が揃うと、次に必要なのは「その prompt が毎回同じ品質で出せるか」の評価である。次章では prompt を case と rubric で評価する。

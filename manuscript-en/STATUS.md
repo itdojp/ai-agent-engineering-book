@@ -23,6 +23,7 @@
 
 | Surface | Japanese Source | English Target | Status |
 |---|---|---|---|
+| Briefs | `manuscript/briefs/` | `manuscript-en/briefs/` | drafted |
 | Front Matter | `manuscript/front-matter/` | `manuscript-en/front-matter/` | drafted |
 | Backmatter | `manuscript/backmatter/` | `manuscript-en/backmatter/` | drafted |
 | Figures | `manuscript/figures/` | `manuscript-en/figures/` | drafted |

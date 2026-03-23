@@ -139,7 +139,7 @@ Comparison points:
 
 ## Source Notes / Further Reading
 - When you need to revisit this chapter, start with `AGENTS.md`, `sample-repo/docs/repo-map.md`, `sample-repo/docs/architecture.md`, and `sample-repo/docs/coding-standards.md`. Read the repo map as the index and the architecture doc as the design rationale.
-- For the next navigation step, see `manuscript/backmatter/00-source-notes.md` under `### CH06 Repo Context を設計する` and `manuscript/backmatter/01-読書案内.md` under `## Context と repo 設計`.
+- For the next navigation step, see `manuscript-en/backmatter/00-source-notes.md` under `### CH06 Design Repo Context` and `manuscript-en/backmatter/01-reading-guide.md` under `## Context and Repo Design`.
 
 ## Chapter Summary
 - Repo Context does not exist to explain the whole repo. It exists to help the AI agent find the correct starting point and the correct update boundary quickly.

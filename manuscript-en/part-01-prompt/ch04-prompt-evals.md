@@ -176,7 +176,7 @@ The important point is that prompt quality is not described as a feeling. It is 
 
 ## Source Notes / Further Reading
 - When you need to revisit this chapter, treat `evals/prompt-contract-cases.json`, `evals/rubrics/feature-spec.json`, and `scripts/run-prompt-evals.py` as the source of truth. Prompt quality should be judged by case and rubric deltas, not by tone or intuition.
-- For the next navigation step, see `manuscript/backmatter/00-source-notes.md` under `### CH04 プロンプトを評価する` and `manuscript/backmatter/01-読書案内.md` under `## Prompt と要求定義`.
+- For the next navigation step, see `manuscript-en/backmatter/00-source-notes.md` under `### CH04 Evaluate Prompts` and `manuscript-en/backmatter/01-reading-guide.md` under `## Prompts and Requirements Shaping`.
 
 ## Chapter Summary
 - Good prompts are judged by eval cases, rubrics, and regression checks rather than one-off success.

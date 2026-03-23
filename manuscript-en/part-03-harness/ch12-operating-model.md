@@ -140,7 +140,7 @@ The point of this example is that adoption succeeds or fails based on whether ro
 
 ## Source Notes / Further Reading
 - To revisit this chapter, start with `docs/operating-model.md`, `docs/metrics.md`, `checklists/repo-hygiene.md`, and `.github/pull_request_template.md`. Read adoption decisions through roles, review budget, cadence, and cleanup instead of through model comparisons.
-- For the backmatter path, see `manuscript/backmatter/00-source-notes.md` under `### CH12 運用モデルと組織導入` and `manuscript/backmatter/01-読書案内.md` under `## 検証・信頼性・運用`.
+- For the backmatter path, see `manuscript-en/backmatter/00-source-notes.md` under `### CH12 Operating Model and Organizational Adoption` and `manuscript-en/backmatter/01-reading-guide.md` under `## Verification, Reliability, and Operations`.
 
 ## Chapter Summary
 - Human responsibilities remain in goal setting, approval, final review, and repo hygiene.

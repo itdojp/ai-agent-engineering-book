@@ -18,6 +18,7 @@ manuscript-en/
   part-01-prompt/  # Chapters 2-4
   part-02-context/ # Chapters 5-8
   part-03-harness/ # Chapters 9-12
+  backmatter/      # English source notes, reading guide, index seed, figure/table policy
   appendices/      # Appendix A-D
 ```
 

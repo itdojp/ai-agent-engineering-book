@@ -197,7 +197,7 @@ The point of this example is not automation theater. The point is to show that H
 
 ## Source Notes / Further Reading
 - To revisit this chapter, start with `scripts/init.sh`, `sample-repo/docs/harness/single-agent-runbook.md`, `sample-repo/docs/harness/permission-policy.md`, and `sample-repo/docs/harness/done-criteria.md`. Read the single-agent harness as a bundle of startup, boundary, and exit conditions rather than as a prompt variant.
-- For the backmatter path, see `manuscript/backmatter/00-source-notes.md` under `### CH09 Harness Engineering の基礎` and `manuscript/backmatter/01-読書案内.md` under `## 検証・信頼性・運用`.
+- For the backmatter path, see `manuscript-en/backmatter/00-source-notes.md` under `### CH09 Foundations of Harness Engineering` and `manuscript-en/backmatter/01-reading-guide.md` under `## Verification, Reliability, and Operations`.
 
 ## Chapter Summary
 - Context Engineering decides what the agent sees. Harness Engineering decides how the agent starts, where it must stop, and what must be true before it may declare completion.

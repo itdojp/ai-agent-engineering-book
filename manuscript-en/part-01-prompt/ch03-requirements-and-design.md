@@ -163,7 +163,7 @@ The important point in this worked example is that ChatGPT does not directly dec
 
 ## Source Notes / Further Reading
 - When you need to revisit this chapter, treat `sample-repo/docs/product-specs/ticket-search.md`, `sample-repo/docs/design-docs/ticket-search-adr.md`, and `sample-repo/docs/acceptance-criteria/ticket-search.md` as the source of truth. Do not treat exploratory dialogue as the implementation contract.
-- For the next navigation step, see `manuscript/backmatter/00-source-notes.md` under `### CH03 ChatGPTで要件と設計を固める` and `manuscript/backmatter/01-読書案内.md` under `## Prompt と要求定義`.
+- For the next navigation step, see `manuscript-en/backmatter/00-source-notes.md` under `### CH03 Use ChatGPT to Shape Requirements and Design` and `manuscript-en/backmatter/01-reading-guide.md` under `## Prompts and Requirements Shaping`.
 
 ## Chapter Summary
 - ChatGPT is most useful when it turns ambiguous requests into product specs, acceptance criteria, and ADRs rather than trying to implement directly from a vague request.

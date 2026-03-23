@@ -174,7 +174,7 @@ This card keeps the decision grounded in integration cost instead of surface com
 
 ## Source Notes / Further Reading
 - To revisit this chapter, start with `sample-repo/docs/harness/feature-list.md`, `sample-repo/docs/harness/restart-protocol.md`, `sample-repo/docs/harness/multi-agent-playbook.md`, and `sample-repo/tasks/FEATURE-002-plan.md`. Read multi-agent work only after the role split and restart packet are concrete.
-- For the backmatter path, see `manuscript/backmatter/00-source-notes.md` under `### CH11 Long-running Task と Multi-agent` and `manuscript/backmatter/01-読書案内.md` under `## 検証・信頼性・運用`.
+- For the backmatter path, see `manuscript-en/backmatter/00-source-notes.md` under `### CH11 Long-running Tasks and Multi-agent Work` and `manuscript-en/backmatter/01-reading-guide.md` under `## Verification, Reliability, and Operations`.
 
 ## Chapter Summary
 - Long-running tasks need a feature list, a Progress Note, and a restart packet to keep state stable across sessions.

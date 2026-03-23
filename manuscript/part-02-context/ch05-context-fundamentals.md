@@ -117,4 +117,4 @@ context は次の順に渡す。
 ## 章末まとめ
 - Prompt Engineering が作業境界を決めるのに対し、Context Engineering は判断材料の種類、鮮度、優先順位を決める。
 - context は永続、タスク、セッション、ツールに分けて扱うと設計しやすい。
-- context の種類が見えたら、次に必要なのは repo 入口の固定である。次章では AGENTS、repo-map、architecture の役割分担を扱う。
+- context の種類が見えたら、次に必要なのは repo 入口の固定である。次章では `AGENTS.md`、`sample-repo/docs/repo-map.md`、`sample-repo/docs/architecture.md` の役割分担を扱う。

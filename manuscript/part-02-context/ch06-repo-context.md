@@ -17,7 +17,7 @@ dependencies:
 # Repo Context を設計する
 
 ## この章の位置づけ
-repo に入った直後の AI agent が `AGENTS.md` と `README` と `tests` を行き来し始めたら、入口設計は弱い。CH05 で Context Engineering の分類を導入した。次に必要なのは、AI agent が repo に入った瞬間に迷わないための永続コンテキストを設計することである。
+repo に入った直後の AI agent が `AGENTS.md` と `README.md` と `sample-repo/tests/` を行き来し始めたら、入口設計は弱い。CH05 で Context Engineering の分類を導入した。次に必要なのは、AI agent が repo に入った瞬間に迷わないための永続コンテキストを設計することである。
 
 この章では、`AGENTS.md`、`repo-map`、`architecture`、`coding-standards` をどう分担させるかを扱う。対象は `Codex CLI` のような coding agent だが、人間のレビューにも同じ構造が効く。
 

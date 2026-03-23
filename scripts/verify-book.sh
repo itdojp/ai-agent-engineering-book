@@ -160,6 +160,22 @@ forbidden_root_onboarding_phrases = {
         "`REPO-01` から Codex CLI に投入する",
     ],
 }
+forbidden_english_counterpart_phrases = {
+    "manuscript-en/README.md": [
+        "# English Manuscript Scaffold",
+        "The English scaffold must preserve the same chapter ids, appendix ids, and referenced artifacts.",
+        "Full English prose can be added later",
+    ],
+    "docs/en/README.md": [
+        "# English Docs Scaffold",
+        "This directory reserves space for English supporting documents that will eventually mirror selected files under `docs/`.",
+    ],
+    "templates/en/README.md": [
+        "# English Templates Scaffold",
+        "This directory reserves the English counterparts of reusable templates referenced by the manuscript.",
+        "Establish the directory contract for future English templates",
+    ],
+}
 
 
 def parse_artifacts(brief: Path) -> list[str]:
@@ -305,10 +321,20 @@ def check_root_onboarding_docs():
             if phrase in text:
                 raise SystemExit(f"root onboarding doc still contains stale pre-bootstrap guidance in {rel}: {phrase}")
 
-def check_english_scaffold(target: str):
+def check_english_counterpart_readmes():
+    for rel, phrases in forbidden_english_counterpart_phrases.items():
+        path = root / rel
+        if not path.exists():
+            raise SystemExit(f"missing English counterpart README: {rel}")
+        text = path.read_text(encoding="utf-8")
+        for phrase in phrases:
+            if phrase in text:
+                raise SystemExit(f"English counterpart README still contains stale wording in {rel}: {phrase}")
+
+def check_english_manuscript(target: str):
     en_root = root / "manuscript-en"
     if not en_root.exists():
-        raise SystemExit("missing English manuscript scaffold: manuscript-en/")
+        raise SystemExit("missing English manuscript directory: manuscript-en/")
     for rel in ["AGENTS.md", "README.md", "STATUS.md"]:
         if not (en_root / rel).exists():
             raise SystemExit(f"missing English manuscript file: manuscript-en/{rel}")
@@ -327,6 +353,7 @@ def check_english_scaffold(target: str):
     check_english_backmatter(en_root)
     check_english_root_artifact_refs(en_root)
     check_english_figures(en_root)
+    check_english_counterpart_readmes()
 
     if target:
         brief = en_root / "briefs" / f"{target}.yaml"
@@ -379,8 +406,8 @@ else:
     for brief in sorted((root / "manuscript" / "briefs").glob("app-*.yaml")):
         check_appendix(brief.stem, brief)
 
-check_english_scaffold(target)
+check_english_manuscript(target)
 check_root_onboarding_docs()
 
-print("book scaffold looks consistent")
+print("book repository artifacts look consistent")
 PY

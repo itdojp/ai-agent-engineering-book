@@ -27,7 +27,7 @@
 
 ## Missing Information Policy
 - 必須 input が足りない場合は、不足情報を列挙して停止する
-- 仮定を置いて進める場合は、その仮定を `Open Questions` に残す
+- 仮定を置いて進める場合は、その仮定を `Remaining Gaps` に残す
 
 ## Completion Criteria
 - acceptance criteria を満たす
@@ -38,6 +38,6 @@
 
 ## Output Format
 1. Implemented Scope
-2. Files Changed
+2. Changed Files
 3. Verification
-4. Open Questions
+4. Remaining Gaps

@@ -38,6 +38,6 @@
 
 ## Output Format
 1. Root Cause
-2. Files Changed
+2. Changed Files
 3. Verification
 4. Remaining Gaps

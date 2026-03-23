@@ -62,7 +62,7 @@ The six elements become easier to write if each one answers a different question
 | Constraints | What boundaries must remain intact? | `Do not change the public interface.` |
 | Forbidden Actions | What tempting shortcuts are disallowed? | `Do not delete the failing test just to get green results.` |
 | Completion Criteria | What observable evidence proves the task is done? | `A test fails before the fix and passes after the fix.` |
-| Output Format | How must the agent report the result? | `Files Changed`, `Verification`, `Remaining Risk` |
+| Output Format | How must the agent report the result? | `Changed Files`, `Verification`, `Remaining Gaps` |
 
 It is also important to separate constraints from forbidden actions. A constraint states a boundary that must hold. A forbidden action blocks a common shortcut that would hide failure. “Do not make out-of-scope UI or API changes” is a constraint. “Do not lock in an ambiguous requirement by guessing” is a forbidden action. The former protects scope. The latter protects the task against a known failure mode.
 
@@ -113,9 +113,9 @@ Completion Criteria:
 - The specified verify command passes
 Output Format:
 1. Implemented Scope
-2. Files Changed
+2. Changed Files
 3. Verification
-4. Open Questions
+4. Remaining Gaps
 ```
 
 This prompt is still short, but it contains the structure needed for reliable execution. A human reviewer can see what is in scope, which artifacts ground the task, what the agent must not do, and how completion will be judged. That is the difference between “please do something useful” and “here is the contract for this task.”
@@ -166,9 +166,9 @@ Completion Criteria:
 - Existing tests and the required verify command pass
 Output Format:
 1. Root Cause
-2. Files Changed
+2. Changed Files
 3. Verification
-4. Remaining Risk
+4. Remaining Gaps
 ```
 
 The corrected version makes the bugfix boundary explicit. The Prompt Contract is not longer for style. It is longer because it closes the specific judgment gaps that usually cause wrong answers, accidental breakage, and early stopping.

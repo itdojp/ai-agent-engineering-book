@@ -26,7 +26,7 @@
       "input": "検索改善をしたいが仕様はまだ粗い",
       "must_include": [
         "不足情報を列挙して停止する",
-        "Open Questions",
+        "Remaining Gaps",
         "曖昧な要件を推測で確定しない"
       ],
       "must_not_include": [
@@ -42,7 +42,7 @@
         "docs/product-specs/ticket-search.md",
         "docs/acceptance-criteria/ticket-search.md",
         "docs/design-docs/ticket-search-adr.md",
-        "Files Changed"
+        "Changed Files"
       ],
       "must_not_include": [
         "コード変更だけで完了扱いにする"
@@ -70,7 +70,7 @@
       "input": "不具合修正の結果をレビューしやすい形で返してほしい",
       "must_include": [
         "Root Cause",
-        "Files Changed",
+        "Changed Files",
         "Remaining Gaps"
       ],
       "must_not_include": [

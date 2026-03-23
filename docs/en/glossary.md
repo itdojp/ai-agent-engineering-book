@@ -1,6 +1,6 @@
 # English Glossary
 
-This file is the source of truth for terminology used in the English manuscript. Keep it aligned with [`docs/glossary.md`](../glossary.md) and update both sides when a term changes meaning.
+This file is the English counterpart of the repo-wide glossary and is used by the English manuscript. It must stay in sync with, and be derived from, [`docs/glossary.md`](../glossary.md), which remains the single source of truth for terminology.
 
 | Term | Definition |
 |---|---|

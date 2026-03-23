@@ -1,8 +1,15 @@
 # Glossary
 
+## Purpose
+
 This book intentionally separates concepts that are often collapsed into one another in AI-agent discussions. Prompt Engineering, Context Engineering, and Harness Engineering are related, but they solve different problems. `task brief`, `Progress Note`, and `context pack` are also different artifacts with different jobs. If the terminology drifts, the artifact boundaries drift with it.
 
-For the English manuscript, the source of truth is [`docs/en/glossary.md`](../../docs/en/glossary.md). That file must stay aligned with the Japanese-side glossary in [`docs/glossary.md`](../../docs/glossary.md). This appendix is the reader-facing guide: it groups the terms that are easiest to confuse and explains why the distinctions matter in practice.
+For the English manuscript, [`docs/en/glossary.md`](../../docs/en/glossary.md) is the English counterpart used by the English chapters and appendices. It must stay aligned with the repo-wide glossary in [`docs/glossary.md`](../../docs/glossary.md), which remains the single source of truth for terminology. This appendix is the reader-facing guide: it groups the terms that are easiest to confuse and explains why the distinctions matter in practice.
+
+## Included Artifacts
+
+- `docs/glossary.md`
+- `docs/en/glossary.md`
 
 ## 1. Terms for the maturity model
 
@@ -61,7 +68,12 @@ To reduce drift, the English manuscript uses these rules.
 
 When a new chapter or artifact is added, normalize the wording against [`docs/en/glossary.md`](../../docs/en/glossary.md) first. Early naming discipline is cheaper than retroactive terminology cleanup.
 
+## Parity Notes
+
+- Japanese source: `manuscript/appendices/app-d-用語集.md`
+- Publication target: preserve the Japanese appendix's terminology groups, maturity-model ordering, and naming-discipline guidance while making the English glossary usable on its own.
+
 ## Referenced Artifacts
 
-- `docs/en/glossary.md`
 - `docs/glossary.md`
+- `docs/en/glossary.md`

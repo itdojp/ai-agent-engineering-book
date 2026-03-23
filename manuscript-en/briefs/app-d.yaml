@@ -2,5 +2,4 @@ id: app-d
 title: Glossary
 goal: Provide reusable templates or definitions used across the whole book.
 artifacts:
-  - docs/en/glossary.md
   - docs/glossary.md

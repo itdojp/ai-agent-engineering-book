@@ -50,6 +50,7 @@ required=(
   "checklists/en/prompt-contract-review.md"
   "checklists/en/verification.md"
   "checklists/en/repo-hygiene.md"
+  "templates/en/README.md"
   "scripts/bootstrap-github.sh"
   "scripts/create-issues.py"
   "scripts/verify-sample.sh"

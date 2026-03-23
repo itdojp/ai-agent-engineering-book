@@ -14,7 +14,7 @@
 | CH10 | `manuscript/part-03-harness/ch10-verification-harness.md` | `manuscript-en/part-03-harness/ch10-verification-harness.md` | scaffolded |
 | CH11 | `manuscript/part-03-harness/ch11-long-running-and-multi-agent.md` | `manuscript-en/part-03-harness/ch11-long-running-and-multi-agent.md` | scaffolded |
 | CH12 | `manuscript/part-03-harness/ch12-operating-model.md` | `manuscript-en/part-03-harness/ch12-operating-model.md` | scaffolded |
-| APP-A | `manuscript/appendices/app-a-Prompt-テンプレート集.md` | `manuscript-en/appendices/app-a-prompt-templates.md` | scaffolded |
+| APP-A | `manuscript/appendices/app-a-Prompt-テンプレート集.md` | `manuscript-en/appendices/app-a-prompt-templates.md` | drafted |
 | APP-B | `manuscript/appendices/app-b-Context-テンプレート集.md` | `manuscript-en/appendices/app-b-context-templates.md` | scaffolded |
 | APP-C | `manuscript/appendices/app-c-Harness-テンプレート集.md` | `manuscript-en/appendices/app-c-harness-templates.md` | scaffolded |
 | APP-D | `manuscript/appendices/app-d-用語集.md` | `manuscript-en/appendices/app-d-glossary.md` | drafted |

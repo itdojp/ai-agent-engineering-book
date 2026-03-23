@@ -15,7 +15,7 @@ dependencies:
 # Verification Harness を作る
 
 ## この章の位置づけ
-CH09 では、single-agent harness の start condition、permission boundary、done criteria を定義した。だが `./scripts/verify-sample.sh` のような 1 本の verify command だけでは、まだ十分ではない。何をテストで守るか、どの順で検証するか、local verify と CI verify をどう分担するか、UI 変更時に何を証跡として残すかが曖昧だと、agent は verify を通しても review に耐える根拠を残せない。
+test が green でも、reviewer が「何を確認すればよいか分からない」なら verify は閉じていない。CH09 では、single-agent harness の start condition、permission boundary、done criteria を定義した。だが `./scripts/verify-sample.sh` のような 1 本の verify command だけでは、まだ十分ではない。
 
 ここで必要になるのが verification harness である。verification harness は、テスト、lint、typecheck、証跡収集、CI、approval gate を束ねた検証系であり、「変更した」ではなく「検証済みで説明可能である」を作るための artifact 群である。本章では support-hub を使い、最小の verification harness をどう設計するかを説明する。
 
@@ -143,4 +143,4 @@ approval が必要な変更は `checklists/verification.md` で分離する。
 ## 章末まとめ
 - verification harness は、test、実行順序、evidence、CI、approval gate を束ねた検証系である。
 - local verify は iteration speed、CI verify は reproducibility を担当し、どちらも必要である。
-- CH10 では verification harness の最小形を定義した。次章では長時間タスクと multi-agent に進み、verify を複数 work package にどう分配するかを扱う。
+- verify chain ができると、次に壊れるのは 1 session では閉じない仕事である。次章では long-running task と multi-agent の分割条件を扱う。

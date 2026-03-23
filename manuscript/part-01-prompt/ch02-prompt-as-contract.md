@@ -14,7 +14,7 @@ dependencies:
 # プロンプトを契約として設計する
 
 ## この章の位置づけ
-CH01 では、AIエージェントが失敗する理由を誤答、忘却、破壊、停止の 4 類型で整理した。ここから Prompt Engineering に入る。最初の論点は単純である。prompt を「うまい言い回し」ではなく「入出力契約」として扱うことだ。
+「検索を改善して」の 1 行でも AIエージェントは何かしら返す。だが、その 1 行には守るべき境界も止まる条件も入っていない。CH01 では failure model を定義した。ここから Prompt Engineering に入り、最初に fix するのはこの曖昧さである。
 
 実務の prompt は、雑談用のメッセージではない。coding agent に単一タスクを実行させるための作業指示であり、目的、入力、制約、禁止事項、完了条件、出力形式を固定する artifact である。これが曖昧だと、AIエージェントはそれらしい説明を返しても、仕事の境界を誤解する。single-task reliability を上げる最初の手段は、prompt を契約として設計することにある。
 
@@ -194,4 +194,4 @@ Output Format:
 ## 章末まとめ
 - Prompt Engineering の出発点は、prompt を曖昧な命令文ではなく入出力契約として設計することにある。
 - single-task reliability を上げるには、Objective、Inputs、Constraints、Forbidden Actions、Completion Criteria、Output Format を分けて書く必要がある。
-- weak prompt と operational prompt の差は文才ではなく契約密度で決まる。次章では、この Prompt Contract を前提に ChatGPT で要件と設計を固める。
+- 契約が固まると、次の bottleneck は「そもそも要求が曖昧」という問題に移る。次章では ChatGPT を使って要求を仕様と設計 artifact に変える。

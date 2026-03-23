@@ -14,7 +14,7 @@ dependencies:
 # AIエージェントはどこで失敗するか
 
 ## この章の位置づけ
-前付けで、本書の約束、想定読者、3 部構成の読み方を整理した。ここから本文に入る。最初に確認すべきなのは、AIエージェントが実務でどこで失敗するかである。数ターンの会話では有能に見えても、repo を読み、必要な artifact を見つけ、変更し、verify し、docs まで更新して仕事を閉じる段階で崩れやすい。
+会話では有能に見えるのに、repo を触らせた途端に雑に壊す。この落差が、多くの読者が最初にぶつかる問題である。前付けで、本書の約束、想定読者、3 部構成の読み方を整理した。ここから本文に入る。最初に確認すべきなのは、AIエージェントが実務でどこで失敗するかである。
 
 CH01 の役割は、failure model を定義することにある。誤答、忘却、破壊、停止の 4 類型を起点に、なぜ Prompt Engineering だけでは足りず、Context Engineering と Harness Engineering まで必要になるのかを整理する。以後の章では、この failure model に対して artifact を 1 層ずつ積み上げる。
 
@@ -141,4 +141,4 @@ good:
 ## 章末まとめ
 - AIエージェントは、会話で賢く見えても、誤答・忘却・破壊・停止で簡単に失敗する。
 - 本書の対象は「もっともらしい出力」ではなく「artifact と verify を伴って仕事を完了させること」である。
-- そのために Prompt Engineering、Context Engineering、Harness Engineering を順に積み上げる。次章ではまず Prompt Engineering から始める。
+- failure model が見えれば、次に最初に固定すべきは task の契約である。次章では Prompt Engineering の入口として、prompt を入出力契約として扱う。

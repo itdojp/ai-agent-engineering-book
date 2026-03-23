@@ -17,7 +17,7 @@ dependencies:
 # Context Engineering の基礎
 
 ## この章の位置づけ
-CH01-CH04 で、本書は Prompt Engineering を使って single-task reliability を上げるところまで進んだ。だが、良い Prompt Contract と eval があっても、AI agent が読む情報が古い、足りない、重すぎる、混ざっている、のいずれかなら作業は完了しない。ここから扱う Context Engineering は、prompt を強くする話ではなく、AI agent に何を見せ、何を残し、何を捨てるかを設計する話である。
+良い Prompt Contract と eval が揃っていても、古い spec や関係ないログを読ませれば AI agent は外す。CH01-CH04 で、本書は Prompt Engineering を使って single-task reliability を上げるところまで進んだ。だが、それだけでは作業は完了しない。ここから扱う Context Engineering は、prompt を強くする話ではなく、AI agent に何を見せ、何を残し、何を捨てるかを設計する話である。
 
 この章では、Prompt Engineering と Context Engineering の境界を明確にし、永続・タスク・セッション・ツールという 4 種類の context を導入する。以後の章では、この基礎の上に repo context、task context、session memory、skill、context pack を積み上げていく。
 
@@ -117,4 +117,4 @@ context は次の順に渡す。
 ## 章末まとめ
 - Prompt Engineering が作業境界を決めるのに対し、Context Engineering は判断材料の種類、鮮度、優先順位を決める。
 - context は永続、タスク、セッション、ツールに分けて扱うと設計しやすい。
-- context budget を切り、stale context と live context を分離しないと、情報量が多いほど失敗しやすくなる。次章では、この考え方を repo 全体の instruction と docs に落とし込む。
+- context の種類が見えたら、次に必要なのは repo 入口の固定である。次章では `AGENTS.md`、`sample-repo/docs/repo-map.md`、`sample-repo/docs/architecture.md` の役割分担を扱う。

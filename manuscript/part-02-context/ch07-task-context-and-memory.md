@@ -16,7 +16,7 @@ dependencies:
 # Task Context と Session Memory
 
 ## この章の位置づけ
-CH06 で repo 全体の context を整えた。だが、repo context だけでは「今回の issue で何をやるか」「前回どこまで進んだか」は決まらない。Context Engineering を実務にするには、GitHub issue を AI agent が実行できる task brief に変換し、さらに中断と再開のための session memory を持つ必要がある。
+issue を reopen した翌朝に「前回どこまで決まっていたか」が読めないなら、repo context が整っていても作業は始められない。CH06 で repo 全体の context を整えた。だが、repo context だけでは「今回の issue で何をやるか」「前回どこまで進んだか」は決まらない。
 
 この章では、issue を task brief に変換する手順、progress note の書式、handoff と resume の最低入力、summary drift を避ける方法を扱う。対象は `sample-repo` の `FEATURE-001` だが、考え方は原稿作業にもそのまま使える。
 
@@ -131,4 +131,4 @@ Acceptance Criteria、Verification を確認する。
 ## 章末まとめ
 - issue はそのままでは task context として粗い。AI agent に渡す前に task brief へ正規化する必要がある。
 - session memory は chat history ではなく progress note と verify 証跡で管理する。
-- `Decided` と `Open Questions` を分け、resume packet を最小化すると summary drift を抑えやすい。次章では、この task context と session memory を再利用可能な skill と context pack にまとめる。
+- task と session の state を分けられると、次はそれを毎回書き直さず再利用する段階になる。次章では skill と context pack を扱う。

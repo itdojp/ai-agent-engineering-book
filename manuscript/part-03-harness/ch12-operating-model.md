@@ -17,7 +17,7 @@ dependencies:
 # 運用モデルと組織導入
 
 ## この章の位置づけ
-CH09-CH11 で、single-agent harness、verification harness、long-running task と multi-agent の設計を見てきた。ここまで来ると、次の問題は技術より運用になる。誰が何を決めるのか。review 量をどう抑えるのか。AI slop をどう掃除するのか。どの指標で改善を判断するのか。これらが曖昧だと、個々の chapter や artifact が正しくても、チーム運用としては破綻しやすい。
+個々の run が成功しても、PR が詰まり、repo が荒れ、誰も最終責任を持たないなら導入は失敗である。CH09-CH11 で、single-agent harness、verification harness、long-running task と multi-agent の設計を見てきた。ここまで来ると、次の問題は技術より運用になる。
 
 CH12 では、AIエージェントをチームへ導入するための operating model を定義する。対象はモデル選定論ではなく、役割分担、review budget、repo hygiene、metrics、導入順序である。ここでの目的は、AIエージェントを「速く動く人手不足の代用品」にすることではない。人間が残す責務を明確にし、artifact-driven な作業をチームで継続できる形にすることだ。
 
@@ -138,4 +138,4 @@ PR template で Goal / Changed Files / Verification / Evidence / Remaining Gaps 
 ## 章末まとめ
 - AIエージェント導入で残る人間責務は、目的設定、承認、最終レビュー、repo hygiene である。
 - throughput を上げるには、モデルを速くするより review budget と work package を整える方が先である。
-- operating model、metrics、repo hygiene、PR template を artifact にすると、Harness Engineering をチーム運用へ接続できる。
+- Prompt、Context、Harness を artifact と operating model に落とすと、AIエージェントは「賢そう」から「完了できる」へ近づく。本書の締めくくりは、その運用を自分の repo で回し続けられる形にすることである。

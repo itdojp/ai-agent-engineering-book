@@ -180,6 +180,25 @@ forbidden_english_counterpart_phrases = {
         "Establish the directory contract for future English templates",
     ],
 }
+required_english_appendix_counterparts = {
+    "app-a": [
+        "templates/en/prompt-contract.md",
+        "templates/en/prompt-rubric.md",
+    ],
+    "app-b": [
+        "templates/en/task-brief.md",
+        "templates/en/progress-note.md",
+        "templates/en/context-pack.md",
+    ],
+    "app-c": [
+        "templates/en/verify-checklist.md",
+        "templates/en/restart-protocol.md",
+        "templates/en/permission-policy.md",
+    ],
+    "app-d": [
+        "docs/en/glossary.md",
+    ],
+}
 
 
 def parse_artifacts(brief: Path) -> list[str]:
@@ -259,9 +278,15 @@ def check_english_chapter(ch_id: str, brief: Path):
 
 def check_english_appendix(app_id: str, brief: Path):
     expect_single_path(f"manuscript-en/appendices/{app_id}-*.md", f"English appendix file for {app_id}")
-    for artifact in parse_artifacts(brief):
+    artifacts = parse_artifacts(brief)
+    for artifact in artifacts:
         if not (root / artifact).exists():
             raise SystemExit(f"English brief {brief.name} references missing artifact: {artifact}")
+    for artifact in required_english_appendix_counterparts.get(app_id, []):
+        if artifact not in artifacts:
+            raise SystemExit(
+                f"English appendix brief {brief.name} is missing counterpart artifact: {artifact}"
+            )
 
 
 def check_english_backmatter(en_root: Path):

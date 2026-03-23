@@ -24,6 +24,7 @@ This file is the English counterpart of the repo-wide glossary and is used by th
 | verification harness | The verification system that bundles tests, lint, typecheck, evidence capture, and CI. |
 | done criteria | The operational conditions required to treat work as complete, including verify state, artifact updates, and approval requirements. |
 | evidence bundle | The set of verify logs, repro steps, screenshots, and summaries that lets a reviewer confirm the result. |
+| Changed Files | The canonical final-report label that lists the code, docs, tests, and artifacts changed in a reviewable unit. |
 | Remaining Gaps | The canonical final-report label for unresolved issues, human follow-up, or gaps that remain after verify. |
 | Prompt Contract | A prompt artifact that defines objective, constraints, completion criteria, and output format. |
 | Progress Note | A short progress record used for interruption, restart, and handoff. |

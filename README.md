@@ -7,7 +7,7 @@
 - **Prompt → Context → Harness** の成熟モデルを、章本文だけでなく repo artifact として体現する
 - ChatGPT で要件・設計を固め、Codex CLI で repo を読んで変更・検証する実務フローを前提にする
 - 章本文とサンプル実装を相互参照しながら執筆できる状態を最初から作る
-- 日本語版と英語版の原稿を chapter / appendix 単位で追跡し、英語版の parity と editorial review を issue 単位で進める
+- 日本語版と英語版の原稿を chapter / appendix / front matter / backmatter / figures 単位で追跡し、英語版の parity と editorial review を issue 単位で進める
 
 ## ディレクトリ
 

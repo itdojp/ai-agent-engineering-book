@@ -14,6 +14,8 @@ This directory holds the English manuscript scaffold for the book. Its purpose i
 ```text
 manuscript-en/
   briefs/          # English briefs mirrored from manuscript/briefs
+  figures/         # English figure plan and Mermaid sources
+  front-matter/    # English introduction and reading guide
   part-00/         # Chapter 1
   part-01-prompt/  # Chapters 2-4
   part-02-context/ # Chapters 5-8
@@ -26,13 +28,13 @@ manuscript-en/
 
 1. The Japanese manuscript remains the source for structure and artifact references.
 2. The English scaffold must preserve the same chapter ids, appendix ids, and referenced artifacts.
-3. Each English file should identify its Japanese source in `## Parity Notes`.
+3. Each English file should identify its Japanese source in `## Parity Notes` when the file contract requires it.
 4. Full English prose can be added later, but the scaffold must stay structurally complete.
 
 ## Editing Workflow
 
 1. Read the matching Japanese brief and chapter.
 2. Update the English brief first if scope changes.
-3. Update the English skeleton or draft.
+3. Update the English skeleton, draft, or reader-entry artifact.
 4. Update `manuscript-en/STATUS.md` if parity status changes.
 5. Run `./scripts/verify-book.sh`.

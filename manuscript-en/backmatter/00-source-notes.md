@@ -28,7 +28,7 @@ If that order drifts, the manuscript becomes too dependent on fashion, screensho
 
 ### CH02 Design Prompts as Contracts
 
-- Start with `prompts/bugfix-contract.md`, `prompts/feature-contract.md`, and `checklists/prompt-contract-review.md`. In this book, a Prompt Contract is a repo artifact rather than a conversational trick.
+- Start with `prompts/en/bugfix-contract.md`, `prompts/en/feature-contract.md`, and `checklists/en/prompt-contract-review.md`. In this book, a Prompt Contract is a repo artifact rather than a conversational trick.
 - If you add external sources, prefer official prompting, structured-output, and tool-use docs for the model you are using. Do not treat generic prompt collections as the source of truth.
 
 ### CH03 Use ChatGPT to Shape Requirements and Design
@@ -43,7 +43,7 @@ If that order drifts, the manuscript becomes too dependent on fashion, screensho
 
 ### CH05 Foundations of Context Engineering
 
-- Start with `docs/context-model.md`, `docs/context-budget.md`, and `docs/context-risk-register.md`. Context Engineering is not about adding more text. It is about managing lifespan, authority, and contamination risk.
+- Start with `docs/en/context-model.md`, `docs/en/context-budget.md`, and `docs/en/context-risk-register.md`. Context Engineering is not about adding more text. It is about managing lifespan, authority, and contamination risk.
 - If you add external sources, prefer official docs for context windows, instruction layering, and workspace access in the tools you use. A pile of long prompts is not a context design method.
 
 ### CH06 Design Repo Context
@@ -53,7 +53,7 @@ If that order drifts, the manuscript becomes too dependent on fashion, screensho
 
 ### CH07 Task Context and Session Memory
 
-- Start with `sample-repo/tasks/FEATURE-001-brief.md`, `sample-repo/tasks/FEATURE-001-progress.md`, `docs/session-memory-policy.md`, and `.github/ISSUE_TEMPLATE/task.yml`. Read the restart packet together with the latest verification result.
+- Start with `sample-repo/tasks/FEATURE-001-brief.md`, `sample-repo/tasks/FEATURE-001-progress.md`, `docs/en/session-memory-policy.md`, and `.github/ISSUE_TEMPLATE/task.yml`. Read the restart packet together with the latest verification result.
 - If you add external sources, prefer your issue-tracker, handoff, and change-log policies. Do not treat stale chat transcripts as the source of truth for session memory.
 
 ### CH08 Reuse Skills and Context Packs
@@ -68,7 +68,7 @@ If that order drifts, the manuscript becomes too dependent on fashion, screensho
 
 ### CH10 Build a Verification Harness
 
-- Start with `.github/workflows/verify.yml`, `checklists/verification.md`, `sample-repo/tests/test_ticket_search.py`, and `artifacts/evidence/README.md`. Read the verification harness as one flow across tests, CI, evidence, and approval.
+- Start with `.github/workflows/verify.yml`, `checklists/en/verification.md`, `sample-repo/tests/test_ticket_search.py`, and `artifacts/evidence/README.md`. Read the verification harness as one flow across tests, CI, evidence, and approval.
 - If you add external sources, prefer official docs for the test framework, CI system, and coverage tooling you use. A green screenshot alone is not reproducible evidence.
 
 ### CH11 Long-running Tasks and Multi-agent Work
@@ -78,5 +78,5 @@ If that order drifts, the manuscript becomes too dependent on fashion, screensho
 
 ### CH12 Operating Model and Organizational Adoption
 
-- Start with `docs/operating-model.md`, `docs/metrics.md`, `checklists/repo-hygiene.md`, and `.github/pull_request_template.md`. Read the operating model through roles, review budget, cadence, and cleanup rather than through model comparisons alone.
+- Start with `docs/en/operating-model.md`, `docs/en/metrics.md`, `checklists/en/repo-hygiene.md`, and `.github/pull_request_template.md`. Read the operating model through roles, review budget, cadence, and cleanup rather than through model comparisons alone.
 - If you add external sources, prefer official documents for your organization's review policy, release policy, and metric definitions. Do not reduce adoption decisions to model benchmarks.

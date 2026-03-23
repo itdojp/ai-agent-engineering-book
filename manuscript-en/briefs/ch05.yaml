@@ -21,9 +21,9 @@ exercises:
   - Sort 15 information fragments into four context types.
   - Write a policy for what to summarize and what to keep verbatim.
 artifacts:
-  - docs/context-model.md
-  - docs/context-budget.md
-  - docs/context-risk-register.md
+  - docs/en/context-model.md
+  - docs/en/context-budget.md
+  - docs/en/context-risk-register.md
 acceptance_criteria:
   - The chapter follows the standard chapter contract
   - It includes at least one bad / good example pair

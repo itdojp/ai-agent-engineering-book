@@ -20,9 +20,9 @@ exercises:
   - Define an operating model for a three-person team.
   - Create a weekly entropy cleanup checklist.
 artifacts:
-  - docs/operating-model.md
-  - docs/metrics.md
-  - checklists/repo-hygiene.md
+  - docs/en/operating-model.md
+  - docs/en/metrics.md
+  - checklists/en/repo-hygiene.md
   - .github/pull_request_template.md
 acceptance_criteria:
   - The chapter follows the standard chapter contract

@@ -4,9 +4,9 @@ title: Design Prompts as Contracts
 status: drafted
 source_ja: manuscript/part-01-prompt/ch02-prompt-as-contract.md
 artifacts:
-  - prompts/bugfix-contract.md
-  - prompts/feature-contract.md
-  - checklists/prompt-contract-review.md
+  - prompts/en/bugfix-contract.md
+  - prompts/en/feature-contract.md
+  - checklists/en/prompt-contract-review.md
 dependencies:
   - ch01
 ---
@@ -51,7 +51,7 @@ Once these six elements are present, the prompt stops being a loose instruction 
 ## 2. Separate Objective, Constraints, Completion Criteria, and Forbidden Actions
 Weak prompts often fail because they mix goal, limits, and done conditions into one paragraph. When those categories are blended together, the agent has to infer priority and trade-offs on its own. That is exactly where unnecessary breakage and premature stopping tend to enter.
 
-`prompts/bugfix-contract.md` and `prompts/feature-contract.md` show the smallest reusable templates for that separation. The center of gravity is different for bugfix work and feature work. A bugfix contract emphasizes preserving existing behavior and proving the fix with a failing test. A feature contract emphasizes staying within the written spec and acceptance criteria while updating docs and tests together.
+`prompts/en/bugfix-contract.md` and `prompts/en/feature-contract.md` show the smallest reusable templates for that separation. The center of gravity is different for bugfix work and feature work. A bugfix contract emphasizes preserving existing behavior and proving the fix with a failing test. A feature contract emphasizes staying within the written spec and acceptance criteria while updating docs and tests together.
 
 The six elements become easier to write if each one answers a different question.
 
@@ -121,7 +121,7 @@ Output Format:
 This prompt is still short, but it contains the structure needed for reliable execution. A human reviewer can see what is in scope, which artifacts ground the task, what the agent must not do, and how completion will be judged. That is the difference between “please do something useful” and “here is the contract for this task.”
 
 ## 5. Review Prompt Contracts Before Execution
-A Prompt Contract is not reliable just because it exists. It has to be reviewed before execution. `checklists/prompt-contract-review.md` is a minimal review artifact for that step.
+A Prompt Contract is not reliable just because it exists. It has to be reviewed before execution. `checklists/en/prompt-contract-review.md` is a minimal review artifact for that step.
 
 The review lens is simple. Do not ask whether the prompt sounds elegant. Ask whether it leaves a likely failure mode open.
 
@@ -183,12 +183,12 @@ Comparison points:
 2. Use `BUG-001` as the task and write only the Completion Criteria in five points. Each point must be verifiable rather than subjective.
 
 ## Referenced Artifacts
-- `prompts/bugfix-contract.md`
-- `prompts/feature-contract.md`
-- `checklists/prompt-contract-review.md`
+- `prompts/en/bugfix-contract.md`
+- `prompts/en/feature-contract.md`
+- `checklists/en/prompt-contract-review.md`
 
 ## Source Notes / Further Reading
-- Treat `prompts/bugfix-contract.md`, `prompts/feature-contract.md`, and `checklists/prompt-contract-review.md` as the primary artifacts for this chapter. In this book, a Prompt Contract is a repo artifact, not a conversation trick.
+- Treat `prompts/en/bugfix-contract.md`, `prompts/en/feature-contract.md`, and `checklists/en/prompt-contract-review.md` as the primary artifacts for this chapter. In this book, a Prompt Contract is a repo artifact, not a conversation trick.
 - For the next navigation step, see `manuscript-en/backmatter/00-source-notes.md` under `### CH02 Design Prompts as Contracts` and `manuscript-en/backmatter/01-reading-guide.md` under `## Prompts and Requirements Shaping`.
 
 ## Chapter Summary

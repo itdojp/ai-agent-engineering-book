@@ -2,7 +2,7 @@
 
 ## Current State
 
-book repo の bootstrap は完了している。
+book repo は日本語版 / 英語版の parity maintenance と polish を継続する運用段階にある。
 
 - GitHub repository、labels、milestones、issue / PR 運用は `main` 上で稼働している
 - 日本語版は front matter、CH01-CH12、appendices、backmatter、figures を含めて drafted 状態にある

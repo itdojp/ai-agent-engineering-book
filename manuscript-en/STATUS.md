@@ -19,8 +19,16 @@
 | APP-C | `manuscript/appendices/app-c-Harness-テンプレート集.md` | `manuscript-en/appendices/app-c-harness-templates.md` | drafted |
 | APP-D | `manuscript/appendices/app-d-用語集.md` | `manuscript-en/appendices/app-d-glossary.md` | drafted |
 
+## Additional Parity Surfaces
+
+| Surface | Japanese Source | English Target | Status |
+|---|---|---|---|
+| Front Matter | `manuscript/front-matter/` | `manuscript-en/front-matter/` | drafted |
+| Backmatter | `manuscript/backmatter/` | `manuscript-en/backmatter/` | drafted |
+| Figures | `manuscript/figures/` | `manuscript-en/figures/` | drafted |
+
 ## Status Meanings
 
-- `scaffolded`: English brief and skeleton exist, but full prose parity is still pending
-- `drafted`: English prose exists and covers the full Japanese argument
+- `drafted`: English counterpart exists and covers the current Japanese argument or artifact surface
 - `reviewed`: English prose has received editorial review for parity and clarity
+- `scaffolded`: fallback status for a future parity surface where layout exists but full draft parity is still pending

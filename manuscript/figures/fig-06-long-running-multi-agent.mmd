@@ -1,0 +1,12 @@
+%% title: fig-06 long-running multi-agent
+%% chapter: CH11
+%% caption: long-running task は feature list、restart packet、role 分担が揃って初めて安全に multi-agent へ分割できる。
+flowchart TB
+    FL[feature list] --> PL[planner]
+    RP[restart packet] --> PL
+    PL --> CA[coder-a<br/>track A]
+    PL --> CB[coder-b<br/>track B]
+    CA --> RV[reviewer]
+    CB --> RV
+    RV --> VF[verifier]
+    VF --> OUT[integrated result]

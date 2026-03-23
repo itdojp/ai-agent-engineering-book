@@ -1,0 +1,9 @@
+%% title: fig-07 operating model
+%% chapter: CH12
+%% caption: operating model は Human と Agent の責務、review budget、metrics、cleanup cadence を循環させて保つ。
+flowchart LR
+    H[Human<br/>priority / approval / final review] --> A[Agent<br/>explore / edit / verify / report]
+    A --> R[Review Budget]
+    R --> M[Metrics]
+    M --> C[Cleanup Cadence]
+    C --> H

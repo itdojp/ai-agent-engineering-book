@@ -1,0 +1,8 @@
+%% title: fig-03 resume packet
+%% chapter: CH07
+%% caption: 再開時は repo context から task brief、session memory、live verify へ降りる順で読むと drift が減る。
+flowchart TB
+    A[Repo Context<br/>AGENTS / repo-map / architecture] --> B[Task Brief<br/>Goal / Scope / Inputs / Verification]
+    B --> C[Session Memory<br/>Progress Note / open questions / next step]
+    C --> D[Latest Verify<br/>live result]
+    D --> E[Resume Packet<br/>reopen file list と次の 1 手]

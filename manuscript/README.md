@@ -6,6 +6,7 @@
 - `part-00/`: 本文導入
 - `part-01-prompt/`, `part-02-context/`, `part-03-harness/`: 各 Part の opener と章本文
 - `appendices/`: テンプレート集と用語集
+- `figures/`: reader-facing な図版 source と figure plan
 
 ## 標準章構成
 
@@ -23,6 +24,7 @@
 - 章本文で言及した path は実在させる
 - 前提知識が増える章は dependencies を brief に記録する
 - 1 章につき 1 つの中核メッセージに絞る
+- 図版 source を追加する場合は `figures/figure-plan.md` と同時に更新する
 
 ## front matter / Part opener の扱い
 

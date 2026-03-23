@@ -1,0 +1,9 @@
+%% title: fig-01 maturity model
+%% chapter: CH01
+%% caption: Prompt / Context / Harness は、誤答・忘却・破壊/停止という failure mode を減らす順に積み上がる。
+flowchart LR
+    P[Prompt Engineering<br/>何をやるかを固定] --> C[Context Engineering<br/>何を見せ続けるかを固定]
+    C --> H[Harness Engineering<br/>どう実行と検証を閉じるかを固定]
+    P -.-> P1[誤答を減らす]
+    C -.-> C1[忘却を減らす]
+    H -.-> H1[破壊と停止を減らす]

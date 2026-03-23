@@ -14,7 +14,7 @@ This file is the seed for the production index. At this stage it fixes the main 
 |---|---|---|
 | acceptance criteria | CH03, CH10 | `sample-repo/docs/acceptance-criteria/ticket-search.md`, `sample-repo/tests/test_ticket_search.py` |
 | ADR | CH03 | `sample-repo/docs/design-docs/ticket-search-adr.md` |
-| AGENTS.md | CH06 | `AGENTS.md`, `manuscript/AGENTS.md`, `sample-repo/AGENTS.md` |
+| AGENTS.md | CH06 | `AGENTS.md`, `manuscript-en/AGENTS.md`, `sample-repo/AGENTS.md` |
 | AI agent | CH01, CH12 | `docs/en/glossary.md`, `docs/operating-model.md` |
 | artifact | CH01, Appendix D | `docs/en/glossary.md` |
 | bad / good example | CH01-CH12 | Each chapter's bad / corrected example section |

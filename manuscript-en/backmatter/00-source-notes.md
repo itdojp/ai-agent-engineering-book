@@ -48,7 +48,7 @@ If that order drifts, the manuscript becomes too dependent on fashion, screensho
 
 ### CH06 Design Repo Context
 
-- Start with `AGENTS.md`, `manuscript/AGENTS.md`, `sample-repo/AGENTS.md`, `sample-repo/docs/repo-map.md`, `sample-repo/docs/architecture.md`, and `sample-repo/docs/coding-standards.md`. Read the repo map as the index and the architecture doc as the design rationale.
+- Start with `AGENTS.md`, `manuscript-en/AGENTS.md`, `sample-repo/AGENTS.md`, `sample-repo/docs/repo-map.md`, `sample-repo/docs/architecture.md`, and `sample-repo/docs/coding-standards.md`. Read the repo map as the index and the architecture doc as the design rationale.
 - If you add external sources, prefer official docs for the VCS, CI, and package manager you use. Repo responsibility boundaries are easier to judge from the concrete repo than from abstractions.
 
 ### CH07 Task Context and Session Memory

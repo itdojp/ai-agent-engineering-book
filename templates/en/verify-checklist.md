@@ -3,7 +3,7 @@
 ## Before Edit
 - Confirm the behavior and source of truth that must be preserved.
 - Decide whether a failing test should be added or updated first.
-- Fix the local verify command before starting the change.
+- Identify the local verify command before starting the change.
 
 ## During Change
 - Keep the diff inside one work package.

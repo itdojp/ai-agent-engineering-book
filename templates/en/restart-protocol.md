@@ -1,10 +1,10 @@
 # Restart Protocol Template
 
 ## Restart Packet
-- current plan or feature list
-- latest Progress Note
-- latest verify result
-- open questions and pending approvals
+- Include the current plan or feature list.
+- Include the latest Progress Note.
+- Include the latest verify result.
+- Include open questions and pending approvals.
 
 ## Restart Steps
 1. Confirm that the restart packet is complete.
@@ -14,7 +14,7 @@
 5. Update the Progress Note and verification result after the work.
 
 ## Stop Conditions
-- the latest Progress Note is missing
-- the verify state is unknown
-- ownership is unclear and conflicts are likely
-- approval is required but has not been granted
+- Stop if the latest Progress Note is missing.
+- Stop if the verify state is unknown.
+- Stop if ownership is unclear and conflicts are likely.
+- Stop if approval is required but has not been granted.

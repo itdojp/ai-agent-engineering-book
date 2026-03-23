@@ -1,0 +1,9 @@
+%% title: fig-01 maturity model
+%% chapter: CH01
+%% caption: Prompt / Context / Harness stack in the order that reduces wrong answers, forgetting, and breaking things or stopping early.
+flowchart LR
+    P[Prompt Engineering<br/>Fix what the agent is asked to do] --> C[Context Engineering<br/>Fix what the agent keeps seeing]
+    C --> H[Harness Engineering<br/>Fix how execution and verification close]
+    P -.-> P1[Reduce wrong answers]
+    C -.-> C1[Reduce forgetting]
+    H -.-> H1[Reduce breakage and early stops]

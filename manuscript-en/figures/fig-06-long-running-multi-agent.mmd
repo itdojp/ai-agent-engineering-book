@@ -1,0 +1,12 @@
+%% title: fig-06 long-running multi-agent
+%% chapter: CH11
+%% caption: A long-running task becomes safe to split into multi-agent work only after the feature list, restart packet, and role split are in place.
+flowchart TB
+    FL[feature list] --> PL[planner]
+    RP[restart packet] --> PL
+    PL --> CA[coder-a<br/>track A]
+    PL --> CB[coder-b<br/>track B]
+    CA --> RV[reviewer]
+    CB --> RV
+    RV --> VF[verifier]
+    VF --> OUT[integrated result]

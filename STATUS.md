@@ -1,15 +1,18 @@
-# Scaffold Status
+# Repository Status
 
-## Created
-- root README / AGENTS / docs / prompts / evals
-- manuscript briefs and chapter skeletons for the Prompt -> Context -> Harness maturity model
-- sample-repo baseline implementation, task artifacts, and docs
-- root skills and sample-repo skills for coding agent workflows
-- GitHub issue drafts, manifest, and bootstrap scripts for Codex CLI setup
-- local verification harness scripts and CI workflow stub
+## Current State
+
+2026-03-23 時点で、book repo の bootstrap は完了している。
+
+- GitHub repository、labels、milestones、issue / PR 運用は `main` 上で稼働している
+- 日本語版は front matter、CH01-CH12、appendices、backmatter、figures を含めて drafted 状態にある
+- 英語版は `manuscript-en/STATUS.md` の parity tracker に従って、front matter、CH01-CH12、appendices、backmatter、figures を drafted 状態で保持している
+- `sample-repo/`、`prompts/`、`checklists/`、`templates/`、`evals/` は本文参照と整合する状態に保たれている
+- `scripts/bootstrap-github.sh`、`scripts/create-issues.py`、`issue-drafts/` は、この運用を別 repo に移植するための reusable setup artifact として残している
 
 ## Next Recommended Action
-1. GitHub に空 repo を作成する
-2. この scaffold を push する
-3. `scripts/bootstrap-github.sh owner/repo` を実行する
-4. `REPO-01` から Codex CLI に投入する
+1. `git pull --ff-only origin main` で最新の canonical source を取得する
+2. `./scripts/verify-book.sh` を実行し、`sample-repo/` を触る場合は `./scripts/verify-sample.sh` も実行する
+3. GitHub 上で次の実行単位になる issue を選ぶか、新規 issue を作成する
+4. root `AGENTS.md`、対象ディレクトリの `AGENTS.md`、brief、artifact を読んでから issue 単位で変更する
+5. verify を通したら PR を作成し、review と CI を処理する

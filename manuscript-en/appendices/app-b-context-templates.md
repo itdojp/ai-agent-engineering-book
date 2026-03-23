@@ -45,9 +45,9 @@ The recommended sections are these.
 - `Completed`: what finished in this session
 - `Decided`: what was firmly decided during the session
 - `Open Questions`: what still needs resolution
-- `Latest Verification`: the most recent verify command and its result
+- `Last Verify`: the most recent verify command and its result
 - `Changed Files`: the diffs a reviewer or handoff owner should track
-- `Read Before Resuming`: the artifact order for the next restart
+- `Resume Steps`: the artifact order for the next restart
 - `Next Step`: the next single work package
 
 `sample-repo/tasks/FEATURE-001-progress.md` shows the practical target. The note should be short. It does not need to become a diary. It only needs to tell the next worker what changed, what still blocks the task, and what to read first.

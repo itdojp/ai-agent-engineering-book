@@ -15,13 +15,13 @@
 ## Open Questions
 - List what remains unresolved.
 
-## Latest Verification
+## Last Verify
 - Record the latest verify command and its result.
 
 ## Changed Files
 - List the diffs that a reviewer or handoff owner should track.
 
-## Read Before Resuming
+## Resume Steps
 - Record which artifacts to read first and in what order when work resumes.
 
 ## Next Step

@@ -1,6 +1,6 @@
-# English Docs Scaffold
+# English Docs Counterparts
 
-This directory reserves space for English supporting documents that will eventually mirror selected files under `docs/`.
+This directory contains the English counterparts for selected supporting documents under `docs/`. These files are reader-facing artifacts used by `manuscript-en/` and kept aligned with the Japanese source.
 
 ## Current Scope
 

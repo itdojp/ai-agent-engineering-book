@@ -189,7 +189,7 @@ Comparison points:
 
 ## Source Notes / Further Reading
 - Treat `prompts/bugfix-contract.md`, `prompts/feature-contract.md`, and `checklists/prompt-contract-review.md` as the primary artifacts for this chapter. In this book, a Prompt Contract is a repo artifact, not a conversation trick.
-- For the next navigation step, see `manuscript/backmatter/00-source-notes.md` under `### CH02 プロンプトを契約として設計する` and `manuscript/backmatter/01-読書案内.md` under `## Prompt と要求定義`.
+- For the next navigation step, see `manuscript-en/backmatter/00-source-notes.md` under `### CH02 Design Prompts as Contracts` and `manuscript-en/backmatter/01-reading-guide.md` under `## Prompts and Requirements Shaping`.
 
 ## Chapter Summary
 - Prompt Engineering begins by designing prompts as execution contracts rather than vague instructions.

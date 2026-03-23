@@ -136,11 +136,15 @@ Comparison points:
 - `sample-repo/docs/domain-overview.md`
 - `sample-repo/docs/seed-issues.md`
 
-## Parity Notes
-- Japanese source: `manuscript/part-00/ch01-failure-model.md`
-- This file is now a full English draft and should stay aligned with the Japanese chapter's failure model, recurring cases, and maturity-model framing.
+## Source Notes / Further Reading
+- When you need to revisit this chapter, start with `sample-repo/README.md`, `sample-repo/docs/domain-overview.md`, and `sample-repo/docs/seed-issues.md`. The failure model is useful only when it stays connected to the recurring cases.
+- For the next navigation step, see `manuscript-en/backmatter/00-source-notes.md` under `### CH01 Where AI Agents Fail` and `manuscript-en/backmatter/01-reading-guide.md` under `## Prompts and Requirements Shaping` and `## Verification, Reliability, and Operations`.
 
 ## Chapter Summary
 - AI agents fail in four recurring ways: wrong answer, forgetting, breaking things, and stopping early.
 - This book is about completing work with artifacts and verification, not producing plausible output.
 - Prompt Engineering, Context Engineering, and Harness Engineering are layered because each one addresses a different failure pattern. The next chapter starts with Prompt Engineering.
+
+## Parity Notes
+- Japanese source: `manuscript/part-00/ch01-failure-model.md`
+- This file is now a full English draft and should stay aligned with the Japanese chapter's failure model, recurring cases, and maturity-model framing.

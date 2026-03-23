@@ -144,7 +144,7 @@ Comparison points:
 
 ## Source Notes / Further Reading
 - To revisit this chapter, start with `.agents/skills/draft-chapter/SKILL.md`, `.agents/skills/review-chapter/SKILL.md`, `sample-repo/.agents/skills/issue-to-plan/SKILL.md`, `sample-repo/.agents/skills/verification/SKILL.md`, and `sample-repo/context-packs/ticket-search.md`. Read the skills as reusable workflow contracts and the context pack as the task-specific minimum input.
-- For the backmatter path, see `manuscript/backmatter/00-source-notes.md` under `### CH08 Skills と Context Pack を再利用する` and `manuscript/backmatter/01-読書案内.md` under `## Context と repo 設計`.
+- For the backmatter path, see `manuscript-en/backmatter/00-source-notes.md` under `### CH08 Reuse Skills and Context Packs` and `manuscript-en/backmatter/01-reading-guide.md` under `## Context and Repo Design`.
 
 ## Chapter Summary
 - A skill is not just a long prompt. It is an artifact that fixes a reusable workflow and output contract.

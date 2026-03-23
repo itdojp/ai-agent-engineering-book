@@ -125,7 +125,7 @@ Comparison points:
 
 ## Source Notes / Further Reading
 - When you need to revisit this chapter, treat `docs/context-model.md`, `docs/context-budget.md`, and `docs/context-risk-register.md` as the source of truth. Context Engineering is not a method for adding more text. It is a method for separating lifespan, authority, and refresh policy.
-- For the next navigation step, see `manuscript/backmatter/00-source-notes.md` under `### CH05 Context Engineering の基礎` and `manuscript/backmatter/01-読書案内.md` under `## Context と repo 設計`.
+- For the next navigation step, see `manuscript-en/backmatter/00-source-notes.md` under `### CH05 Foundations of Context Engineering` and `manuscript-en/backmatter/01-reading-guide.md` under `## Context and Repo Design`.
 
 ## Chapter Summary
 - Prompt Engineering defines the work boundary. Context Engineering defines the type, freshness, and priority of the decision material inside that boundary.

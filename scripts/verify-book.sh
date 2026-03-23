@@ -15,6 +15,10 @@ required=(
   "manuscript/backmatter/01-読書案内.md"
   "manuscript/backmatter/02-索引seed.md"
   "manuscript/backmatter/03-図表一覧方針.md"
+  "manuscript-en/backmatter/00-source-notes.md"
+  "manuscript-en/backmatter/01-reading-guide.md"
+  "manuscript-en/backmatter/02-index-seed.md"
+  "manuscript-en/backmatter/03-figure-table-list-policy.md"
   "manuscript/part-01-prompt/part-opener.md"
   "manuscript/part-02-context/part-opener.md"
   "manuscript/part-03-harness/part-opener.md"
@@ -72,7 +76,13 @@ required_part_openers = {
     "manuscript/part-02-context/part-opener.md": required_part_opener_sections,
     "manuscript/part-03-harness/part-opener.md": required_part_opener_sections,
 }
-required_sections_en = ["## Learning Objectives", "## Outline", "## Exercises", "## Referenced Artifacts"]
+required_sections_en = ["## Learning Objectives", "## Outline", "## Exercises", "## Referenced Artifacts", "## Source Notes / Further Reading"]
+required_backmatter_en = {
+    "manuscript-en/backmatter/00-source-notes.md": ["## What This Backmatter Does", "## Source Policy", "## Chapter-by-Chapter Source Notes"],
+    "manuscript-en/backmatter/01-reading-guide.md": ["## How to Use This Guide", "## Prompts and Requirements Shaping", "## Verification, Reliability, and Operations"],
+    "manuscript-en/backmatter/02-index-seed.md": ["## How to Use This Seed", "## Index Seed"],
+    "manuscript-en/backmatter/03-figure-table-list-policy.md": ["## Role", "## Figure List Policy", "## Table List Policy"],
+}
 
 
 def parse_artifacts(brief: Path) -> list[str]:
@@ -120,6 +130,14 @@ def chapter_title(ch_id: str) -> str:
             return line.removeprefix("# ").strip()
     raise SystemExit(f"chapter {ch_id} is missing a title heading")
 
+
+def english_chapter_title(ch_id: str) -> str:
+    chapter = expect_single_path(f"manuscript-en/**/{ch_id}-*.md", f"English chapter file for {ch_id}")
+    for line in chapter.read_text(encoding="utf-8").splitlines():
+        if line.startswith("# "):
+            return line.removeprefix("# ").strip()
+    raise SystemExit(f"English chapter {ch_id} is missing a title heading")
+
 def expect_single_path(pattern: str, label: str) -> Path:
     paths = sorted(root.glob(pattern))
     if not paths:
@@ -135,6 +153,8 @@ def check_english_chapter(ch_id: str, brief: Path):
     missing = [item for item in required_sections_en if item not in text]
     if missing:
         raise SystemExit(f"English chapter {ch_id} missing sections: {', '.join(missing)}")
+    if "manuscript/backmatter/" in text:
+        raise SystemExit(f"English chapter {ch_id} still points to Japanese backmatter")
     for artifact in parse_artifacts(brief):
         if not (root / artifact).exists():
             raise SystemExit(f"English brief {brief.name} references missing artifact: {artifact}")
@@ -145,6 +165,20 @@ def check_english_appendix(app_id: str, brief: Path):
     for artifact in parse_artifacts(brief):
         if not (root / artifact).exists():
             raise SystemExit(f"English brief {brief.name} references missing artifact: {artifact}")
+
+
+def check_english_backmatter(en_root: Path):
+    for rel, sections in required_backmatter_en.items():
+        text = (root / rel).read_text(encoding="utf-8")
+        missing = [item for item in sections if item not in text]
+        if missing:
+            raise SystemExit(f"English backmatter {rel} missing sections: {', '.join(missing)}")
+
+    source_notes = (en_root / "backmatter" / "00-source-notes.md").read_text(encoding="utf-8")
+    for brief in sorted((en_root / "briefs").glob("ch*.yaml")):
+        heading = f"### {brief.stem.upper()} {english_chapter_title(brief.stem)}"
+        if heading not in source_notes:
+            raise SystemExit(f"English source notes missing chapter heading: {heading}")
 
 
 def check_english_scaffold(target: str):
@@ -164,6 +198,8 @@ def check_english_scaffold(target: str):
         raise SystemExit("English chapter briefs do not match Japanese chapter briefs")
     if [p.stem for p in ja_app] != [p.stem for p in en_app]:
         raise SystemExit("English appendix briefs do not match Japanese appendix briefs")
+
+    check_english_backmatter(en_root)
 
     if target:
         brief = en_root / "briefs" / f"{target}.yaml"

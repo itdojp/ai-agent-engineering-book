@@ -147,7 +147,7 @@ This table keeps the verification harness from collapsing into “the test chapt
 
 ## Source Notes / Further Reading
 - To revisit this chapter, start with `.github/workflows/verify.yml`, `checklists/verification.md`, `sample-repo/tests/test_ticket_search.py`, and `artifacts/evidence/README.md`. Read the verification harness as a flow across tests, CI, evidence, and approval rather than as a single command.
-- For the backmatter path, see `manuscript/backmatter/00-source-notes.md` under `### CH10 Verification Harness を作る` and `manuscript/backmatter/01-読書案内.md` under `## 検証・信頼性・運用`.
+- For the backmatter path, see `manuscript-en/backmatter/00-source-notes.md` under `### CH10 Build a Verification Harness` and `manuscript-en/backmatter/01-reading-guide.md` under `## Verification, Reliability, and Operations`.
 
 ## Chapter Summary
 - A verification harness combines tests, execution order, evidence, CI, and approval gates into one verification system.

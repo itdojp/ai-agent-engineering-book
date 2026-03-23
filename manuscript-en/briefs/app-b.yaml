@@ -5,3 +5,6 @@ artifacts:
   - templates/task-brief.md
   - templates/progress-note.md
   - templates/context-pack.md
+  - templates/en/task-brief.md
+  - templates/en/progress-note.md
+  - templates/en/context-pack.md

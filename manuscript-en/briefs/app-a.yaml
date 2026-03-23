@@ -4,3 +4,5 @@ goal: Provide reusable templates or definitions used across the whole book.
 artifacts:
   - templates/prompt-contract.md
   - templates/prompt-rubric.md
+  - templates/en/prompt-contract.md
+  - templates/en/prompt-rubric.md

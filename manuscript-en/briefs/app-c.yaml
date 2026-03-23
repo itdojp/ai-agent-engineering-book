@@ -5,3 +5,6 @@ artifacts:
   - templates/verify-checklist.md
   - templates/restart-protocol.md
   - templates/permission-policy.md
+  - templates/en/verify-checklist.md
+  - templates/en/restart-protocol.md
+  - templates/en/permission-policy.md

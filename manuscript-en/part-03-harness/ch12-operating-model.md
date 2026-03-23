@@ -47,7 +47,7 @@ By contrast, AI agents are well suited to repo exploration, repetitive edits, sc
 The common failure is to assume that if the agent can write code, it should also own design judgment and merge judgment. That does not produce speed. It produces responsibility gaps. In this chapter's operating model, AI agents are execution actors, not accountability owners.
 
 ## 2. Review Budget and Throughput
-The first bottleneck after AI-agent adoption is rarely implementation speed. It is review capacity. As generation speed rises, human review budget saturates quickly. If that limit is ignored, unread PRs accumulate, review quality drops, and post-merge regressions increase.
+The first bottleneck after AI agent adoption is rarely implementation speed. It is review capacity. As generation speed rises, human review budget saturates quickly. If that limit is ignored, unread PRs accumulate, review quality drops, and post-merge regressions increase.
 
 CH12 does not treat throughput as “number of PRs.” `docs/metrics.md` frames it through `closed issues / week`, `PR cycle time`, and `draft-to-merge time`, together with review-budget usage. `docs/operating-model.md` makes the constraint concrete:
 
@@ -57,7 +57,7 @@ CH12 does not treat throughput as “number of PRs.” `docs/metrics.md` frames 
 The rule is simple: do not increase agent speed before protecting review flow. Smaller PRs, smaller work packages, and a stable PR template usually improve throughput more than a more aggressive model does. `.github/pull_request_template.md` supports this by fixing `Goal`, `Changed Files`, `Verification`, `Evidence / Approval`, and `Remaining Gaps`.
 
 ## 3. Repo Hygiene and AI Slop Control
-AI-agent operations accelerate good diffs and bad diffs at the same time. The accumulated low-quality residue is AI slop. It includes more than obvious bugs. It also includes stale docs, broken paths, orphaned task briefs, drift between verify scripts and the repo, terminology inconsistency, and long explanations that are no longer tied to real artifacts.
+AI agent operations accelerate good diffs and bad diffs at the same time. The accumulated low-quality residue is AI slop. It includes more than obvious bugs. It also includes stale docs, broken paths, orphaned task briefs, drift between verify scripts and the repo, terminology inconsistency, and long explanations that are no longer tied to real artifacts.
 
 `checklists/repo-hygiene.md` separates checks before merge from weekly cleanup. That split matters. A team cannot rely on “we will clean it up later” once agent throughput increases. Cleanup needs a cadence, owners, and explicit escalation conditions.
 
@@ -75,7 +75,7 @@ Metrics are not here to answer whether AI agents feel useful. They exist to show
 The critical rule is to attach action to each metric. If verify failure rate rises, the team should inspect task decomposition, briefs, or prompt quality. If PR cycle time grows, the team should inspect review budget. If stale docs count rises, the team should inspect hygiene cadence. Metrics should support operating-model adjustment, not blame allocation.
 
 ## 5. Plan an Adoption Roadmap
-AI-agent adoption is safer when rolled out in stages instead of across the entire repo at once. `docs/operating-model.md` already defines three stages:
+AI agent adoption is safer when rolled out in stages instead of across the entire repo at once. `docs/operating-model.md` already defines three stages:
 
 1. `Pilot`
    - limit work to docs, tests, and scoped bugfixes

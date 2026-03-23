@@ -1,12 +1,12 @@
-# English Manuscript Scaffold
+# English Manuscript
 
-This directory holds the English manuscript scaffold for the book. Its purpose is not to replace the Japanese manuscript immediately. Its purpose is to keep the English edition structurally aligned so translation and editorial work can proceed issue by issue.
+This directory holds the English manuscript counterpart for the book. The English edition is maintained in parity with the Japanese manuscript so translation and editorial work can proceed issue by issue without breaking chapter, appendix, or artifact alignment.
 
 ## Scope
 
 - Mirror the Japanese chapter and appendix layout
 - Keep one English brief for every Japanese brief
-- Keep one English skeleton for every Japanese chapter and appendix
+- Keep one English counterpart for every Japanese chapter and appendix
 - Track parity status in `manuscript-en/STATUS.md`
 
 ## Directory Layout
@@ -27,14 +27,14 @@ manuscript-en/
 ## Parity Policy
 
 1. The Japanese manuscript remains the source for structure and artifact references.
-2. The English scaffold must preserve the same chapter ids, appendix ids, and referenced artifacts.
+2. The English manuscript must preserve the same chapter ids, appendix ids, and referenced artifacts.
 3. Each English file should identify its Japanese source in `## Parity Notes` when the file contract requires it.
-4. Full English prose can be added later, but the scaffold must stay structurally complete.
+4. When the Japanese manuscript changes structure or artifacts, the English counterpart and `manuscript-en/STATUS.md` must be updated in the same issue.
 
 ## Editing Workflow
 
 1. Read the matching Japanese brief and chapter.
 2. Update the English brief first if scope changes.
-3. Update the English skeleton, draft, or reader-entry artifact.
+3. Update the English counterpart, draft, or reader-entry artifact.
 4. Update `manuscript-en/STATUS.md` if parity status changes.
 5. Run `./scripts/verify-book.sh`.

@@ -7,7 +7,7 @@ artifacts:
   - .github/workflows/verify.yml
   - checklists/en/verification.md
   - sample-repo/tests/test_ticket_search.py
-  - artifacts/evidence/README.md
+  - artifacts/en/evidence/README.md
 dependencies:
   - ch09
 ---
@@ -48,7 +48,7 @@ The benefit of explicit order is not just speed. It also improves diagnosis. A l
 ## 3. Keep Evidence for UI Changes
 Even when tests pass, a reviewer may still be unable to judge the change. That is especially true for UI or other user-visible changes, where logs alone do not explain what actually changed.
 
-That is why the verification harness needs an evidence bundle. `artifacts/evidence/README.md` defines the purpose, recommended layout, and minimum contents. The core set is usually enough:
+That is why the verification harness needs an evidence bundle. `artifacts/en/evidence/README.md` defines the purpose, recommended layout, and minimum contents. The core set is usually enough:
 
 - `summary.md`
 - `verify.log`
@@ -102,7 +102,7 @@ First add or strengthen the regression guard in
 Then run `./scripts/verify-sample.sh` locally.
 Let `.github/workflows/verify.yml` rerun the same bar in CI.
 If the change is UI-visible, create an evidence bundle using
-`artifacts/evidence/README.md`.
+`artifacts/en/evidence/README.md`.
 Use `checklists/en/verification.md` to separate approval-required points.
 ```
 
@@ -118,7 +118,7 @@ Use `FEATURE-001` as the verification-harness example. Its acceptance criteria a
 
 The first step is therefore to strengthen `sample-repo/tests/test_ticket_search.py` with a case-insensitive regression guard. That is not a new feature. It is verification-harness work. The next step is to run `./scripts/verify-sample.sh` locally and confirm that the search regression line still passes. CI then reruns the same standard through `.github/workflows/verify.yml`, with book verification and sample verification isolated in separate jobs.
 
-This particular task does not change a UI, so screenshots are unnecessary. The reviewer still needs an explanation, though: which acceptance criterion became a regression guard, and which verify command was run. If a later search UI is added, the same harness can extend into an evidence bundle by following `artifacts/evidence/README.md`.
+This particular task does not change a UI, so screenshots are unnecessary. The reviewer still needs an explanation, though: which acceptance criterion became a regression guard, and which verify command was run. If a later search UI is added, the same harness can extend into an evidence bundle by following `artifacts/en/evidence/README.md`.
 
 The worked example matters because it shows that a verification harness is not “tests only” and not “CI only.” It becomes real only when specification guards, execution order, evidence, and approval are designed together.
 
@@ -130,7 +130,7 @@ The worked example matters because it shows that a verification harness is not �
 | failing test | whether the broken behavior is executable | `sample-repo/tests/test_ticket_search.py` | whether acceptance criteria became a regression guard |
 | local verify | whether the minimum local bar passes | `./scripts/verify-sample.sh` | whether the bar is fast enough for iteration |
 | CI | whether the same bar is reproducible on the branch | `.github/workflows/verify.yml` | whether local and shared verification still match |
-| evidence | whether a reviewer can re-check the visible change | `artifacts/evidence/README.md` | whether required artifacts and rationale are explicit |
+| evidence | whether a reviewer can re-check the visible change | `artifacts/en/evidence/README.md` | whether required artifacts and rationale are explicit |
 | approval | whether only human-owned judgments remain | `checklists/en/verification.md` | whether non-automated decisions are isolated clearly |
 
 This table keeps the verification harness from collapsing into “the test chapter.” It starts with an executable guard, continues through local and shared verification, and ends with evidence and approval for review-readiness.
@@ -143,10 +143,10 @@ This table keeps the verification harness from collapsing into “the test chapt
 - `.github/workflows/verify.yml`
 - `checklists/en/verification.md`
 - `sample-repo/tests/test_ticket_search.py`
-- `artifacts/evidence/README.md`
+- `artifacts/en/evidence/README.md`
 
 ## Source Notes / Further Reading
-- To revisit this chapter, start with `.github/workflows/verify.yml`, `checklists/en/verification.md`, `sample-repo/tests/test_ticket_search.py`, and `artifacts/evidence/README.md`. Read the verification harness as a flow across tests, CI, evidence, and approval rather than as a single command.
+- To revisit this chapter, start with `.github/workflows/verify.yml`, `checklists/en/verification.md`, `sample-repo/tests/test_ticket_search.py`, and `artifacts/en/evidence/README.md`. Read the verification harness as a flow across tests, CI, evidence, and approval rather than as a single command.
 - For the backmatter path, see `manuscript-en/backmatter/00-source-notes.md` under `### CH10 Build a Verification Harness` and `manuscript-en/backmatter/01-reading-guide.md` under `## Verification, Reliability, and Operations`.
 
 ## Chapter Summary

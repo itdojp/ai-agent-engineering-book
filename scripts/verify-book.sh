@@ -8,6 +8,8 @@ required=(
   "AGENTS.md"
   "README.md"
   "STATUS.md"
+  "artifacts/en/README.md"
+  "artifacts/en/evidence/README.md"
   "docs/glossary.md"
   "docs/en/README.md"
   "docs/en/glossary.md"
@@ -136,6 +138,7 @@ forbidden_english_root_refs = [
     "checklists/prompt-contract-review.md",
     "checklists/verification.md",
     "checklists/repo-hygiene.md",
+    "artifacts/evidence/README.md",
 ]
 required_figure_readme_en = {
     "manuscript-en/figures/README.md": ["## Source Of Truth", "## Update Policy", "## Print / Ebook Rule"],

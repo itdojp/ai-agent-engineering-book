@@ -68,7 +68,7 @@ If that order drifts, the manuscript becomes too dependent on fashion, screensho
 
 ### CH10 Build a Verification Harness
 
-- Start with `.github/workflows/verify.yml`, `checklists/en/verification.md`, `sample-repo/tests/test_ticket_search.py`, and `artifacts/evidence/README.md`. Read the verification harness as one flow across tests, CI, evidence, and approval.
+- Start with `.github/workflows/verify.yml`, `checklists/en/verification.md`, `sample-repo/tests/test_ticket_search.py`, and `artifacts/en/evidence/README.md`. Read the verification harness as one flow across tests, CI, evidence, and approval.
 - If you add external sources, prefer official docs for the test framework, CI system, and coverage tooling you use. A green screenshot alone is not reproducible evidence.
 
 ### CH11 Long-running Tasks and Multi-agent Work

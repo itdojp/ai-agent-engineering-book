@@ -4,9 +4,9 @@ This directory holds the English manuscript counterpart for the book. The Englis
 
 ## Scope
 
-- Mirror the Japanese chapter and appendix layout
+- Mirror the Japanese front matter, chapter, appendix, backmatter, and figure layout
 - Keep one English brief for every Japanese brief
-- Keep one English counterpart for every Japanese chapter and appendix
+- Keep one English counterpart for every Japanese reader-facing artifact
 - Track parity status in `manuscript-en/STATUS.md`
 
 ## Directory Layout

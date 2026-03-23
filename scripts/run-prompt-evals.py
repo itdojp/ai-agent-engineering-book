@@ -114,7 +114,7 @@ def main() -> int:
     print(f"cases: {len(cases_doc['cases'])}")
     print(f"rubric: {rubric['name']}")
     print(f"criteria: {len(rubric['criteria'])}")
-    print("prompt eval scaffold looks consistent")
+    print("prompt eval artifacts look consistent")
     return 0
 
 

@@ -28,4 +28,4 @@ for path in "${required[@]}"; do
 done
 
 PYTHONPATH="$SAMPLE/src" python3 -m unittest discover -s "$SAMPLE/tests" -v
-echo "sample scaffold looks consistent"
+echo "sample repository artifacts look consistent"

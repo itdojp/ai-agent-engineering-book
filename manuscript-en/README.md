@@ -15,6 +15,7 @@ This directory holds the English manuscript scaffold for the book. Its purpose i
 manuscript-en/
   briefs/          # English briefs mirrored from manuscript/briefs
   figures/         # English figure plan and Mermaid sources
+  front-matter/    # English introduction and reading guide
   part-00/         # Chapter 1
   part-01-prompt/  # Chapters 2-4
   part-02-context/ # Chapters 5-8
@@ -34,6 +35,6 @@ manuscript-en/
 
 1. Read the matching Japanese brief and chapter.
 2. Update the English brief first if scope changes.
-3. Update the English skeleton or draft.
+3. Update the English skeleton, draft, or reader-entry artifact.
 4. Update `manuscript-en/STATUS.md` if parity status changes.
 5. Run `./scripts/verify-book.sh`.

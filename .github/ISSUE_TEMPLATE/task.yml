@@ -1,8 +1,6 @@
 name: Task
-description: Chapter, scaffold, appendix, or polish task
+description: Chapter, repo, appendix, or polish task
 title: "[TASK] "
-labels:
-  - type/chapter
 body:
   - type: textarea
     id: goal

@@ -69,6 +69,18 @@ Task Context と Session Memory の設計ができると、AI agent は「前回
 
 
 
+## 紙面で押さえるポイント
+### Resume Packet 最小形
+
+| issue 側の入力 | task brief / session memory で増やすもの | 再開時に確認する要点 |
+|---|---|---|
+| `Goal` | `Goal` と `Scope` | そもそも何を終わらせる task か |
+| `Deliverables` | `Deliverables` と `Inputs` | どの artifact が完了物で、何を読むか |
+| `Acceptance Criteria` | `Acceptance Criteria`、`Verification`、`Out of Scope` | 何を満たせば done で、何はやらないか |
+| 会話で決まった追加事項 | `Decided`、`Open Questions`、`Next Step` | 前回の session で何が確定し、何が未決か |
+
+再開時の最小 packet は 4 点でよい。`task brief`、最新 `progress note`、最新 `verify`、再開時に開くファイル一覧である。これが揃っていれば、前回の会話全文を読まなくても scope と次の 1 手を復元できる。逆にこの 4 点が欠けると、AI agent は chat history を source of truth と誤認しやすい。
+
 ## 章で使う bad / good example
 bad:
 
@@ -103,9 +115,13 @@ Acceptance Criteria、Verification を確認する。
 
 ## 参照する artifact
 - `sample-repo/tasks/FEATURE-001-brief.md`
+  issue を task brief に正規化した実例として読む。CH07 では Scope、Inputs、Verification の増分を見る。
 - `sample-repo/tasks/FEATURE-001-progress.md`
+  session memory の実例として読む。`Decided` と `Open Questions` をどう分離しているかを確認する。
 - `docs/session-memory-policy.md`
+  progress note の必須項目と resume packet の最小入力を確認する。本文の再開手順と照らし合わせて読む。
 - `.github/ISSUE_TEMPLATE/task.yml`
+  GitHub issue 側の最小入力を確認する。brief で何を補っているかを比較する起点になる。
 
 
 ## 章末まとめ

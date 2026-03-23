@@ -63,7 +63,7 @@ Good handoff is not a long narrative. It is a restart procedure. `docs/session-m
 3. the latest verification result
 4. the file list to reopen when resuming
 
-That set is small, but it is enough. In `FEATURE-001`, a new agent can read `tasks/FEATURE-001-brief.md` to reestablish scope, read `tasks/FEATURE-001-progress.md` to see what was decided and what remains open, and then rerun or confirm the latest verify command before continuing.
+That set is small, but it is enough. In `FEATURE-001`, a new agent can read `sample-repo/tasks/FEATURE-001-brief.md` to reestablish scope, read `sample-repo/tasks/FEATURE-001-progress.md` to see what was decided and what remains open, and then rerun or confirm the latest verify command before continuing.
 
 Without that packet, handoff turns into vague memory: “we were probably still discussing search behavior.” That is not operational context. A useful handoff brings the next session back to the same canonical artifacts.
 
@@ -72,8 +72,8 @@ Without that packet, handoff turns into vague memory: “we were probably still 
 
 | Artifact | Why it exists | What it stabilizes |
 |---|---|---|
-| `tasks/FEATURE-001-brief.md` | Restates the issue as an execution contract | scope, inputs, constraints, acceptance criteria, verification |
-| `tasks/FEATURE-001-progress.md` | Captures session-local progress | what changed, what was decided, what remains open |
+| `sample-repo/tasks/FEATURE-001-brief.md` | Restates the issue as an execution contract | scope, inputs, constraints, acceptance criteria, verification |
+| `sample-repo/tasks/FEATURE-001-progress.md` | Captures session-local progress | what changed, what was decided, what remains open |
 | latest verify result | Re-establishes live state before more edits | whether the repo currently matches the note |
 | `Resume Steps` file list | Reduces restart thrash | reading order and first files to reopen |
 

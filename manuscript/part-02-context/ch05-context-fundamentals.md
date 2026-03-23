@@ -110,6 +110,10 @@ context は次の順に渡す。
 - `docs/context-risk-register.md`
 
 
+## Source Notes / Further Reading
+- この章を探し直すときは、まず `docs/context-model.md`、`docs/context-budget.md`、`docs/context-risk-register.md` を正本として見る。Context Engineering は情報を増やす話ではなく、寿命と更新責任を分ける設計である。
+- 次の一歩は `manuscript/backmatter/00-source-notes.md` の「CH05 Context Engineering の基礎」と `manuscript/backmatter/01-読書案内.md` の「Context と repo 設計」を参照する。
+
 ## 章末まとめ
 - Prompt Engineering が作業境界を決めるのに対し、Context Engineering は判断材料の種類、鮮度、優先順位を決める。
 - context は永続、タスク、セッション、ツールに分けて扱うと設計しやすい。

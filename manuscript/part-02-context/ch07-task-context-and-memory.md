@@ -124,6 +124,10 @@ Acceptance Criteria、Verification を確認する。
   GitHub issue 側の最小入力を確認する。brief で何を補っているかを比較する起点になる。
 
 
+## Source Notes / Further Reading
+- この章を探し直すときは、まず `sample-repo/tasks/FEATURE-001-brief.md`、`sample-repo/tasks/FEATURE-001-progress.md`、`docs/session-memory-policy.md` を正本として見る。resume packet は summary だけでなく最新 verify とセットで読む。
+- 次の一歩は `manuscript/backmatter/00-source-notes.md` の「CH07 Task Context と Session Memory」と `manuscript/backmatter/01-読書案内.md` の「Context と repo 設計」を参照する。
+
 ## 章末まとめ
 - issue はそのままでは task context として粗い。AI agent に渡す前に task brief へ正規化する必要がある。
 - session memory は chat history ではなく progress note と verify 証跡で管理する。

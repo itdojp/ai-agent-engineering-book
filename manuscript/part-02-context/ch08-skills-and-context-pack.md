@@ -122,6 +122,10 @@ canonical fact の source of truth として使う。
   task 固有の読み順と canonical fact を束ねた例として読む。skill ではなく context pack で持つ理由を確認する。
 
 
+## Source Notes / Further Reading
+- この章を探し直すときは、まず `SKILL.md` 群と `sample-repo/context-packs/ticket-search.md` を正本として見る。skill は再利用 workflow の契約、context pack は task ごとの最小入力として分けて読む。
+- 次の一歩は `manuscript/backmatter/00-source-notes.md` の「CH08 Skills と Context Pack を再利用する」と `manuscript/backmatter/01-読書案内.md` の「Context と repo 設計」を参照する。
+
 ## 章末まとめ
 - skill は長い prompt の別名ではなく、再利用可能な workflow と output contract を持つ artifact である。
 - context pack は task brief を置き換えるものではなく、読む順序と canonical fact を束ねる task-specific context である。

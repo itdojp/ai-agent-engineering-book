@@ -17,6 +17,7 @@
 - 学習目標: 2〜3 項目
 - 小見出し: brief に従う
 - 参照 artifact の説明
+- 章末の `Source Notes / Further Reading`
 - 演習: 2 問
 - 章末まとめ
 

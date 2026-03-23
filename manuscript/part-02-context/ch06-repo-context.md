@@ -131,6 +131,10 @@ root `AGENTS.md` には全体の不変条件だけを書く。
   code 変更時に同時更新すべき artifact を確認する。done 判定が code だけで閉じない理由を押さえる。
 
 
+## Source Notes / Further Reading
+- この章を探し直すときは、まず `AGENTS.md`、`sample-repo/docs/repo-map.md`、`sample-repo/docs/architecture.md`、`sample-repo/docs/coding-standards.md` を正本として見る。repo-map は索引、architecture は設計理由として読み分ける。
+- 次の一歩は `manuscript/backmatter/00-source-notes.md` の「CH06 Repo Context を設計する」と `manuscript/backmatter/01-読書案内.md` の「Context と repo 設計」を参照する。
+
 ## 章末まとめ
 - Repo Context の仕事は、repo の全文を説明することではなく、AI agent が正しい起点と更新境界を素早く掴めるようにすることにある。
 - `AGENTS.md` は地図、repo-map は索引、architecture は設計理由、coding standards は変更規律として分離すると drift を防ぎやすい。

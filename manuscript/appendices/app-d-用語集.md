@@ -2,7 +2,7 @@
 
 本書では、似た概念を意図的に分けて扱う。Prompt Engineering、Context Engineering、Harness Engineering は近いが別工程であり、task brief、Progress Note、context pack も役割が異なる。用語が揃っていないと、artifact の境界も壊れやすい。
 
-定義の source of truth は `docs/glossary.md` である。この appendix では、読み進めるうえで混同しやすい語をまとまりごとに整理する。
+定義の source of truth は `docs/glossary.md` である。この appendix では、読み進めるうえで混同しやすい語をまとまりごとに整理する。後付けの source notes、読書案内、索引 seed は探し直しの装置であり、この appendix は語義と表記を固定する装置に集中する。
 
 ## 1. 成熟モデルの語
 

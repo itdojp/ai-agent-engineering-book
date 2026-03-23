@@ -11,7 +11,7 @@ This directory reserves the English counterparts of reusable templates reference
 - Maintain English context-template counterparts for Appendix B
 - Maintain English harness-template counterparts for Appendix C
 
-## Out of Scope in EN-01
+## Out of Scope
 
 - English translations beyond the prompt, context, and harness template sets
 - Changes to the Japanese template contract

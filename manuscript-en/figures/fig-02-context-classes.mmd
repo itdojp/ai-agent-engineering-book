@@ -1,0 +1,12 @@
+%% title: fig-02 context classes
+%% chapter: CH05
+%% caption: Context falls into four classes: persistent, task, session, and tool. Each has a different freshness rule and update owner.
+flowchart TB
+    CTX[Context Engineering] --> R[Persistent Context<br/>AGENTS / architecture / glossary]
+    CTX --> T[Task Context<br/>issue / brief / spec / ADR / AC]
+    CTX --> S[Session Context<br/>Progress Note / open questions / next step]
+    CTX --> L[Tool Context<br/>grep / verify / terminal log]
+    R --> R1[stale-safe]
+    T --> T1[issue-level canonical]
+    S --> S1[mutable for restart]
+    L --> L1[live and short-lived]

@@ -1,0 +1,17 @@
+%% title: fig-04 single-agent harness
+%% chapter: CH09
+%% caption: A single-agent harness combines init, boundary, permission, verify, exit, and report inside one execution frame.
+flowchart LR
+    I[init] --> B[boundary]
+    B --> P{permission}
+    P -- not needed --> W[work]
+    P -- needed --> A[needs-human-approval]
+    W --> V{verify}
+    V -- fail --> R[retry / narrow scope]
+    R --> B
+    V -- pass --> E{exit}
+    E -- done --> D[done]
+    E -- blocked --> X[blocked]
+    D --> O[report]
+    X --> O
+    A --> O

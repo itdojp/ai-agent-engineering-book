@@ -1,0 +1,9 @@
+%% title: fig-05 verification pipeline
+%% chapter: CH10
+%% caption: A verification harness connects failing test, local verify, CI, evidence, and approval in a fixed sequence.
+flowchart LR
+    AC[Acceptance Criteria] --> FT[failing test]
+    FT --> LV[local verify]
+    LV --> CI[CI verify]
+    CI --> EV[evidence bundle]
+    EV --> AP[approval]

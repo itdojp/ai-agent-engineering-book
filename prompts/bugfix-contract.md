@@ -34,7 +34,7 @@
 - 修正前は失敗し、修正後は成功する test がある
 - 既存 test と指定 verify が通る
 - 変更した code / docs / tests を列挙できる
-- 未解決 gap があれば明記し、なければ `none` と書ける
+- `Remaining Gaps` フィールドに、未解決の gap があれば明記し、なければ `none` と書ける
 
 ## Output Format
 1. Root Cause

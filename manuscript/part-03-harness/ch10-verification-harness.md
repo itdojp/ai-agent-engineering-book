@@ -66,7 +66,7 @@ CH10 の範囲では、approval を 3 箇所に置くと整理しやすい。
    - evidence bundle が review に十分か
    - scope 外の影響が残っていないか
 3. merge 前
-   - PR summary、verification、remaining gaps が説明可能か
+   - PR summary、verification、`Remaining Gaps` が説明可能か
 
 `checklists/verification.md` には、この approval 観点も含めてある。重要なのは「すべて人間確認に戻す」ことではない。機械で判定できる部分は harness に寄せ、人間が判断すべき部分だけを明示的に残すことだ。これにより、AI agent は verify をやり切りつつ、approval が必要な地点では止まれる。
 

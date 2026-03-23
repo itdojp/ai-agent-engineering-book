@@ -7,6 +7,7 @@ TARGET="${1:-}"
 required=(
   "AGENTS.md"
   "README.md"
+  "STATUS.md"
   "docs/glossary.md"
   "docs/en/README.md"
   "docs/en/glossary.md"
@@ -148,6 +149,17 @@ required_figure_sources_en = [
     "fig-06-long-running-multi-agent.mmd",
     "fig-07-operating-model.mmd",
 ]
+forbidden_root_onboarding_phrases = {
+    "README.md": [
+        "GitHub 上に空 repo を作成し、この内容を push する",
+        "`REPO-01` から順に issue を処理する",
+    ],
+    "STATUS.md": [
+        "GitHub に空 repo を作成する",
+        "この scaffold を push する",
+        "`REPO-01` から Codex CLI に投入する",
+    ],
+}
 
 
 def parse_artifacts(brief: Path) -> list[str]:
@@ -283,6 +295,16 @@ def check_english_reader_entry(en_root: Path):
         if missing:
             raise SystemExit(f"English part opener manuscript-en/{rel} missing sections: {', '.join(missing)}")
 
+def check_root_onboarding_docs():
+    for rel, phrases in forbidden_root_onboarding_phrases.items():
+        path = root / rel
+        if not path.exists():
+            raise SystemExit(f"missing root onboarding doc: {rel}")
+        text = path.read_text(encoding="utf-8")
+        for phrase in phrases:
+            if phrase in text:
+                raise SystemExit(f"root onboarding doc still contains stale pre-bootstrap guidance in {rel}: {phrase}")
+
 def check_english_scaffold(target: str):
     en_root = root / "manuscript-en"
     if not en_root.exists():
@@ -358,6 +380,7 @@ else:
         check_appendix(brief.stem, brief)
 
 check_english_scaffold(target)
+check_root_onboarding_docs()
 
 print("book scaffold looks consistent")
 PY

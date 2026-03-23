@@ -25,6 +25,7 @@ evals/         # Prompt 評価用ファイル
 artifacts/     # `artifacts/evidence/` と `artifacts/en/` を含む共有 artifact
 .agents/       # Codex 向け skills
 scripts/       # verify / GitHub bootstrap 用スクリプト
+site-assets/   # GitHub Pages 公開用 asset
 templates/     # 日本語版で参照する再利用テンプレート
 templates/en/  # 英語版テンプレート
 issue-drafts/  # GitHub issue 作成用の草案と manifest
@@ -33,7 +34,7 @@ issue-drafts/  # GitHub issue 作成用の草案と manifest
 ## 推奨の進め方
 
 1. `git pull --ff-only origin main` で canonical source を同期する
-2. `./scripts/verify-book.sh` を実行し、`sample-repo/` を触る作業では `./scripts/verify-sample.sh` も実行する
+2. `./scripts/verify-book.sh` を実行し、`sample-repo/` を触る作業では `./scripts/verify-sample.sh` も実行する。Pages build に触る作業では `./scripts/verify-pages.sh` も実行する
 3. GitHub 上で次に扱う 1 issue を選ぶか、新しい issue を作成して作業単位を固定する
 4. root `AGENTS.md` と対象ディレクトリ配下の `AGENTS.md`、対応する brief、関連 artifact を読む
 5. issue 単位で変更し、verify を通したうえで PR を作成する
@@ -49,6 +50,7 @@ issue-drafts/  # GitHub issue 作成用の草案と manifest
 ## 参照
 
 - `docs/codex-runbook.md`: Codex への投入単位と推奨プロンプト
+- `docs/pages-publishing.md`: GitHub Pages 公開の build / deploy 運用
 - `manuscript/README.md`: 原稿構成と標準章テンプレート
 - `manuscript-en/README.md`: 英語版原稿の構成と parity ルール
 - `sample-repo/README.md`: サンプル実装の前提

@@ -19,6 +19,8 @@ artifacts/evidence/<task-id>/<timestamp>/
   after.png
 ```
 
+> Note: Evidence bundles themselves must be created under `artifacts/evidence/...`. The `artifacts/en/evidence/` directory only contains the English guidance for those bundles.
+
 ## Minimum Contents
 
 - `summary.md`

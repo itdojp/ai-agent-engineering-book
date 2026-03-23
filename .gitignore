@@ -4,5 +4,6 @@ __pycache__/
 .venv/
 dist/
 build/
+_site/
 *.egg-info/
 artifacts/evidence/generated/

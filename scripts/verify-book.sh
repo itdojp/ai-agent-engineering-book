@@ -8,6 +8,7 @@ required=(
   "AGENTS.md"
   "README.md"
   "STATUS.md"
+  "docs/pages-publishing.md"
   "artifacts/en/README.md"
   "artifacts/en/evidence/README.md"
   "docs/glossary.md"
@@ -44,6 +45,7 @@ required=(
   "manuscript-en/part-03-harness/part-opener.md"
   "sample-repo/AGENTS.md"
   ".github/ISSUE_TEMPLATE/task.yml"
+  ".github/workflows/pages.yml"
   "issue-drafts/manifest.json"
   "prompts/en/README.md"
   "prompts/en/bugfix-contract.md"
@@ -54,8 +56,12 @@ required=(
   "checklists/en/repo-hygiene.md"
   "templates/en/README.md"
   "scripts/bootstrap-github.sh"
+  "scripts/build-pages.py"
   "scripts/create-issues.py"
+  "scripts/verify-pages.sh"
   "scripts/verify-sample.sh"
+  "requirements-pages.txt"
+  "site-assets/book.css"
 )
 
 for path in "${required[@]}"; do

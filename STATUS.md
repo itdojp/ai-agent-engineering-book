@@ -2,7 +2,7 @@
 
 ## Current State
 
-2026-03-23 時点で、book repo の bootstrap は完了している。
+book repo の bootstrap は完了している。
 
 - GitHub repository、labels、milestones、issue / PR 運用は `main` 上で稼働している
 - 日本語版は front matter、CH01-CH12、appendices、backmatter、figures を含めて drafted 状態にある

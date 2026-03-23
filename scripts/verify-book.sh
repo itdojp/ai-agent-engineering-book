@@ -11,10 +11,14 @@ required=(
   "manuscript/AGENTS.md"
   "manuscript/front-matter/00-はじめに.md"
   "manuscript/front-matter/01-本書の読み方.md"
+  "manuscript/figures/README.md"
+  "manuscript/figures/figure-plan.md"
   "manuscript/backmatter/00-source-notes.md"
   "manuscript/backmatter/01-読書案内.md"
   "manuscript/backmatter/02-索引seed.md"
   "manuscript/backmatter/03-図表一覧方針.md"
+  "manuscript-en/figures/README.md"
+  "manuscript-en/figures/figure-plan.md"
   "manuscript-en/backmatter/00-source-notes.md"
   "manuscript-en/backmatter/01-reading-guide.md"
   "manuscript-en/backmatter/02-index-seed.md"
@@ -83,6 +87,19 @@ required_backmatter_en = {
     "manuscript-en/backmatter/02-index-seed.md": ["## How to Use This Seed", "## Index Seed"],
     "manuscript-en/backmatter/03-figure-table-list-policy.md": ["## Role", "## Figure List Policy", "## Table List Policy"],
 }
+required_figure_readme_en = {
+    "manuscript-en/figures/README.md": ["## Source Of Truth", "## Update Policy", "## Print / Ebook Rule"],
+    "manuscript-en/figures/figure-plan.md": ["| Figure ID | Chapter | Suggested Placement | Caption | Reader Value | Source |", "`fig-01`", "`fig-07`"],
+}
+required_figure_sources_en = [
+    "fig-01-maturity-model.mmd",
+    "fig-02-context-classes.mmd",
+    "fig-03-resume-packet.mmd",
+    "fig-04-single-agent-harness.mmd",
+    "fig-05-verification-pipeline.mmd",
+    "fig-06-long-running-multi-agent.mmd",
+    "fig-07-operating-model.mmd",
+]
 
 
 def parse_artifacts(brief: Path) -> list[str]:
@@ -181,6 +198,25 @@ def check_english_backmatter(en_root: Path):
             raise SystemExit(f"English source notes missing chapter heading: {heading}")
 
 
+def check_english_figures(en_root: Path):
+    for rel, sections in required_figure_readme_en.items():
+        text = (root / rel).read_text(encoding="utf-8")
+        missing = [item for item in sections if item not in text]
+        if missing:
+            raise SystemExit(f"English figure artifact {rel} missing sections: {', '.join(missing)}")
+
+    figure_root = en_root / "figures"
+    for rel in required_figure_sources_en:
+        if not (figure_root / rel).exists():
+            raise SystemExit(f"missing English figure source: manuscript-en/figures/{rel}")
+
+    figure_backmatter = (en_root / "backmatter" / "03-figure-table-list-policy.md").read_text(encoding="utf-8")
+    if "manuscript/figures/" in figure_backmatter:
+        raise SystemExit("English figure/table policy still points to Japanese figure sources")
+    if "manuscript-en/figures/figure-plan.md" not in figure_backmatter:
+        raise SystemExit("English figure/table policy is missing manuscript-en figure-plan reference")
+
+
 def check_english_scaffold(target: str):
     en_root = root / "manuscript-en"
     if not en_root.exists():
@@ -200,6 +236,7 @@ def check_english_scaffold(target: str):
         raise SystemExit("English appendix briefs do not match Japanese appendix briefs")
 
     check_english_backmatter(en_root)
+    check_english_figures(en_root)
 
     if target:
         brief = en_root / "briefs" / f"{target}.yaml"

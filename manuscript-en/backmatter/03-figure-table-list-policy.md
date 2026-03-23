@@ -1,6 +1,6 @@
 # Figure and Table Listing Policy
 
-This file is the source of truth for building the figure list and table list in ebook and print backmatter. The figure sources live under `manuscript/figures/`, and the table sources live in each chapter's Markdown tables.
+This file is the source of truth for building the figure list and table list in ebook and print backmatter. The figure sources for the English edition live under `manuscript-en/figures/`, and the table sources live in each chapter's Markdown tables.
 
 ## Role
 
@@ -10,21 +10,22 @@ This file is the source of truth for building the figure list and table list in 
 
 ## Figure List Policy
 
-- Treat `manuscript/figures/figure-plan.md` as the source of truth for figure ID, chapter, caption, and first mention
+- Treat `manuscript-en/figures/figure-plan.md` as the source of truth for figure ID, chapter, caption, and first mention
 - Keep each caption reader-facing so the main lesson of the figure is visible in one line
 - Preserve the rule of one figure for one main message, then swap only the production numbering later
+- Keep figure IDs aligned with the Japanese edition so cross-edition editorial work stays stable
 
 ## Current Figure Seed
 
 | Figure ID | Chapter | First Mention | Source |
 |---|---|---|---|
-| `fig-01` | CH01 | The map from Prompt / Context / Harness | `manuscript/figures/fig-01-maturity-model.mmd` |
-| `fig-02` | CH05 | Persistent, task, session, and tool context | `manuscript/figures/fig-02-context-classes.mmd` |
-| `fig-03` | CH07 | The minimum input for resuming a session | `manuscript/figures/fig-03-resume-packet.mmd` |
-| `fig-04` | CH09 | The overall single-agent harness flow | `manuscript/figures/fig-04-single-agent-harness.mmd` |
-| `fig-05` | CH10 | The order of lint, typecheck, unit, and e2e | `manuscript/figures/fig-05-verification-pipeline.mmd` |
-| `fig-06` | CH11 | The split among planner, coder, and reviewer | `manuscript/figures/fig-06-long-running-multi-agent.mmd` |
-| `fig-07` | CH12 | The responsibilities that remain with humans | `manuscript/figures/fig-07-operating-model.mmd` |
+| `fig-01` | CH01 | The map from Prompt / Context / Harness | `manuscript-en/figures/fig-01-maturity-model.mmd` |
+| `fig-02` | CH05 | Persistent, task, session, and tool context | `manuscript-en/figures/fig-02-context-classes.mmd` |
+| `fig-03` | CH07 | The minimum input for resuming a session | `manuscript-en/figures/fig-03-resume-packet.mmd` |
+| `fig-04` | CH09 | The overall single-agent harness flow | `manuscript-en/figures/fig-04-single-agent-harness.mmd` |
+| `fig-05` | CH10 | The order of lint, typecheck, unit, and e2e | `manuscript-en/figures/fig-05-verification-pipeline.mmd` |
+| `fig-06` | CH11 | The split among planner, coder, and reviewer | `manuscript-en/figures/fig-06-long-running-multi-agent.mmd` |
+| `fig-07` | CH12 | The responsibilities that remain with humans | `manuscript-en/figures/fig-07-operating-model.mmd` |
 
 ## Table List Policy
 

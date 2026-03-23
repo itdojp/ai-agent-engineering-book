@@ -31,4 +31,3 @@
 
 - `drafted`: English counterpart exists and covers the current Japanese argument or artifact surface
 - `reviewed`: English prose has received editorial review for parity and clarity
-- `scaffolded`: fallback status for a future parity surface where layout exists but full draft parity is still pending

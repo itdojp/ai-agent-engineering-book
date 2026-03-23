@@ -24,7 +24,7 @@ This file is the seed for the production index. At this stage it fixes the main 
 | context pack | CH08 | `sample-repo/context-packs/ticket-search.md` |
 | Context Engineering | CH01, CH05 | `docs/en/context-model.md` |
 | done criteria | CH09 | `sample-repo/docs/harness/done-criteria.md` |
-| evidence bundle | CH10 | `artifacts/evidence/README.md` |
+| evidence bundle | CH10 | `artifacts/en/evidence/README.md` |
 | feature list | CH11 | `sample-repo/docs/harness/feature-list.md` |
 | Harness Engineering | CH01, CH09 | `sample-repo/docs/harness/single-agent-runbook.md` |
 | operating model | CH12 | `docs/en/operating-model.md` |

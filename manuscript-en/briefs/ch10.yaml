@@ -21,7 +21,7 @@ artifacts:
   - .github/workflows/verify.yml
   - checklists/en/verification.md
   - sample-repo/tests/test_ticket_search.py
-  - artifacts/evidence/README.md
+  - artifacts/en/evidence/README.md
 acceptance_criteria:
   - The chapter follows the standard chapter contract
   - It includes at least one bad / good example pair

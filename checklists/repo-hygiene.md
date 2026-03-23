@@ -7,6 +7,7 @@
 - verify script と実態がずれていないか
 - `docs/glossary.md` を source of truth として表記を揃えたか
 - `Prompt Contract`、`Progress Note`、`verification harness` の固有表記がぶれていないか
+- 出力契約の最終項目が `Remaining Gaps` に揃っているか
 
 ## Weekly Cleanup
 - orphaned task brief がないか

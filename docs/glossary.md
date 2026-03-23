@@ -22,6 +22,7 @@
 | verification harness | テスト、lint、typecheck、証跡収集、CI を束ねた検証系 |
 | done criteria | harness 上で完了扱いにする条件。verify、artifact 更新、approval の要否を含む |
 | evidence bundle | reviewer が変更を検証できるように残す verify log、repro 手順、画像、summary の組 |
+| Remaining Gaps | 最終報告で使う canonical な出力項目。verify 後も残る未解決事項、human follow-up、completion を妨げる差分を短く記す |
 | Prompt Contract | 目的・制約・完了条件・出力形式を定義した prompt artifact |
 | Progress Note | 中断・再開・handoff のための短い進捗記録 |
 | repo context | repo 全体で比較的安定している構造、規約、entry point、ownership 情報 |

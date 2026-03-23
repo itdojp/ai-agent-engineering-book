@@ -71,7 +71,7 @@
       "must_include": [
         "Root Cause",
         "Files Changed",
-        "Remaining Risk"
+        "Remaining Gaps"
       ],
       "must_not_include": [
         "verify を省略して完了扱いにする"

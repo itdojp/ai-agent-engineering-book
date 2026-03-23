@@ -50,7 +50,7 @@ support-hub は現時点で UI repo ではないため、CH10 の worked example
 ### 4. CI と local verify の分担
 local verify と CI verify は同じものではない。local verify は、agent や開発者が変更前後に高速に回す検証であり、CI verify は branch や PR に対して同じ検証を再現し、共有の合格ラインにする仕組みである。前者は iteration speed、後者は reproducibility を担当する。
 
-`.github/workflows/verify.yml` では、book 側と sample-repo 側の検証を別 job に分けている。これは「どちらかが落ちた」ではなく、「どの harness が壊れたか」を CI で判別しやすくするためである。book manuscript の path 整合性と prompt eval scaffold の確認と、sample-repo の test 実行は、どちらも verify だが failure mode は異なる。job を分けると、review も retry も速くなる。
+`.github/workflows/verify.yml` では、book 側と sample-repo 側の検証を別 job に分けている。これは「どちらかが落ちた」ではなく、「どの harness が壊れたか」を CI で判別しやすくするためである。book manuscript の path 整合性と prompt eval artifact の整合確認と、sample-repo の test 実行は、どちらも verify だが failure mode は異なる。job を分けると、review も retry も速くなる。
 
 ここで重要なのは、CI が local verify を置き換えるわけではないという点である。agent はまず local で `./scripts/verify-book.sh ch10` や `./scripts/verify-sample.sh` を回す。その後、CI が同じ合格ラインを branch 上で再実行する。この二段構えが verification harness の基本になる。
 

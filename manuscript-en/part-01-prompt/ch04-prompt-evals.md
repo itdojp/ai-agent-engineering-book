@@ -87,13 +87,13 @@ This does not mean goldens are useless. A golden check is still a good fit for s
 ## 4. Prompt Regression Checks
 A one-line prompt change can break cases that used to pass. That is why prompts need regression checks in the same way code does. The workflow is simple: run the same eval set against prompt version 1 and version 2, then compare the differences.
 
-This repo includes `scripts/run-prompt-evals.py` as a minimal scaffold. At this stage it does not call a model. Instead, it verifies that the prompt-eval assets remain internally consistent:
+This repo includes `scripts/run-prompt-evals.py` as a lightweight consistency check. At this stage it does not call a model. Instead, it verifies that the prompt-eval artifacts remain internally consistent, including:
 
 - required Prompt Contract headings exist
 - `evals/prompt-contract-cases.json` is structurally valid
 - `evals/rubrics/feature-spec.json` is structurally valid
 
-That is not yet a full evaluation runner, but it is still useful. Prompt evaluation has to start by keeping the cases and rubric themselves healthy inside the repo. If the evaluation assets drift or break, later comparisons stop being trustworthy.
+That is not yet a full evaluation runner, but it is still useful. Prompt evaluation has to start by keeping the cases and rubric themselves healthy inside the repo. If those artifacts drift or break, later comparisons stop being trustworthy.
 
 The actual regression idea is still the same. Suppose version 1 of `feature-contract` handled missing information weakly. Version 2 adds a `Missing Information Policy`, tighter artifact-sync wording, and a stronger prohibition against out-of-scope UI or API changes. The same suite should then show whether the target cases improved and whether other cases regressed.
 

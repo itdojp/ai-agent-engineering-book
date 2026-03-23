@@ -41,7 +41,7 @@ This is why tests are not post-hoc explanation. They are executable specificatio
 ## 2. Order Lint, Typecheck, Unit, and E2E Checks
 A verification harness should be designed as an ordered pipeline, not as a bag of checks. In a larger system, the typical order is lint, typecheck, unit, integration, then e2e. The reason is practical: cheaper failures should stop the run before the expensive checks start.
 
-This repo is still a minimal scaffold, so the active verification line is mostly unit-test based. That does not reduce the value of defining the pipeline shape now. `checklists/en/verification.md` captures the verification order as a practical review checklist: confirm the guarded behavior, decide whether a failing test is needed, run local verify, reflect the same bar in CI, preserve evidence when required, and isolate the parts that still need human approval.
+In this repo, the active verification line is still mostly unit-test based. That does not reduce the value of defining the pipeline shape now. `checklists/en/verification.md` captures the verification order as a practical review checklist: confirm the guarded behavior, decide whether a failing test is needed, run local verify, reflect the same bar in CI, preserve evidence when required, and isolate the parts that still need human approval.
 
 The benefit of explicit order is not just speed. It also improves diagnosis. A lint failure, a unit-test failure, and a missing evidence bundle are all verification failures, but they are not the same failure mode. The harness should make that visible.
 
@@ -63,7 +63,7 @@ The objective is not to create a glossy report. The objective is to preserve eno
 ## 4. Divide Work Between CI and Local Verify
 Local verify and CI verify are not the same thing. Local verify exists for fast iteration before and after each change. CI verify exists to rerun the same acceptance line on the branch and make it shareable across reviewers.
 
-`.github/workflows/verify.yml` makes that division concrete by separating book verification and sample-repo verification into distinct jobs. That matters because the failure modes are different. Manuscript path drift and prompt-eval scaffold problems belong to one harness. Sample-repo tests belong to another. Splitting the jobs makes failure classification, retry, and review faster.
+`.github/workflows/verify.yml` makes that division concrete by separating book verification and sample-repo verification into distinct jobs. That matters because the failure modes are different. Manuscript path drift and prompt-eval artifact consistency checks belong to one harness. Sample-repo tests belong to another. Splitting the jobs makes failure classification, retry, and review faster.
 
 The important rule is that CI does not replace local verify. The coding agent should still run `./scripts/verify-book.sh ch10` or `./scripts/verify-sample.sh` locally first. CI then reruns the same standard on the branch. The harness needs both: local speed and shared reproducibility.
 

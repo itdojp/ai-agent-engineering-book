@@ -63,6 +63,15 @@ required_part_openers = {
     "manuscript/part-03-harness/part-opener.md": required_part_opener_sections,
 }
 
+required_english_chapter_sections = {
+    "manuscript-en/part-00/ch01-failure-model.md": [
+        "## Role in This Book",
+        "## Learning Objectives",
+        "## Outline",
+        "## Bad / Good Example",
+    ],
+}
+
 
 def parse_artifacts(brief: Path) -> list[str]:
     artifacts: list[str] = []
@@ -81,9 +90,9 @@ def parse_artifacts(brief: Path) -> list[str]:
 
 
 def check_chapter(ch_id: str, brief: Path):
-    paths = list(root.glob(f"manuscript/**/{ch_id}-*.md"))
-    if not paths:
-        raise SystemExit(f"missing chapter file for {ch_id}")
+    paths = sorted(root.glob(f"manuscript/**/{ch_id}-*.md"))
+    if len(paths) != 1:
+        raise SystemExit(f"expected exactly one chapter file for {ch_id}, found {len(paths)}")
     text = paths[0].read_text(encoding="utf-8")
     missing = [item for item in required_sections if item not in text]
     if missing:
@@ -94,12 +103,37 @@ def check_chapter(ch_id: str, brief: Path):
 
 
 def check_appendix(app_id: str, brief: Path):
-    paths = list(root.glob(f"manuscript/appendices/{app_id}-*.md"))
-    if not paths:
-        raise SystemExit(f"missing appendix file for {app_id}")
+    paths = sorted(root.glob(f"manuscript/appendices/{app_id}-*.md"))
+    if len(paths) != 1:
+        raise SystemExit(f"expected exactly one appendix file for {app_id}, found {len(paths)}")
     for artifact in parse_artifacts(brief):
         if not (root / artifact).exists():
             raise SystemExit(f"brief {brief.name} references missing artifact: {artifact}")
+
+
+def check_english_chapter(rel: str, sections: list[str]):
+    paths = sorted(root.glob(rel))
+    if len(paths) != 1:
+        raise SystemExit(f"expected exactly one English chapter file for {rel}, found {len(paths)}")
+    text = paths[0].read_text(encoding="utf-8")
+    missing = [item for item in sections if item not in text]
+    if missing:
+        raise SystemExit(f"English chapter {rel} missing sections: {', '.join(missing)}")
+
+
+def check_english_appendix(rel: str, sections: list[str]):
+    paths = sorted(root.glob(rel))
+    if len(paths) != 1:
+        raise SystemExit(f"expected exactly one English appendix file for {rel}, found {len(paths)}")
+    text = paths[0].read_text(encoding="utf-8")
+    missing = [item for item in sections if item not in text]
+    if missing:
+        raise SystemExit(f"English appendix {rel} missing sections: {', '.join(missing)}")
+
+
+english_root = root / "manuscript-en"
+if not english_root.exists():
+    raise SystemExit("missing: manuscript-en")
 
 
 for rel, sections in required_frontmatter.items():
@@ -113,6 +147,9 @@ for rel, sections in required_part_openers.items():
     missing = [item for item in sections if item not in text]
     if missing:
         raise SystemExit(f"part opener {rel} missing sections: {', '.join(missing)}")
+
+for rel, sections in required_english_chapter_sections.items():
+    check_english_chapter(rel, sections)
 
 if target:
     brief = root / "manuscript" / "briefs" / f"{target}.yaml"

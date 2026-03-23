@@ -12,7 +12,7 @@
 | CH08 | `manuscript/part-02-context/ch08-skills-and-context-pack.md` | `manuscript-en/part-02-context/ch08-skills-and-context-pack.md` | drafted |
 | CH09 | `manuscript/part-03-harness/ch09-harness-fundamentals.md` | `manuscript-en/part-03-harness/ch09-harness-fundamentals.md` | drafted |
 | CH10 | `manuscript/part-03-harness/ch10-verification-harness.md` | `manuscript-en/part-03-harness/ch10-verification-harness.md` | drafted |
-| CH11 | `manuscript/part-03-harness/ch11-long-running-and-multi-agent.md` | `manuscript-en/part-03-harness/ch11-long-running-and-multi-agent.md` | scaffolded |
+| CH11 | `manuscript/part-03-harness/ch11-long-running-and-multi-agent.md` | `manuscript-en/part-03-harness/ch11-long-running-and-multi-agent.md` | drafted |
 | CH12 | `manuscript/part-03-harness/ch12-operating-model.md` | `manuscript-en/part-03-harness/ch12-operating-model.md` | scaffolded |
 | APP-A | `manuscript/appendices/app-a-Prompt-テンプレート集.md` | `manuscript-en/appendices/app-a-prompt-templates.md` | scaffolded |
 | APP-B | `manuscript/appendices/app-b-Context-テンプレート集.md` | `manuscript-en/appendices/app-b-context-templates.md` | scaffolded |

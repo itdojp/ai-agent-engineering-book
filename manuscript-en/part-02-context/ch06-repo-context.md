@@ -5,7 +5,7 @@ status: drafted
 source_ja: manuscript/part-02-context/ch06-repo-context.md
 artifacts:
   - AGENTS.md
-  - manuscript/AGENTS.md
+  - manuscript-en/AGENTS.md
   - sample-repo/AGENTS.md
   - sample-repo/docs/repo-map.md
   - sample-repo/docs/architecture.md
@@ -75,7 +75,7 @@ If those responsibilities stay fuzzy, the same explanation appears in multiple p
 This repo becomes easier to reason about when instruction layering is kept explicit:
 
 1. root `AGENTS.md`: repo-wide invariants, verify expectations, artifact-sync obligations
-2. `manuscript/AGENTS.md`: chapter structure and manuscript style rules
+2. `manuscript-en/AGENTS.md`: English-manuscript structure and parity rules
 3. `sample-repo/AGENTS.md`: domain constraints, verification rules, update boundaries
 4. task brief or context pack: the scope, inputs, and done conditions for the current issue
 
@@ -89,7 +89,7 @@ The critical rule is that each layer must have a distinct responsibility. The ro
 | Artifact | First question it answers | When to read it | What decision it fixes |
 |---|---|---|---|
 | `AGENTS.md` | What repo-wide constraints must not be violated? | immediately at task start | verify requirements, artifact sync, issue-scoped work boundaries |
-| `manuscript/AGENTS.md` | What does acceptable manuscript work look like? | before editing manuscript files | chapter structure, exercise count, artifact-driven prose |
+| `manuscript-en/AGENTS.md` | What does acceptable English manuscript work look like? | before editing `manuscript-en/` files | chapter structure, exercise count, appendix contract, parity rules |
 | `sample-repo/AGENTS.md` | What is the source of truth inside sample-repo? | before editing sample-repo files | domain constraints, docs update boundaries, sample verify |
 | `sample-repo/docs/repo-map.md` | Where do I start reading and where is everything? | when identifying the target area | read order, hot paths, starting points |
 | `sample-repo/docs/architecture.md` | Why is the repo structured this way, and where should behavior change? | before deciding an implementation path | layer responsibilities, change rules, impact range |
@@ -112,7 +112,7 @@ Corrected:
 
 ```text
 Keep only repo-wide invariants in root `AGENTS.md`.
-Put chapter structure and prose rules in `manuscript/AGENTS.md`.
+Put chapter structure and parity rules in `manuscript-en/AGENTS.md`.
 Put verify rules and domain constraints in `sample-repo/AGENTS.md`.
 Use `sample-repo/docs/repo-map.md` as the index.
 Use `sample-repo/docs/architecture.md` to explain the service layer and change rules.
@@ -131,7 +131,7 @@ Comparison points:
 
 ## Referenced Artifacts
 - `AGENTS.md`
-- `manuscript/AGENTS.md`
+- `manuscript-en/AGENTS.md`
 - `sample-repo/AGENTS.md`
 - `sample-repo/docs/repo-map.md`
 - `sample-repo/docs/architecture.md`

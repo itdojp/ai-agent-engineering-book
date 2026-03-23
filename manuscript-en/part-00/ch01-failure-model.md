@@ -1,7 +1,7 @@
 ---
 id: ch01
 title: Where AI Agents Fail
-status: draft
+status: drafted
 source_ja: manuscript/part-00/ch01-failure-model.md
 artifacts:
   - sample-repo/README.md

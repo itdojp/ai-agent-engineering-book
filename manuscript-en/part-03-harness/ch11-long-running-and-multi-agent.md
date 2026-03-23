@@ -29,7 +29,7 @@ The purpose of this chapter is not to jump to multi-agent execution by default. 
 ### 1. Where long-running tasks break
 ### 2. Feature lists and progress tracking
 ### 3. Design a restart protocol
-### 4. Separate planner, coder, and reviewer work
+### 4. Separate planner, coder, reviewer, and verifier work
 ### 5. Decide when multi-agent work is justified
 
 ## 1. Where Long-running Tasks Break
@@ -57,7 +57,7 @@ Each track has a goal, primary files, and a verify signal. That matters because 
 
 Progress tracking then connects the feature list to the existing CH07 artifacts. The feature list is the map of the task. The Progress Note is the current location. Without both, a resumed session cannot reconnect the previous verify state to the next safe step.
 
-CH11 does not add a new progress-note template. Instead, it connects the existing session-memory policy to long-running task control through the feature list and restart protocol.
+CH11 does not add a new Progress Note template. Instead, it connects the existing session-memory policy to long-running task control through the feature list and restart protocol.
 
 ## 3. Design a Restart Protocol
 A restart protocol exists so that a resumed session does not begin by guessing what “the previous session was probably doing.” `sample-repo/docs/harness/restart-protocol.md` fixes both the restart packet and the restart steps.
@@ -139,7 +139,7 @@ Break `FEATURE-002` into three stages.
 
 1. planner
    - fix scope and non-goals in `FEATURE-002-plan.md`
-   - create tracks and verify checkpoints in `feature-list.md`
+   - create tracks and verify checkpoints in `sample-repo/docs/harness/feature-list.md`
 2. coder
    - implement assignee-filter semantics and audit-log behavior as separate workstreams
    - run local verify inside each track

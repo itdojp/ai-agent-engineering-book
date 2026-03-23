@@ -14,9 +14,9 @@ dependencies:
 # AIエージェントはどこで失敗するか
 
 ## この章の位置づけ
-AIエージェントは、数ターンの会話では非常に有能に見える。質問に答え、設計案を出し、コードの断片もそれらしく書ける。しかし、実務で必要なのは「もっともらしい出力」ではなく「仕事が完了した状態」を作ることだ。repo を読み、必要な artifact を見つけ、変更し、verify し、必要なら docs も更新して初めて、作業は完了と言える。
+前付けで、本書の約束、想定読者、3 部構成の読み方を整理した。ここから本文に入る。最初に確認すべきなのは、AIエージェントが実務でどこで失敗するかである。数ターンの会話では有能に見えても、repo を読み、必要な artifact を見つけ、変更し、verify し、docs まで更新して仕事を閉じる段階で崩れやすい。
 
-本書は、AIエージェントを賢く見せる本ではない。ChatGPT で要件と設計を整理し、Codex CLI で repo を読みながら変更と verify を進め、最終的に仕事を最後までやり切らせるための本である。そのために、Prompt Engineering、Context Engineering、Harness Engineering という 3 段階の成熟モデルを使う。CH01 では、この成熟モデルがなぜ必要なのかを、失敗パターンと `sample-repo` の貫通ケースから整理する。
+CH01 の役割は、failure model を定義することにある。誤答、忘却、破壊、停止の 4 類型を起点に、なぜ Prompt Engineering だけでは足りず、Context Engineering と Harness Engineering まで必要になるのかを整理する。以後の章では、この failure model に対して artifact を 1 層ずつ積み上げる。
 
 ## 学習目標
 - 単発の誤答と長時間タスク失敗の違いを説明できる
@@ -76,16 +76,18 @@ AIエージェントの失敗は、多くの場合 4 類型に収まる。
 この順番は、学習順でもあり、実務で事故率を下げる順でもある。まず「何をやらせるか」を決め、次に「何を見せ続けるか」を決め、最後に「どう実行と検証を閉じるか」を決める。
 
 ### 4. 本書の貫通ケースと sample-repo の概要
-本書では、`support-hub` という小さなサポートチケット管理システムを `sample-repo` として使う。`sample-repo/docs/domain-overview.md` にある通り、現在の中核は `Ticket`、`TicketStore`、`SupportHubService` であり、一覧取得、ステータス更新、キーワード検索、assignee での絞り込みが入っている。規模は小さいが、要件整理、変更影響、verify、長時間タスクという実務の論点を一通り載せられる。
+本書では、`support-hub` という小さなサポートチケット管理システムを `sample-repo` として使う。これは単なる toy app ではない。一次受け担当が ticket を triage し、当番リードが assignee と backlog を見て、実装担当や運用担当が再発問い合わせの検索と運用変更を判断する、という現場を簡略化した題材である。`sample-repo/docs/domain-overview.md` にある通り、中核は `Ticket`、`InMemoryTicketStore`（概念として `TicketStore` と総称する）、`SupportHubService` であり、一覧取得、ステータス更新、キーワード検索、assignee での絞り込みが入っている。規模は小さいが、status の不整合、検索の弱さ、ownership の曖昧さ、verify 不足といった実務の痛みを一通り載せられる。
 
 さらに、本書では `sample-repo/docs/seed-issues.md` の 4 件を貫通ケースとして使う。
 
-| ケース | 何を見るか | 代表的な失敗 |
-|---|---|---|
-| `BUG-001` | バグ修正をどう閉じるか | 破壊、停止 |
-| `FEATURE-001` | 曖昧要求をどう仕様化するか | 誤答 |
-| `FEATURE-002` | 長時間タスクをどう分割・継続するか | 忘却、停止 |
-| `HARNESS-001` | verify と証跡をどう整えるか | 停止、破壊 |
+| ケース | 現場の痛み | 何が増えるか | 代表的な失敗 |
+|---|---|---|---|
+| `BUG-001` | 旧 status が見え、二重対応が起きうる | bugfix brief、test、single-agent harness | 破壊、停止 |
+| `FEATURE-001` | 類似 ticket を見つけにくく、要求も曖昧 | spec、ADR、acceptance criteria、context pack、verify guard | 誤答 |
+| `FEATURE-002` | assignee と監査ログの扱いが長時間化しやすい | plan、feature list、restart packet、role 分担 | 忘却、停止 |
+| `HARNESS-001` | verify と証跡が弱く、review で説明しにくい | done criteria、CI、evidence bundle、operating model | 停止、破壊 |
+
+`FEATURE-001` は本書の spine であり、曖昧要求を spec、context、verify に変えていく流れを通して追う。`BUG-001` は bounded な bugfix を確実に閉じる題材であり、`FEATURE-002` は session を跨ぐ task を壊さない題材であり、`HARNESS-001` は verify と証跡を team 運用へ接続する題材である。`sample-repo/docs/seed-issues.md` には、各ケースがどの chapter / artifact / payoff に接続するかの対応表も置いてある。後続章では毎回ケースを最初から説明し直すのではなく、「今回このケースで何を学ぶか」だけを再確認しながら進める。
 
 ChatGPT と Codex CLI の役割も分ける。ChatGPT は曖昧要求の整理、代替案比較、レビュー観点の洗い出しに向く。Codex CLI は repo を読み、変更し、verify を回し、artifact を更新する実行側に向く。CH01 の時点では、この役割分担だけ押さえればよい。詳細な prompt 設計や task brief の書式は後続章で扱う。
 

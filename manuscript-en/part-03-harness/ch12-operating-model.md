@@ -4,9 +4,9 @@ title: Operating Model and Organizational Adoption
 status: drafted
 source_ja: manuscript/part-03-harness/ch12-operating-model.md
 artifacts:
-  - docs/operating-model.md
-  - docs/metrics.md
-  - checklists/repo-hygiene.md
+  - docs/en/operating-model.md
+  - docs/en/metrics.md
+  - checklists/en/repo-hygiene.md
   - .github/pull_request_template.md
 dependencies:
   - ch09
@@ -34,7 +34,7 @@ This chapter defines the operating model for introducing AI agents into a team. 
 ### 5. Plan an adoption roadmap
 
 ## 1. Human Responsibilities That Remain
-Introducing AI agents does not remove human responsibility. It only removes part of the repetitive execution load. The repo's `docs/operating-model.md` already separates `Human` and `Agent` responsibilities, but five human responsibilities must stay explicit:
+Introducing AI agents does not remove human responsibility. It only removes part of the repetitive execution load. The repo's `docs/en/operating-model.md` already separates `Human` and `Agent` responsibilities, but five human responsibilities must stay explicit:
 
 1. deciding goals and priorities
 2. approving destructive or boundary-crossing changes
@@ -49,7 +49,7 @@ The common failure is to assume that if the agent can write code, it should also
 ## 2. Review Budget and Throughput
 The first bottleneck after AI-agent adoption is rarely implementation speed. It is review capacity. As generation speed rises, human review budget saturates quickly. If that limit is ignored, unread PRs accumulate, review quality drops, and post-merge regressions increase.
 
-CH12 does not treat throughput as “number of PRs.” `docs/metrics.md` frames it through `closed issues / week`, `PR cycle time`, and `draft-to-merge time`, together with review-budget usage. `docs/operating-model.md` makes the constraint concrete:
+CH12 does not treat throughput as “number of PRs.” `docs/en/metrics.md` frames it through `closed issues / week`, `PR cycle time`, and `draft-to-merge time`, together with review-budget usage. `docs/en/operating-model.md` makes the constraint concrete:
 
 - one reviewer should deeply review at most two PRs at a time
 - PRs that require an evidence bundle should be limited to one per reviewer at a time
@@ -59,12 +59,12 @@ The rule is simple: do not increase agent speed before protecting review flow. S
 ## 3. Repo Hygiene and AI Slop Control
 AI-agent operations accelerate good diffs and bad diffs at the same time. The accumulated low-quality residue is AI slop. It includes more than obvious bugs. It also includes stale docs, broken paths, orphaned task briefs, drift between verify scripts and the repo, terminology inconsistency, and long explanations that are no longer tied to real artifacts.
 
-`checklists/repo-hygiene.md` separates checks before merge from weekly cleanup. That split matters. A team cannot rely on “we will clean it up later” once agent throughput increases. Cleanup needs a cadence, owners, and explicit escalation conditions.
+`checklists/en/repo-hygiene.md` separates checks before merge from weekly cleanup. That split matters. A team cannot rely on “we will clean it up later” once agent throughput increases. Cleanup needs a cadence, owners, and explicit escalation conditions.
 
 Repo hygiene stays a human responsibility for that reason. An agent can detect candidate stale artifacts, but deciding which artifact still holds source-of-truth status often requires human judgment. In this chapter, hygiene does not mean aesthetics. It means keeping the repo safe for the next agent run.
 
 ## 4. Metrics and Retrospectives
-Metrics are not here to answer whether AI agents feel useful. They exist to show whether the operating model is healthy and where it is currently blocked. `docs/metrics.md` groups them into three sets:
+Metrics are not here to answer whether AI agents feel useful. They exist to show whether the operating model is healthy and where it is currently blocked. `docs/en/metrics.md` groups them into three sets:
 
 | Group | Example metrics | What they reveal |
 |---|---|---|
@@ -75,7 +75,7 @@ Metrics are not here to answer whether AI agents feel useful. They exist to show
 The critical rule is to attach action to each metric. If verify failure rate rises, the team should inspect task decomposition, briefs, or prompt quality. If PR cycle time grows, the team should inspect review budget. If stale docs count rises, the team should inspect hygiene cadence. Metrics should support operating-model adjustment, not blame allocation.
 
 ## 5. Plan an Adoption Roadmap
-AI-agent adoption is safer when rolled out in stages instead of across the entire repo at once. `docs/operating-model.md` already defines three stages:
+AI-agent adoption is safer when rolled out in stages instead of across the entire repo at once. `docs/en/operating-model.md` already defines three stages:
 
 1. `Pilot`
    - limit work to docs, tests, and scoped bugfixes
@@ -124,7 +124,7 @@ Consider a three-person team operating this repo.
 - reviewer
   - reviews the PR template output, verification, and evidence
 
-In this setup, one reviewer should hold at most two deep reviews at once. The operator must use `.github/pull_request_template.md` so that `Goal`, `Changed Files`, `Verification`, `Evidence / Approval`, and `Remaining Gaps` are always present. Every week, the team reviews `docs/metrics.md`. If `PR cycle time` grows, work packages are reduced further. If stale artifacts grow, `checklists/repo-hygiene.md` drives the entropy-cleanup pass.
+In this setup, one reviewer should hold at most two deep reviews at once. The operator must use `.github/pull_request_template.md` so that `Goal`, `Changed Files`, `Verification`, `Evidence / Approval`, and `Remaining Gaps` are always present. Every week, the team reviews `docs/en/metrics.md`. If `PR cycle time` grows, work packages are reduced further. If stale artifacts grow, `checklists/en/repo-hygiene.md` drives the entropy-cleanup pass.
 
 The point of this example is that adoption succeeds or fails based on whether roles and cadence are artifactized. CH12 is therefore an operations chapter, not a model-selection chapter.
 
@@ -133,13 +133,13 @@ The point of this example is that adoption succeeds or fails based on whether ro
 2. Create a weekly entropy cleanup checklist.
 
 ## Referenced Artifacts
-- `docs/operating-model.md`
-- `docs/metrics.md`
-- `checklists/repo-hygiene.md`
+- `docs/en/operating-model.md`
+- `docs/en/metrics.md`
+- `checklists/en/repo-hygiene.md`
 - `.github/pull_request_template.md`
 
 ## Source Notes / Further Reading
-- To revisit this chapter, start with `docs/operating-model.md`, `docs/metrics.md`, `checklists/repo-hygiene.md`, and `.github/pull_request_template.md`. Read adoption decisions through roles, review budget, cadence, and cleanup instead of through model comparisons.
+- To revisit this chapter, start with `docs/en/operating-model.md`, `docs/en/metrics.md`, `checklists/en/repo-hygiene.md`, and `.github/pull_request_template.md`. Read adoption decisions through roles, review budget, cadence, and cleanup instead of through model comparisons.
 - For the backmatter path, see `manuscript-en/backmatter/00-source-notes.md` under `### CH12 Operating Model and Organizational Adoption` and `manuscript-en/backmatter/01-reading-guide.md` under `## Verification, Reliability, and Operations`.
 
 ## Chapter Summary

@@ -4,9 +4,9 @@ title: Foundations of Context Engineering
 status: drafted
 source_ja: manuscript/part-02-context/ch05-context-fundamentals.md
 artifacts:
-  - docs/context-model.md
-  - docs/context-budget.md
-  - docs/context-risk-register.md
+  - docs/en/context-model.md
+  - docs/en/context-budget.md
+  - docs/en/context-risk-register.md
 dependencies:
   - ch01
   - ch02
@@ -34,14 +34,14 @@ Context Engineering is not about writing a better prompt. It is about deciding w
 ### 5. Prevent context poisoning and drift
 
 ## 1. Prompt Engineering Versus Context Engineering
-Prompt Contracts tell the AI agent what to do, what not to do, and what counts as done. CH02 examined `prompts/feature-contract.md`, and CH04 showed how to evaluate whether that contract behaves consistently. A strong contract still does not tell the agent where the current truth lives in the repo. It does not answer which spec is canonical, which test is the regression guard, or which previous decision is already fixed.
+Prompt Contracts tell the AI agent what to do, what not to do, and what counts as done. CH02 examined `prompts/en/feature-contract.md`, and CH04 showed how to evaluate whether that contract behaves consistently. A strong contract still does not tell the agent where the current truth lives in the repo. It does not answer which spec is canonical, which test is the regression guard, or which previous decision is already fixed.
 
 That is the job of Context Engineering. Context is the decision material an AI agent needs in order to execute the contract. It is not a decorative appendix to the prompt. For `FEATURE-001`, even if the objective says “improve ticket search according to the spec,” the agent still needs `sample-repo/docs/product-specs/ticket-search.md`, `sample-repo/docs/acceptance-criteria/ticket-search.md`, and `sample-repo/tests/test_ticket_search.py` in view. Without those artifacts, the word “spec” remains too vague to execute.
 
 The opposite mistake also fails. A large pile of docs and tests cannot compensate for a weak prompt. If the objective and completion criteria are missing, the agent has no clear stopping condition. Prompt Engineering and Context Engineering are not competing techniques. Prompt Engineering defines the work boundary. Context Engineering defines the decision material inside that boundary.
 
 ## 2. Persistent, Task, Session, and Tool Context
-`docs/context-model.md` divides context into four types. The value of this model is not taxonomy for its own sake. The real value is that each type has a different update rate, owner, and freshness requirement.
+`docs/en/context-model.md` divides context into four types. The value of this model is not taxonomy for its own sake. The real value is that each type has a different update rate, owner, and freshness requirement.
 
 - Persistent context: relatively stable repo rules such as `AGENTS.md`, architecture docs, glossary entries, and coding standards
 - Task context: issue-specific scope and done conditions such as the issue, task brief, product spec, ADR, and acceptance criteria
@@ -53,14 +53,14 @@ For `FEATURE-001`, `sample-repo/docs/architecture.md` is persistent context. `sa
 The separation matters because the update speed is different. Architecture docs do not change every session. Progress notes do. Verify output can become obsolete within minutes. Context Engineering treats those differences as design constraints rather than accidents.
 
 ## 3. Think in Context Budgets
-A context budget is not only about token limits. It is a design policy for what should stay verbatim, what should be summarized, and what should be dropped. `docs/context-budget.md` gives that policy explicitly: keep acceptance criteria, interface contracts, verify commands, and destructive-change constraints verbatim; summarize exploratory logs and comparison history; drop stale test output and expired hypotheses.
+A context budget is not only about token limits. It is a design policy for what should stay verbatim, what should be summarized, and what should be dropped. `docs/en/context-budget.md` gives that policy explicitly: keep acceptance criteria, interface contracts, verify commands, and destructive-change constraints verbatim; summarize exploratory logs and comparison history; drop stale test output and expired hypotheses.
 
 The reason for that split is practical. Anything that becomes dangerous when paraphrased should stay in its original wording. In `sample-repo/docs/acceptance-criteria/ticket-search.md`, the rule “return all tickets when the query is blank or only whitespace” should remain verbatim. By contrast, the historical reason why ranking became a non-goal can usually be summarized as long as the decision itself remains intact.
 
 Without a context budget, noisy artifacts pull attention away from the real contract. Long terminal logs and exploratory notes can overshadow current acceptance criteria simply because they are larger or more vivid. In practice, Context Engineering is less about accumulating information and more about declaring information priority.
 
 ## 4. Separate Stale Context from Live Context
-If stale context and live context are mixed together, the agent will use “correct yesterday, wrong today” information as if it were current evidence. `docs/context-model.md` treats architecture guidance as stale-safe and verify output as live for exactly this reason.
+If stale context and live context are mixed together, the agent will use “correct yesterday, wrong today” information as if it were current evidence. `docs/en/context-model.md` treats architecture guidance as stale-safe and verify output as live for exactly this reason.
 
 The operational rule is straightforward:
 
@@ -72,7 +72,7 @@ The operational rule is straightforward:
 In `FEATURE-001`, `sample-repo/docs/repo-map.md` and `sample-repo/docs/architecture.md` are safe entry points. `sample-repo/tasks/FEATURE-001-progress.md` is less stable. If the progress note says the last verify passed, that statement may already be obsolete by the next session. Restarting from the note alone is not enough. The safe action is to reread the note, then rerun verify if the current task depends on it.
 
 ## 5. Prevent Context Poisoning and Drift
-Context Engineering fails not only when information is missing, but also when the wrong information keeps circulating. `docs/context-risk-register.md` lists the main risks: stale docs, summary drift, instruction bloat, context poisoning, hidden done criteria, and tool spam.
+Context Engineering fails not only when information is missing, but also when the wrong information keeps circulating. `docs/en/context-risk-register.md` lists the main risks: stale docs, summary drift, instruction bloat, context poisoning, hidden done criteria, and tool spam.
 
 Three failure patterns appear often:
 
@@ -119,12 +119,12 @@ Comparison points:
 2. Write a policy that decides what to summarize and what to keep verbatim for a task like `FEATURE-001`.
 
 ## Referenced Artifacts
-- `docs/context-model.md`
-- `docs/context-budget.md`
-- `docs/context-risk-register.md`
+- `docs/en/context-model.md`
+- `docs/en/context-budget.md`
+- `docs/en/context-risk-register.md`
 
 ## Source Notes / Further Reading
-- When you need to revisit this chapter, treat `docs/context-model.md`, `docs/context-budget.md`, and `docs/context-risk-register.md` as the source of truth. Context Engineering is not a method for adding more text. It is a method for separating lifespan, authority, and refresh policy.
+- When you need to revisit this chapter, treat `docs/en/context-model.md`, `docs/en/context-budget.md`, and `docs/en/context-risk-register.md` as the source of truth. Context Engineering is not a method for adding more text. It is a method for separating lifespan, authority, and refresh policy.
 - For the next navigation step, see `manuscript-en/backmatter/00-source-notes.md` under `### CH05 Foundations of Context Engineering` and `manuscript-en/backmatter/01-reading-guide.md` under `## Context and Repo Design`.
 
 ## Chapter Summary

@@ -5,7 +5,7 @@ status: drafted
 source_ja: manuscript/part-03-harness/ch10-verification-harness.md
 artifacts:
   - .github/workflows/verify.yml
-  - checklists/verification.md
+  - checklists/en/verification.md
   - sample-repo/tests/test_ticket_search.py
   - artifacts/evidence/README.md
 dependencies:
@@ -41,7 +41,7 @@ This is why tests are not post-hoc explanation. They are executable specificatio
 ## 2. Order Lint, Typecheck, Unit, and E2E Checks
 A verification harness should be designed as an ordered pipeline, not as a bag of checks. In a larger system, the typical order is lint, typecheck, unit, integration, then e2e. The reason is practical: cheaper failures should stop the run before the expensive checks start.
 
-This repo is still a minimal scaffold, so the active verification line is mostly unit-test based. That does not reduce the value of defining the pipeline shape now. `checklists/verification.md` captures the verification order as a practical review checklist: confirm the guarded behavior, decide whether a failing test is needed, run local verify, reflect the same bar in CI, preserve evidence when required, and isolate the parts that still need human approval.
+This repo is still a minimal scaffold, so the active verification line is mostly unit-test based. That does not reduce the value of defining the pipeline shape now. `checklists/en/verification.md` captures the verification order as a practical review checklist: confirm the guarded behavior, decide whether a failing test is needed, run local verify, reflect the same bar in CI, preserve evidence when required, and isolate the parts that still need human approval.
 
 The benefit of explicit order is not just speed. It also improves diagnosis. A lint failure, a unit-test failure, and a missing evidence bundle are all verification failures, but they are not the same failure mode. The harness should make that visible.
 
@@ -81,7 +81,7 @@ In this chapter, approval is easiest to place in three moments:
 3. before merge
    - when the PR summary, verification section, and `Remaining Gaps` must still be checked for clarity
 
-`checklists/verification.md` carries these approval points in practical form. The goal is not to return all decisions to humans. The goal is to mechanize what can be checked and leave only the explicitly human judgments behind.
+`checklists/en/verification.md` carries these approval points in practical form. The goal is not to return all decisions to humans. The goal is to mechanize what can be checked and leave only the explicitly human judgments behind.
 
 ## Bad / Good Example
 Bad:
@@ -103,7 +103,7 @@ Then run `./scripts/verify-sample.sh` locally.
 Let `.github/workflows/verify.yml` rerun the same bar in CI.
 If the change is UI-visible, create an evidence bundle using
 `artifacts/evidence/README.md`.
-Use `checklists/verification.md` to separate approval-required points.
+Use `checklists/en/verification.md` to separate approval-required points.
 ```
 
 This version treats tests, local verify, CI, evidence, and approval as one harness.
@@ -131,7 +131,7 @@ The worked example matters because it shows that a verification harness is not �
 | local verify | whether the minimum local bar passes | `./scripts/verify-sample.sh` | whether the bar is fast enough for iteration |
 | CI | whether the same bar is reproducible on the branch | `.github/workflows/verify.yml` | whether local and shared verification still match |
 | evidence | whether a reviewer can re-check the visible change | `artifacts/evidence/README.md` | whether required artifacts and rationale are explicit |
-| approval | whether only human-owned judgments remain | `checklists/verification.md` | whether non-automated decisions are isolated clearly |
+| approval | whether only human-owned judgments remain | `checklists/en/verification.md` | whether non-automated decisions are isolated clearly |
 
 This table keeps the verification harness from collapsing into “the test chapter.” It starts with an executable guard, continues through local and shared verification, and ends with evidence and approval for review-readiness.
 
@@ -141,12 +141,12 @@ This table keeps the verification harness from collapsing into “the test chapt
 
 ## Referenced Artifacts
 - `.github/workflows/verify.yml`
-- `checklists/verification.md`
+- `checklists/en/verification.md`
 - `sample-repo/tests/test_ticket_search.py`
 - `artifacts/evidence/README.md`
 
 ## Source Notes / Further Reading
-- To revisit this chapter, start with `.github/workflows/verify.yml`, `checklists/verification.md`, `sample-repo/tests/test_ticket_search.py`, and `artifacts/evidence/README.md`. Read the verification harness as a flow across tests, CI, evidence, and approval rather than as a single command.
+- To revisit this chapter, start with `.github/workflows/verify.yml`, `checklists/en/verification.md`, `sample-repo/tests/test_ticket_search.py`, and `artifacts/evidence/README.md`. Read the verification harness as a flow across tests, CI, evidence, and approval rather than as a single command.
 - For the backmatter path, see `manuscript-en/backmatter/00-source-notes.md` under `### CH10 Build a Verification Harness` and `manuscript-en/backmatter/01-reading-guide.md` under `## Verification, Reliability, and Operations`.
 
 ## Chapter Summary

@@ -18,6 +18,6 @@ Provide the English appendix structure for verification, restart, and permission
 - `templates/verify-checklist.md`
 - `templates/restart-protocol.md`
 - `templates/permission-policy.md`
-- `checklists/verification.md`
+- `checklists/en/verification.md`
 - `sample-repo/docs/harness/restart-protocol.md`
 - `sample-repo/docs/harness/permission-policy.md`

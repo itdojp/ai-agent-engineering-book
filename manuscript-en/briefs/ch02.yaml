@@ -18,9 +18,9 @@ exercises:
   - Rewrite “add search” as a contract prompt.
   - Make `done` explicit for a bugfix task in five points.
 artifacts:
-  - prompts/bugfix-contract.md
-  - prompts/feature-contract.md
-  - checklists/prompt-contract-review.md
+  - prompts/en/bugfix-contract.md
+  - prompts/en/feature-contract.md
+  - checklists/en/prompt-contract-review.md
 acceptance_criteria:
   - The chapter follows the standard chapter contract
   - It includes at least one bad / good example pair

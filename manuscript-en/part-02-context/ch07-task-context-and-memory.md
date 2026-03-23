@@ -6,7 +6,7 @@ source_ja: manuscript/part-02-context/ch07-task-context-and-memory.md
 artifacts:
   - sample-repo/tasks/FEATURE-001-brief.md
   - sample-repo/tasks/FEATURE-001-progress.md
-  - docs/session-memory-policy.md
+  - docs/en/session-memory-policy.md
   - .github/ISSUE_TEMPLATE/task.yml
 dependencies:
   - ch05
@@ -45,7 +45,7 @@ Two rules matter during the conversion:
 If the brief restates the whole repo, it becomes noisy. If it omits verification or out-of-scope boundaries, the coding agent can stop after a plausible partial change and still claim progress.
 
 ## 2. Format a Progress Note
-If the task brief is the stable task context, the Progress Note is the mutable session context. `sample-repo/tasks/FEATURE-001-progress.md` and `docs/session-memory-policy.md` define the required fields: `Current Goal`, `Completed`, `Decided`, `Open Questions`, `Changed Files`, `Last Verify`, `Resume Steps`, and `Next Step`. `Status` can exist as a quick scan aid, but it is not the source of truth.
+If the task brief is the stable task context, the Progress Note is the mutable session context. `sample-repo/tasks/FEATURE-001-progress.md` and `docs/en/session-memory-policy.md` define the required fields: `Current Goal`, `Completed`, `Decided`, `Open Questions`, `Changed Files`, `Last Verify`, `Resume Steps`, and `Next Step`. `Status` can exist as a quick scan aid, but it is not the source of truth.
 
 The purpose of this format is not to preserve every step of exploration. Its purpose is to let the next session resume without rereading the full chat log. That means the Progress Note should only record what changed in this session:
 
@@ -56,7 +56,7 @@ The purpose of this format is not to preserve every step of exploration. Its pur
 The most common mistake is to paste brief content into the Progress Note. Goal, constraints, and acceptance criteria already belong in the task brief. The Progress Note should record session delta, not duplicate stable context.
 
 ## 3. Design Handoff and Resume
-Good handoff is not a long narrative. It is a restart procedure. `docs/session-memory-policy.md` defines the minimum resume packet as four items:
+Good handoff is not a long narrative. It is a restart procedure. `docs/en/session-memory-policy.md` defines the minimum resume packet as four items:
 
 1. the task brief
 2. the latest Progress Note
@@ -144,11 +144,11 @@ Comparison points:
 ## Referenced Artifacts
 - `sample-repo/tasks/FEATURE-001-brief.md`
 - `sample-repo/tasks/FEATURE-001-progress.md`
-- `docs/session-memory-policy.md`
+- `docs/en/session-memory-policy.md`
 - `.github/ISSUE_TEMPLATE/task.yml`
 
 ## Source Notes / Further Reading
-- To revisit this chapter quickly, start with `sample-repo/tasks/FEATURE-001-brief.md`, `sample-repo/tasks/FEATURE-001-progress.md`, and `docs/session-memory-policy.md`. These three artifacts show the boundary between stable task context and mutable session context.
+- To revisit this chapter quickly, start with `sample-repo/tasks/FEATURE-001-brief.md`, `sample-repo/tasks/FEATURE-001-progress.md`, and `docs/en/session-memory-policy.md`. These three artifacts show the boundary between stable task context and mutable session context.
 - For the backmatter navigation path, see `manuscript-en/backmatter/00-source-notes.md` under `### CH07 Task Context and Session Memory` and `manuscript-en/backmatter/01-reading-guide.md` under `## Context and Repo Design`.
 
 ## Chapter Summary

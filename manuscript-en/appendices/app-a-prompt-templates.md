@@ -27,7 +27,7 @@ Each section has a distinct job.
 - `Completion Criteria`: define done in words that can be verified
 - `Output Format`: fix the final report headings so review is faster and more consistent
 
-In practice, `prompts/bugfix-contract.md` and `prompts/feature-contract.md` are the worked examples. The `Objective` and `Completion Criteria` differ by task type, but the contract structure stays stable. First fix the structure, then fill only the task-specific differences.
+In practice, `prompts/en/bugfix-contract.md` and `prompts/en/feature-contract.md` are the worked examples. The `Objective` and `Completion Criteria` differ by task type, but the contract structure stays stable. First fix the structure, then fill only the task-specific differences.
 
 A minimal fill looks like this:
 
@@ -104,5 +104,5 @@ Appendix A stays within Prompt Engineering. Repo-wide reading order, task histor
 - `templates/prompt-rubric.md`
 - `templates/en/prompt-contract.md`
 - `templates/en/prompt-rubric.md`
-- `prompts/bugfix-contract.md`
-- `prompts/feature-contract.md`
+- `prompts/en/bugfix-contract.md`
+- `prompts/en/feature-contract.md`

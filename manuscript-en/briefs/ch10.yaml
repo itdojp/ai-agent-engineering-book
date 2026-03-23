@@ -19,7 +19,7 @@ exercises:
   - Create an evidence bundle for a UI change.
 artifacts:
   - .github/workflows/verify.yml
-  - checklists/verification.md
+  - checklists/en/verification.md
   - sample-repo/tests/test_ticket_search.py
   - artifacts/evidence/README.md
 acceptance_criteria:

@@ -21,7 +21,7 @@ exercises:
 artifacts:
   - sample-repo/tasks/FEATURE-001-brief.md
   - sample-repo/tasks/FEATURE-001-progress.md
-  - docs/session-memory-policy.md
+  - docs/en/session-memory-policy.md
   - .github/ISSUE_TEMPLATE/task.yml
 acceptance_criteria:
   - The chapter follows the standard chapter contract

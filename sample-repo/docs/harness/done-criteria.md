@@ -5,7 +5,7 @@
 - 変更ファイルが current issue / work package の範囲に収まっている
 - code、docs、tests、task artifact の間に drift がない
 - `./scripts/verify-sample.sh` が通っている
-- `Changed Files`、`Verification`、`Remaining Risk` を報告できる
+- `Changed Files`、`Verification`、`Remaining Gaps` を報告できる
 
 ## Bugfix Addendum
 - failing behavior を test で再現した、または既存 test で回帰 guard を確認した

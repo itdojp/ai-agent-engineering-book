@@ -9,6 +9,7 @@
 - `Prompt Contract`、`Progress Note`、`verification harness` の固有表記がぶれていないか
 - 各章の `Source Notes / Further Reading` が `manuscript/backmatter/00-source-notes.md` と矛盾していないか
 - `manuscript/backmatter/00-source-notes.md` が CH01-CH12 を取りこぼしていないか
+- 出力契約の最終項目が `Remaining Gaps` に揃っているか
 
 ## Weekly Cleanup
 - orphaned task brief がないか

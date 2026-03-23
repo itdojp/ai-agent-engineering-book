@@ -44,7 +44,7 @@ This is also where CH08 must stay distinct from CH02. A `Prompt Contract` fixes 
 Not every recurring thought deserves a skill. “Think about whether `FEATURE-001` should add ranking” is still a one-off design question. A workflow should become a skill only when reuse cost is lower than repeated rediscovery cost. Common candidates are chapter drafting, issue-to-plan conversion, verification, and review.
 
 ## 2. Structure a `SKILL.md`
-A useful `SKILL.md` is not a slogan. It is an operational contract. In this repo, `.agents/skills/draft-chapter/SKILL.md`, `.agents/skills/review-chapter/SKILL.md`, `sample-repo/.agents/skills/issue-to-plan/SKILL.md`, and `sample-repo/.agents/skills/verification/SKILL.md` all define a stable purpose, an activation condition, required inputs or read order, a workflow, an output contract, and guardrails.
+A useful `SKILL.md` is not a slogan. It is an operational contract. In this repo, `.agents/skills/draft-chapter/SKILL.md`, `.agents/skills/review-chapter/SKILL.md`, `sample-repo/.agents/skills/issue-to-plan/SKILL.md`, and `sample-repo/.agents/skills/verification/SKILL.md` illustrate a common structure: they define a stable purpose and activation condition, and together they show how to capture required inputs or read order, a workflow, an output contract, and guardrails, even when section names vary by skill.
 
 That structure matters because each section answers a different operational question:
 

@@ -34,7 +34,7 @@ This chapter explains how to divide work among `AGENTS.md`, a repo map, an archi
 ### 5. Build instruction layering for Codex CLI
 
 ## 1. `AGENTS.md` Is a Map, Not an Encyclopedia
-`AGENTS.md` should not try to explain the entire repo. Its job is to tell the AI agent what must not be violated, what to read next, and which artifacts matter first. In this repo, the root [`AGENTS.md`](AGENTS.md) keeps only the repo-wide invariants, while [`manuscript/AGENTS.md`](manuscript/AGENTS.md) and [`sample-repo/AGENTS.md`](sample-repo/AGENTS.md) carry the local detail for their own areas.
+`AGENTS.md` should not try to explain the entire repo. Its job is to tell the AI agent what must not be violated, what to read next, and which artifacts matter first. In this repo, the root `AGENTS.md` keeps only the repo-wide invariants, while `manuscript-en/AGENTS.md` and `sample-repo/AGENTS.md` carry the local detail for their own areas.
 
 That split matters because a root file that contains everything mixes unrelated detail into every task. A manuscript-only edit does not need the sample domain rules every time. A sample-repo code change cares more about verify commands and domain constraints than about prose style for book chapters. Layering lets the agent read only the detail that belongs to the current directory.
 

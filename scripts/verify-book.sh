@@ -23,6 +23,8 @@ required=(
   "manuscript/backmatter/01-読書案内.md"
   "manuscript/backmatter/02-索引seed.md"
   "manuscript/backmatter/03-図表一覧方針.md"
+  "manuscript-en/front-matter/00-introduction.md"
+  "manuscript-en/front-matter/01-how-to-read-this-book.md"
   "manuscript-en/backmatter/00-source-notes.md"
   "manuscript-en/backmatter/01-reading-guide.md"
   "manuscript-en/backmatter/02-index-seed.md"
@@ -30,6 +32,9 @@ required=(
   "manuscript/part-01-prompt/part-opener.md"
   "manuscript/part-02-context/part-opener.md"
   "manuscript/part-03-harness/part-opener.md"
+  "manuscript-en/part-01-prompt/part-opener.md"
+  "manuscript-en/part-02-context/part-opener.md"
+  "manuscript-en/part-03-harness/part-opener.md"
   "sample-repo/AGENTS.md"
   ".github/ISSUE_TEMPLATE/task.yml"
   "issue-drafts/manifest.json"
@@ -74,6 +79,10 @@ required_frontmatter = {
     "manuscript/front-matter/00-はじめに.md": ["## 本書の約束", "## 想定読者", "## 想定しない読者"],
     "manuscript/front-matter/01-本書の読み方.md": ["## 3部構成", "## 3つの読み進め方", "## 読み終わりの到達点"],
 }
+required_frontmatter_en = {
+    "front-matter/00-introduction.md": ["## What This Book Promises", "## Intended Reader", "## Not the Intended Reader"],
+    "front-matter/01-how-to-read-this-book.md": ["## Three-Part Structure", "## Three Ways to Read This Book", "## What You Should Be Able to Do by the End"],
+}
 required_backmatter = {
     "manuscript/backmatter/00-source-notes.md": ["## この後付けの役割", "## Source Policy", "## 章別 Source Notes"],
     "manuscript/backmatter/01-読書案内.md": ["## 使い方", "## Prompt と要求定義", "## 検証・信頼性・運用"],
@@ -90,6 +99,17 @@ required_part_openers = {
     "manuscript/part-01-prompt/part-opener.md": required_part_opener_sections,
     "manuscript/part-02-context/part-opener.md": required_part_opener_sections,
     "manuscript/part-03-harness/part-opener.md": required_part_opener_sections,
+}
+required_part_opener_sections_en = [
+    "## Role of This Part",
+    "## Artifacts Added in This Part",
+    "## Chapter Map",
+    "## What You Should Be Able to Do by the End of This Part",
+]
+required_part_openers_en = {
+    "part-01-prompt/part-opener.md": required_part_opener_sections_en,
+    "part-02-context/part-opener.md": required_part_opener_sections_en,
+    "part-03-harness/part-opener.md": required_part_opener_sections_en,
 }
 required_sections_en = ["## Learning Objectives", "## Outline", "## Exercises", "## Referenced Artifacts", "## Source Notes / Further Reading"]
 required_backmatter_en = {
@@ -219,6 +239,20 @@ def check_english_root_artifact_refs(en_root: Path):
                 raise SystemExit(f"English manuscript still points to Japanese root artifact {ref}: {rel}")
 
 
+def check_english_reader_entry(en_root: Path):
+    for rel, sections in required_frontmatter_en.items():
+        text = (en_root / rel).read_text(encoding="utf-8")
+        missing = [item for item in sections if item not in text]
+        if missing:
+            raise SystemExit(f"English front matter manuscript-en/{rel} missing sections: {', '.join(missing)}")
+
+    for rel, sections in required_part_openers_en.items():
+        text = (en_root / rel).read_text(encoding="utf-8")
+        missing = [item for item in sections if item not in text]
+        if missing:
+            raise SystemExit(f"English part opener manuscript-en/{rel} missing sections: {', '.join(missing)}")
+
+
 def check_english_scaffold(target: str):
     en_root = root / "manuscript-en"
     if not en_root.exists():
@@ -237,6 +271,7 @@ def check_english_scaffold(target: str):
     if [p.stem for p in ja_app] != [p.stem for p in en_app]:
         raise SystemExit("English appendix briefs do not match Japanese appendix briefs")
 
+    check_english_reader_entry(en_root)
     check_english_backmatter(en_root)
     check_english_root_artifact_refs(en_root)
 

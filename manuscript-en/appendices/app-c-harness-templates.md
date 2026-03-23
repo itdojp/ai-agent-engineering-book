@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Harness Engineering is the move from “let the agent do the work” to “let the agent complete, stop, and restart work safely.” Tests alone are not enough. The verify order, permission boundary, and restart conditions also need to be fixed as artifacts.
+Harness Engineering is the move from "let the agent do the work" to "let the agent complete, stop, and restart work safely." Tests alone are not enough. The verify order, permission boundary, and restart conditions also need to be fixed as artifacts.
 
 This appendix reorganizes the harness artifacts reused across CH09 through CH12 into a form that can be applied again. The same foundations support both single-agent work and long-running tasks: define how far autonomy goes, where the worker must stop, and what must be read before work resumes.
 
@@ -25,7 +25,7 @@ The recommended flow has three stages.
 - `During Change`: keep the diff to one work package, check for missing doc or task-artifact updates, and classify verify failures correctly
 - `Before Review`: confirm local verify, CI alignment, evidence-bundle needs, and whether human approval is required
 
-`checklists/verification.md` is the concrete example inside this repo. The checklist becomes more useful when it stays short enough that reviewers actually reread it before merge.
+`checklists/en/verification.md` is the concrete example inside this repo. The checklist becomes more useful when it stays short enough that reviewers actually reread it before merge.
 
 ## 2. Restart Protocol Template
 
@@ -76,6 +76,6 @@ A passing test suite is necessary, but it is not sufficient. Evidence may still 
 - `templates/en/verify-checklist.md`
 - `templates/en/restart-protocol.md`
 - `templates/en/permission-policy.md`
-- `checklists/verification.md`
+- `checklists/en/verification.md`
 - `sample-repo/docs/harness/restart-protocol.md`
 - `sample-repo/docs/harness/permission-policy.md`

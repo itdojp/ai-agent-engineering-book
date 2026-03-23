@@ -8,6 +8,14 @@ required=(
   "AGENTS.md"
   "README.md"
   "docs/glossary.md"
+  "docs/en/README.md"
+  "docs/en/glossary.md"
+  "docs/en/context-model.md"
+  "docs/en/context-budget.md"
+  "docs/en/context-risk-register.md"
+  "docs/en/session-memory-policy.md"
+  "docs/en/operating-model.md"
+  "docs/en/metrics.md"
   "manuscript/AGENTS.md"
   "manuscript/front-matter/00-はじめに.md"
   "manuscript/front-matter/01-本書の読み方.md"
@@ -34,6 +42,13 @@ required=(
   "sample-repo/AGENTS.md"
   ".github/ISSUE_TEMPLATE/task.yml"
   "issue-drafts/manifest.json"
+  "prompts/en/README.md"
+  "prompts/en/bugfix-contract.md"
+  "prompts/en/feature-contract.md"
+  "checklists/en/README.md"
+  "checklists/en/prompt-contract-review.md"
+  "checklists/en/verification.md"
+  "checklists/en/repo-hygiene.md"
   "scripts/bootstrap-github.sh"
   "scripts/create-issues.py"
   "scripts/verify-sample.sh"
@@ -107,6 +122,19 @@ required_backmatter_en = {
     "manuscript-en/backmatter/02-index-seed.md": ["## How to Use This Seed", "## Index Seed"],
     "manuscript-en/backmatter/03-figure-table-list-policy.md": ["## Role", "## Figure List Policy", "## Table List Policy"],
 }
+forbidden_english_root_refs = [
+    "docs/context-model.md",
+    "docs/context-budget.md",
+    "docs/context-risk-register.md",
+    "docs/session-memory-policy.md",
+    "docs/operating-model.md",
+    "docs/metrics.md",
+    "prompts/bugfix-contract.md",
+    "prompts/feature-contract.md",
+    "checklists/prompt-contract-review.md",
+    "checklists/verification.md",
+    "checklists/repo-hygiene.md",
+]
 required_figure_readme_en = {
     "manuscript-en/figures/README.md": ["## Source Of Truth", "## Update Policy", "## Print / Ebook Rule"],
     "manuscript-en/figures/figure-plan.md": ["| Figure ID | Chapter | Suggested Placement | Caption | Reader Value | Source |", "`fig-01`", "`fig-07`"],
@@ -217,7 +245,14 @@ def check_english_backmatter(en_root: Path):
         if heading not in source_notes:
             raise SystemExit(f"English source notes missing chapter heading: {heading}")
 
-
+def check_english_root_artifact_refs(en_root: Path):
+    scan_paths = sorted(en_root.rglob("*.md")) + sorted((en_root / "briefs").glob("*.yaml"))
+    for path in scan_paths:
+        text = path.read_text(encoding="utf-8")
+        for ref in forbidden_english_root_refs:
+            if ref in text:
+                rel = path.relative_to(root)
+                raise SystemExit(f"English manuscript still points to Japanese root artifact {ref}: {rel}")
 def check_english_figures(en_root: Path):
     for rel, sections in required_figure_readme_en.items():
         text = (root / rel).read_text(encoding="utf-8")
@@ -235,8 +270,6 @@ def check_english_figures(en_root: Path):
         raise SystemExit("English figure/table policy still points to Japanese figure sources")
     if "manuscript-en/figures/figure-plan.md" not in figure_backmatter:
         raise SystemExit("English figure/table policy is missing manuscript-en figure-plan reference")
-
-
 def check_english_reader_entry(en_root: Path):
     for rel, sections in required_frontmatter_en.items():
         text = (en_root / rel).read_text(encoding="utf-8")
@@ -270,6 +303,7 @@ def check_english_scaffold(target: str):
 
     check_english_reader_entry(en_root)
     check_english_backmatter(en_root)
+    check_english_root_artifact_refs(en_root)
     check_english_figures(en_root)
 
     if target:

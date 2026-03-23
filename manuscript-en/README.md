@@ -7,6 +7,7 @@ This directory holds the English manuscript counterpart for the book. The Englis
 - Mirror the Japanese front matter, chapter, appendix, backmatter, and figure layout
 - Keep one English brief for every Japanese brief
 - Keep one English counterpart for every Japanese reader-facing artifact
+- Keep the English support-artifact surfaces under `docs/en/`, `prompts/en/`, `checklists/en/`, `templates/en/`, and `artifacts/en/` aligned with the Japanese source
 - Track parity status in `manuscript-en/STATUS.md`
 
 ## Directory Layout
@@ -29,12 +30,12 @@ manuscript-en/
 1. The Japanese manuscript remains the source for structure and artifact references.
 2. The English manuscript must preserve the same chapter ids, appendix ids, and referenced artifacts.
 3. Each English file should identify its Japanese source in `## Parity Notes` when the file contract requires it.
-4. When the Japanese manuscript changes structure or artifacts, the English counterpart and `manuscript-en/STATUS.md` must be updated in the same issue.
+4. When the Japanese manuscript or a reader-facing support artifact changes structure or artifacts, the English counterpart and `manuscript-en/STATUS.md` must be updated in the same issue.
 
 ## Editing Workflow
 
 1. Read the matching Japanese brief and chapter.
 2. Update the English brief first if scope changes.
-3. Update the English counterpart, draft, or reader-entry artifact.
+3. Update the English counterpart, draft, or reader-entry artifact, including support artifacts when the chapter depends on them.
 4. Update `manuscript-en/STATUS.md` if parity status changes.
 5. Run `./scripts/verify-book.sh`.

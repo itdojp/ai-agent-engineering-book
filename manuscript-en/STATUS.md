@@ -27,6 +27,11 @@
 | Front Matter | `manuscript/front-matter/` | `manuscript-en/front-matter/` | drafted |
 | Backmatter | `manuscript/backmatter/` | `manuscript-en/backmatter/` | drafted |
 | Figures | `manuscript/figures/` | `manuscript-en/figures/` | drafted |
+| Docs Counterparts | `docs/` | `docs/en/` | drafted |
+| Prompt Counterparts | `prompts/` | `prompts/en/` | drafted |
+| Checklist Counterparts | `checklists/` | `checklists/en/` | drafted |
+| Template Counterparts | `templates/` | `templates/en/` | drafted |
+| Shared Artifact Counterparts | `artifacts/` | `artifacts/en/` | drafted |
 
 ## Status Meanings
 

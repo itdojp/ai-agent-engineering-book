@@ -42,9 +42,11 @@ done
 grep -q "AIエージェント実践" "$OUT/index.html"
 grep -q "book-layout" "$OUT/index.html"
 grep -q "CH01 から読む" "$OUT/index.html"
+grep -q "AI Agent Engineering in Practice" "$OUT/en/index.html"
 grep -q "Start with CH01" "$OUT/en/index.html"
 grep -q "AIエージェントはどこで失敗するか" "$OUT/chapters/ch01/index.html"
 grep -q "Chapter 1" "$OUT/en/chapters/ch01/index.html"
+grep -q "Where AI Agents Fail - AI Agent Engineering in Practice" "$OUT/en/chapters/ch01/index.html"
 grep -q 'meta name="author" content="株式会社アイティードゥ"' "$OUT/index.html"
 grep -q 'link rel="canonical" href="https://itdojp.github.io/ai-agent-engineering-book/"' "$OUT/index.html"
 grep -q 'meta property="og:title"' "$OUT/index.html"
@@ -53,8 +55,15 @@ grep -q 'link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg"' 
 grep -q 'meta name="author" content="株式会社アイティードゥ"' "$OUT/en/index.html"
 grep -q 'link rel="canonical" href="https://itdojp.github.io/ai-agent-engineering-book/en/"' "$OUT/en/index.html"
 grep -q 'meta property="og:title"' "$OUT/en/index.html"
+grep -q 'meta property="og:site_name" content="AI Agent Engineering in Practice: Prompt / Context / Harness Engineering"' "$OUT/en/index.html"
 grep -q 'meta name="twitter:card" content="summary"' "$OUT/en/index.html"
 grep -q 'link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg"' "$OUT/en/index.html"
+
+if grep -q "AIエージェント実践" "$OUT/en/index.html" || \
+   grep -q "AIエージェント実践" "$OUT/en/chapters/ch01/index.html"; then
+  echo "english pages still expose the Japanese book title"
+  exit 1
+fi
 
 if grep -q 'book-toc-panel' "$OUT/chapters/ch01/index.html" || \
    grep -q 'book-toc-panel' "$OUT/en/chapters/ch01/index.html"; then

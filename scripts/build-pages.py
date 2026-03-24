@@ -15,7 +15,6 @@ import markdown
 ROOT = Path(__file__).resolve().parents[1]
 REPO_URL = "https://github.com/itdojp/ai-agent-engineering-book"
 PAGES_BASE_URL = "https://itdojp.github.io/ai-agent-engineering-book"
-SITE_TITLE = "AIエージェント実践: Prompt / Context / Harness Engineering"
 SITE_AUTHOR = "株式会社アイティードゥ"
 FORMATTER_ASSETS = ROOT / "site-assets" / "formatter"
 FAVICON_ASSET = ROOT / "site-assets" / "favicon.svg"
@@ -52,6 +51,7 @@ class Page:
 
 BOOK_SPECS = {
     "ja": {
+        "book_title": "AIエージェント実践: Prompt / Context / Harness Engineering",
         "label": "日本語版",
         "lang_attr": "ja",
         "root": ROOT / "manuscript",
@@ -80,6 +80,7 @@ BOOK_SPECS = {
         "home_kicker": "IT Engineer Knowledge Architecture Series",
     },
     "en": {
+        "book_title": "AI Agent Engineering in Practice: Prompt / Context / Harness Engineering",
         "label": "English Edition",
         "lang_attr": "en",
         "root": ROOT / "manuscript-en",
@@ -108,6 +109,10 @@ BOOK_SPECS = {
         "home_kicker": "IT Engineer Knowledge Architecture Series",
     },
 }
+
+
+def book_title(language: str) -> str:
+    return BOOK_SPECS[language]["book_title"]
 
 
 def parse_args() -> argparse.Namespace:
@@ -265,8 +270,8 @@ def rel_link(from_rel: Path, to_rel: Path) -> str:
 
 def page_title(page: Page) -> str:
     if page.page_kind == "home" and page.language == "ja":
-        return SITE_TITLE
-    return f"{page.title} - {SITE_TITLE}"
+        return book_title(page.language)
+    return f"{page.title} - {book_title(page.language)}"
 
 
 def page_description(page: Page) -> str:
@@ -323,7 +328,7 @@ def render_nav(pages: list[Page], current: Page, counterpart: Page | None) -> st
     return (
         "<div class=\"sidebar-content\">"
         "<div class=\"book-info\">"
-        f"<h2 class=\"book-title\">{html.escape(SITE_TITLE)}</h2>"
+        f"<h2 class=\"book-title\">{html.escape(book_title(current.language))}</h2>"
         f"<p class=\"book-subtitle\">{html.escape(spec['sidebar_subtitle'])}</p>"
         "</div>"
         "<div class=\"toc\">"
@@ -356,7 +361,7 @@ def render_lead(page: Page, counterpart: Page | None, first_chapter: Page) -> st
         return (
             "<section class=\"book-home-lead\">"
             f"<p class=\"page-kicker\">{html.escape(spec['home_kicker'])}</p>"
-            f"<h1>{html.escape(SITE_TITLE)}</h1>"
+            f"<h1>{html.escape(book_title(page.language))}</h1>"
             f"<p class=\"page-deck\">{html.escape(spec['home_summary'])}</p>"
             f"<div class=\"lead-actions\">{''.join(actions)}</div>"
             "</section>"
@@ -431,7 +436,7 @@ def page_chrome(page: Page, body: str, current_search_placeholder: str) -> str:
         f"<meta property=\"og:description\" content=\"{html.escape(page_desc)}\">"
         "<meta property=\"og:type\" content=\"website\">"
         f"<meta property=\"og:url\" content=\"{html.escape(page_url)}\">"
-        f"<meta property=\"og:site_name\" content=\"{html.escape(SITE_TITLE)}\">"
+        f"<meta property=\"og:site_name\" content=\"{html.escape(book_title(page.language))}\">"
         "<meta name=\"twitter:card\" content=\"summary\">"
         f"<meta name=\"twitter:title\" content=\"{html.escape(title)}\">"
         f"<meta name=\"twitter:description\" content=\"{html.escape(page_desc)}\">"
@@ -456,7 +461,7 @@ def page_chrome(page: Page, body: str, current_search_placeholder: str) -> str:
         "<line x1=\"3\" y1=\"18\" x2=\"21\" y2=\"18\"></line>"
         "</svg>"
         "</button>"
-        f"<a href=\"{html.escape(rel_link(page.output_rel, Path('index.html') if page.language == 'ja' else Path('en') / 'index.html'))}\" class=\"header-title\"><h1>{html.escape(SITE_TITLE)}</h1></a>"
+        f"<a href=\"{html.escape(rel_link(page.output_rel, Path('index.html') if page.language == 'ja' else Path('en') / 'index.html'))}\" class=\"header-title\"><h1>{html.escape(book_title(page.language))}</h1></a>"
         "</div>"
         "<div class=\"header-center\">"
         "<div class=\"search-container\">"

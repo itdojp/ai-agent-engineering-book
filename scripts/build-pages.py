@@ -530,14 +530,6 @@ def render_page(
     spec = BOOK_SPECS[page.language]
     first_chapter = next(candidate for candidate in pages if candidate.page_kind == "chapter")
     sidebar_html = render_nav(pages, page, counterpart)
-    toc_panel = (
-        "<aside class=\"book-toc-panel\">"
-        f"<h3>{html.escape(spec['toc_title'])}</h3>"
-        f"{page.toc_html}"
-        "</aside>"
-        if page.toc_html
-        else ""
-    )
     footer = (
         "<footer class=\"book-footer\" role=\"contentinfo\">"
         "<div class=\"book-footer-inner\">"
@@ -559,7 +551,6 @@ def render_page(
         f"{render_lead(page, counterpart, first_chapter)}"
         f"{page.body_html}"
         "</article>"
-        f"{toc_panel}"
         f"{render_pager(page, previous_page, next_page)}"
         f"{footer}"
         "</div>"

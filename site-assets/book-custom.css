@@ -89,25 +89,6 @@
     color: var(--text-primary);
 }
 
-.book-toc-panel {
-    margin: 0 0 2rem;
-    padding: 1.25rem 1.5rem;
-    background: var(--bg-primary);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-}
-
-.book-toc-panel h3 {
-    margin-top: 0;
-    margin-bottom: 0.75rem;
-    font-size: 1rem;
-}
-
-.book-toc-panel ul {
-    margin: 0;
-    padding-left: 1.2rem;
-}
-
 .book-navigation {
     margin: 2rem 0 0;
     padding-top: 1.5rem;

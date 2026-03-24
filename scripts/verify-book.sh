@@ -61,7 +61,14 @@ required=(
   "scripts/verify-pages.sh"
   "scripts/verify-sample.sh"
   "requirements-pages.txt"
-  "site-assets/book.css"
+  "site-assets/book-custom.css"
+  "site-assets/formatter/README.md"
+  "site-assets/formatter/css/main.css"
+  "site-assets/formatter/css/mobile-responsive.css"
+  "site-assets/formatter/css/syntax-highlighting.css"
+  "site-assets/formatter/js/code-copy-lightweight.js"
+  "site-assets/formatter/js/search.js"
+  "site-assets/formatter/js/theme.js"
 )
 
 for path in "${required[@]}"; do

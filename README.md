@@ -25,7 +25,7 @@ evals/         # Prompt 評価用ファイル
 artifacts/     # `artifacts/evidence/` と `artifacts/en/` を含む共有 artifact
 .agents/       # Codex 向け skills
 scripts/       # verify / GitHub bootstrap 用スクリプト
-site-assets/   # GitHub Pages 公開用 asset
+site-assets/   # book-formatter shared assets と Pages 用 custom CSS
 templates/     # 日本語版で参照する再利用テンプレート
 templates/en/  # 英語版テンプレート
 issue-drafts/  # GitHub issue 作成用の草案と manifest
@@ -50,7 +50,7 @@ issue-drafts/  # GitHub issue 作成用の草案と manifest
 ## 参照
 
 - `docs/codex-runbook.md`: Codex への投入単位と推奨プロンプト
-- `docs/pages-publishing.md`: GitHub Pages 公開の build / deploy 運用
+- `docs/pages-publishing.md`: GitHub Pages 公開の build / deploy 運用と book-formatter 連携方針
 - `manuscript/README.md`: 原稿構成と標準章テンプレート
 - `manuscript-en/README.md`: 英語版原稿の構成と parity ルール
 - `sample-repo/README.md`: サンプル実装の前提

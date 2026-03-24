@@ -56,7 +56,8 @@ grep -q 'meta property="og:title"' "$OUT/en/index.html"
 grep -q 'meta name="twitter:card" content="summary"' "$OUT/en/index.html"
 grep -q 'link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg"' "$OUT/en/index.html"
 
-if grep -q 'book-toc-panel' "$OUT/chapters/ch01/index.html"; then
+if grep -q 'book-toc-panel' "$OUT/chapters/ch01/index.html" || \
+   grep -q 'book-toc-panel' "$OUT/en/chapters/ch01/index.html"; then
   echo "chapter page still renders a redundant page-level TOC"
   exit 1
 fi

@@ -9,11 +9,26 @@
     let searchResults;
     let searchIndex = [];
     let searchTimeout;
+    const SEARCH_MESSAGES = {
+        ja: {
+            noResults: '「{query}」に一致する結果が見つかりませんでした。',
+            moreResults: '他 {count} 件の結果'
+        },
+        en: {
+            noResults: 'No results found for "{query}".',
+            moreResults: '{count} more results'
+        }
+    };
     
     // Initialize elements
     function initElements() {
         searchInput = document.getElementById('search-input');
         searchResults = document.getElementById('search-results');
+    }
+
+    function getMessages() {
+        const lang = document.documentElement.lang || 'ja';
+        return lang.toLowerCase().startsWith('en') ? SEARCH_MESSAGES.en : SEARCH_MESSAGES.ja;
     }
     
     // Build search index from page content
@@ -58,36 +73,53 @@
     // Display search results
     function displayResults(results, query) {
         if (!searchResults) return;
-        
+
+        searchResults.replaceChildren();
+        const messages = getMessages();
+
         if (results.length === 0) {
-            searchResults.innerHTML = `
-                <div class="search-no-results">
-                    <p>「${escapeHtml(query)}」に一致する結果が見つかりませんでした。</p>
-                </div>
-            `;
+            const emptyState = document.createElement('div');
+            emptyState.className = 'search-no-results';
+            const message = document.createElement('p');
+            message.textContent = messages.noResults.replace('{query}', query);
+            emptyState.appendChild(message);
+            searchResults.appendChild(emptyState);
         } else {
-            const resultsHtml = results.slice(0, 10).map(result => {
-                const highlightedTitle = highlightText(result.title, query);
-                const snippet = getSnippet(result.content, query);
-                const highlightedSnippet = highlightText(snippet, query);
-                
-                return `
-                    <div class="search-result-item" data-id="${result.id}">
-                        <div class="search-result-title">${highlightedTitle}</div>
-                        <div class="search-result-snippet">${highlightedSnippet}</div>
-                    </div>
-                `;
-            }).join('');
-            
-            searchResults.innerHTML = `
-                <div class="search-results-list">
-                    ${resultsHtml}
-                </div>
-                ${results.length > 10 ? `<div class="search-more">他 ${results.length - 10} 件の結果</div>` : ''}
-            `;
+            const list = document.createElement('div');
+            list.className = 'search-results-list';
+
+            results.slice(0, 10).forEach((result) => {
+                list.appendChild(createResultNode(result, query));
+            });
+            searchResults.appendChild(list);
+
+            if (results.length > 10) {
+                const moreResults = document.createElement('div');
+                moreResults.className = 'search-more';
+                moreResults.textContent = messages.moreResults.replace('{count}', String(results.length - 10));
+                searchResults.appendChild(moreResults);
+            }
         }
         
         showResults();
+    }
+
+    function createResultNode(result, query) {
+        const item = document.createElement('div');
+        item.className = 'search-result-item';
+        item.dataset.id = result.id;
+
+        const title = document.createElement('div');
+        title.className = 'search-result-title';
+        appendHighlightedText(title, result.title, query);
+
+        const snippet = document.createElement('div');
+        snippet.className = 'search-result-snippet';
+        appendHighlightedText(snippet, getSnippet(result.content, query), query);
+
+        item.appendChild(title);
+        item.appendChild(snippet);
+        return item;
     }
     
     // Get snippet around query
@@ -107,8 +139,46 @@
     
     // Highlight search term in text
     function highlightText(text, query) {
-        const regex = new RegExp(`(${escapeRegex(query)})`, 'gi');
-        return text.replace(regex, '<mark>$1</mark>');
+        if (!query) {
+            return [{ text, match: false }];
+        }
+
+        const regex = new RegExp(escapeRegex(query), 'gi');
+        const parts = [];
+        let lastIndex = 0;
+        let match = regex.exec(text);
+
+        while (match) {
+            if (match.index > lastIndex) {
+                parts.push({ text: text.slice(lastIndex, match.index), match: false });
+            }
+            parts.push({ text: match[0], match: true });
+            lastIndex = regex.lastIndex;
+            match = regex.exec(text);
+        }
+
+        if (lastIndex < text.length) {
+            parts.push({ text: text.slice(lastIndex), match: false });
+        }
+
+        return parts;
+    }
+
+    function appendHighlightedText(target, text, query) {
+        highlightText(text, query).forEach((part) => {
+            if (!part.text) {
+                return;
+            }
+
+            if (part.match) {
+                const mark = document.createElement('mark');
+                mark.textContent = part.text;
+                target.appendChild(mark);
+                return;
+            }
+
+            target.appendChild(document.createTextNode(part.text));
+        });
     }
     
     // Show search results
@@ -144,13 +214,6 @@
                 result.element.classList.remove('search-highlight');
             }, 2000);
         }
-    }
-    
-    // Escape HTML
-    function escapeHtml(text) {
-        const div = document.createElement('div');
-        div.textContent = text;
-        return div.innerHTML;
     }
     
     // Escape regex

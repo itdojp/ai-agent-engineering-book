@@ -27,6 +27,7 @@ required=(
   "assets/css/book-custom.css"
   "assets/js/search.js"
   "assets/js/theme.js"
+  "assets/js/code-copy-lightweight.js"
   ".nojekyll"
 )
 

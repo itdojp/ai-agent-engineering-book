@@ -144,8 +144,8 @@ def extract_excerpt(body: str) -> str:
     return ""
 
 
-def strip_leading_h1_html(body_html: str) -> str:
-    return re.sub(r"^\s*<h1\b[^>]*>.*?</h1>\s*", "", body_html, count=1, flags=re.S)
+def strip_leading_h1_markdown(body: str) -> str:
+    return re.sub(r"^\s*# .*(?:\n+)?", "", body, count=1)
 
 
 def page_token(path: Path) -> str:
@@ -230,8 +230,9 @@ def load_page(language: str, section: SectionSpec, source_path: Path) -> Page:
     raw = source_path.read_text(encoding="utf-8")
     body = strip_frontmatter(raw).strip()
     title = extract_title(body, source_path.stem)
+    content_body = strip_leading_h1_markdown(body)
     md = markdown.Markdown(extensions=["extra", "toc", "sane_lists"])
-    body_html = strip_leading_h1_html(md.convert(body))
+    body_html = md.convert(content_body)
     excerpt = extract_excerpt(body)
     page_kind, page_label = classify_page(language, section, source_path, title)
     return Page(
@@ -418,13 +419,13 @@ def page_chrome(page: Page, body: str, current_search_placeholder: str) -> str:
         "<div class=\"book-layout\">"
         "<header class=\"book-header\">"
         "<div class=\"header-left\">"
-        "<label for=\"sidebar-toggle-checkbox\" class=\"sidebar-toggle\" aria-label=\"Toggle sidebar\" role=\"button\" tabindex=\"0\">"
+        "<button type=\"button\" class=\"sidebar-toggle\" id=\"sidebar-toggle-button\" aria-label=\"Toggle sidebar\" aria-controls=\"sidebar\" aria-expanded=\"false\">"
         "<svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\">"
         "<line x1=\"3\" y1=\"6\" x2=\"21\" y2=\"6\"></line>"
         "<line x1=\"3\" y1=\"12\" x2=\"21\" y2=\"12\"></line>"
         "<line x1=\"3\" y1=\"18\" x2=\"21\" y2=\"18\"></line>"
         "</svg>"
-        "</label>"
+        "</button>"
         f"<a href=\"{html.escape(rel_link(page.output_rel, Path('index.html') if page.language == 'ja' else Path('en') / 'index.html'))}\" class=\"header-title\"><h1>{html.escape(SITE_TITLE)}</h1></a>"
         "</div>"
         "<div class=\"header-center\">"
@@ -459,20 +460,28 @@ def page_chrome(page: Page, body: str, current_search_placeholder: str) -> str:
         "</header>"
         f"{body}"
         "</div>"
-        "<label for=\"sidebar-toggle-checkbox\" class=\"book-sidebar-overlay\" id=\"sidebar-overlay\" aria-label=\"Close sidebar\"></label>"
+        "<button type=\"button\" class=\"book-sidebar-overlay\" id=\"sidebar-overlay\" aria-label=\"Close sidebar\"></button>"
         f"<script async src=\"{html.escape(js_copy)}\"></script>"
         f"<script defer src=\"{html.escape(js_theme)}\"></script>"
         f"<script defer src=\"{html.escape(js_search)}\"></script>"
         "<script>"
         "document.addEventListener('DOMContentLoaded',function(){"
         "var cb=document.getElementById('sidebar-toggle-checkbox');"
-        "if(!cb)return;"
+        "var toggle=document.getElementById('sidebar-toggle-button');"
+        "var overlay=document.getElementById('sidebar-overlay');"
+        "if(!cb||!toggle)return;"
+        "function syncSidebarState(){toggle.setAttribute('aria-expanded',cb.checked?'true':'false');}"
+        "function closeSidebar(){cb.checked=false;syncSidebarState();}"
         "cb.checked=false;"
+        "syncSidebarState();"
+        "toggle.addEventListener('click',function(){cb.checked=!cb.checked;syncSidebarState();});"
+        "if(overlay){overlay.addEventListener('click',function(){closeSidebar();});}"
         "document.addEventListener('click',function(e){"
         "if(!cb.checked)return;"
         "if(e.target.closest('.book-sidebar')||e.target.closest('.sidebar-toggle'))return;"
-        "cb.checked=false;"
+        "closeSidebar();"
         "});"
+        "document.addEventListener('keydown',function(e){if(e.key==='Escape'&&cb.checked){closeSidebar();toggle.focus();}});"
         "});"
         "</script>"
         "</body>"

@@ -28,6 +28,7 @@ required=(
   "assets/js/search.js"
   "assets/js/theme.js"
   "assets/js/code-copy-lightweight.js"
+  "assets/images/favicon.svg"
   ".nojekyll"
 )
 
@@ -44,6 +45,16 @@ grep -q "CH01 から読む" "$OUT/index.html"
 grep -q "Start with CH01" "$OUT/en/index.html"
 grep -q "AIエージェントはどこで失敗するか" "$OUT/chapters/ch01/index.html"
 grep -q "Chapter 1" "$OUT/en/chapters/ch01/index.html"
+grep -q 'meta name="author" content="株式会社アイティードゥ"' "$OUT/index.html"
+grep -q 'link rel="canonical" href="https://itdojp.github.io/ai-agent-engineering-book/"' "$OUT/index.html"
+grep -q 'meta property="og:title"' "$OUT/index.html"
+grep -q 'meta name="twitter:card" content="summary"' "$OUT/index.html"
+grep -q 'link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg"' "$OUT/index.html"
+grep -q 'meta name="author" content="株式会社アイティードゥ"' "$OUT/en/index.html"
+grep -q 'link rel="canonical" href="https://itdojp.github.io/ai-agent-engineering-book/en/"' "$OUT/en/index.html"
+grep -q 'meta property="og:title"' "$OUT/en/index.html"
+grep -q 'meta name="twitter:card" content="summary"' "$OUT/en/index.html"
+grep -q 'link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg"' "$OUT/en/index.html"
 
 if grep -q "Publishing Guide" "$OUT/index.html"; then
   echo "public landing page still exposes operator publishing wording"

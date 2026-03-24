@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title>AI Agent Engineering Book favicon</title>
+  <desc>Blue rounded square with an open book icon and the letters AI.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1d4ed8"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+  </defs>
+  <rect x="8" y="8" width="112" height="112" rx="24" fill="url(#bg)"/>
+  <path d="M34 38h24c9.8 0 18 7.4 18 16.5V94c-4.8-4.6-11.3-7-18-7H34V38Z" fill="#ffffff" opacity="0.96"/>
+  <path d="M94 38H70c-9.8 0-18 7.4-18 16.5V94c4.8-4.6 11.3-7 18-7h24V38Z" fill="#dbeafe" opacity="0.96"/>
+  <path d="M64 52v36" stroke="#1e3a8a" stroke-width="3" stroke-linecap="round"/>
+  <text x="64" y="77" text-anchor="middle" font-size="20" font-family="Arial, Helvetica, sans-serif" font-weight="700" fill="#1e3a8a">AI</text>
+</svg>

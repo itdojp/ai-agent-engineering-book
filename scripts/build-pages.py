@@ -276,15 +276,11 @@ def page_description(page: Page) -> str:
 
 
 def public_path(page: Page) -> str:
-    if page.output_rel.name == "index.html":
-        parent = page.output_rel.parent.as_posix()
-        if parent in {"", "."}:
-            return "/"
-        return f"/{parent}/"
-    rel = page.output_rel.as_posix()
-    if rel == "index.html":
+    # output_rel() currently always produces index-backed routes.
+    parent = page.output_rel.parent.as_posix()
+    if parent in {"", "."}:
         return "/"
-    return f"/{rel}"
+    return f"/{parent}/"
 
 
 def absolute_page_url(page: Page) -> str:

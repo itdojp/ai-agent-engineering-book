@@ -14,8 +14,11 @@ import markdown
 
 ROOT = Path(__file__).resolve().parents[1]
 REPO_URL = "https://github.com/itdojp/ai-agent-engineering-book"
+PAGES_BASE_URL = "https://itdojp.github.io/ai-agent-engineering-book"
 SITE_TITLE = "AIエージェント実践: Prompt / Context / Harness Engineering"
+SITE_AUTHOR = "株式会社アイティードゥ"
 FORMATTER_ASSETS = ROOT / "site-assets" / "formatter"
+FAVICON_ASSET = ROOT / "site-assets" / "favicon.svg"
 
 
 @dataclass(frozen=True)
@@ -272,6 +275,22 @@ def page_description(page: Page) -> str:
     return BOOK_SPECS[page.language]["home_summary"]
 
 
+def public_path(page: Page) -> str:
+    if page.output_rel.name == "index.html":
+        parent = page.output_rel.parent.as_posix()
+        if parent in {"", "."}:
+            return "/"
+        return f"/{parent}/"
+    rel = page.output_rel.as_posix()
+    if rel == "index.html":
+        return "/"
+    return f"/{rel}"
+
+
+def absolute_page_url(page: Page) -> str:
+    return f"{PAGES_BASE_URL}{public_path(page)}"
+
+
 def render_nav(pages: list[Page], current: Page, counterpart: Page | None) -> str:
     spec = BOOK_SPECS[current.language]
     home_page = next(page for page in pages if page.page_kind == "home")
@@ -398,6 +417,10 @@ def page_chrome(page: Page, body: str, current_search_placeholder: str) -> str:
     js_copy = rel_link(page.output_rel, Path("assets") / "js" / "code-copy-lightweight.js")
     js_theme = rel_link(page.output_rel, Path("assets") / "js" / "theme.js")
     js_search = rel_link(page.output_rel, Path("assets") / "js" / "search.js")
+    favicon_href = rel_link(page.output_rel, Path("assets") / "images" / "favicon.svg")
+    page_url = absolute_page_url(page)
+    page_desc = page_description(page)
+    title = page_title(page)
 
     return (
         "<!DOCTYPE html>"
@@ -405,11 +428,22 @@ def page_chrome(page: Page, body: str, current_search_placeholder: str) -> str:
         "<head>"
         "<meta charset=\"utf-8\">"
         "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
-        f"<meta name=\"description\" content=\"{html.escape(page_description(page))}\">"
-        f"<title>{html.escape(page_title(page))}</title>"
+        f"<meta name=\"description\" content=\"{html.escape(page_desc)}\">"
+        f"<meta name=\"author\" content=\"{html.escape(SITE_AUTHOR)}\">"
+        f"<link rel=\"canonical\" href=\"{html.escape(page_url)}\">"
+        f"<meta property=\"og:title\" content=\"{html.escape(title)}\">"
+        f"<meta property=\"og:description\" content=\"{html.escape(page_desc)}\">"
+        "<meta property=\"og:type\" content=\"website\">"
+        f"<meta property=\"og:url\" content=\"{html.escape(page_url)}\">"
+        f"<meta property=\"og:site_name\" content=\"{html.escape(SITE_TITLE)}\">"
+        "<meta name=\"twitter:card\" content=\"summary\">"
+        f"<meta name=\"twitter:title\" content=\"{html.escape(title)}\">"
+        f"<meta name=\"twitter:description\" content=\"{html.escape(page_desc)}\">"
+        f"<title>{html.escape(title)}</title>"
         f"<link rel=\"stylesheet\" href=\"{html.escape(css_main)}\">"
         f"<link rel=\"stylesheet\" href=\"{html.escape(css_syntax)}\">"
         f"<link rel=\"stylesheet\" href=\"{html.escape(css_custom)}\">"
+        f"<link rel=\"icon\" type=\"image/svg+xml\" href=\"{html.escape(favicon_href)}\">"
         "<script>"
         "(function(){try{const k='book-theme';const t=localStorage.getItem(k)||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(_){}})();"
         "</script>"
@@ -552,8 +586,10 @@ def collect_pages(language: str) -> list[Page]:
 def copy_assets(output_dir: Path) -> None:
     css_dir = output_dir / "assets" / "css"
     js_dir = output_dir / "assets" / "js"
+    images_dir = output_dir / "assets" / "images"
     css_dir.mkdir(parents=True, exist_ok=True)
     js_dir.mkdir(parents=True, exist_ok=True)
+    images_dir.mkdir(parents=True, exist_ok=True)
     shutil.copy2(FORMATTER_ASSETS / "css" / "main.css", css_dir / "main.css")
     shutil.copy2(FORMATTER_ASSETS / "css" / "mobile-responsive.css", css_dir / "mobile-responsive.css")
     shutil.copy2(FORMATTER_ASSETS / "css" / "syntax-highlighting.css", css_dir / "syntax-highlighting.css")
@@ -561,6 +597,7 @@ def copy_assets(output_dir: Path) -> None:
     shutil.copy2(FORMATTER_ASSETS / "js" / "theme.js", js_dir / "theme.js")
     shutil.copy2(FORMATTER_ASSETS / "js" / "search.js", js_dir / "search.js")
     shutil.copy2(FORMATTER_ASSETS / "js" / "code-copy-lightweight.js", js_dir / "code-copy-lightweight.js")
+    shutil.copy2(FAVICON_ASSET, images_dir / "favicon.svg")
     (output_dir / ".nojekyll").write_text("", encoding="utf-8")
 
 

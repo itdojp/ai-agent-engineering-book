@@ -18,6 +18,8 @@
   - `book-formatter` から vendor した shared CSS / JS
 - `site-assets/book-custom.css`
   - formatter shared asset の上に載せる、この repo 固有の追加 CSS
+- `site-assets/favicon.svg`
+  - Pages 出力で使う reader-facing favicon artifact
 
 ## Local Verify
 
@@ -31,6 +33,7 @@
 - `/en/` が英語版トップとして生成される
 - CH01 の日本語版 / 英語版 page が生成される
 - formatter shared asset と custom CSS / JS が配置される
+- author / canonical / Open Graph / Twitter Card / favicon metadata が出力される
 - 公開トップに operator wording (`Publishing Guide` / `canonical source`) が残っていない
 
 ## GitHub Actions
@@ -64,6 +67,14 @@
 
 - `https://github.com/itdojp/book-formatter`
 - commit `2170e0589d1d323649f3602db688d7d12cd7b21d`
+
+公開 HTML には reader-facing metadata として、少なくとも次を出力する。
+
+- `meta name="author"`
+- `link rel="canonical"`
+- `meta property="og:title" / "og:description" / "og:type" / "og:url" / "og:site_name"`
+- `meta name="twitter:card" / "twitter:title" / "twitter:description"`
+- `link rel="icon"`
 
 ## 最初に必要な repository 設定
 

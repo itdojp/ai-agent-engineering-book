@@ -62,6 +62,7 @@ required=(
   "scripts/verify-sample.sh"
   "requirements-pages.txt"
   "site-assets/book-custom.css"
+  "site-assets/favicon.svg"
   "site-assets/formatter/README.md"
   "site-assets/formatter/css/main.css"
   "site-assets/formatter/css/mobile-responsive.css"

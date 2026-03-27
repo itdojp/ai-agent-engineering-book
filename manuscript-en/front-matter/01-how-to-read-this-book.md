@@ -46,6 +46,18 @@ The repo is not the main character. It is the supporting evidence, the storage f
 
 If you browse the repo first, the artifacts can look like an unstructured list. If you read the prose first, the reason each artifact exists is easier to see.
 
+## How to Handle Tool Drift
+
+The book is written around artifact design rather than a single UI or one model name. In practice, the behavior of ChatGPT, coding agents, CLIs, and CI changes over time.
+
+Use this order when the tooling in front of you does not match the exact screenshots or steps you expect.
+
+1. Understand which artifact and decision boundary the chapter is trying to stabilize
+2. Check the latest repository state together with `docs/pages-publishing.md` and `docs/en/operating-model.md`
+3. Confirm the active permission, execution, and verification behavior in the official documentation for the tool you actually use
+
+If the manuscript and the live tool differ, prefer the artifact model and read the operational steps through the current official source.
+
 ## How to Track the Recurring Cases
 
 The recurring cases change meaning as the book moves through Prompt, Context, and Harness.

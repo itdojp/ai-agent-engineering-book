@@ -34,6 +34,16 @@ This book does not directly target the following expectations.
 
 The book assumes a development environment with a repo and persistent artifacts. It does not focus on workflows that never reach code changes or verification.
 
+## Background Assumptions
+
+This book is easiest to use when the reader already has three basics in place.
+
+- A working understanding of Git, diffs, history, and branches
+- Familiarity with development flow based on issues, specs, tests, and code review
+- Comfort with opening a repo, changing files, and running verification
+
+Deep knowledge of Python or any specific framework is not required. It is enough to be comfortable with shells, CI, tests, and pull requests as normal engineering artifacts.
+
 ## What This Book Covers and Does Not Cover
 
 The book covers the design required to get an AI agent to complete work. In practical terms, that means artifacts and operating rules such as Prompt Contracts, task briefs, context packs, verification harnesses, restart packets, and review budgets.
@@ -45,6 +55,25 @@ It does not cover the following areas in depth.
 - Organization-wide HR or performance-review systems
 
 The book includes the theory it needs, but it always lands that theory in repo artifacts that can be reused.
+
+## Safety Notes
+
+Letting an AI agent touch a repo or verification flow does not mean the setup is safe for production by default. Review the following boundaries before reuse.
+
+- Permission boundary: decide write access, secrets, external calls, and billable APIs before execution
+- Verification boundary: decide which local checks, CI checks, and review evidence are required before a task can be called done
+- Auditability: keep changes to Prompt, Context, and Harness in repo artifacts rather than only in chat history
+
+The examples in this book are intentionally simplified for readers. When you reuse them in practice, confirm the active model, CLI, permission settings, organizational policy, and legal constraints in your own environment.
+
+## How to Track Updates
+
+- Public site: `https://itdojp.github.io/ai-agent-engineering-book/`
+- Repository: `https://github.com/itdojp/ai-agent-engineering-book`
+- Change history: GitHub commits and pull requests
+- Pages pipeline notes: `docs/pages-publishing.md`
+
+Prompt, Context, and Harness tooling changes quickly. The intended reading model is the manuscript plus the latest repository state plus the official documentation of the tool in use.
 
 ## How to Read the Recurring Cases
 

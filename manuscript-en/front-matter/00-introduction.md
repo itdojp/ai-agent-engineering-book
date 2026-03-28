@@ -71,7 +71,7 @@ The examples in this book are intentionally simplified for readers. When you reu
 - Public site: `https://itdojp.github.io/ai-agent-engineering-book/`
 - Repository: `https://github.com/itdojp/ai-agent-engineering-book`
 - Change history: GitHub commits and pull requests
-- Pages pipeline notes: `docs/pages-publishing.md`
+- Pages pipeline notes (Japanese only): `docs/pages-publishing.md`
 
 Prompt, Context, and Harness tooling changes quickly. The intended reading model is the manuscript plus the latest repository state plus the official documentation of the tool in use.
 

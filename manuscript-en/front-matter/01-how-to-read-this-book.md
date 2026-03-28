@@ -53,7 +53,7 @@ The book is written around artifact design rather than a single UI or one model 
 Use this order when the tooling in front of you does not match the exact screenshots or steps you expect.
 
 1. Understand which artifact and decision boundary the chapter is trying to stabilize
-2. Check the latest repository state together with `docs/pages-publishing.md` and `docs/en/operating-model.md`
+2. Check the latest repository state together with `docs/pages-publishing.md` (Japanese only) and `docs/en/operating-model.md`
 3. Confirm the active permission, execution, and verification behavior in the official documentation for the tool you actually use
 
 If the manuscript and the live tool differ, prefer the artifact model and read the operational steps through the current official source.

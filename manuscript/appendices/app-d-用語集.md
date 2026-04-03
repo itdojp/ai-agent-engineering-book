@@ -34,6 +34,7 @@ AI agent、coding agent、ChatGPT、Codex CLI は同じではない。
 - `Progress Note`: 中断、handoff、再開のための短い進捗記録
 - `context pack`: 特定タスクで読む最小参照情報の束
 - `verification harness`: test、lint、typecheck、evidence、CI、approval を束ねた検証系
+- `recurring case`: 章を跨いで同じ repo / issue / failure mode を追跡するための継続ケース
 
 ここで重要なのは、どの artifact も「説明文」ではなく「運用のための入力」であることだ。artifact は人が読むだけでは不十分で、agent が使っても誤解しにくい形でなければならない。
 
@@ -50,7 +51,20 @@ AI agent、coding agent、ChatGPT、Codex CLI は同じではない。
 
 これらの語は近いが役割が違う。たとえば `acceptance criteria` は仕様側の条件であり、`done criteria` は運用側の条件である。前者を満たしても verify 未実行なら完了ではないし、後者だけ満たしても仕様を外していれば意味がない。
 
-## 5. 表記ルール
+## 5. 2026年版で特に固定する語
+
+2026 年版では、protocol と governance の語も drift しやすいため先に固定する。
+
+- `MCP (Model Context Protocol)`: tool / resource / prompt などの context source を統一的に接続するための protocol
+- `A2A (Agent2Agent)`: agent 間の task 移譲、状態共有、handoff を扱う protocol 群
+- `tool drift`: UI、CLI、API、tool capability が時間経過で変わり、本文や手順の記述とズレる現象
+- `human approval gate`: 高リスク操作の前に human reviewer の確認を必須にする承認境界
+- `provenance`: prompt、context、artifact、evidence がどの source から生成・更新されたかを追跡する来歴情報
+- `source hierarchy`: 本文、repo artifact、official docs、組織ポリシーのどれを何の判断で優先するかを定めた優先順位
+
+これらは本文の理解だけでなく、実務へ移すときの事故防止にも直結する。特に protocol と権限境界は runtime ごとの差が大きいため、本文と一次情報を併読する前提で使う。
+
+## 6. 表記ルール
 
 表記の揺れを減らすため、本文では次を優先する。
 

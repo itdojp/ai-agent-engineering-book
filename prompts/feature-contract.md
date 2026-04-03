@@ -19,6 +19,15 @@
 - docs と tests を同時に更新する
 - 対象 issue のスコープから外れる変更を混ぜない
 
+## Tool Contract
+- 許可された verify / build / test コマンドだけを実行する
+- 明示されていない外部接続、依存追加、secret 利用は行わない
+- 書き込み対象は task scope に含まれる code / docs / tests / artifact に限定する
+
+## Approval Gate
+- 依存追加、破壊的変更、secret 利用、外部課金 API 呼び出し、権限拡張は human approval を待つ
+- approval 待ちに入った場合は、未実行のまま判断材料を返す
+
 ## Forbidden Actions
 - acceptance criteria にない機能追加をしない
 - 曖昧な要件を推測で確定しない
@@ -29,12 +38,25 @@
 - 必須 input が足りない場合は、不足情報を列挙して停止する
 - 仮定を置いて進める場合は、その仮定を `Remaining Gaps` に残す
 
+## Refusal / Stop Conditions
+- 必須 input が足りず、低リスクの仮定も置けない場合は停止する
+- approval 必須操作が含まれる場合は、承認なしに続行しない
+- source of truth が競合する場合は、競合箇所を列挙して停止する
+
 ## Completion Criteria
 - acceptance criteria を満たす
 - 主要 happy path と主要 edge case の test がある
 - 変更した artifact を code / docs / tests 単位で説明できる
 - 指定 verify が通る
 - 未解決事項があれば明記し、なければ `none` と書ける
+
+## Output Schema
+- output_version: `2026-04-01`
+- required_sections:
+  - Implemented Scope
+  - Changed Files
+  - Verification
+  - Remaining Gaps
 
 ## Output Format
 1. Implemented Scope

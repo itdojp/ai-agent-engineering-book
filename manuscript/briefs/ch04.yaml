@@ -1,23 +1,23 @@
 id: ch04
 title: プロンプトを評価する
 part: part-01-prompt
-goal: Prompt Engineering を評価可能な artifact にし、prompt versioning と回帰テストの考え方を導入する。
+goal: Prompt Engineering を prompt / workflow evaluation まで広げ、trace review・cost / latency・judge / human spot-check を含む評価ループを導入する。
 reader_outcomes:
-  - eval case と rubric を分けて設計できる
-  - prompt の回帰テストを自動実行できる
-  - モデル更新時の比較観点を列挙できる
+  - eval case、rubric、judge / human spot-check を分けて設計できる
+  - prompt の回帰比較に加え、workflow metrics と trace review を評価軸へ入れられる
+  - モデル更新時の比較観点として品質、tool-call、cost / latency、approval signal を列挙できる
 dependencies:
   - ch02
   - ch03
 sections:
-  - 良い prompt は評価できる
+  - 良い prompt / workflow は評価できる
   - eval set の作り方
-  - rubric と golden の違い
-  - prompt の回帰テスト
+  - rubric・golden・judge・human spot-check の違い
+  - prompt の回帰テストと trace review
   - versioning と比較運用
 exercises:
-  - 5 件の eval case を自作する。
-  - v1/v2 prompt を比較し、どちらが安定するか記録する。
+  - structured output と approval boundary を含む eval case を追加する。
+  - v1/v2 prompt を比較し、品質・cost / latency・tool-call の観点で記録する。
 artifacts:
   - evals/prompt-contract-cases.json
   - evals/rubrics/feature-spec.json

@@ -1,7 +1,7 @@
 {
   "name": "feature-spec",
   "description": "Score whether a prompt response is implementation-ready for feature requirement shaping.",
-  "pass_threshold": 9,
+  "pass_threshold": 11,
   "scale": {
     "0": "missing or misleading",
     "1": "partial",
@@ -41,6 +41,16 @@
     {
       "id": "output_format",
       "description": "レビューまたは handoff しやすい出力形式になっている",
+      "weight": 1
+    },
+    {
+      "id": "approval_boundary",
+      "description": "approval 必須操作と停止条件が明示されている",
+      "weight": 2
+    },
+    {
+      "id": "structured_output",
+      "description": "output schema / version と canonical な報告項目が固定されている",
       "weight": 1
     }
   ]

@@ -4,6 +4,43 @@
 
 CH01-CH12 を、template に従って情報が並ぶ原稿ではなく、読者が「次の failure を減らすためにこの章が要る」と感じながら読み進められる原稿へ寄せる。
 
+## Rewrite Contract (2026)
+
+2026 年版の rewrite では、章本文の言い換えだけでなく、商用運用に耐える判断基準と supporting artifact を揃えることを優先する。具体的には次を固定する。
+
+- Prompt → Context → Harness の成熟モデルを、chapter と appendix を跨いで同じ語彙で運用する
+- `support-hub` と recurring case を、全 Part の共通ケースとして維持する
+- artifact-driven pedagogy を崩さず、各章で `何を読むか` ではなく `何を残すか` を明確にする
+- UI や product 名の一時的な差分より、権限境界、verify、handoff、resume の durable な設計を優先する
+
+## Source Hierarchy
+
+記述が競合したときの優先順位を先に固定する。
+
+1. runtime の挙動、権限、protocol、pricing は official docs と組織ポリシーを優先する
+2. recurring case と artifact の責務は、本文と `sample-repo` を source of truth とする
+3. 用語と命名は `docs/glossary.md` を正本にする
+
+この方針により、2026 年の product update を追いながらも、本文の設計原則と artifact contract を安定させる。
+
+## Part-level Deliverables
+
+| Part | 章 | 先に固定する artifact | 主に下げる failure |
+|---|---|---|---|
+| Prompt | CH01-CH04 | Prompt Contract、spec、acceptance criteria、eval case | 曖昧要求の誤読、出力契約の崩壊 |
+| Context | CH05-CH08 | repo context、task brief、Progress Note、context pack | 前提喪失、参照迷子、再開失敗 |
+| Harness | CH09-CH12 | verify checklist、done criteria、restart protocol、operating model | verify 前停止、越権、handoff 不全 |
+
+## Verification Gate
+
+rewrite 系 PR は、対象範囲に応じて次の検証を通す。
+
+- 章本文、front matter、appendix、backmatter の更新: `./scripts/verify-book.sh`
+- `sample-repo/`、`prompts/`、`checklists/`、`evals/` に触れる更新: `./scripts/verify-sample.sh`
+- GitHub Pages 公開内容または `docs/` に影響する更新: `./scripts/verify-pages.sh`
+
+verify を通せない場合は、未解決点を issue または PR に明示し、黙って完了扱いにしない。
+
 ## Opening 方針
 
 - 冒頭は `CHxx では...` より先に、読者が現場で遭遇する失敗や詰まり方を置く

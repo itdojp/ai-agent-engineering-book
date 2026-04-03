@@ -7,7 +7,13 @@
 - **Prompt → Context → Harness** の成熟モデルを、章本文だけでなく repo artifact として体現する
 - ChatGPT で要件・設計を固め、Codex CLI で repo を読んで変更・検証する実務フローを前提にする
 - 章本文とサンプル実装を相互参照しながら執筆できる状態を最初から作る
-- 日本語版と英語版の原稿を chapter / appendix / front matter / backmatter / figures 単位で追跡し、英語版の parity と editorial review を issue 単位で進める
+- 日本語版を 2026 年の商用運用前提へ再基準化し、英語版は reference / parity backlog として保守する
+
+## 現在の作業モード
+
+- 主対象は日本語版の全面 rewrite であり、変更は parent issue と work package issue 単位で進める
+- 英語版は parity maintenance の参照資産として残すが、日本語版 rewrite と同じ優先度では扱わない
+- `sample-repo`、`prompts/`、`checklists/`、`evals/` は本文 rewrite に追従して段階的に更新する
 
 ## ディレクトリ
 

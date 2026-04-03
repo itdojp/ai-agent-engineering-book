@@ -9,7 +9,7 @@
 - Completion Criteria が verify 可能で、完了判定を主観に依存していない
 - Refusal / Stop Conditions があり、止まるべき場面を定義している
 - Output Schema と output version があり、作業結果の報告粒度と互換性が固定されている
-- Output Format があり、canonical な項目名 (`Changed Files`、`Verification`、`Remaining Gaps`) が固定されている
+- Output Format があり、canonical な項目名として少なくとも `Changed Files`、`Verification`、`Remaining Gaps` が固定され、feature では `Implemented Scope`、bugfix では `Root Cause` など契約種別ごとの必須セクションが Output Schema と矛盾なく定義されている
 - 不足情報がある場合の扱いが明示されている
 - out of scope が分かる
 - 必要な artifact が参照されている

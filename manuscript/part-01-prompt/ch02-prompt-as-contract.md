@@ -30,7 +30,7 @@ dependencies:
 
 2026 年の実務では、prompt は単なる指示文ではなく、単一 run の contract である。たとえば `sample-repo` の `BUG-001` を扱うなら、「既存挙動を壊さずに不具合を修正する」が Objective になり、「public interface を変えない」「failing test を先に追加または更新する」が Constraints になる。そこにさらに、「どの tool を使ってよいか」「approval が必要な操作は何か」「どの schema で結果を返すか」まで入れて、初めて operational prompt になる。
 
-この章では prompt を次の 10 要素で扱う。
+この章では prompt を次の 9 要素で扱う。
 
 | 要素 | 役割 | ないと何が起きるか |
 |---|---|---|
@@ -42,8 +42,7 @@ dependencies:
 | Forbidden Actions | 近道や危険な行動を禁止する | 見かけ上の成功が増える |
 | Refusal / Stop Conditions | 止まるべき条件を固定する | 無理に進めて破壊する |
 | Completion Criteria | 完了判定を固定する | 停止が起きる |
-| Output Schema | 報告粒度と項目構造を固定する | handoff と review が不安定になる |
-| Output Version | schema 変更の互換性を追跡する | 古い consumer と drift する |
+| Output Schema | 報告粒度と項目構造を固定し、`output_version` を schema の一部として含める | handoff と review が不安定になり、古い consumer と drift する |
 
 この要素が揃って初めて、prompt は「命令文」ではなく「作業契約」になる。
 
@@ -208,5 +207,5 @@ Output Format:
 
 ## 章末まとめ
 - Prompt Engineering の出発点は、prompt を曖昧な命令文ではなく入出力契約として設計することにある。
-- single-task reliability を上げるには、Objective、Inputs、Tool Contract、Approval Gate、Completion Criteria、Output Schema を分けて書く必要がある。
+- single-task reliability を上げるには、Objective、Inputs、Constraints、Forbidden Actions、Tool Contract、Refusal / Stop Conditions、Approval Gate、Completion Criteria、Output Format、Output Schema を分けて書く必要がある。
 - 契約が固まると、次の bottleneck は「そもそも要求が曖昧」という問題に移る。次章では ChatGPT を使って要求を仕様と設計 artifact に変える。

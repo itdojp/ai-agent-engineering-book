@@ -134,7 +134,7 @@ bad:
 good:
 
 ```text
-`evals/prompt-contract-cases.json` にある 6 件を固定の eval set とする。
+`evals/prompt-contract-cases.json` にあるケース群から、少なくとも 5 件を固定の eval set とする。
 `evals/rubrics/feature-spec.json` の rubric で v1 と v2 を比較する。
 `feature-001-missing-info`、`feature-001-approval-boundary`、`bugfix-001-regression-guard` を重要ケースとして、改善と退行を個別に記録する。
 ```
@@ -158,7 +158,7 @@ good:
 1. `feature-001-scope`
    - ranking や typo correction を今回の必須要件にしないか
 2. `feature-001-missing-info`
-   - 不足情報を列挙して停止または `Open Questions` に残せるか
+   - 不足情報を列挙して停止または `Remaining Gaps` に残せるか
 3. `feature-001-artifact-sync`
    - product spec、acceptance criteria、ADR を同期対象として扱えるか
 4. `feature-001-approval-boundary`

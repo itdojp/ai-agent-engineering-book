@@ -35,8 +35,8 @@
 - verify を省略して完了扱いにしない
 
 ## Missing Information Policy
-- 必須 input が足りない場合は、不足情報を列挙して停止する
-- 低リスクの仮定を置く場合は、その仮定を最終報告に明記する
+- 必須 input が足りない場合は、不足情報を列挙する
+- 低リスクの仮定を置いて進める場合は、その仮定を `Remaining Gaps` に残す
 
 ## Refusal / Stop Conditions
 - 必須 input が足りず、低リスクの仮定も置けない場合は停止する
@@ -59,7 +59,8 @@
   - Remaining Gaps
 
 ## Output Format
-1. Root Cause
-2. Changed Files
-3. Verification
-4. Remaining Gaps
+1. output_version
+2. Root Cause
+3. Changed Files
+4. Verification
+5. Remaining Gaps

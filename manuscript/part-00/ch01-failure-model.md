@@ -16,7 +16,7 @@ dependencies:
 ## この章の位置づけ
 会話では有能に見えるのに、repo を触らせた途端に雑に壊す。この落差が、多くの読者が最初にぶつかる問題である。前付けで、本書の約束、想定読者、3 部構成の読み方を整理した。ここから本文に入る。最初に確認すべきなのは、AIエージェントが実務でどこで失敗するかである。
 
-CH01 の役割は、failure model を定義することにある。誤答、context poisoning、tool misuse、approval 漏れ、verify 不足を含む 8 類型を起点に、なぜ Prompt Engineering だけでは足りず、Context Engineering と Harness Engineering まで必要になるのかを整理する。以後の章では、この failure model に対して artifact を 1 層ずつ積み上げる。
+CH01 の役割は、failure model を定義することにある。誤答、context poisoning、tool misuse、approval 漏れ、verify 不足などを含む 8 類型を起点に、なぜ Prompt Engineering だけでは足りず、Context Engineering と Harness Engineering まで必要になるのかを整理する。以後の章では、この failure model に対して artifact を 1 層ずつ積み上げる。
 
 ## 学習目標
 - 単発の誤答と、context / permissions / verify / approvals を含む実行失敗の違いを説明できる

@@ -6,10 +6,11 @@
 - manuscript や docs に絶対パス参照が残っていないか
 - verify script と実態がずれていないか
 - `docs/glossary.md` を source of truth として表記を揃えたか
-- `Prompt Contract`、`Progress Note`、`verification harness` の固有表記がぶれていないか
+- `Prompt Contract`、`Progress Note`、`verification harness`、`needs-human-approval` の固有表記がぶれていないか
 - 各章の `Source Notes / Further Reading` が `manuscript/backmatter/00-source-notes.md` と矛盾していないか
 - `manuscript/backmatter/00-source-notes.md` が CH01-CH12 を取りこぼしていないか
 - 出力契約の報告項目が `Changed Files`、`Verification`、`Remaining Gaps` に揃っているか
+- local verify、CI、evidence の用語が chapter と checklist で矛盾していないか
 
 ## Weekly Cleanup
 - orphaned task brief がないか

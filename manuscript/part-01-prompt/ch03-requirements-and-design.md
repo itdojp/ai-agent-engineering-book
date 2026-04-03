@@ -20,9 +20,9 @@ dependencies:
 ここで重要なのは、ChatGPT との対話そのものを成果物と勘違いしないことだ。探索的な会話は有用だが、実装準備ができた状態とは別である。実装準備ができた状態とは、repo に product spec、acceptance criteria、ADR が残り、人間が最終判断を説明できる状態を指す。この章では `sample-repo` の `FEATURE-001` を題材に、その変換過程を具体化する。
 
 ## 学習目標
-- 曖昧な依頼を acceptance criteria 付き仕様に変換できる
-- 代替案比較から ADR を書ける
-- 人間が残す判断点と AI に委ねる判断点を分けられる
+- 曖昧な依頼を acceptance criteria と eval seed 付き仕様に変換できる
+- interactive assistant と coding agent に分けて artifact を受け渡せる
+- 人間が残す判断点と AI に委ねる論点整理を分けられる
 
 
 ## 小見出し
@@ -45,7 +45,7 @@ dependencies:
 
 この段階で大切なのは、「何を作るか」だけでなく「今回は何を作らないか」を決めることだ。ChatGPT は論点を出すのが得意だが、どこで切るかは人間が決める必要がある。検索を使いやすくする議論は、ranking、typo correction、保存済み検索、UI 変更へ簡単に広がる。product spec の価値は、広がる論点を現在の issue のスコープに閉じ込めることにある。
 
-### 2. 受け入れ条件の分解
+### 2. 受け入れ条件と eval seed の分解
 product spec ができても、まだ実装準備は終わらない。Objective や In Scope は、読む人によって解釈がぶれるからだ。そこで必要になるのが acceptance criteria である。acceptance criteria は、仕様を verify 可能な文へ落とし直した artifact であり、「何ができたら完了か」を固定する。
 
 `sample-repo/docs/acceptance-criteria/ticket-search.md` では、仕様を次の単位へ分解している。
@@ -56,9 +56,9 @@ product spec ができても、まだ実装準備は終わらない。Objective 
 - 大文字小文字を区別しない
 - 空文字または空白のみの query は全件を返す
 
-この分解により、product spec の「検索を使いやすくする」が、test と結びつく粒度まで下りてくる。さらに、artifact criteria を別に置くことで、「docs と tests が同期しているか」も acceptance の一部として扱える。実務では機能の挙動だけでなく、仕様・設計・検証 artifact の同期も品質条件に含めるべきだ。
+2026 年版では、ここに eval seed も加える。つまり「あとでどの prompt / workflow evaluation で比較するか」を acceptance と同時に考える。artifact criteria を別に置くことで、「docs と tests が同期しているか」「後続の eval case に落とせるか」も acceptance の一部として扱える。
 
-ChatGPT は acceptance criteria の候補を大量に出せるが、最終的に残す条件は人間が絞り込む必要がある。条件が多すぎると実装範囲が膨らみ、少なすぎると完成判定が曖昧になる。CH03 の時点で重要なのは、「あとで test に落とせる文になっているか」を基準にすることだ。
+ChatGPT や他の interactive assistant は acceptance criteria の候補を大量に出せるが、最終的に残す条件は人間が絞り込む必要がある。条件が多すぎると実装範囲が膨らみ、少なすぎると完成判定が曖昧になる。CH03 の時点で重要なのは、「あとで test や eval case に落とせる文になっているか」を基準にすることだ。
 
 ### 3. 代替案比較と設計判断
 要求が固定されたら、次は設計判断である。ここでも ChatGPT は有用だが、役割は「正解を決めること」ではなく、「選択肢とトレードオフを整理すること」にある。
@@ -86,19 +86,18 @@ ChatGPT にこの比較をさせると、長所短所はすぐ出る。しかし
 
 設計判断を会話だけで済ませると、「たしかこういう理由だったはずだ」が増える。ADR を残すと、「この repo の今の前提での判断」が artifact として追跡できる。
 
-### 5. 人間が止めるべき判断点
-ChatGPT は、曖昧要求を分解し、仕様候補や設計案を出すのに向く。しかし、次の判断は人間が残すべきである。
+### 5. 人間が残す判断と assistant / agent の責務分担
+interactive assistant は、曖昧要求を分解し、仕様候補や設計案を出すのに向く。しかし、次の判断は人間が残すべきである。
 
 1. どの要求を今の issue のスコープに入れるか
 2. どの非目標を受け入れるか
 3. どのトレードオフを許容するか
 4. 失敗時の責任を誰が持つか
+5. どの artifact を coding agent へ handoff するか
 
-たとえば「検索を使いやすくしたい」に対して、ChatGPT は ranking や typo correction も提案できる。だが、それを今回の `FEATURE-001` に入れるかは、優先度、工数、教育目的、repo の複雑性を踏まえて人間が決めるべきである。AI に委ねてよいのは論点の発見と比較表のたたき台までであり、採否の責任までではない。
+たとえば「検索を使いやすくしたい」に対して、interactive assistant は ranking や typo correction も提案できる。だが、それを今回の `FEATURE-001` に入れるかは、優先度、工数、教育目的、repo の複雑性を踏まえて人間が決めるべきである。AI に委ねてよいのは論点の発見と比較表のたたき台までであり、採否の責任までではない。
 
-この線引きができると、探索会話は速くなる。人間は「何を決めるべきか」を知った上で ChatGPT を使い、決めた内容だけを artifact に落とせばよい。次の coding agent に渡すべきものは、会話の全文ではなく、確定した product spec、acceptance criteria、ADR である。
-
-
+この線引きができると、探索会話は速くなる。人間は「何を決めるべきか」を知った上で interactive assistant を使い、決めた内容だけを artifact に落とせばよい。次の coding agent に渡すべきものは、会話の全文ではなく、確定した product spec、acceptance criteria、ADR、必要なら eval seed である。
 
 ## 章で使う bad / good example
 bad:
@@ -162,6 +161,6 @@ good:
 - 次の一歩は `manuscript/backmatter/00-source-notes.md` の「CH03 ChatGPTで要件と設計を固める」と `manuscript/backmatter/01-読書案内.md` の「Prompt と要求定義」を参照する。
 
 ## 章末まとめ
-- ChatGPT の価値は、曖昧要求をそのまま実装させることではなく、論点を洗い出して product spec、acceptance criteria、ADR に収束させることにある。
-- 探索会話と実装準備ができた artifact は別であり、実装に渡すべきなのは確定した artifact である。
-- 仕様 artifact が揃うと、次に必要なのは「その prompt が毎回同じ品質で出せるか」の評価である。次章では prompt を case と rubric で評価する。
+- interactive assistant の価値は、曖昧要求をそのまま実装させることではなく、論点を洗い出して product spec、acceptance criteria、ADR、eval seed に収束させることにある。
+- exploratory dialogue と実装準備ができた artifact は別であり、coding agent に渡すべきなのは確定した artifact である。
+- 仕様 artifact が揃うと、次に必要なのは「その prompt と workflow が毎回同じ品質で動くか」の評価である。次章では prompt と workflow を case と rubric で評価する。

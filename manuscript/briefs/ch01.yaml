@@ -1,21 +1,21 @@
 id: ch01
 title: AIエージェントはどこで失敗するか
 part: part-00
-goal: AIエージェントの主要な失敗類型を整理し、本書の成熟モデル Prompt Engineering → Context Engineering → Harness Engineering を導入する。
+goal: AIエージェントの failure model を 2026 年の実務前提へ拡張し、Prompt → Context → Harness と agent 類型の境界を導入する。
 reader_outcomes:
-  - 単発の誤答と長時間タスク失敗の違いを説明できる
-  - 本書の sample-repo、ChatGPT、Codex CLI の役割分担を理解する
-  - 後続章で何を artifact として積み上げるか把握する
+  - 単発の誤答と、context / permissions / verify / approvals を含む実行失敗を区別できる
+  - interactive assistant、ローカル CLI coding agent、クラウド / バックグラウンド agent の役割差を説明できる
+  - 後続章で何を artifact として積み上げ、何を verification signal として見るか把握する
 dependencies:
 sections:
   - 単発で当たることと、仕事が完了することは違う
-  - 失敗の4類型: 誤答・忘却・破壊・停止
-  - Prompt Engineering / Context Engineering / Harness Engineering の対応表
-  - 本書の貫通ケース、sample-repo、ChatGPT、Codex CLI の役割
+  - 失敗の 8 類型: 誤答・汚染・誤用・漏れ・停止
+  - Failure を減らす設計面と agent 類型
+  - 本書の貫通ケースと sample-repo の概要
   - 理論ではなく artifact を積む本として読む
 exercises:
-  - 失敗した coding agent transcript を読み、欠けている artifact を 3 つ特定する。
-  - 悪い依頼文を見て、どの失敗類型が起きるか分類し、改善の方向を提案する。
+  - 4 種類の agent 類型を 1 つの task に割り当て、どこで human approval gate を置くべきか整理する。
+  - 失敗した coding agent transcript を読み、どの failure 類型が連鎖したかと不足 artifact を特定する。
 artifacts:
   - sample-repo/README.md
   - sample-repo/docs/domain-overview.md

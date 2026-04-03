@@ -14,9 +14,13 @@ PROMPT_HEADINGS = [
     "## Objective",
     "## Inputs",
     "## Constraints",
+    "## Tool Contract",
+    "## Approval Gate",
     "## Forbidden Actions",
     "## Missing Information Policy",
+    "## Refusal / Stop Conditions",
     "## Completion Criteria",
+    "## Output Schema",
     "## Output Format",
 ]
 

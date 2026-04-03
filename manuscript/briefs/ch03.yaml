@@ -1,23 +1,23 @@
 id: ch03
 title: ChatGPTで要件と設計を固める
 part: part-01-prompt
-goal: 曖昧要求を product spec と design decision に変換し、ChatGPT を要件定義・設計レビューに使う方法を示す。
+goal: 曖昧要求を product spec・acceptance criteria・ADR・eval seed に変換し、interactive assistant と coding agent の責務分担を明確にする。
 reader_outcomes:
-  - 曖昧な依頼を acceptance criteria 付き仕様に変換できる
-  - 代替案比較から ADR を書ける
-  - 人間が残す判断点と AI に委ねる判断点を分けられる
+  - 曖昧な依頼を acceptance criteria と eval seed 付き仕様に変換できる
+  - interactive assistant と coding agent に分けて artifact を受け渡せる
+  - 人間が残す判断点と AI に委ねる論点整理を分けられる
 dependencies:
   - ch01
   - ch02
 sections:
   - 曖昧要求を仕様に変える
-  - 受け入れ条件の分解
+  - 受け入れ条件と eval seed の分解
   - 代替案比較と設計判断
   - ADR を残す理由
-  - 人間が止めるべき判断点
+  - 人間が残す判断と assistant / agent の責務分担
 exercises:
-  - 『検索を使いやすくしたい』を product spec に変換する。
-  - 検索実装案を 2 案比較し、ADR を 1 本書く。
+  - 検索改善要求を product spec + acceptance criteria + eval seed に変換する。
+  - interactive assistant と coding agent の分担表を作り、どの artifact を handoff するか明文化する。
 artifacts:
   - sample-repo/docs/product-specs/ticket-search.md
   - sample-repo/docs/design-docs/ticket-search-adr.md

@@ -96,7 +96,7 @@ bad:
 prompt には「検索を直して。前回の流れを踏まえて進めて」とだけ書く。
 ```
 
-このやり方では、Prompt Contract が弱いだけでなく、context の鮮度も重みも区別されない。古いログや未検証の推測が、acceptance criteria と同じ扱いになる。しかも secret や一時的な live output を persistent note と同列に扱うため、漏洩と resume drift まで起こしやすい。
+このやり方では、Prompt Contract が弱いだけでなく、context の鮮度も重みも区別されない。古いログや未検証の推測が、acceptance criteria と同じ扱いになる。しかも secret や一時的な live output を persisted note と同列に扱うため、漏洩と resume drift まで起こしやすい。
 
 good:
 

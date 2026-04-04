@@ -34,11 +34,18 @@
 | A2A (Agent2Agent) | agent 間の task 移譲、状態共有、handoff を扱う protocol 群。実装や運用モデルは vendor ごとに差がある |
 | tool drift | UI、CLI、API、tool capability が時間経過で変わり、本文や手順の記述とズレる現象 |
 | human approval gate | 高リスク操作の前に human reviewer の確認を必須にする承認境界 |
+| approval boundary | 破壊的変更、public contract 変更、運用ポリシー変更の前に human approval が必要になる境界 |
 | operating model | AIエージェント運用の責務分担、review budget、cadence、導入段階を定義する運用設計 |
+| Lead | issue 優先順位、work package の粒度、破壊的変更や public contract 変更の承認を担う human role |
+| Operator | brief、artifact、verify、evidence を揃えて agent 実行を進め、`Remaining Gaps` を明示する human role |
+| Reviewer | `Goal`、`Changed Files`、`Scope and Non-goals`、`Verification`、`Evidence / Approval`、`Remaining Gaps` を確認して merge 可否を判断する human role |
 | throughput | 一定期間に処理できる issue、PR、work package の量 |
+| stale draft count | review budget の窓で進行が止まっている draft PR の数。queue 解消を優先する signal に使う |
+| approval-stop rate | approval boundary や permission policy によって run や PR が停止した比率 |
 | repo hygiene | 次の作業を壊さないために repo の整合性と可読性を保つ運用 |
+| hygiene backlog age | cleanup backlog のうち最も古い未処理項目の経過時間 |
 | entropy cleanup | stale docs、孤立 artifact、表記ゆれ、不要差分を定期的に整理する運用 |
-| restart packet | 中断後の再開に必要な最小入力。plan、最新 Progress Note、verify、open questions の組 |
+| restart packet | 中断後の再開に必要な canonical input。plan、feature list、最新 `Progress Note`、verify evidence、open questions の組 |
 | permission policy | coding agent が自律で進めてよい変更と human approval が必要な変更を分ける規則 |
 | skill | 再利用可能な instructions / resources / scripts の単位。章タイトルや file 名では `Skills` や `SKILL.md` と表記することがある |
 | work package | 1 回の session または 1 人の担当で安全に進められる最小作業単位 |

@@ -45,9 +45,16 @@ AI agent、coding agent、ChatGPT、Codex CLI は同じではない。
 - `acceptance criteria`: 機能または変更が満たすべき受け入れ条件
 - `done criteria`: harness 上で完了扱いにする条件
 - `evidence bundle`: reviewer が変更を検証できるように残す証跡一式
-- `restart packet`: 再開時に読む最小入力の組
+- `restart packet`: plan、feature list、最新 `Progress Note`、verify evidence、open questions から成る再開時の canonical input
 - `permission policy`: 自律実行と human approval の境界を定義する規則
+- `approval boundary`: 破壊的変更、public contract 変更、運用ポリシー変更の前に human approval が必要になる境界
 - `work package`: 1 回の session または 1 人の担当で安全に進められる最小単位
+- `Lead`: issue 優先順位と承認境界を管理する human role
+- `Operator`: brief、artifact、verify、evidence を揃えて agent 実行を進める human role
+- `Reviewer`: `Goal`、`Changed Files`、`Scope and Non-goals`、`Verification`、`Evidence / Approval`、`Remaining Gaps` を確認して merge 可否を判断する human role
+- `stale draft count`: review budget を超える前に queue 解消を促す draft PR 数の指標
+- `approval-stop rate`: approval boundary や permission policy により run や PR が停止した比率
+- `hygiene backlog age`: cleanup backlog の最古項目の経過時間
 
 これらの語は近いが役割が違う。たとえば `acceptance criteria` は仕様側の条件であり、`done criteria` は運用側の条件である。前者を満たしても verify 未実行なら完了ではないし、後者だけ満たしても仕様を外していれば意味がない。
 

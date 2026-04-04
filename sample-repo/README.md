@@ -17,7 +17,7 @@
 |---|---|---|---|
 | `BUG-001` | ステータス更新後に旧状態が見え、二重対応が起きうる | CH01, CH02, CH09 | 範囲を閉じた bugfix を prompt と harness で完了へ持ち込む感覚をつかむ |
 | `FEATURE-001` | 既存 ticket を見つけにくく、要求も曖昧 | CH01, CH03, CH04, CH05-CH08, CH10 | 曖昧要求を spec、context、verify に変える流れを理解する |
-| `FEATURE-002` | assignee と監査ログの整理が長時間化しやすい | CH01, CH07, CH11, CH12 | long-running task を feature list、restart packet、owner / merge order で扱う |
+| `FEATURE-002` | assignee と監査ログの整理が長時間化しやすい | CH01, CH07, CH11, CH12 | long-running task を feature list、restart packet、owner と merge order で扱う |
 | `HARNESS-001` | verify と証跡が弱く、変更を安心してレビューできない | CH01, CH09, CH10, CH12 | verification harness と evidence / approval の必要性を理解する |
 
 各ケースの chapter guide と中心 artifact は `docs/seed-issues.md` にまとめてある。後続章で「なぜ今このケースを見るのか」を確認したくなったら、まずここへ戻る。

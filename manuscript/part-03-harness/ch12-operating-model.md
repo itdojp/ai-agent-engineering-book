@@ -96,7 +96,7 @@ good:
 
 ```text
 1 issue = 1 work package を守る。
-PR template で Goal / Scope and Non-goals / Changed Files / Verification / Evidence / Approval / Remaining Gaps を固定する。
+PR template で Goal、Scope and Non-goals、Changed Files、Verification、Evidence / Approval、Remaining Gaps を固定する。
 人間は目的設定、承認、最終レビュー、entropy cleanup を担当する。
 週次で metrics と repo hygiene を見直し、review budget を超える前に投入量を調整する。
 ```

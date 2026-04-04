@@ -37,7 +37,7 @@ AIエージェントをチーム運用へ載せるための最小 operating mode
 - `Remaining Gaps` を明示し、曖昧な completion を避ける
 
 ### Reviewer
-- Goal / Changed Files / Scope and Non-goals / Verification / Evidence / Approval を確認する
+- `Goal`、`Changed Files`、`Scope and Non-goals`、`Verification`、`Evidence / Approval`、`Remaining Gaps` を確認する
 - docs drift、artifact drift、scope 逸脱を確認する
 - merge 可能か、追加 verify が必要かを判定する
 

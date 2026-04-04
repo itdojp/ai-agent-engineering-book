@@ -46,7 +46,7 @@ AIエージェント導入で最初に起きるボトルネックは実装速度
 
 CH12 では throughput を単純な PR 数では見ない。`docs/metrics.md` で扱うように、closed issues / week、PR cycle time、draft-to-merge time に加え、stale draft count を見る。たとえば「1 reviewer が 1 日に深く見られる PR は 2 本まで」「evidence bundle が必要な PR は同時に 1 本まで」「stale draft が 3 本を超えたら新規着手より queue 解消を優先する」のように、人的ボトルネックを明示する。
 
-ここでの原則は、agent を速くする前に review を詰まらせないことだ。throughput を上げたいなら、PR を小さくし、work package を issue 単位に分け、PR template で review 入力を標準化する方が効く。`.github/pull_request_template.md` は、そのために `Goal`、`Changed Files`、`Verification`、`Evidence / Approval`、`Remaining Gaps` を固定する。
+ここでの原則は、agent を速くする前に review を詰まらせないことだ。throughput を上げたいなら、PR を小さくし、work package を issue 単位に分け、PR template で review 入力を標準化する方が効く。`.github/pull_request_template.md` は、そのために `Goal`、`Scope and Non-goals`、`Changed Files`、`Verification`、`Evidence / Approval`、`Remaining Gaps` を固定する。
 
 さらに budget を超えたときの動作も operating model に含めるべきである。`docs/operating-model.md` では、新規 issue 着手を止め、stale draft / blocked PR を棚卸しし、verify 不足と evidence 不足を優先して潰す手順を `Budget Overflow Actions` として定義している。throughput を守るには、止め方まで artifact に落とす必要がある。
 
@@ -96,7 +96,7 @@ good:
 
 ```text
 1 issue = 1 work package を守る。
-PR template で Goal / Changed Files / Verification / Evidence / Remaining Gaps を固定する。
+PR template で Goal / Scope and Non-goals / Changed Files / Verification / Evidence / Approval / Remaining Gaps を固定する。
 人間は目的設定、承認、最終レビュー、entropy cleanup を担当する。
 週次で metrics と repo hygiene を見直し、review budget を超える前に投入量を調整する。
 ```

@@ -34,11 +34,11 @@ verification harness の起点は test である。理由は単純で、test が
 ここでのポイントは、「test は実装の後に添える説明」ではなく「変更可能な仕様の実行形式」だということだ。AI agent に実装を任せるなら、spec と同じくらい test が source of truth になる。だから、変更前に test を確認し、必要なら先に足す。
 
 ### 2. verify matrix と実行順序
-verification harness は、検証項目を 1 つの塊としてではなく、順序付きの matrix として設計する。一般には lint、typecheck、unit、integration、e2e の順で重くしていくのがよい。軽い失敗を先に落とすことで、無駄な実行時間を減らせるからだ。
+verification harness は、検証項目を 1 つの塊としてではなく、順序付きの pipeline として設計する。一般には lint、typecheck、unit、integration、e2e の順で重くしていくのがよい。軽い失敗を先に落とすことで、無駄な実行時間を減らせるからだ。
 
 この repo の現状は最小構成なので、実行しているのは主に unit test である。だが CH10 の論点は「今ある検証を厚く見せる」ことではない。将来 lint や typecheck が追加されても壊れない verification harness の考え方を先に定義することである。`checklists/verification.md` では、failing test、local verify、CI 反映、evidence、artifact update、approval を順に確認する checklist として整理した。
 
-ここで重要なのは、verify matrix に owner と blocking 条件を持たせることだ。たとえば local verify は agent と開発者が高速に回す。CI verify は branch 上で同じ contract を再実行し、共有 gate にする。evidence review は reviewer が読む。approval は human reviewer が責任を持つ。すべてを 1 回の green に畳み込むのではなく、どの failure をどこで止めるかを分離する。
+ここで重要なのは、この verification pipeline に owner と blocking 条件を持たせることだ。たとえば local verify は agent と開発者が高速に回す。CI verify は branch 上で同じ contract を再実行し、共有 gate にする。evidence review は reviewer が読む。approval は human reviewer が責任を持つ。すべてを 1 回の green に畳み込むのではなく、どの failure をどこで止めるかを分離する。
 
 順序を決めておく利点は、agent が verify failure を分類しやすくなることにある。lint failure を抱えたまま e2e だけ見ても意味が薄い。逆に unit が落ちている段階で evidence bundle を集めても、まだ review-ready ではない。verification harness は、何を確認するかだけでなく、どの順で確認し、誰がその結果を消費するかまで artifact にする。
 
@@ -56,7 +56,7 @@ local verify と CI verify は同じものではない。local verify は、agen
 
 `.github/workflows/verify.yml` では、book 側と sample-repo 側の検証を別 job に分けている。これは「どちらかが落ちた」ではなく、「どの harness が壊れたか」を CI で判別しやすくするためである。book manuscript の path 整合性と prompt eval artifact の整合確認と、sample-repo の test 実行は、どちらも verify だが failure mode は異なる。job を分けると、review も retry も速くなる。
 
-ここで重要なのは、CI が local verify を置き換えるわけではないという点である。agent はまず local で `./scripts/verify-book.sh` や `./scripts/verify-sample.sh` を回す。その後、CI が同じ合格ラインを branch 上で再実行する。local と CI の command が意図的に違うなら、その差は checklist や PR summary で説明されなければならない。この二段構えが verification harness の基本になる。
+ここで重要なのは、CI が local verify を置き換えるわけではないという点である。agent はまず local で、変更範囲に応じて `./scripts/verify-book.sh ch10` または `./scripts/verify-sample.sh` を回す。その後、CI が同じ合格ラインを branch 上で再実行する。local と CI の command が意図的に違うなら、その差は checklist や PR summary で説明されなければならない。この二段構えが verification harness の基本になる。
 
 ### 5. human approval の位置
 verification harness は完全自動化の話ではない。human approval をどこに置くかも設計対象である。approval が必要なのは、verify の成否だけでは決められない変更、または人間が責任を持つべき変更である。

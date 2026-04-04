@@ -13,29 +13,49 @@ assignee filter の振る舞い整理と assignment change の監査ログ強化
 - unrelated な repo 再編
 - multi-agent を使うこと自体の最適化
 
-## Work Breakdown
-1. planner
-   - `docs/harness/feature-list.md` を track 単位に整理する
-   - scope、non-goals、ownership を固定する
-2. coder-a
-   - assignee filter semantics を担当する
-   - 主な対象: `src/support_hub/service.py`, `tests/test_service.py`
-3. coder-b
-   - assignment change audit log を担当する
-   - 主な対象: `src/support_hub/models.py`, `src/support_hub/store.py`, `tests/test_service.py`
-4. reviewer
-   - docs drift、scope 逸脱、role 間衝突を確認する
-5. verifier
-   - `./scripts/verify-sample.sh` と evidence / report を担当する
+## Workstreams
+| Track | Owner | Goal | Owned Files | Verify | Exit Signal |
+|---|---|---|---|---|---|
+| A | planner | scope と non-goals を固定する | `tasks/FEATURE-002-plan.md`, `docs/harness/feature-list.md` | track 定義と owner が揃う | coder が迷わず着手できる |
+| B | coder-a | assignee filter semantics を固定する | `src/support_hub/service.py`, `tests/test_service.py` | assignee filter 関連 test | semantics の決定と verify が progress note に残る |
+| C | coder-b | assignment change audit log を固定する | `src/support_hub/models.py`, `src/support_hub/store.py` | audit log 関連 test | audit 方針と verify が progress note に残る |
+| D | reviewer / verifier | docs、artifact、verify summary を統合する | `docs/harness/*.md`, `tasks/FEATURE-002-plan.md` | `./scripts/verify-sample.sh` と review | `Changed Files` / `Verification` / `Remaining Gaps` を説明できる |
+
+## Shared File Rule
+- `tests/test_service.py` は Track B の owner を `coder-a` とする。
+- `coder-b` が同 file の更新を必要とする場合は、Track B 完了後に planner が sync window を開く。
+- docs と task artifact の更新は Track D でまとめる。
+
+## Merge Order
+1. planner が track と owner を固定する
+2. `coder-a` と `coder-b` は shared file rule を守って並列化する
+3. reviewer が docs drift と scope 逸脱を確認する
+4. verifier が current-run verify と report contract を閉じる
+
+## Approval Gates
+- public contract を変える
+- audit retention policy を変える
+- verify script や CI を変える
+- shared file を無計画に同時更新する
+
+## Handoff Contract
+- Goal
+- Owned Files
+- Required Inputs
+- Expected Output
+- Verify
+- Stop Condition
+- Next Owner
 
 ## Checkpoints
-- Checkpoint 1: planner が scope と ownership を固定した
+- Checkpoint 1: planner が scope、owner、shared file rule を固定した
 - Checkpoint 2: assignee filter track の verify が通った
 - Checkpoint 3: audit log track の verify が通った
-- Checkpoint 4: reviewer / verifier が統合結果を確認した
+- Checkpoint 4: reviewer / verifier が current-run evidence を確認した
 
 ## Restart Anchor
 - read `docs/harness/restart-protocol.md`
+- read latest `docs/harness/feature-list.md`
 - read latest progress note
 - read latest verify result
-- confirm current track and owner before resuming
+- confirm current track, owner, and next work package before resuming

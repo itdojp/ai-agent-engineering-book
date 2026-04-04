@@ -78,8 +78,8 @@
   - Track B
 
 ## Shared File Rule
-- `tests/test_service.py` は Track A の owner を優先する。
-- Track B で同 file の更新が必要になった場合は、planner が sync window を開いてから着手する。
+- `tests/test_service.py` は assignee filter workstream の owner（`coder-a`）を優先する。
+- audit log workstream で同 file の更新が必要になった場合は、planner が sync window を開いてから着手する。
 - `docs/harness/*.md` と `tasks/FEATURE-002-plan.md` は reviewer / verifier の統合フェーズで更新する。
 
 ## Stop Instead Of Parallelizing

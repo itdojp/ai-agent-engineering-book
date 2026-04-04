@@ -1,6 +1,6 @@
 # Restart Protocol
 
-## Canonical Inputs
+## Restart Packet (Canonical Inputs)
 - `tasks/FEATURE-002-plan.md` (`FEATURE-002` では task brief 相当として使う)
 - 最新の `docs/harness/feature-list.md`
 - 最新の progress note
@@ -14,7 +14,7 @@
 - approval 待ち項目が `needs-human-approval` のまま残っていないか確認する
 
 ## Restart Steps
-1. canonical inputs が揃っているか確認する
+1. restart packet（canonical inputs）が揃っているか確認する
 2. feature list で current track、owner、exit signal を特定する
 3. latest verify と open question を読み、stale な前提を捨てる
 4. current-run の verify や status command を再実行し、live context を取り直す

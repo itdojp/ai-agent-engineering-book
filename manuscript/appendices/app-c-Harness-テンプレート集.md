@@ -10,9 +10,9 @@ Harness Engineering は、「agent に作業させる」段階から「安全に
 
 推奨の使い方は三段階である。
 
-- `Before Edit`: 守るべき behavior、failing test の必要性、local verify command を先に確定する
-- `During Change`: scope の逸脱、docs / task artifact の更新漏れ、verify failure の分類を確認する
-- `Before Review`: local verify、CI 反映、evidence bundle、human approval の要否を確認する
+- `Before Edit`: 守るべき behavior、failing test の必要性、local verify command、approval boundary を先に確定する
+- `During Change`: `Scope and Non-goals` の逸脱、docs / task artifact の更新漏れ、verify failure の分類を確認する
+- `Before Review`: `Goal`、`Changed Files`、`Verification`、`Evidence / Approval`、`Remaining Gaps` が current-run の内容と一致しているか確認する
 
 `checklists/verification.md` は、この template を book repo 用に具体化した実例である。checklist は長くするより、merge 前に本当に見返す項目だけに絞る方が運用しやすい。
 
@@ -22,11 +22,11 @@ Harness Engineering は、「agent に作業させる」段階から「安全に
 
 template の中核は 3 つある。
 
-- `Restart Packet`: 再開前に揃える最小入力
+- `Restart Packet (Canonical Inputs)`: 再開前に揃える最小入力
 - `Restart Steps`: 読み順と次の 1 手の決め方
 - `Stop Conditions`: 情報不足や衝突の疑いがあるときに止まる条件
 
-`sample-repo/docs/harness/restart-protocol.md` では、plan、feature list、最新 Progress Note、verify、open question を restart packet として定義している。restart protocol がないまま multi-agent を始めると、役割分担より先に state が壊れる。
+`sample-repo/docs/harness/restart-protocol.md` では、plan、feature list、最新 `Progress Note`、verify evidence、open questions を restart packet（canonical inputs）として定義している。restart protocol がないまま multi-agent を始めると、役割分担より先に state が壊れる。
 
 ## 3. Permission Policy Template
 
@@ -36,9 +36,9 @@ template の中核は 3 つある。
 
 - `Purpose`: どの harness で使う policy かを書く
 - `Agent May Proceed`: 自律実行してよい変更を列挙する
-- `Require Human Approval`: interface 変更、外部依存、verify 基盤変更などを止める
+- `Require Human Approval`: approval boundary に触れる変更、interface 変更、外部依存、verify 基盤変更などを止める
 - `Stop And Report`: source of truth の衝突や無関係 failure など、作業継続より報告を優先すべき条件を書く
-- `Escalation Format`: 何を人間へ報告すべきかを固定する
+- `Escalation Format`: `Evidence / Approval` に残すべき判断材料と、何を人間へ報告すべきかを固定する
 
 `sample-repo/docs/harness/permission-policy.md` は、single-agent harness 向けの具体例である。policy が曖昧な repo では、agent が不用意に public interface や CI を変更しやすい。逆に policy が明確なら、止まるべきときに止まれる。
 
@@ -48,9 +48,9 @@ Harness artifact では、次の 3 点を混同しない。
 
 - verify が通ったこと
 - done criteria を満たしたこと
-- human approval が不要であること
+- approval boundary に触れていない、または必要な承認が `Evidence / Approval` に残っていること
 
-test pass は必要条件だが十分条件ではない。evidence が足りない、approval が必要、task artifact が stale という状態では、まだ review-ready ではない。Harness Engineering は、この差分を言語化して artifact に残すための工程である。
+test pass は必要条件だが十分条件ではない。evidence が足りない、approval boundary に触れているのに承認が整理されていない、task artifact が stale という状態では、まだ review-ready ではない。Harness Engineering は、この差分を言語化して artifact に残すための工程である。
 
 ## 参照する artifact
 

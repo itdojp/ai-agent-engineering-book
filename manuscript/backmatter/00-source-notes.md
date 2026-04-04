@@ -73,10 +73,10 @@
 
 ### CH11 Long-running Task と Multi-agent
 
-- 最初に信頼するのは `sample-repo/docs/harness/feature-list.md`、`sample-repo/docs/harness/restart-protocol.md`、`sample-repo/docs/harness/multi-agent-playbook.md`、`sample-repo/tasks/FEATURE-002-plan.md` である。multi-agent は role split と restart packet が揃って初めて扱う。
+- 最初に信頼するのは `sample-repo/docs/harness/feature-list.md`、`sample-repo/docs/harness/restart-protocol.md`、`sample-repo/docs/harness/multi-agent-playbook.md`、`sample-repo/tasks/FEATURE-002-plan.md` である。multi-agent は role split と restart packet（canonical inputs）が揃って初めて扱う。
 - 外部 source を足すなら、使っている orchestration tool や task queue の公式 docs を優先する。並列化の議論を、write scope と handoff artifact から切り離さない。
 
 ### CH12 運用モデルと組織導入
 
-- 最初に信頼するのは `docs/operating-model.md`、`docs/metrics.md`、`checklists/repo-hygiene.md`、`.github/pull_request_template.md` である。運用モデルは役割、review budget、cadence、cleanup の組で読む。
+- 最初に信頼するのは `docs/operating-model.md`、`docs/metrics.md`、`checklists/repo-hygiene.md`、`.github/pull_request_template.md` である。運用モデルは Lead / Operator / Reviewer、approval boundary、review budget、cadence、cleanup の組で読む。
 - 外部 source を足すなら、組織が採用する review policy、release policy、metrics definition の公式文書を優先する。導入判断をモデル比較だけで閉じない。

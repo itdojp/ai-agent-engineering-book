@@ -6,7 +6,7 @@
 ## Operating Rules
 - planner が track 定義と ownership を固定してから coder が着手する。
 - 1 回の session で閉じるのは 1 checkpoint までとし、track 全体を一気に終わらせようとしない。
-- verify が通ったら progress note と feature list を同じ session で更新する。
+- verify が通ったら `Progress Note` と feature list を同じ session で更新する。
 - approval 待ち、verify 不明、shared file の衝突がある track は `blocked` または `needs-human-approval` として止める。
 
 ## Tracks
@@ -48,7 +48,7 @@
   - assignment change の履歴が test で確認できる
 - Exit Signal
   - data model と store の変更理由を説明できる
-  - verify 結果と open question が progress note に残っている
+  - verify 結果と open question が `Progress Note` に残っている
 - Dependencies
   - none
 

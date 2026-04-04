@@ -3,12 +3,12 @@
 ## Restart Packet (Canonical Inputs)
 - `tasks/FEATURE-002-plan.md` (`FEATURE-002` では task brief 相当として使う)
 - 最新の `docs/harness/feature-list.md`
-- 最新の progress note
+- 最新の `Progress Note`
 - current track の直近 verify 結果
 - open question と approval 待ち項目
 
 ## Live Checks
-- progress note だけで再開せず、必要な verify や status command を再実行する
+- `Progress Note` だけで再開せず、必要な verify や status command を再実行する
 - current track の owner と owned files を feature list で再確認する
 - base branch の更新、rebase 必要性、未解決 conflict を確認する
 - approval 待ち項目が `needs-human-approval` のまま残っていないか確認する
@@ -40,7 +40,7 @@
 - next session で再開する owner と first step
 
 ## Stop Conditions
-- 最新の progress note がない
+- 最新の `Progress Note` がない
 - verify 状態が不明、または current-run evidence がない
 - ownership が曖昧で、他の workstream と衝突しそう
 - approval が必要なのに承認がない

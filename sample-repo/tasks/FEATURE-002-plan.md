@@ -21,8 +21,8 @@ assignee filter の振る舞い整理と assignment change の監査ログ強化
 ## Workstreams
 | Track | Owner | Goal | Owned Files | Verify | Exit Signal |
 |---|---|---|---|---|---|
-| A | coder-a | assignee filter semantics を固定する | `src/support_hub/service.py`, `tests/test_service.py` | assignee filter 関連 test | semantics の決定と verify が progress note に残る |
-| B | coder-b | assignment change audit log を固定する | `src/support_hub/models.py`, `src/support_hub/store.py` | audit log 関連 test | audit 方針と verify が progress note に残る |
+| A | coder-a | assignee filter semantics を固定する | `src/support_hub/service.py`, `tests/test_service.py` | assignee filter 関連 test | semantics の決定と verify が `Progress Note` に残る |
+| B | coder-b | assignment change audit log を固定する | `src/support_hub/models.py`, `src/support_hub/store.py` | audit log 関連 test | audit 方針と verify が `Progress Note` に残る |
 | C | reviewer / verifier | docs、artifact、verify summary を統合する | `docs/harness/*.md`, `tasks/FEATURE-002-plan.md` | `./scripts/verify-sample.sh` と review | `Changed Files` / `Verification` / `Remaining Gaps` を説明できる |
 
 ## Shared File Rule
@@ -60,6 +60,6 @@ assignee filter の振る舞い整理と assignment change の監査ログ強化
 ## Restart Anchor
 - read `docs/harness/restart-protocol.md`
 - read latest `docs/harness/feature-list.md`
-- read latest progress note
+- read latest `Progress Note`
 - read latest verify result
 - confirm current track, owner, and next work package before resuming

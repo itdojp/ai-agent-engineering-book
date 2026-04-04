@@ -49,7 +49,7 @@ Identify the root cause of the target bug and fix it with the smallest possible 
 
 - stop if required inputs are missing and no low-risk assumption is acceptable
 - stop if an approval-required action is in scope and approval has not been granted
-- stop if the sources of truth conflict and the conflict cannot be resolved safely
+- stop if the sources of truth conflict; enumerate the conflict
 
 ## Completion Criteria
 

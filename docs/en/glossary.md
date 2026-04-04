@@ -29,13 +29,13 @@ This file is the English counterpart of the repo-wide glossary and is used by th
 | Prompt Contract | A prompt artifact that defines objective, constraints, completion criteria, and output format. |
 | Progress Note | A short progress record used for interruption, restart, and handoff. |
 | repo context | The relatively stable repo-wide information about structure, conventions, entry points, and ownership. |
-| approval boundary | The boundary beyond which destructive changes, public-contract changes, or policy changes require human approval. |
+| approval boundary | The boundary beyond which destructive changes, public contract changes, or policy changes require human approval. |
 | operating model | The operating design that defines role boundaries, review budget, cadence, and rollout stages for AI-agent use. |
-| Lead | The human role that sets issue priority, work-package size, and approves destructive or public-contract changes. |
+| Lead | The human role that sets issue priority, work-package size, and approves destructive or public contract changes. |
 | Operator | The human role that prepares briefs, artifacts, verify evidence, and explicit `Remaining Gaps` before or during agent execution. |
 | Reviewer | The human role that inspects `Goal`, `Changed Files`, `Scope and Non-goals`, `Verification`, `Evidence / Approval`, and `Remaining Gaps` before deciding mergeability. |
 | throughput | The amount of issue, PR, or work-package volume a team can process within a period. |
-| stale draft count | The number of draft PRs that have stalled long enough to trigger queue reduction before new intake. |
+| stale draft count | The number of draft PRs that have stalled within the review budget window and therefore count as stalled drafts. |
 | approval-stop rate | The rate at which runs or PRs are intentionally stopped by approval boundaries or permission policy. |
 | repo hygiene | The practice of preserving repo consistency and readability so the next task is not made harder. |
 | hygiene backlog age | The age of the oldest unresolved item in the cleanup backlog. |

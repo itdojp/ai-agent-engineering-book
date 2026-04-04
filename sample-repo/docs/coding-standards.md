@@ -11,7 +11,7 @@
 
 - docstring より task brief / architecture docs を優先する
 - 仕様変更時は product spec、acceptance criteria、ADR を同時更新する
-- 中断や handoff が発生する変更では progress note を更新する
+- 中断や handoff が発生する変更では `Progress Note` を更新する
 - TODO を残す場合は task brief または issue と結びつける
 
 ## Scope Guard

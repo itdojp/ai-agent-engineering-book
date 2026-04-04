@@ -7,7 +7,7 @@
 - failing test design
 - root cause hypothesis
 - fix plan
-- progress note
+- `Progress Note`
 
 ## Out of Scope
 - UI 層の実装

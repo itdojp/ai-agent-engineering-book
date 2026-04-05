@@ -10,7 +10,7 @@ Context Engineering では次の順に積み上げる。
 
 1. context の種類と budget を分ける
 2. repo context で永続コンテキストの入口を作る
-3. task brief と Session Memory で今回の作業と現在位置を固定する
+3. task brief、Session Memory、restart packet で今回の作業と現在位置を固定する
 4. skill と context pack で再利用可能な作業単位にする
 
 ## この Part で増える artifact

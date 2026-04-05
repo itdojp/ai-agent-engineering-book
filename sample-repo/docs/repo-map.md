@@ -32,7 +32,7 @@
 
 ## Task Artifacts
 - `tasks/`: brief / Progress Note / plan
-- `context-packs/`: task specific context pack、canonical facts、live checks
+- `context-packs/`: task specific context pack / canonical facts / live checks
 - `.agents/skills/`: repeatable workflow
 
 ## Update Guide

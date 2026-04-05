@@ -25,14 +25,14 @@
 1. `tasks/FEATURE-001-brief.md`
 2. `docs/acceptance-criteria/ticket-search.md`
 3. `docs/product-specs/ticket-search.md` と `docs/design-docs/ticket-search-adr.md`
-4. 最新の `Progress Note` と verify 出力
+4. この task の `Progress Note`（`tasks/FEATURE-001-progress.md`）と verify 出力
 
 `Progress Note` と verify は session memory / live evidence であり、brief や acceptance criteria を上書きしない。
 
 ## Live Checks
 - 最新の `python -m unittest discover -s tests -v` 結果
 - `tests/test_ticket_search.py` の期待値
-- 直近の `Progress Note`
+- 直近の `tasks/FEATURE-001-progress.md`
 - public contract や scope を越える変更が approval boundary に当たらないか
 
 ## Approval Boundary

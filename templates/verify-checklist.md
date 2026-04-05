@@ -7,7 +7,7 @@
 
 ## During Change
 - diff を最小の work package に保ったか
-- docs / task artifact / progress note の更新漏れがないか
+- docs / task artifact / `Progress Note` の更新漏れがないか
 - verify failure を分類できているか
 
 ## Before Review

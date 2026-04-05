@@ -1,23 +1,23 @@
 id: ch07
 title: Task Context and Session Memory
 part: part-02-context
-goal: Convert issues into task briefs, and design progress notes and handoffs so coding agent work survives across sessions.
+goal: Convert issues into task briefs, and design the Progress Note artifact and handoffs so coding agent work survives across sessions.
 reader_outcomes:
   - Convert a GitHub issue into a task brief
-  - Understand the minimum fields in a coding agent progress note
+  - Understand the minimum fields in a coding agent Progress Note
   - Design a workflow that prevents summary drift
 dependencies:
   - ch05
   - ch06
 sections:
   - Convert an issue into a task brief
-  - Format a coding agent progress note
+  - Format a coding agent Progress Note
   - Design handoff and resume
   - Avoid summary drift
   - Minimum inputs for session restart
 exercises:
   - Convert a GitHub issue into a task brief.
-  - Build a resume packet that starts from a progress note and includes the task brief and verify result.
+  - Build a resume packet that starts from a Progress Note and includes the task brief and verify result.
 artifacts:
   - sample-repo/tasks/FEATURE-001-brief.md
   - sample-repo/tasks/FEATURE-001-progress.md

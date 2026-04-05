@@ -61,7 +61,7 @@ The basic structure is:
 - `Purpose`: which task this context pack supports
 - `Read Order`: the sequence in which artifacts should be read
 - `Canonical Facts`: the facts this task must not override
-- `Live Checks`: the latest verification, progress note, or state checks that must be refreshed each time
+- `Live Checks`: the latest verification, `Progress Note`, or state checks that must be refreshed each time
 - `Exclusions`: the topics intentionally left out of this task
 - `Done Signals`: the conditions that tell the worker the task is actually complete
 

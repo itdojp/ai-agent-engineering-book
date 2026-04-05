@@ -7,7 +7,7 @@ support-hub サンプル実装向けの instructions。
 - まず `docs/repo-map.md` と `docs/architecture.md` を読む
 - public API を壊す場合は brief と docs を更新する
 - test を追加または更新してから本体を変える
-- `tasks/` の task brief / progress note を更新する
+- `tasks/` の task brief / `Progress Note` を更新する
 - 変更が docs に影響するなら同時に更新する
 
 ## Verification

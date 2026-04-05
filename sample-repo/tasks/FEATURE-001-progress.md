@@ -1,4 +1,4 @@
-# FEATURE-001 Progress
+# FEATURE-001 Progress Note
 
 ## Status
 ready-for-handoff

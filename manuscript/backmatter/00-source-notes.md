@@ -44,7 +44,7 @@
 ### CH05 Context Engineering の基礎
 
 - 最初に信頼するのは `docs/context-model.md`、`docs/context-budget.md`、`docs/context-risk-register.md` である。Context Engineering は情報量ではなく、寿命、更新責任、毒性の管理として読む。
-- 外部 source を足すなら、[Anthropic: Effective Context Engineering for AI Agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents)、[OpenAI Codex: AGENTS.md](https://developers.openai.com/codex/guides/agents-md)、[OpenAI Codex: Skills](https://developers.openai.com/codex/skills) を優先する。長い prompt の寄せ集めや context window の広さだけで context design を説明しない。
+- 外部 source を足すなら、[OpenAI Codex: AGENTS.md](https://developers.openai.com/codex/guides/agents-md)、[OpenAI Codex: Skills](https://developers.openai.com/codex/skills)、[Anthropic: Effective Context Engineering for AI Agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) を優先する。長い prompt の寄せ集めや context window の広さだけで context design を説明しない。
 
 ### CH06 Repo Context を設計する
 
@@ -54,7 +54,7 @@
 ### CH07 Task Context と Session Memory
 
 - 最初に信頼するのは `sample-repo/tasks/FEATURE-001-brief.md`、`sample-repo/tasks/FEATURE-001-progress.md`、`docs/session-memory-policy.md`、`.github/ISSUE_TEMPLATE/task.yml` である。resume packet は最新 verify とセットで読む。
-- 外部 source を足すなら、[Anthropic: Effective Context Engineering for AI Agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) と [OpenAI Codex: AGENTS.md](https://developers.openai.com/codex/guides/agents-md) を補助線にしつつ、組織の issue tracker / handoff / change log ルールを優先する。古い summary や chat log を session memory の正本にしない。
+- 外部 source を足すなら、[OpenAI Codex: AGENTS.md](https://developers.openai.com/codex/guides/agents-md) を先に見て、[Anthropic: Effective Context Engineering for AI Agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) は補助線として使う。組織の issue tracker / handoff / change log ルールを優先し、古い summary や chat log を session memory の正本にしない。
 
 ### CH08 Skills と Context Pack を再利用する
 
@@ -64,7 +64,7 @@
 ### CH09 Harness Engineering の基礎
 
 - 最初に信頼するのは `scripts/init.sh`、`scripts/verify-sample.sh`、`sample-repo/docs/harness/single-agent-runbook.md`、`sample-repo/docs/harness/permission-policy.md`、`sample-repo/docs/harness/done-criteria.md` である。single-agent harness は prompt の言い換えではなく、開始条件と終了条件の束である。
-- 外部 source を足すなら、[Anthropic: Effective Harnesses for Long-Running Agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)、[OpenAI Codex: Hooks](https://developers.openai.com/codex/hooks)、[OpenAI: New tools for building agents](https://openai.com/index/new-tools-for-building-agents/) を優先する。権限境界は agent の印象論ではなく、実行環境の仕様で決める。
+- 外部 source を足すなら、[OpenAI Codex: Hooks](https://developers.openai.com/codex/hooks)、[OpenAI: New tools for building agents](https://openai.com/index/new-tools-for-building-agents/)、[Anthropic: Effective Harnesses for Long-Running Agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents) を優先する。権限境界は agent の印象論ではなく、実行環境の仕様で決める。
 
 ### CH10 Verification Harness を作る
 

@@ -31,10 +31,12 @@
 - `docs/harness/`: runbook / permission / done / restart
 
 ## Task Artifacts
-- `tasks/`: brief / progress / plan
-- `context-packs/`: task specific context pack
+- `tasks/`: brief / Progress Note / plan
+- `context-packs/`: task specific context pack / canonical facts / live checks
 - `.agents/skills/`: repeatable workflow
 
 ## Update Guide
 - 振る舞い変更時は code だけでなく docs / tests / task artifacts を同時に更新する
 - 変更対象が `service.py` なら、関連する acceptance criteria と `Progress Note` を確認する
+- 中断や handoff がある場合は、最新 verify、`Progress Note`、再開時に読むファイル一覧が restart packet として揃っている状態にする
+- public contract や外部依存を変える場合は approval boundary を越える前に止まる

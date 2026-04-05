@@ -10,7 +10,7 @@
 - 覆してはいけない事実を書く
 
 ## Live Checks
-- 毎回確認すべき verify、progress note、最新 state を書く
+- 毎回確認すべき verify、`Progress Note`、最新 state を書く
 
 ## Exclusions
 - 今回扱わない論点を書く

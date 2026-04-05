@@ -10,7 +10,7 @@
 ## Scope
 - `search_tickets` の検索挙動を `title`、`description`、`tags` の部分一致に揃える
 - product spec、acceptance criteria、ADR を現行挙動と同期する
-- progress note に判断と verify 結果を残す
+- `Progress Note` に判断と verify 結果を残す
 
 ## Inputs
 - `docs/product-specs/ticket-search.md`
@@ -22,7 +22,7 @@
 ## Deliverables
 - 検索関連 docs の更新
 - 必要なら code / tests の更新
-- progress note の更新
+- `Progress Note` の更新
 
 ## Constraints
 - `list_tickets` の既存 public contract は変更しない

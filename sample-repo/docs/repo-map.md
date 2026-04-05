@@ -37,4 +37,4 @@
 
 ## Update Guide
 - 振る舞い変更時は code だけでなく docs / tests / task artifacts を同時に更新する
-- 変更対象が `service.py` なら、関連する acceptance criteria と progress note を確認する
+- 変更対象が `service.py` なら、関連する acceptance criteria と `Progress Note` を確認する

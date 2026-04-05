@@ -23,7 +23,7 @@
 ## Live Checks
 - 最新の `python -m unittest discover -s tests -v` 結果
 - `tests/test_ticket_search.py` の期待値
-- 直近の progress note
+- 直近の `Progress Note`
 
 ## Exclusions
 - relevance ranking
@@ -34,4 +34,4 @@
 ## Done Signals
 - docs、tests、実装が同じ挙動を説明している
 - verify が通る
-- progress note が更新されている
+- `Progress Note` が更新されている

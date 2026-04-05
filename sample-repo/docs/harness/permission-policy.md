@@ -8,7 +8,7 @@ single-agent harness で、coding agent が自律で進めてよい変更と hum
 - failing test の追加または更新
 - 変更した挙動に追随する docs / task artifact の同期
 - read-only の調査コマンド、`./scripts/verify-sample.sh` の実行
-- scope 内の progress note 更新
+- scope 内の `Progress Note` 更新
 - current session で完結する foreground command の実行
 
 ## Require Human Approval

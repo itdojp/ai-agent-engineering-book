@@ -8,9 +8,12 @@
 - Is the verify script aligned with the actual repo state?
 - Is wording normalized against `docs/glossary.md` as the source of truth?
 - Are the canonical spellings of `Prompt Contract`, `Progress Note`, and `verification harness` stable?
+- If the diff touches an approval boundary, does `Evidence / Approval` name the approver and the decision inputs?
+- Is the `needs-human-approval` wording aligned with `sample-repo/docs/harness/done-criteria.md`?
 - Does each chapter's `Source Notes / Further Reading` stay aligned with `manuscript-en/backmatter/00-source-notes.md`?
 - Does `manuscript-en/backmatter/00-source-notes.md` cover CH01 through CH12 without omissions?
-- Are output-contract report fields normalized to `Changed Files`, `Verification`, and `Remaining Gaps`?
+- Are `Output Contract` report fields normalized to `Goal`, `Scope and Non-goals`, `Changed Files`, `Verification`, `Evidence / Approval`, and `Remaining Gaps`?
+- Are local verify, CI, and evidence terms consistent across chapters and checklists?
 
 ## Weekly Cleanup
 

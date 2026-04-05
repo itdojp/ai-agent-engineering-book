@@ -55,12 +55,12 @@ If one document tries to do both jobs, the map becomes long and the architecture
 ## 3. Define Update Boundaries for Coding Standards and Docs
 `sample-repo/docs/coding-standards.md` should do more than describe coding style in the abstract. Its more important role is to define which artifacts must be updated together when behavior changes.
 
-Docs drift usually happens because the repo treats code changes, spec changes, and task-artifact changes as separate concerns. In this repo, a public behavior change requires tests. A spec change requires product spec, acceptance criteria, and ADR updates. If a task is paused or handed off, the progress note must also be updated. Those rules make it harder for an AI agent to stop after code-only green results.
+Docs drift usually happens because the repo treats code changes, spec changes, and task-artifact changes as separate concerns. In this repo, a public behavior change requires tests. A spec change requires product spec, acceptance criteria, and ADR updates. If a task is paused or handed off, the `Progress Note` must also be updated. Those rules make it harder for an AI agent to stop after code-only green results.
 
 This is also how repo context helps defend against the failure modes from CH01. The update boundary reduces both accidental breakage and stopping early. In an artifact-heavy repo, update boundaries often matter more than style guidance.
 
 ## 4. Estimate Ownership and Change Impact
-Repo context also supports ownership and impact estimation. If `sample-repo/src/support_hub/service.py` changes, the minimum downstream check usually includes related tests such as `sample-repo/tests/test_service.py` or `sample-repo/tests/test_ticket_search.py`, plus the relevant spec, acceptance criteria, and progress note.
+Repo context also supports ownership and impact estimation. If `sample-repo/src/support_hub/service.py` changes, the minimum downstream check usually includes related tests such as `sample-repo/tests/test_service.py` or `sample-repo/tests/test_ticket_search.py`, plus the relevant spec, acceptance criteria, and `Progress Note`.
 
 Ownership does not have to mean named people. It can also mean artifact responsibility:
 

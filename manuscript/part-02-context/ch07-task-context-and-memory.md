@@ -41,8 +41,8 @@ task brief が stable な task context だとすると、`Progress Note` は mut
 
 `Progress Note` がないと、AI agent は「前回どこまでやったか」を chat history に依存する。これは session を跨いだ瞬間に壊れる。Session Memory は、会話ではなく artifact に残す必要がある。
 
-### 3. handoff と resume の設計
-handoff で必要なのは、全文サマリーではなく、再開手順である。`docs/session-memory-policy.md` は、Restart Packet（Resume Packet）の最低入力を task brief、最新 `Progress Note`、最新 verify 結果、再開時に読むべきファイル一覧の 4 点と定義している。これは最小だが十分である。
+### 3. handoff と restart の設計
+handoff で必要なのは、全文サマリーではなく、再開手順である。`docs/session-memory-policy.md` は「Resume Packet の最低入力」として、task brief、最新 `Progress Note`、最新 verify 結果、再開時に読むべきファイル一覧の 4 点を定義している。本章では、この最小 packet を `Restart Packet（Resume Packet）` と呼ぶ。これは最小だが十分である。
 
 `FEATURE-001` を例にすると、途中で作業者が交代しても、次の担当者は `FEATURE-001-brief.md` を読んで scope を確認し、`FEATURE-001-progress.md` で前回の `Decided` と `Open Questions` を見て、最後に verify を回せば再開できる。逆に「前回はだいたい検索仕様の話をしていた」程度の handoff では、どこまで確定したかが分からず、同じ議論をやり直すことになる。
 
@@ -119,13 +119,13 @@ Acceptance Criteria、Verification を確認する。
 - `sample-repo/tasks/FEATURE-001-progress.md`
   session memory の実例として読む。`Decided` と `Open Questions` をどう分離しているかを確認する。
 - `docs/session-memory-policy.md`
-  `Progress Note` の必須項目と `Restart Packet（Resume Packet）` の最小入力を確認する。本文の再開手順と照らし合わせて読む。
+  `Progress Note` の必須項目と `Resume Packet` の最低入力を確認する。本章ではこれを `Restart Packet（Resume Packet）` として扱い、本文の再開手順と照らし合わせて読む。
 - `.github/ISSUE_TEMPLATE/task.yml`
   GitHub issue 側の最小入力を確認する。brief で何を補っているかを比較する起点になる。
 
 
 ## Source Notes / Further Reading
-- この章を探し直すときは、まず `sample-repo/tasks/FEATURE-001-brief.md`、`sample-repo/tasks/FEATURE-001-progress.md`、`docs/session-memory-policy.md` を正本として見る。`Restart Packet（Resume Packet）` は summary だけでなく最新 verify とセットで読む。
+- この章を探し直すときは、まず `sample-repo/tasks/FEATURE-001-brief.md`、`sample-repo/tasks/FEATURE-001-progress.md`、`docs/session-memory-policy.md` を正本として見る。ポリシーでは `Resume Packet` と呼ぶ最小 packet を、本章では `Restart Packet（Resume Packet）` として扱う。summary だけでなく最新 verify とセットで読む。
 - 次の一歩は `manuscript/backmatter/00-source-notes.md` の「CH07 Task Context と Session Memory」と `manuscript/backmatter/01-読書案内.md` の「Context と repo 設計」を参照する。
 
 ## 章末まとめ

@@ -2,7 +2,7 @@
 
 ## Source
 - `docs/seed-issues.md` の `FEATURE-001`
-- `.github/ISSUE_TEMPLATE/task.yml`
+- `../.github/ISSUE_TEMPLATE/task.yml`
 
 ## Goal
 チケット検索機能を仕様に沿って明文化し、現行実装と docs と tests を同期する。
@@ -13,6 +13,8 @@
 - `Progress Note` に判断と verify 結果を残す
 
 ## Inputs
+- `docs/repo-map.md`
+- `context-packs/ticket-search.md`
 - `docs/product-specs/ticket-search.md`
 - `docs/design-docs/ticket-search-adr.md`
 - `docs/acceptance-criteria/ticket-search.md`
@@ -28,6 +30,7 @@
 - `list_tickets` の既存 public contract は変更しない
 - ranking、typo correction、外部検索エンジンは今回扱わない
 - docs、tests、task artifact を同時に更新する
+- public contract や scope を広げる変更は approval boundary で止める
 
 ## Acceptance Criteria
 - title / description / tags の部分一致
@@ -36,7 +39,7 @@
 - docs と tests が一致
 
 ## Verification
-`python -m unittest discover -s tests -v`
+`PYTHONPATH=src python -m unittest discover -s tests -v`
 
 ## Open Questions
 - search と status / assignee filter の組み合わせは `FEATURE-002` で扱うか、別 issue に切り出すか

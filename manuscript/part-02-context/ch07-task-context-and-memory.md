@@ -18,7 +18,7 @@ dependencies:
 ## この章の位置づけ
 issue を reopen した翌朝に「前回どこまで決まっていたか」が読めないなら、repo context が整っていても作業は始められない。CH06 で repo 全体の context を整えた。だが、repo context だけでは「今回の issue で何をやるか」「前回どこまで進んだか」は決まらない。
 
-この章では、issue を task brief に変換する手順、`Progress Note` の書式、handoff と resume の最低入力、summary drift を避ける方法を扱う。対象は `sample-repo` の `FEATURE-001` だが、考え方は原稿作業にもそのまま使える。
+この章では、issue を task brief に変換する手順、`Progress Note` の書式、handoff と restart の最低入力、summary drift を避ける方法を扱う。対象は `sample-repo` の `FEATURE-001` だが、考え方は原稿作業にもそのまま使える。
 
 ## 学習目標
 - GitHub issue を task brief に変換できる
@@ -42,7 +42,7 @@ task brief が stable な task context だとすると、`Progress Note` は mut
 `Progress Note` がないと、AI agent は「前回どこまでやったか」を chat history に依存する。これは session を跨いだ瞬間に壊れる。Session Memory は、会話ではなく artifact に残す必要がある。
 
 ### 3. handoff と resume の設計
-handoff で必要なのは、全文サマリーではなく、再開手順である。`docs/session-memory-policy.md` は、resume packet の最低入力を task brief、最新 `Progress Note`、最新 verify 結果、再開時に読むべきファイル一覧の 4 点と定義している。これは最小だが十分である。
+handoff で必要なのは、全文サマリーではなく、再開手順である。`docs/session-memory-policy.md` は、Restart Packet（Resume Packet）の最低入力を task brief、最新 `Progress Note`、最新 verify 結果、再開時に読むべきファイル一覧の 4 点と定義している。これは最小だが十分である。
 
 `FEATURE-001` を例にすると、途中で作業者が交代しても、次の担当者は `FEATURE-001-brief.md` を読んで scope を確認し、`FEATURE-001-progress.md` で前回の `Decided` と `Open Questions` を見て、最後に verify を回せば再開できる。逆に「前回はだいたい検索仕様の話をしていた」程度の handoff では、どこまで確定したかが分からず、同じ議論をやり直すことになる。
 
@@ -70,7 +70,7 @@ Task Context と Session Memory の設計ができると、AI agent は「前回
 
 
 ## 紙面で押さえるポイント
-### Resume Packet 最小形
+### Restart Packet 最小形
 
 | issue 側の入力 | task brief / session memory で増やすもの | 再開時に確認する要点 |
 |---|---|---|
@@ -79,7 +79,7 @@ Task Context と Session Memory の設計ができると、AI agent は「前回
 | `Acceptance Criteria` | `Acceptance Criteria`、`Verification`、`Out of Scope` | 何を満たせば done で、何はやらないか |
 | 会話で決まった追加事項 | `Decided`、`Open Questions`、`Next Step` | 前回の session で何が確定し、何が未決か |
 
-再開時の最小 packet は 4 点でよい。`task brief`、最新 `Progress Note`、最新 `verify`、再開時に開くファイル一覧である。これが揃っていれば、前回の会話全文を読まなくても scope と次の 1 手を復元できる。逆にこの 4 点が欠けると、AI agent は chat history を source of truth と誤認しやすい。
+再開時の最小 packet は 4 点でよい。ここではこれを `Restart Packet（Resume Packet）` と呼ぶ。`task brief`、最新 `Progress Note`、最新 `verify`、再開時に開くファイル一覧である。これが揃っていれば、前回の会話全文を読まなくても scope と次の 1 手を復元できる。逆にこの 4 点が欠けると、AI agent は chat history を source of truth と誤認しやすい。
 
 ## 章で使う bad / good example
 bad:
@@ -111,7 +111,7 @@ Acceptance Criteria、Verification を確認する。
 
 ## 演習
 1. GitHub issue を task brief に変換する。
-2. 中断した作業に対して、`Progress Note` を起点に task brief と verify 結果を含む resume packet を作りなさい。読む順番も書くこと。
+2. 中断した作業に対して、`Progress Note` を起点に task brief と verify 結果を含む `Restart Packet（Resume Packet）` を作りなさい。読む順番も書くこと。
 
 ## 参照する artifact
 - `sample-repo/tasks/FEATURE-001-brief.md`
@@ -119,13 +119,13 @@ Acceptance Criteria、Verification を確認する。
 - `sample-repo/tasks/FEATURE-001-progress.md`
   session memory の実例として読む。`Decided` と `Open Questions` をどう分離しているかを確認する。
 - `docs/session-memory-policy.md`
-  `Progress Note` の必須項目と resume packet の最小入力を確認する。本文の再開手順と照らし合わせて読む。
+  `Progress Note` の必須項目と `Restart Packet（Resume Packet）` の最小入力を確認する。本文の再開手順と照らし合わせて読む。
 - `.github/ISSUE_TEMPLATE/task.yml`
   GitHub issue 側の最小入力を確認する。brief で何を補っているかを比較する起点になる。
 
 
 ## Source Notes / Further Reading
-- この章を探し直すときは、まず `sample-repo/tasks/FEATURE-001-brief.md`、`sample-repo/tasks/FEATURE-001-progress.md`、`docs/session-memory-policy.md` を正本として見る。resume packet は summary だけでなく最新 verify とセットで読む。
+- この章を探し直すときは、まず `sample-repo/tasks/FEATURE-001-brief.md`、`sample-repo/tasks/FEATURE-001-progress.md`、`docs/session-memory-policy.md` を正本として見る。`Restart Packet（Resume Packet）` は summary だけでなく最新 verify とセットで読む。
 - 次の一歩は `manuscript/backmatter/00-source-notes.md` の「CH07 Task Context と Session Memory」と `manuscript/backmatter/01-読書案内.md` の「Context と repo 設計」を参照する。
 
 ## 章末まとめ

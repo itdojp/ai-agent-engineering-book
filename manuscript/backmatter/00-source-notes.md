@@ -44,39 +44,39 @@
 ### CH05 Context Engineering の基礎
 
 - 最初に信頼するのは `docs/context-model.md`、`docs/context-budget.md`、`docs/context-risk-register.md` である。Context Engineering は情報量ではなく、寿命、更新責任、毒性の管理として読む。
-- 外部 source を足すなら、利用中ツールの context window、instruction layering、workspace access の公式 docs を優先する。長い prompt の寄せ集めは context design の説明にならない。
+- 外部 source を足すなら、[Anthropic: Effective Context Engineering for AI Agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents)、[OpenAI Codex: AGENTS.md](https://developers.openai.com/codex/guides/agents-md)、[OpenAI Codex: Skills](https://developers.openai.com/codex/skills) を優先する。長い prompt の寄せ集めや context window の広さだけで context design を説明しない。
 
 ### CH06 Repo Context を設計する
 
 - 最初に信頼するのは `AGENTS.md`、`manuscript/AGENTS.md`、`sample-repo/AGENTS.md`、`sample-repo/docs/repo-map.md`、`sample-repo/docs/architecture.md`、`sample-repo/docs/coding-standards.md` である。repo-map は索引、architecture は設計理由として分けて読む。
-- 外部 source を足すなら、利用中 VCS、CI、package manager の公式 docs を優先する。repo の責務分離は一般論より実 repo の構成で判断する方が速い。
+- 外部 source を足すなら、[OpenAI Codex: AGENTS.md](https://developers.openai.com/codex/guides/agents-md)、[OpenAI Codex: Hooks](https://developers.openai.com/codex/hooks)、[GitHub Coding Agent: Create custom agents](https://docs.github.com/en/copilot/how-tos/use-copilot-agents/coding-agent/create-custom-agents) を優先する。repo の責務分離は一般論より、instruction layering と managed policy の実運用で判断する方が速い。
 
 ### CH07 Task Context と Session Memory
 
 - 最初に信頼するのは `sample-repo/tasks/FEATURE-001-brief.md`、`sample-repo/tasks/FEATURE-001-progress.md`、`docs/session-memory-policy.md`、`.github/ISSUE_TEMPLATE/task.yml` である。resume packet は最新 verify とセットで読む。
-- 外部 source を足すなら、issue tracker、handoff、change log の組織ルールを優先する。古い summary や chat log を session memory の正本にしない。
+- 外部 source を足すなら、[Anthropic: Effective Context Engineering for AI Agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) と [OpenAI Codex: AGENTS.md](https://developers.openai.com/codex/guides/agents-md) を補助線にしつつ、組織の issue tracker / handoff / change log ルールを優先する。古い summary や chat log を session memory の正本にしない。
 
 ### CH08 Skills と Context Pack を再利用する
 
 - 最初に信頼するのは `.agents/skills/draft-chapter/SKILL.md`、`.agents/skills/review-chapter/SKILL.md`、`sample-repo/.agents/skills/issue-to-plan/SKILL.md`、`sample-repo/.agents/skills/verification/SKILL.md`、`sample-repo/context-packs/ticket-search.md` である。skill は再利用 workflow の契約、context pack は task ごとの最小入力として読む。
-- 外部 source を足すなら、利用中 agent runtime の公式 skill / instruction docs を優先する。フレームワーク名だけで再利用設計を説明しない。
+- 外部 source を足すなら、[OpenAI Codex: Skills](https://developers.openai.com/codex/skills)、[OpenAI Codex: Subagents](https://developers.openai.com/codex/subagents)、[Google ADK: Skills](https://adk.dev/skills/) を優先する。フレームワーク名だけで再利用設計を説明しない。
 
 ### CH09 Harness Engineering の基礎
 
 - 最初に信頼するのは `scripts/init.sh`、`scripts/verify-sample.sh`、`sample-repo/docs/harness/single-agent-runbook.md`、`sample-repo/docs/harness/permission-policy.md`、`sample-repo/docs/harness/done-criteria.md` である。single-agent harness は prompt の言い換えではなく、開始条件と終了条件の束である。
-- 外部 source を足すなら、shell、CI runner、permission model の公式 docs を優先する。権限境界は agent の印象論ではなく、実行環境の仕様で決める。
+- 外部 source を足すなら、[Anthropic: Effective Harnesses for Long-Running Agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)、[OpenAI Codex: Hooks](https://developers.openai.com/codex/hooks)、[OpenAI: New tools for building agents](https://openai.com/index/new-tools-for-building-agents/) を優先する。権限境界は agent の印象論ではなく、実行環境の仕様で決める。
 
 ### CH10 Verification Harness を作る
 
 - 最初に信頼するのは `.github/workflows/verify.yml`、`checklists/verification.md`、`sample-repo/tests/test_ticket_search.py`、`artifacts/evidence/README.md` である。verification harness は test、CI、evidence、approval の流れで読む。
-- 外部 source を足すなら、利用中 test framework、CI、coverage tool の公式 docs を優先する。green screenshot だけでは reviewer が再検証できない。
+- 外部 source を足すなら、[OpenAI Agents SDK: Tracing](https://openai.github.io/openai-agents-python/tracing/)、[OpenAI Agents SDK: Guardrails](https://openai.github.io/openai-agents-python/guardrails/)、[OpenAI Agents SDK: Human in the Loop](https://openai.github.io/openai-agents-python/human_in_the_loop/) を優先する。green screenshot だけでは reviewer が再検証できない。
 
 ### CH11 Long-running Task と Multi-agent
 
 - 最初に信頼するのは `sample-repo/docs/harness/feature-list.md`、`sample-repo/docs/harness/restart-protocol.md`、`sample-repo/docs/harness/multi-agent-playbook.md`、`sample-repo/tasks/FEATURE-002-plan.md` である。multi-agent は role split と restart packet（canonical inputs）が揃って初めて扱う。
-- 外部 source を足すなら、使っている orchestration tool や task queue の公式 docs を優先する。並列化の議論を、write scope と handoff artifact から切り離さない。
+- 外部 source を足すなら、[OpenAI Codex: Subagents](https://developers.openai.com/codex/subagents)、[A2A Protocol specification](https://a2a-protocol.org/latest/specification/)、[Anthropic: Effective Harnesses for Long-Running Agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents) を優先する。並列化の議論を、write scope と handoff artifact から切り離さない。
 
 ### CH12 運用モデルと組織導入
 
 - 最初に信頼するのは `docs/operating-model.md`、`docs/metrics.md`、`checklists/repo-hygiene.md`、`.github/pull_request_template.md` である。運用モデルは Lead / Operator / Reviewer、approval boundary、review budget、cadence、cleanup の組で読む。
-- 外部 source を足すなら、組織が採用する review policy、release policy、metrics definition の公式文書を優先する。導入判断をモデル比較だけで閉じない。
+- 外部 source を足すなら、[OpenAI Agents SDK: Human in the Loop](https://openai.github.io/openai-agents-python/human_in_the_loop/)、[OpenAI Agents SDK: Guardrails](https://openai.github.io/openai-agents-python/guardrails/)、[GitHub Coding Agent: About coding agent](https://docs.github.com/en/copilot/concepts/agents/coding-agent/about-coding-agent) を優先する。導入判断をモデル比較だけで閉じない。

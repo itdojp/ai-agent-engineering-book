@@ -13,6 +13,8 @@
 - `Progress Note` に判断と verify 結果を残す
 
 ## Inputs
+- `docs/repo-map.md`
+- `context-packs/ticket-search.md`
 - `docs/product-specs/ticket-search.md`
 - `docs/design-docs/ticket-search-adr.md`
 - `docs/acceptance-criteria/ticket-search.md`
@@ -28,6 +30,7 @@
 - `list_tickets` の既存 public contract は変更しない
 - ranking、typo correction、外部検索エンジンは今回扱わない
 - docs、tests、task artifact を同時に更新する
+- public contract や scope を広げる変更は approval boundary で止める
 
 ## Acceptance Criteria
 - title / description / tags の部分一致

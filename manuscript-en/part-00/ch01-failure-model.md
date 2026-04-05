@@ -60,7 +60,7 @@ In `sample-repo/docs/seed-issues.md`, the recurring cases line up with these fai
 | Failure Mode | Typical `sample-repo` Example | First Missing Artifact to Suspect |
 |---|---|---|
 | Wrong answer | Guessing the search scope in `FEATURE-001` | The issue boundary and domain understanding |
-| Forgetting | Losing decisions during `FEATURE-002` | The task brief and progress note |
+| Forgetting | Losing decisions during `FEATURE-002` | The task brief and `Progress Note` |
 | Breaking things | Fixing `BUG-001` while drifting from docs or adjacent behavior | Tests and impact analysis |
 | Stopping early | Treating `HARNESS-001` as done before verification and evidence | The verification harness and done criteria |
 

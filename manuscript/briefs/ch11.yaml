@@ -1,7 +1,7 @@
 id: ch11
 title: Long-running Task と Multi-agent
 part: part-03-harness
-goal: 長時間タスクで必要な feature list・restart protocol・`Progress Note` を定義し、必要時のみ multi-agent に分割する。
+goal: 長時間タスクで必要な feature list・restart protocol・Progress Note を定義し、必要時のみ multi-agent に分割する。
 reader_outcomes:
   - 長時間タスクが壊れる理由を説明できる
   - restart protocol を設計できる

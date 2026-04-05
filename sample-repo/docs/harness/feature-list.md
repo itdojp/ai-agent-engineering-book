@@ -27,7 +27,7 @@
   - assignee filter 関連 test が通る
 - Exit Signal
   - `Changed Files` / `Verification` / `Remaining Gaps` を説明できる
-  - progress note に semantics の決定と latest verify が残っている
+  - `Progress Note` に semantics の決定と latest verify が残っている
 - Dependencies
   - none
 

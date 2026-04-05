@@ -20,7 +20,7 @@
 4. current-run の verify や status command を再実行し、live context を取り直す
 5. 次の 1 手を 1 work package に絞る
 6. owner が変わる場合は handoff contract を書いて role を切り替える
-7. 作業後に progress note、feature list、verify 結果を更新する
+7. 作業後に `Progress Note`、feature list、verify 結果を更新する
 
 ## Handoff Contract
 - Goal

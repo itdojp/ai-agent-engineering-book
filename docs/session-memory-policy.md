@@ -28,7 +28,7 @@
 ## Resume Packet の最低入力
 
 1. task brief
-2. 最新 progress note
+2. 最新 `Progress Note`
 3. 最新 verify 結果
 4. 再開時に読むべきファイル一覧
 
@@ -37,7 +37,7 @@
 - Acceptance Criteria は task brief から原文で引用する
 - 未確定事項は `Decided` に入れない
 - verify 実行前後で summary を分けて書かない
-- open question が解決したら progress note から消すのではなく `Decided` に昇格させる
+- open question が解決したら `Progress Note` から消すのではなく `Decided` に昇格させる
 
 ## 更新タイミング
 

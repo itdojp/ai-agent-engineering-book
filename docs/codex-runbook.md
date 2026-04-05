@@ -37,7 +37,7 @@ Return only:
 - issue brief
 - code change
 - test change
-- docs / progress note 更新
+- docs / `Progress Note` 更新
 
 ## 避けること
 

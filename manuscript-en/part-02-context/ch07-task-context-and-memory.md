@@ -22,12 +22,12 @@ This chapter shows how to turn an issue into a task brief, how to structure a Pr
 
 ## Learning Objectives
 - Convert a GitHub issue into a task brief
-- Understand the minimum fields in a coding agent progress note
+- Understand the minimum fields in a coding agent `Progress Note`
 - Design a workflow that prevents summary drift
 
 ## Outline
 ### 1. Convert an issue into a task brief
-### 2. Format a coding agent progress note
+### 2. Format a coding agent `Progress Note`
 ### 3. Design handoff and resume
 ### 4. Avoid summary drift
 ### 5. Define minimum inputs for session restart
@@ -139,7 +139,7 @@ Comparison points:
 
 ## Exercises
 1. Convert a GitHub issue into a task brief.
-2. Build a resume packet that starts from a progress note and includes the task brief and verify result.
+2. Build a resume packet that starts from a `Progress Note` and includes the task brief and verify result.
 
 ## Referenced Artifacts
 - `sample-repo/tasks/FEATURE-001-brief.md`

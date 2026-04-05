@@ -45,12 +45,12 @@ The opposite mistake also fails. A large pile of docs and tests cannot compensat
 
 - Persistent context: relatively stable repo rules such as `AGENTS.md`, architecture docs, glossary entries, and coding standards
 - Task context: issue-specific scope and done conditions such as the issue, task brief, product spec, ADR, and acceptance criteria
-- Session context: restart-oriented records such as progress notes, open questions, the latest decision summary, and the next step
+- Session context: restart-oriented records such as the `Progress Note`, open questions, the latest decision summary, and the next step
 - Tool context: live evidence such as grep output, test results, verify logs, and screenshots
 
 For `FEATURE-001`, `sample-repo/docs/architecture.md` is persistent context. `sample-repo/tasks/FEATURE-001-brief.md` is task context. `sample-repo/tasks/FEATURE-001-progress.md` is session context. The latest `python -m unittest discover -s tests -v` output is tool context. If these all get dumped into one memo, old decisions and live failures start to look equally authoritative.
 
-The separation matters because the update speed is different. Architecture docs do not change every session. Progress notes do. Verify output can become obsolete within minutes. Context Engineering treats those differences as design constraints rather than accidents.
+The separation matters because the update speed is different. Architecture docs do not change every session. The `Progress Note` does. Verify output can become obsolete within minutes. Context Engineering treats those differences as design constraints rather than accidents.
 
 ## 3. Think in Context Budgets
 A context budget is not only about token limits. It is a design policy for what should stay verbatim, what should be summarized, and what should be dropped. `docs/en/context-budget.md` gives that policy explicitly: keep acceptance criteria, interface contracts, verify commands, and destructive-change constraints verbatim; summarize exploratory logs and comparison history; drop stale test output and expired hypotheses.
@@ -66,10 +66,10 @@ The operational rule is straightforward:
 
 - repo principles such as `sample-repo/docs/architecture.md` and `sample-repo/docs/coding-standards.md` are stale-safe starting points
 - task artifacts such as a task brief or acceptance criteria must be reread for the current issue
-- progress notes are useful session memory, but they become stale as soon as verify results change
+- the `Progress Note` is useful session memory, but it becomes stale as soon as verify results change
 - terminal output and failing test logs are live context and should be refreshed rather than trusted from memory
 
-In `FEATURE-001`, `sample-repo/docs/repo-map.md` and `sample-repo/docs/architecture.md` are safe entry points. `sample-repo/tasks/FEATURE-001-progress.md` is less stable. If the progress note says the last verify passed, that statement may already be obsolete by the next session. Restarting from the note alone is not enough. The safe action is to reread the note, then rerun verify if the current task depends on it.
+In `FEATURE-001`, `sample-repo/docs/repo-map.md` and `sample-repo/docs/architecture.md` are safe entry points. `sample-repo/tasks/FEATURE-001-progress.md` is less stable. If the `Progress Note` says the last verify passed, that statement may already be obsolete by the next session. Restarting from the note alone is not enough. The safe action is to reread the note, then rerun verify if the current task depends on it.
 
 ## 5. Prevent Context Poisoning and Drift
 Context Engineering fails not only when information is missing, but also when the wrong information keeps circulating. `docs/en/context-risk-register.md` lists the main risks: stale docs, summary drift, instruction bloat, context poisoning, hidden done criteria, and tool spam.
@@ -77,10 +77,10 @@ Context Engineering fails not only when information is missing, but also when th
 Three failure patterns appear often:
 
 1. docs and tests drift apart, so implementation follows an obsolete spec
-2. a progress note writes an unverified guess under `Decided`, and the next session treats it as fact
+2. a `Progress Note` writes an unverified guess under `Decided`, and the next session treats it as fact
 3. `AGENTS.md` or handoff notes grow until the important constraints are buried
 
-The countermeasures are structural. Keep canonical artifacts in the task brief and acceptance criteria. Separate `Decided` from `Open Questions` in the progress note. Move long logs out of the standing context and keep them as evidence instead. When live evidence can be rerun, rerun it before trusting an old summary.
+The countermeasures are structural. Keep canonical artifacts in the task brief and acceptance criteria. Separate `Decided` from `Open Questions` in the `Progress Note`. Move long logs out of the standing context and keep them as evidence instead. When live evidence can be rerun, rerun it before trusting an old summary.
 
 Context Engineering is not only a technique for adding information. It is also a technique for preventing broken information from surviving too long.
 
@@ -104,7 +104,7 @@ Then provide context in this order:
 3. `sample-repo/docs/acceptance-criteria/ticket-search.md`
 4. `sample-repo/tasks/FEATURE-001-progress.md`
 5. the latest verify result
-Do not keep full historical logs in the standing context. Promote only the conclusions that must survive into the progress note.
+Do not keep full historical logs in the standing context. Promote only the conclusions that must survive into the `Progress Note`.
 ```
 
 This version separates the contract from the decision material and also separates stale-safe docs from live verify evidence.

@@ -10,7 +10,7 @@
 - Record the facts this task must not override.
 
 ## Live Checks
-- Record the verification state, progress note, and other current checks that must be refreshed each time.
+- Record the verification state, `Progress Note`, and other current checks that must be refreshed each time.
 
 ## Exclusions
 - State the topics intentionally left out of this task.

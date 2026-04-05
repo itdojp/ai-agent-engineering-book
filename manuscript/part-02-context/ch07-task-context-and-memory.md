@@ -79,7 +79,7 @@ Task Context と Session Memory の設計ができると、AI agent は「前回
 | `Acceptance Criteria` | `Acceptance Criteria`、`Verification`、`Out of Scope` | 何を満たせば done で、何はやらないか |
 | 会話で決まった追加事項 | `Decided`、`Open Questions`、`Next Step` | 前回の session で何が確定し、何が未決か |
 
-再開時の最小 packet は 4 点でよい。`task brief`、最新 ``Progress Note``、最新 `verify`、再開時に開くファイル一覧である。これが揃っていれば、前回の会話全文を読まなくても scope と次の 1 手を復元できる。逆にこの 4 点が欠けると、AI agent は chat history を source of truth と誤認しやすい。
+再開時の最小 packet は 4 点でよい。`task brief`、最新 `Progress Note`、最新 `verify`、再開時に開くファイル一覧である。これが揃っていれば、前回の会話全文を読まなくても scope と次の 1 手を復元できる。逆にこの 4 点が欠けると、AI agent は chat history を source of truth と誤認しやすい。
 
 ## 章で使う bad / good example
 bad:

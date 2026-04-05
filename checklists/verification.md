@@ -8,7 +8,7 @@
 
 ## During Change
 - diff を最小の work package に保ったか
-- docs / brief / progress note の更新漏れがないか
+- docs / brief / `Progress Note` の更新漏れがないか
 - verify failure を failure mode ごとに分類したか
 - 実行した verify command と pass / fail を current run の情報として記録したか
 

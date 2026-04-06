@@ -63,7 +63,7 @@ Restart Packet（Canonical Inputs）の最低入力は次の 5 つでよい。
 
 この packet が揃わない状態で再開すると、agent は古い前提で作業を続けやすい。たとえば前回は assignee filter の semantics だけ決めたのに、再開時に audit log の設計へ飛ぶと、verify も review もつながらない。
 
-restart protocol で大切なのは、`Progress Note` だけで再開しないことだ。summary は再開の起点であって、source of truth の置き換えではない。feature list で current track と owner を確認し、さらに verify や status command を再実行して live context を取り直す。CH07 の resume packet を、長時間タスク向けに ownership と verify freshness まで含めて強化したものと考えるとよい。
+restart protocol で大切なのは、`Progress Note` だけで再開しないことだ。summary は再開の起点であって、source of truth の置き換えではない。feature list で current track と owner を確認し、さらに verify や status command を再実行して live context を取り直す。CH07 の `Restart Packet（Resume Packet）` を、長時間タスク向けに ownership と verify freshness まで含めて強化したものと考えるとよい。
 
 さらに handoff が入る場合は、`Goal`、`Owned Files`、`Required Inputs`、`Expected Output`、`Verify`、`Stop Condition`、`Next Owner` を handoff contract として残す。restart protocol は「続きをやるための手順」であると同時に、「役割を戻し直すための手順」でもある。
 

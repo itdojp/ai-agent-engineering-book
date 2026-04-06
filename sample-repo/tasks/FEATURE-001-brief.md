@@ -30,7 +30,7 @@
 - `list_tickets` の既存 public contract は変更しない
 - ranking、typo correction、外部検索エンジンは今回扱わない
 - docs、tests、task artifact を同時に更新する
-- public contract や scope を広げる変更は Approval Boundary で止める
+- public contract や scope を広げる変更は approval boundary で止める
 
 ## Acceptance Criteria
 - title / description / tags の部分一致

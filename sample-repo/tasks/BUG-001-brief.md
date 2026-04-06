@@ -31,7 +31,7 @@
 
 ## Constraints
 - UI 層は扱わない
-- public contract を変える場合は Approval Boundary を越える前に止まる
+- public contract を変える場合は approval boundary を越える前に止まる
 - verify、docs、task artifact の更新境界を先に固定する
 
 ## Acceptance Criteria

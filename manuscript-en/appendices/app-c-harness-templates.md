@@ -33,7 +33,7 @@ The recommended flow has three stages.
 
 The template has three core parts.
 
-- `Restart Packet`: the minimum input that must exist before restart
+- `Restart Packet (Canonical Inputs)`: the minimum input that must exist before restart
 - `Restart Steps`: the read order and how to choose the next single work package
 - `Stop Conditions`: when missing information or ownership conflict should block restart
 

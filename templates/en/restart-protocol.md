@@ -1,6 +1,6 @@
 # Restart Protocol Template
 
-## Restart Packet
+## Restart Packet (Canonical Inputs)
 - Include the current plan or feature list.
 - Include the latest Progress Note.
 - Include the latest verify result.

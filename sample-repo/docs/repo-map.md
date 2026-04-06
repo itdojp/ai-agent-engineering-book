@@ -38,5 +38,5 @@
 ## Update Guide
 - 振る舞い変更時は code だけでなく docs / tests / task artifacts を同時に更新する
 - 変更対象が `service.py` なら、関連する acceptance criteria と `Progress Note` を確認する
-- 中断や handoff がある場合は、最新 verify、`Progress Note`、再開時に読むファイル一覧が restart packet として揃っている状態にする
-- public contract や外部依存を変える場合は approval boundary を越える前に止まる
+- 中断や handoff がある場合は、task brief、最新 `Progress Note`、最新 verify、再開時に読むファイル一覧が Restart Packet として揃っている状態にする
+- public contract や外部依存を変える場合は Approval Boundary を越える前に止まる

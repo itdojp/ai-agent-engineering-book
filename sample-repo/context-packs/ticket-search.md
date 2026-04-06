@@ -33,7 +33,7 @@
 - 最新の `python -m unittest discover -s tests -v` 結果
 - `tests/test_ticket_search.py` の期待値
 - 直近の `tasks/FEATURE-001-progress.md`
-- public contract や scope を越える変更が approval boundary に当たらないか
+- public contract や scope を越える変更が Approval Boundary に当たらないか
 
 ## Approval Boundary
 - `list_tickets` の既存 public contract を変える
@@ -50,4 +50,4 @@
 - docs、tests、実装が同じ挙動を説明している
 - verify が通る
 - `Progress Note` が更新されている
-- unresolved な approval boundary が残っていない
+- unresolved な Approval Boundary が残っていない

@@ -73,7 +73,7 @@
 
 ### CH11 Long-running Task と Multi-agent
 
-- 最初に信頼するのは `sample-repo/docs/harness/feature-list.md`、`sample-repo/docs/harness/restart-protocol.md`、`sample-repo/docs/harness/multi-agent-playbook.md`、`sample-repo/tasks/FEATURE-002-plan.md` である。multi-agent は role split と restart packet（canonical inputs）が揃って初めて扱う。
+- 最初に信頼するのは `sample-repo/docs/harness/feature-list.md`、`sample-repo/docs/harness/restart-protocol.md`、`sample-repo/docs/harness/multi-agent-playbook.md`、`sample-repo/tasks/FEATURE-002-plan.md` である。multi-agent は role split と restart packet（Canonical Inputs）が揃って初めて扱う。
 - 外部 source を足すなら、[OpenAI Codex: Subagents](https://developers.openai.com/codex/subagents)、[A2A Protocol specification](https://a2a-protocol.org/latest/specification/)、[Anthropic: Effective Harnesses for Long-Running Agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents) を優先する。並列化の議論を、write scope と handoff artifact から切り離さない。
 
 ### CH12 運用モデルと組織導入

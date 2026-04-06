@@ -53,7 +53,7 @@
 
 ### CH07 Task Context と Session Memory
 
-- 最初に信頼するのは `sample-repo/tasks/FEATURE-001-brief.md`、`sample-repo/tasks/FEATURE-001-progress.md`、`docs/session-memory-policy.md`、`.github/ISSUE_TEMPLATE/task.yml` である。ポリシーで `Resume Packet` と呼ぶ最小 packet を、本書では `Restart Packet（Resume Packet）` として扱い、最新 verify とセットで読む。
+- 最初に信頼するのは `sample-repo/tasks/FEATURE-001-brief.md`、`sample-repo/tasks/FEATURE-001-progress.md`、`docs/session-memory-policy.md`、`.github/ISSUE_TEMPLATE/task.yml` である。ポリシーの `Restart Packet（Resume Packet）` を、本書でも `Restart Packet（Resume Packet）` として扱い、最新 verify とセットで読む。
 - 外部 source を足すなら、[OpenAI Codex: AGENTS.md](https://developers.openai.com/codex/guides/agents-md) を先に見て、[Anthropic: Effective Context Engineering for AI Agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) は補助線として使う。組織の issue tracker / handoff / change log ルールを優先し、古い summary や chat log を session memory の正本にしない。
 
 ### CH08 Skills と Context Pack を再利用する

@@ -24,7 +24,7 @@ This reading guide is for the point after a reader has finished the chapter pros
 |---|---|---|
 | Official docs for the agent runtime in use | Instruction layering, workspace access, session handling | CH05, CH06, CH07, CH08 |
 | Internal repo maps, architecture docs, and coding standards | Canonical repo context and clearer ownership | CH06 |
-| Internal handoff, incident, and change-log rules | Session memory, Restart Packet (Resume Packet), and resume discipline | CH07, CH11 |
+| Internal handoff, incident, and change-log rules | Session memory, restart packet (Resume Packet), and resume discipline | CH07, CH11 |
 
 ## Verification, Reliability, and Operations
 

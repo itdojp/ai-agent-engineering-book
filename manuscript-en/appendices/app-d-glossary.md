@@ -51,7 +51,7 @@ The later chapters depend on a second layer of terminology.
 - `acceptance criteria`: the conditions a feature or change must satisfy from the specification side
 - `done criteria`: the conditions that make the work complete from the operational side
 - `evidence bundle`: the logs, commands, screenshots, and summaries that let a reviewer verify the result
-- `Restart Packet`: the minimum input needed to resume work after interruption
+- `restart packet`: the minimum input needed to resume work after interruption
 - `permission policy`: the rule set that separates autonomous execution from human approval
 - `work package`: the smallest unit of work that can be completed safely in one session or by one owner
 

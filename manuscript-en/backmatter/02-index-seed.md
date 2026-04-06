@@ -34,7 +34,7 @@ This file is the seed for the production index. At this stage it fixes the main 
 | Prompt Engineering | CH01, CH02 | `checklists/en/prompt-contract-review.md` |
 | repo context | CH06 | `sample-repo/docs/repo-map.md`, `sample-repo/docs/architecture.md` |
 | repo hygiene | CH12 | `checklists/en/repo-hygiene.md` |
-| Restart Packet | CH11 | `sample-repo/docs/harness/restart-protocol.md` |
+| restart packet | CH11 | `sample-repo/docs/harness/restart-protocol.md` |
 | review budget | CH12 | `docs/en/operating-model.md`, `docs/en/metrics.md` |
 | rubrics | CH04 | `evals/rubrics/feature-spec.json` |
 | sample-repo | CH01 | `sample-repo/README.md`, `sample-repo/docs/domain-overview.md` |

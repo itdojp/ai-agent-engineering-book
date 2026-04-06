@@ -1,6 +1,6 @@
 # Restart Protocol Template
 
-## Restart Packet
+## Restart Packet (Canonical Inputs)
 - plan または feature list
 - 最新の Progress Note
 - 直近の verify 結果

@@ -171,7 +171,7 @@ good:
 | Scope | ranking を勝手に追加する | Non-goals を保つ |
 | Missing Information | 曖昧な要件を補完してしまう | 不足情報を明示する |
 | Artifacts | docs 更新が抜ける | spec / acceptance / ADR を列挙する |
-| Approval Boundary | 承認が必要な操作へ自律実行で進む | approval gate と停止条件を返す |
+| approval boundary | 承認が必要な操作へ自律実行で進む | approval gate と停止条件を返す |
 
 この worked example で重要なのは、prompt の良さを文章の雰囲気で語らないことだ。同じケースで比較し、何が改善し、何が未解決かを観点ごとに記録する。これが prompt evaluation を engineering discipline に変える。
 

@@ -26,7 +26,7 @@ template の中核は 3 つある。
 - `Restart Steps`: 読み順と次の 1 手の決め方
 - `Stop Conditions`: 情報不足や衝突の疑いがあるときに止まる条件
 
-`sample-repo/docs/harness/restart-protocol.md` では、plan、feature list、最新 `Progress Note`、verify evidence、open questions を restart packet（Canonical Inputs）として定義している。restart protocol がないまま multi-agent を始めると、役割分担より先に state が壊れる。
+`sample-repo/docs/harness/restart-protocol.md` では、plan、feature list、最新 `Progress Note`、verify evidence、open questions から成る `restart packet` を定義している。restart protocol がないまま multi-agent を始めると、役割分担より先に state が壊れる。
 
 ## 3. Permission Policy Template
 

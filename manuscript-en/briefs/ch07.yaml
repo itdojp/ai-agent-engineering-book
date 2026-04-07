@@ -17,7 +17,7 @@ sections:
   - Minimum inputs for session restart
 exercises:
   - Convert a GitHub issue into a task brief.
-  - Build a `Restart Packet (Resume Packet)` that starts from a Progress Note and includes the task brief and verify result.
+  - Build a `restart packet (Resume Packet)` that starts from a Progress Note and includes the task brief and verify result.
 artifacts:
   - sample-repo/tasks/FEATURE-001-brief.md
   - sample-repo/tasks/FEATURE-001-progress.md

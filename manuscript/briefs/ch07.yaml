@@ -17,7 +17,7 @@ sections:
   - セッション再開時の最低入力
 exercises:
   - GitHub issue を task brief に変換する。
-  - 中断した作業に対して、`Progress Note` を起点に task brief と verify 結果を含む `Restart Packet（Resume Packet）` を作る。
+  - 中断した作業に対して、`Progress Note` を起点に task brief と verify 結果を含む `restart packet（Resume Packet）` を作る。
 artifacts:
   - sample-repo/tasks/FEATURE-001-brief.md
   - sample-repo/tasks/FEATURE-001-progress.md

@@ -42,7 +42,7 @@ task brief が stable な task context だとすると、`Progress Note` は mut
 `Progress Note` がないと、AI agent は「前回どこまでやったか」を chat history に依存する。これは session を跨いだ瞬間に壊れる。Session Memory は、会話ではなく artifact に残す必要がある。
 
 ### 3. handoff と restart の設計
-handoff で必要なのは、全文サマリーではなく、再開手順である。`docs/session-memory-policy.md` は「Resume Packet の最低入力」として、task brief、最新 `Progress Note`、最新 verify 結果、再開時に読むべきファイル一覧の 4 点を定義している。本章では、この最小 packet を `restart packet（Resume Packet）` と呼ぶ。これは最小だが十分である。
+handoff で必要なのは、全文サマリーではなく、再開手順である。`docs/session-memory-policy.md` は「Restart Packet（Resume Packet）の最低入力」として、task brief、最新 `Progress Note`、最新 verify 結果、再開時に読むべきファイル一覧の 4 点を定義している。本章では、この最小 packet を `restart packet（Resume Packet）` と呼ぶ。これは最小だが十分である。
 
 `FEATURE-001` を例にすると、途中で作業者が交代しても、次の担当者は `FEATURE-001-brief.md` を読んで scope を確認し、`FEATURE-001-progress.md` で前回の `Decided` と `Open Questions` を見て、最後に verify を回せば再開できる。逆に「前回はだいたい検索仕様の話をしていた」程度の handoff では、どこまで確定したかが分からず、同じ議論をやり直すことになる。
 

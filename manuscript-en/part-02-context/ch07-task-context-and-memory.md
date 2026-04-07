@@ -56,7 +56,7 @@ The purpose of this format is not to preserve every step of exploration. Its pur
 The most common mistake is to paste brief content into the Progress Note. Goal, constraints, and acceptance criteria already belong in the task brief. The Progress Note should record session delta, not duplicate stable context.
 
 ## 3. Design Handoff and Restart
-Good handoff is not a long narrative. It is a restart procedure. `docs/en/session-memory-policy.md` defines the minimum `restart packet (Resume Packet)` as four items. In this chapter, that minimal packet is also referred to as a `restart packet (Resume Packet)`:
+Good handoff is not a long narrative. It is a restart procedure. `docs/en/session-memory-policy.md` defines the "Minimum Input for a Restart Packet (Resume Packet)" as four items. In this chapter, that same minimal set is also referred to as a `restart packet (Resume Packet)`:
 
 1. the task brief
 2. the latest Progress Note
@@ -148,7 +148,7 @@ Comparison points:
 - `.github/ISSUE_TEMPLATE/task.yml`
 
 ## Source Notes / Further Reading
-- To revisit this chapter quickly, start with `sample-repo/tasks/FEATURE-001-brief.md`, `sample-repo/tasks/FEATURE-001-progress.md`, and `docs/en/session-memory-policy.md`. These three artifacts show the boundary between stable task context and mutable session context. The policy uses `restart packet (Resume Packet)` as the term for this minimal restart artifact, and this chapter uses the same term.
+- To revisit this chapter quickly, start with `sample-repo/tasks/FEATURE-001-brief.md`, `sample-repo/tasks/FEATURE-001-progress.md`, and `docs/en/session-memory-policy.md`. These three artifacts show the boundary between stable task context and mutable session context. The policy refers to this minimal restart artifact as a `Restart Packet`, and this chapter discusses the same concept as a `restart packet (Resume Packet)`.
 - For the backmatter navigation path, see `manuscript-en/backmatter/00-source-notes.md` under `### CH07 Task Context and Session Memory` and `manuscript-en/backmatter/01-reading-guide.md` under `## Context and Repo Design`.
 
 ## Chapter Summary

@@ -119,13 +119,13 @@ Acceptance Criteria、Verification を確認する。
 - `sample-repo/tasks/FEATURE-001-progress.md`
   session memory の実例として読む。`Decided` と `Open Questions` をどう分離しているかを確認する。
 - `docs/session-memory-policy.md`
-  `Progress Note` の必須項目と `Resume Packet` の最低入力を確認する。本章ではこれを `restart packet（Resume Packet）` として扱い、本文の再開手順と照らし合わせて読む。
+  `Progress Note` の必須項目と `Restart Packet（Resume Packet）` の最低入力を確認する。本章ではこれを `restart packet（Resume Packet）` として扱い、本文の再開手順と照らし合わせて読む。
 - `.github/ISSUE_TEMPLATE/task.yml`
   GitHub issue 側の最小入力を確認する。brief で何を補っているかを比較する起点になる。
 
 
 ## Source Notes / Further Reading
-- この章を探し直すときは、まず `sample-repo/tasks/FEATURE-001-brief.md`、`sample-repo/tasks/FEATURE-001-progress.md`、`docs/session-memory-policy.md` を正本として見る。ポリシーでは `Resume Packet` と呼ぶ最小 packet を、本章では `restart packet（Resume Packet）` として扱う。summary だけでなく最新 verify とセットで読む。
+- この章を探し直すときは、まず `sample-repo/tasks/FEATURE-001-brief.md`、`sample-repo/tasks/FEATURE-001-progress.md`、`docs/session-memory-policy.md` を正本として見る。ポリシーでは `Restart Packet（Resume Packet）` と呼ぶ最小 packet を、本章では `restart packet（Resume Packet）` として扱う。summary だけでなく最新 verify とセットで読む。
 - 次の一歩は `manuscript/backmatter/00-source-notes.md` の「CH07 Task Context と Session Memory」と `manuscript/backmatter/01-読書案内.md` の「Context と repo 設計」を参照する。
 
 ## 章末まとめ

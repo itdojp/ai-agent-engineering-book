@@ -41,7 +41,7 @@ rewrite は章単位ではなく work package 単位で閉じる。現時点の 
 | WP-02 | `#155` | Closed | CH01-CH04 と prompt contract / eval artifacts |
 | WP-03 | `#156` | Closed | CH05-CH08 と context artifacts |
 | WP-04 | `#157` | Closed | CH09-CH12 と harness artifacts |
-| WP-05 | `#158` | Open | appendix / backmatter / source notes / figure policy |
+| WP-05 | `#158` | Closed | appendix / backmatter / source notes / figure policy |
 | WP-06 | `#159` | Closed | sample-repo / templates / EN parity / verify support |
 
 work package を閉じる判断は、issue コメントだけでなく repo 上の tracking docs でも再確認できるようにする。

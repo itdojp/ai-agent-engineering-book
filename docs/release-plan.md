@@ -21,12 +21,12 @@ Status: completed
 CH09-CH12 を執筆し、verification / restart / operating model を固める。
 
 ## M4 Polish
-Status: active
+Status: completed
 
-appendix、glossary、cross-reference、technical pass、editorial cleanup を継続する。
+appendix、glossary、cross-reference、technical pass、editorial cleanup を closeout 監査まで完了した。
 
 ## Current Focus
 
-- review で見つかった drift を issue 単位で修正する
-- 日本語版と英語版の onboarding / parity docs を current state に保つ
-- verify 出力、cross-reference、support artifact の terminology drift を小さく解消する
+- rewrite umbrella を再利用せず、focused follow-up issue / PR として maintenance を進める
+- 日本語版と英語版の parity docs は drift が見つかったときだけ小さく更新する
+- verify 出力、cross-reference、support artifact の terminology drift は periodic audit で点検する

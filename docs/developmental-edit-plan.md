@@ -46,6 +46,8 @@ rewrite は章単位ではなく work package 単位で閉じる。現時点の 
 
 work package を閉じる判断は、issue コメントだけでなく repo 上の tracking docs でも再確認できるようにする。
 
+2026 rewrite の work package はすべて close 済みである。以後の調整は umbrella issue を再利用せず、focused follow-up issue / PR として扱う。
+
 ## Verification Gate
 
 rewrite 系 PR は、対象範囲に応じて次の検証を通す。

@@ -13,10 +13,10 @@ sections:
   - 長時間タスクで壊れる点
   - feature list と進捗記録
   - restart protocol
-  - planner / coder / reviewer の分離
+  - planner / coder / reviewer / verifier の分離
   - multi-agent を使う条件、使わない条件
 exercises:
-  - ケースCを planner / coder / reviewer に分解する。
+  - ケースCを planner / coder / reviewer / verifier に分解する。
   - 途中で失敗した長時間タスクを restart protocol で再開する。
 artifacts:
   - sample-repo/docs/harness/feature-list.md

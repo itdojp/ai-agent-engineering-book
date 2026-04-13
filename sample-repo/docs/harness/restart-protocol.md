@@ -3,13 +3,13 @@
 ## Principle
 summary は必要だが、それだけで再開してはならない。restart は plan、feature list、`Progress Note`、verify、owned files をそろえてから行う。
 
-## Restart Packet
+## Restart Packet (Canonical Inputs)
 - `tasks/FEATURE-002-plan.md`（`FEATURE-002` では task brief 相当として使う）
-- 最新の feature list
+- 最新の `docs/harness/feature-list.md`
+- 現在の owned files と merge order
 - 最新の `Progress Note`
 - 直近の verify 結果
 - open question と approval 待ち項目
-- 現在の owned files と merge order
 
 ## Live Checks
 - `Progress Note` だけで再開せず、必要な verify や status command を再実行する

@@ -66,8 +66,6 @@ support-hub で local multi-agent orchestration を使うときの entry criteri
 - `done`
   - checkpoint が閉じ、verify と report が揃っている
 - `blocked`
-  - ownership 衝突、未解決の verify failure、source conflict がある
+  - ownership 衝突、未解決の verify failure、source conflict がある、または owned files や merge order を組み直さないと進められない
 - `needs-human-approval`
   - public contract、approval boundary、merge policy に触れた
-- `needs-replan`
-  - owned files や merge order を組み直さないと進められない

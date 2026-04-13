@@ -39,7 +39,7 @@ dependencies:
 この failure mode は CH01 の「忘却」と「停止が早い」の複合形である。long-running task では、context を厚くするだけでは足りない。session を跨いでも state を保てる artifact が必要になる。
 
 ### 2. feature list と進捗記録
-long-running task の最初の artifact は feature list である。feature list は、最終目標を複数の track に分け、どこまで進んだかを workstream 単位で見える化するための artifact である。`sample-repo/docs/harness/feature-list.md` では、`FEATURE-002` を `assignee filter semantics`、`assignment change audit log`、`verification and docs sync` の 3 track に分けている。
+long-running task の最初の artifact は feature list である。feature list は、最終目標を複数の track に分け、どこまで進んだかを workstream 単位で見える化するための artifact である。`sample-repo/docs/harness/feature-list.md` では、`FEATURE-002` を `Track A: Assignee Filter Semantics`、`Track B: Assignment Change Audit Log`、`Track C: Verification And Docs Sync` の 3 track に分けている。
 
 ここで重要なのは、feature list が backlog の別名ではないことだ。backlog はやることの一覧だが、feature list は long-running task を session またぎで維持するための進行管理 artifact である。各 track に目的、主要ファイル、verify signal、依存関係を持たせることで、「今どの塊を閉じにいくのか」を決めやすくなる。
 
@@ -51,18 +51,18 @@ restart protocol は、中断後に「前回の続きらしいこと」を推測
 restart packet の最低入力は次の 6 つでよい。
 
 1. `FEATURE-002` plan
-2. 最新の feature list
-3. 最新の `Progress Note`
-4. 直近の verify 結果
-5. 未解決の open question と approval 待ち項目
-6. 現在の owned files と merge order
+2. 最新の `sample-repo/docs/harness/feature-list.md`
+3. 現在の owned files と merge order
+4. 最新の `Progress Note`
+5. 直近の verify 結果
+6. 未解決の open question と approval 待ち項目
 
 この packet が揃わない状態で再開すると、agent は古い前提で作業を続けやすい。特に summary だけで再開するのは危険である。summary は session summary として必要だが、それ単体では source of truth にならない。再開時には plan、feature list、`Progress Note`、verify、owned files を読み直し、必要なら live verify を取り直す。
 
-### 4. planner / coder / reviewer の分離
+### 4. planner / coder / reviewer / verifier の分離
 task を multi-agent に分けるとき、最初に分けるべきなのは人数ではなく責務である。`sample-repo/docs/harness/multi-agent-playbook.md` と `sample-repo/tasks/FEATURE-002-plan.md` では、`planner`、`coder`、`reviewer`、`verifier` の 4 役を定義している。
 
-この分離が有効なのは、write scope と判断責務が違うからである。
+この 4 役の分離が有効なのは、write scope と判断責務が違うからである。
 
 | role | 主な責務 | 触る artifact |
 |---|---|---|
@@ -144,7 +144,7 @@ local で閉じる track だけを multi-agent にし、MCP は tool connectivit
 このカードで見るべき点は、「複雑だから multi-agent」ではなく、「分割後に統合コストが下がるか」である。feature list と restart packet が弱い状態で agent を増やすと、単に state 崩壊を並列化するだけになる。逆に plan と role split が明確なら、local multi-agent orchestration は long-running task の coordination cost を下げる。
 
 ## 演習
-1. ケースCを planner / coder / reviewer に分解する。
+1. ケースCを planner / coder / reviewer / verifier に分解する。
 2. 途中で失敗した長時間タスクを restart protocol で再開する。
 
 ## 参照する artifact

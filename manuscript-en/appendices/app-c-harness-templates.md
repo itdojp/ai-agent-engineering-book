@@ -37,7 +37,7 @@ The template has three core parts.
 - `Restart Steps`: the read order and how to choose the next single work package
 - `Stop Conditions`: when missing information or ownership conflict should block restart
 
-`sample-repo/docs/harness/restart-protocol.md` is the concrete example. Without a restart protocol, long-running or multi-agent work loses state before it gains speed.
+`sample-repo/docs/harness/restart-protocol.md` is the concrete example. In that repo, the restart packet includes the plan, feature list, owned files, merge order, latest Progress Note, verify evidence, and open questions. Without a restart protocol, long-running or multi-agent work loses state before it gains speed.
 
 ## 3. Permission Policy Template
 

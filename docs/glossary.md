@@ -53,7 +53,7 @@
 | repo hygiene | 次の作業を壊さないために repo の整合性と可読性を保つ運用 |
 | hygiene backlog age | cleanup backlog のうち最も古い未処理項目の経過時間 |
 | entropy cleanup | stale docs、孤立 artifact、表記ゆれ、不要差分を定期的に整理する運用 |
-| restart packet | 中断後の再開に必要な canonical input。plan、feature list、最新 `Progress Note`、verify evidence、open questions の組 |
+| restart packet | 中断後の再開に必要な canonical input。plan、feature list、owned files、merge order、最新 `Progress Note`、verify evidence、open questions から成る最小入力セット |
 | permission policy | coding agent が自律で進めてよい変更と human approval が必要な変更を分ける規則 |
 | skill | 再利用可能な workflow / output contract を持つ instructions / resources / scripts の単位。章タイトルや file 名では `Skills` や `SKILL.md` と表記することがある |
 | runtime-managed capability | background execution、hosted tools、managed context のように runtime が mechanism を肩代わりする機能 |

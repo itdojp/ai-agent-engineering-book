@@ -52,6 +52,20 @@ verify log は freshness が命である。昨日の green log は、今日の c
 
 `artifacts/evidence/README.md` では、evidence bundle を保存する目的、適用場面、推奨ディレクトリ構成、最低限の内容を定義した。2026 年の運用で特に重要なのは freshness である。evidence は存在するだけでは不十分で、current run の verify と結び付いていなければならない。古い screenshot、古い verify.log、別 branch の summary を流用すると、green check が付いていても reviewer は現行 diff を信じられない。evidence bundle は archive ではなく、現在の PR と verify chain を結び付ける artifact である。
 
+trace coverage を metrics に使うなら、trace も自由記述のメモでは足りない。少なくとも review で trace を参照するときは、minimum trace reference contract を満たしている必要がある。必要なのは複雑な tracing system ではなく、次の 7 項目で十分である。
+
+| 項目 | 役割 |
+|---|---|
+| task / work-package identifier | どの task を指す trace かを識別する |
+| run timestamp または run identifier | どの実行の trace かを current-run verify と結び付ける |
+| owner / handoff | 誰が実行し、handoff があれば誰へ渡したかを示す |
+| retry / restart reason | なぜ再試行や再開が発生したかを示す |
+| verify reference | どの current-run verify に対応する trace かを示す |
+| evidence linkage | review でどの evidence bundle から参照されているかを示す |
+| redaction / privacy note | 秘匿化や省略がある場合に、その影響を説明する |
+
+この contract があれば、reviewer は「この trace が何を指しているか」を判断できる。逆に、run id も verify 参照もない trace は historical memo にはなっても、trace coverage を測る対象にはしにくい。CH10 の範囲では、trace は current-run verify を置き換えず、verify を説明しやすくする参照 artifact として扱う。
+
 ### 4. CI と local verify の分担
 local verify と CI verify は同じものではない。local verify は、agent や開発者が変更前後に高速に回す検証であり、CI verify は branch や PR に対して同じ検証を再現し、共有の合格ラインにする仕組みである。前者は iteration speed、後者は reproducibility を担当する。
 

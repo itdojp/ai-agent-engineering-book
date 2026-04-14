@@ -41,11 +41,19 @@ throughput の自慢ではなく、どこで運用が詰まり、どの artifact
 
 ## Observability Inputs
 - trace coverage
-  - long-running task や handoff で failure analysis に必要な履歴が残っているかを見る
+  - long-running task、handoff、retry、restart がある work package に対して、minimum trace reference contract を満たす trace が残っているかを見る
 - current-run verify availability
   - reviewer が最新 run を確認できるかを見る
 - retry concentration
   - 同じ段階で failure loop が起きていないかを見る
+
+## Trace Coverage Definition
+- 分母
+  - long-running task、handoff、retry、restart のいずれかがあり、trace 参照が必要な work package 数
+- 分子
+  - task / work-package id、run timestamp または run id、owner / handoff、retry / restart reason、verify reference、evidence linkage、redaction note のうち必要項目を満たす trace を残した work package 数
+
+ここでの trace coverage は trace file の有無だけではない。reviewer が「どの verify とどの task に紐づく trace か」を説明できるかまで含めて測る。
 
 ## Intervention Rules
 - PR cycle time や queue wait time が伸びたら
@@ -62,5 +70,6 @@ throughput の自慢ではなく、どこで運用が詰まり、どの artifact
 - verify failure の主因は prompt / context / harness のどこか
 - queue wait time が長いのは reviewer 待ちか、verify 待ちか、approval 待ちか
 - trace coverage が不足して failure analysis ができなくなっていないか
+- trace coverage の不足は、trace 不在なのか、verify reference 不足なのか、evidence linkage 不足なのか
 - repo hygiene の悪化が次の作業速度を落としていないか
 - stale draft と stale docs を同時に増やしていないか

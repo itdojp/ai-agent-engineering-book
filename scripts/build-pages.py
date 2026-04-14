@@ -156,6 +156,26 @@ def strip_leading_h1_markdown(body: str) -> str:
     return re.sub(r"^\s*# .*(?:\n+)?", "", body, count=1)
 
 
+def normalize_text(text: str) -> str:
+    return re.sub(r"\s+", " ", html.unescape(text)).strip()
+
+
+def remove_duplicate_excerpt_paragraph(body_html: str, excerpt: str) -> str:
+    target = normalize_text(excerpt)
+    if not target:
+        return body_html
+
+    paragraph_re = re.compile(r"<p>.*?</p>", re.DOTALL)
+    tag_re = re.compile(r"<[^>]+>")
+
+    for match in paragraph_re.finditer(body_html):
+        paragraph_html = match.group(0)
+        paragraph_text = normalize_text(tag_re.sub("", paragraph_html))
+        if paragraph_text == target:
+            return body_html[: match.start()] + body_html[match.end() :]
+    return body_html
+
+
 def page_token(path: Path) -> str:
     stem = path.stem
     if stem == "part-opener":
@@ -240,8 +260,8 @@ def load_page(language: str, section: SectionSpec, source_path: Path) -> Page:
     title = extract_title(body, source_path.stem)
     content_body = strip_leading_h1_markdown(body)
     md = markdown.Markdown(extensions=["extra", "toc", "sane_lists"])
-    body_html = md.convert(content_body)
     excerpt = extract_excerpt(body)
+    body_html = remove_duplicate_excerpt_paragraph(md.convert(content_body), excerpt)
     page_kind, page_label = classify_page(language, section, source_path, title)
     return Page(
         language=language,

@@ -13,6 +13,7 @@
 - verify failure を failure mode ごとに分類したか
 - 実行した verify command と pass / fail を current run の情報として記録したか
 - 長時間タスクなら trace に残すべき handoff / retry が整理されているか
+- trace を残す場合、task / work-package id、run timestamp または run id、owner / handoff、retry / restart reason を残したか
 
 ## Before Review
 - local verify を回したか
@@ -21,6 +22,7 @@
 - UI または user-visible change なら evidence bundle を保存したか
 - evidence が current-run の結果を指しているか
 - `Changed Files`、`Verification`、`Remaining Gaps` が current diff と一致しているか
+- trace を review で参照する場合、verify reference と evidence linkage が明示されているか
 - trace や screenshot に redaction / privacy consideration が必要か確認したか
 - evidence が不要な場合、その理由を説明できるか
 - human approval が必要な点を明示したか

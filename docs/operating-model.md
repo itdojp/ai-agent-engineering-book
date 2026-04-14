@@ -24,6 +24,20 @@ runtime は background execution、hosted tools、managed context のような m
 
 runtime は mechanism の提供者であり、policy の決定者ではない。この区別を曖昧にすると、便利機能が増えるほど責務の所在が見えなくなる。
 
+## Runtime-managed loop / repo-owned manual harness の判断
+
+最終 review / merge は常に human-owned であり、source-of-truth artifact も repo-owned のままである。その前提で、runtime-managed loop だけで足りるか、manual harness を厚く残すかを次の表で判断する。
+
+| 判断要因 | runtime-managed loop で足りる条件 | repo-owned manual harness が必要な条件 |
+|---|---|---|
+| human approval | 最終 review 以外に追加の approval gate がない | 実行前 / 実行中 / 実行後の approval を artifact で管理したい |
+| evidence / audit trail | runtime status と verify 結果で十分に説明できる | custom evidence bundle や監査用の記録を残す必要がある |
+| stop / resume logic | 線形な run、単純な retry、単純な stop で閉じる | 条件分岐した stop / resume、handoff、retry rule を残したい |
+| source-of-truth maintenance | task brief や done criteria が固定済みで run 中に更新しない | artifact sync、refresh policy、owned files を run 中に明示したい |
+| review packaging | reviewer が runtime surface をそのまま読めば足りる | `Changed Files`、`Verification`、`Remaining Gaps` を custom に整形したい |
+
+判断基準は「runtime が便利か」ではなく、「custom policy と証跡がどれだけ必要か」である。そこが増えるほど、repo-owned manual harness を薄くしすぎない方が安全になる。
+
 ## Responsibilities
 ### Human / Team
 - 目的設定と優先順位の決定

@@ -33,6 +33,8 @@ Context Engineering では、AI agent に見せる情報を「何でも渡す」
 - live tool output
   - 現時点の挙動や探索結果。grep、test 出力、verify log は refresh 前提で扱い、常駐させすぎない。
 
+modern runtime の prompt caching や server-side compaction / context editing は、この責務分離の上に載る補助である。caching は stable な context の再送コストを下げ、compaction / context editing は live context の圧力を下げる。だが、どの artifact を source of truth とするか、いつ refresh するか、どこで redact するかは repo / team 側の policy で決め続ける必要がある。
+
 ## Rules
 1. prompt 自体を context の代わりにしない。
 2. 不変情報は persistent artifact に置き、毎回貼り直さない。

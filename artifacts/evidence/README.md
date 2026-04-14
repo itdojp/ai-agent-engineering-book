@@ -28,6 +28,19 @@ artifacts/evidence/<task-id>/<timestamp>/
   after.png
 ```
 
+## Minimum Trace Reference Contract
+trace を review や metrics で参照する場合は、少なくとも次の項目を結び付けられるようにする。
+
+- task / work-package identifier
+- run timestamp または run identifier
+- owner / handoff information（必要な場合）
+- retry / restart reason（必要な場合）
+- verify reference（どの current-run verify に対応するか）
+- evidence linkage（どの bundle / PR summary から参照されるか）
+- redaction / privacy note（必要な場合）
+
+この contract は trace を current-run verify の代わりにするためではなく、「何の trace か」を reviewer が識別できるようにするための最低限の参照情報である。
+
 ## Minimum Contents
 - `summary.md`
   - 何を変えたか
@@ -40,6 +53,7 @@ artifacts/evidence/<task-id>/<timestamp>/
   - before / after の確認手順
 - `trace.md`
   - handoff、retry、失敗分析に必要な履歴がある場合のみ
+  - 参照する場合は minimum trace reference contract の項目を満たす
 - `before.png`, `after.png`
   - UI 変更がある場合のみ
 
@@ -47,6 +61,7 @@ artifacts/evidence/<task-id>/<timestamp>/
 - evidence bundle は review 時点で current-run の verify を指している必要がある
 - 過去 run の verify log を流用する場合は、再実行できない理由と影響を `summary.md` に明記する
 - stale な screenshot や trace だけを残して current-run verify を省略しない
+- trace だけが残っていて verify reference が無い状態を current-run evidence と誤認しない
 
 ## Redaction / Privacy
 - secret、credential、個人情報、社内識別子が含まれる場合は bundle 化前に除く

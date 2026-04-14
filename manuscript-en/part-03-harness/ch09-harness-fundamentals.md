@@ -23,6 +23,8 @@ Even when repo context, task briefs, and skills are all present, a coding agent 
 
 Harness Engineering starts where Context Engineering stops. Context Engineering designs what the agent should read. Harness Engineering designs how the agent starts, what it may touch, when it may say “done,” and how it should retry or stop. This chapter defines the minimum unit of that system: the single-agent harness. The scope here is not the full verification harness yet. The goal is to establish the minimal execution frame that lets one coding agent finish work safely.
 
+Modern runtimes may provide convenience features such as background execution, hosted tools, and managed context. Those mechanisms can reduce execution friction, but they do not remove repo responsibility for approval boundaries, artifact sync, verify, or review. Making that distinction reader-facing is part of this chapter's job.
+
 ## Learning Objectives
 - Explain the components of a single-agent harness
 - Understand why permission policy and escalation matter
@@ -50,6 +52,20 @@ In this repo, the single-agent harness has six parts:
 | report format | standardizes what must be reported at finish | runbook and done criteria |
 
 `BUG-001` makes the difference clear. If the instruction is only “fix the bug,” the agent can stop after producing a plausible root-cause guess. Once the task runs inside a single-agent harness, startup inputs, permission boundaries, exit states, and verify command are fixed before the first edit begins.
+
+This is also where runtime-managed capability diverges from harness-owned duty. Background execution and hosted tools help with how the work runs, but the repo still has to fix which task brief is the source of truth, where approval begins, and which verify line counts as done. Managed context does not remove artifact sync or report format.
+
+To decide whether a runtime-managed loop is enough or whether a repo-owned manual harness should remain explicit, use the following table. The baseline is fixed: final review / merge remains human-owned, and source-of-truth artifacts remain repo-owned even when the runtime manages execution state.
+
+| Decision factor | When a runtime-managed loop is enough | When a repo-owned manual harness should stay explicit |
+|---|---|---|
+| human approval | there is no extra approval gate beyond final review | human approval is needed before, during, or after execution |
+| evidence / audit trail | runtime status and current-run verify are enough for review | task-specific evidence bundles or audit-oriented records must be preserved |
+| stop / resume logic | the run is linear and closes with simple retry | conditional stop / resume, retry classification, or handoff must be fixed in repo artifacts |
+| source of truth | the task brief, runbook, and done criteria remain fixed during the run | artifact sync, refresh policy, or owned files must stay explicit during the run |
+| review responsibility | the reviewer can read the runtime result as-is | `Changed Files`, `Verification`, and `Remaining Gaps` need explicit packaging for review |
+
+In other words, a runtime-managed loop is a question of whether the mechanism is sufficient, not a question of whether responsibility disappears. Once approval, evidence, stop / resume, or artifact sync become custom, it is unsafe to thin the repo-owned manual harness too far.
 
 CH08 completed the reusable context side. CH09 begins the execution side.
 
@@ -202,6 +218,7 @@ The point of this example is not automation theater. The point is to show that H
 ## Chapter Summary
 - Context Engineering decides what the agent sees. Harness Engineering decides how the agent starts, where it must stop, and what must be true before it may declare completion.
 - The minimum single-agent harness consists of init, work boundary, permission policy, done criteria, verify command, and retry rule.
+- Runtime-managed loops may improve mechanism, but approval boundaries, artifact sync, and review-ready reporting still remain repo-owned duties.
 - Once start and exit conditions are stable, the next missing piece is a verification chain that reviewers can trust. The next chapter focuses on the verification harness itself.
 
 ## Parity Notes

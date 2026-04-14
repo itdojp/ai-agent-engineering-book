@@ -60,12 +60,36 @@ The objective is not to create a glossy report. The objective is to preserve eno
 
 `support-hub` is not a UI repo today, so the worked example in this chapter does not require screenshots. But the artifact still matters now, because it fixes the location and format before a UI task arrives. That prevents later ambiguity about where evidence belongs and what must be included.
 
+The important point here is not to use similar words for different kinds of evidence. At minimum, the verification harness should keep three artifacts distinct:
+
+- verify log: the log that keeps the current-run command, timestamp, and result
+- trace: the history that spans sessions or runs, including state changes and handoff
+- evidence bundle: the reviewer-facing bundle that makes the diff inspectable
+
+Freshness is what matters most for a verify log. Yesterday's green log is not today's current-run verify. A trace is different: it is a historical artifact used to understand how the work progressed across a long-running task or a failure analysis. An evidence bundle is reviewer-facing and may include selected verify-log lines, trace references, repro steps, and screenshots. Current-run verify and historical trace therefore serve different purposes, and the bundle is the artifact that prepares them for review.
+
+If trace coverage is going to be used as a metric, a trace cannot stay as a free-form memo. At minimum, any trace cited in review should satisfy a minimum trace reference contract. This does not require a complex tracing system. The seven fields below are enough.
+
+| Field | Role |
+|---|---|
+| task / work-package identifier | identifies which task the trace belongs to |
+| run timestamp or run identifier | connects the trace to the current-run verify |
+| owner / handoff | shows who ran the work and who received it when handoff happened |
+| retry / restart reason | explains why retry or restart was needed |
+| verify reference | shows which current-run verify the trace belongs to |
+| evidence linkage | shows which evidence bundle or review artifact cites the trace |
+| redaction / privacy note | explains the impact when parts were redacted or omitted |
+
+With this contract, a reviewer can identify what the trace refers to. Without a run id or verify reference, a trace may still be a useful historical memo, but it is difficult to count it as trace coverage. Within CH10, trace does not replace current-run verify. It acts as a reference artifact that makes verify easier to explain.
+
 ## 4. Divide Work Between CI and Local Verify
 Local verify and CI verify are not the same thing. Local verify exists for fast iteration before and after each change. CI verify exists to rerun the same acceptance line on the branch and make it shareable across reviewers.
 
 `.github/workflows/verify.yml` makes that division concrete by separating book verification and sample-repo verification into distinct jobs. That matters because the failure modes are different. Manuscript path drift and prompt-eval artifact consistency checks belong to one harness. Sample-repo tests belong to another. Splitting the jobs makes failure classification, retry, and review faster.
 
 The important rule is that CI does not replace local verify. The coding agent should still run `./scripts/verify-book.sh ch10` or `./scripts/verify-sample.sh` locally first. CI then reruns the same standard on the branch. The harness needs both: local speed and shared reproducibility.
+
+This is also where observability connects back into the verification harness. CI job results, verify-log freshness, retry counts recorded in traces, and the existence of an evidence bundle all become inputs for later failure analysis and review-quality diagnosis. Observability is not a separate team's monitoring feature here. It is part of the verification harness.
 
 ## 5. Place Human Approval Explicitly
 A verification harness is not a story about full automation. It also decides where human approval belongs. Approval is needed where verification alone cannot make the final call, or where a human still owns the risk.
@@ -77,9 +101,10 @@ In this chapter, approval is easiest to place in three moments:
    - when CI or verify scripts themselves would change
 2. after verify
    - when the evidence bundle may still be too weak for review
-   - when scope-outside effects may remain
+   - when the verify log may not belong to the current run
+   - when traces or screenshots may still need redaction / privacy treatment
 3. before merge
-   - when the PR summary, verification section, and `Remaining Gaps` must still be checked for clarity
+   - when the PR summary, `Verification`, and `Remaining Gaps` must still be checked for clarity
 
 `checklists/en/verification.md` carries these approval points in practical form. The goal is not to return all decisions to humans. The goal is to mechanize what can be checked and leave only the explicitly human judgments behind.
 
@@ -88,30 +113,30 @@ Bad:
 
 ```text
 The search fix passed `python -m unittest` once.
-CI can be checked later.
-The task probably did not change the UI, so no evidence is needed.
+Yesterday's verify log is still around, so it is probably safe enough.
+Treat trace and evidence as the same thing and dig them up later if needed.
 ```
 
-This turns verification into a memory of one green run. It leaves unclear which tests are the regression guard, whether CI reruns the same bar, and whether evidence is truly unnecessary.
+This blurs the line between current-run verify and historical artifacts. A reviewer cannot tell what belongs to the current run and what belongs to older history.
 
 Corrected:
 
 ```text
 First add or strengthen the regression guard in
 `sample-repo/tests/test_ticket_search.py`.
-Then run `./scripts/verify-sample.sh` locally.
-Let `.github/workflows/verify.yml` rerun the same bar in CI.
-If the change is UI-visible, create an evidence bundle using
-`artifacts/en/evidence/README.md`.
-Use `checklists/en/verification.md` to separate approval-required points.
+Then run `./scripts/verify-sample.sh` locally and keep the current-run verify log.
+If needed, keep retry or handoff history in a trace.
+For review, create an evidence bundle in the format defined by
+`artifacts/en/evidence/README.md` and organize the verify-log and trace references.
+Remove or redact any information that needs privacy treatment before bundling.
 ```
 
-This version treats tests, local verify, CI, evidence, and approval as one harness.
+This keeps tests, current-run verify, historical trace, and reviewer evidence connected as one harness.
 
 Comparison points:
-- The bad version treats verify as a one-off command.
-- The bad version leaves CI and evidence responsibilities vague.
-- The corrected version separates regression guards, shared verify, review evidence, and approval gates.
+- The bad version confuses current-run verify with historical trace.
+- The bad version does not manage evidence freshness or redaction.
+- The corrected version separates verify log, trace, and evidence bundle by role.
 
 ## Worked Example
 Use `FEATURE-001` as the verification-harness example. Its acceptance criteria already include the rule that query matching is case-insensitive. If the tests do not explicitly guard that behavior, a later refactor can break it without immediate notice.

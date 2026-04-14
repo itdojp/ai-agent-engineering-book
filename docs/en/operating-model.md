@@ -26,6 +26,20 @@ A runtime can provide mechanisms such as background execution, hosted tools, and
 
 The runtime provides mechanisms, not policy. If that distinction becomes blurry, convenience features hide responsibility instead of removing it.
 
+## Deciding Between a Runtime-managed Loop and a Repo-owned Manual Harness
+
+Final review and merge always remain human-owned, and source-of-truth artifacts remain repo-owned. With that fixed, decide whether a runtime-managed loop is enough or whether a manual harness should stay explicit by using the table below.
+
+| Decision Factor | When a runtime-managed loop is enough | When a repo-owned manual harness is still required |
+|---|---|---|
+| human approval | there is no additional approval gate beyond final review | the team wants artifact-managed approval before, during, or after execution |
+| evidence / audit trail | runtime status and verify results are enough to explain the work | a custom evidence bundle or audit-oriented record must be preserved |
+| stop / resume logic | the run is linear and closes with simple retry and simple stop behavior | conditional stop / resume, handoff, or retry rules must be preserved explicitly |
+| source-of-truth maintenance | the task brief and done criteria stay fixed during the run | artifact sync, refresh policy, or owned files must stay explicit during the run |
+| review packaging | the reviewer can read the runtime surface as-is | `Changed Files`, `Verification`, and `Remaining Gaps` need custom packaging |
+
+The key test is not whether the runtime feels convenient. The key test is how much custom policy and evidence the team still needs. As those needs grow, it becomes unsafe to thin the repo-owned manual harness too far.
+
 ## Responsibilities
 
 ### Human / Team

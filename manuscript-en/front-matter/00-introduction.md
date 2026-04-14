@@ -1,18 +1,27 @@
 # Introduction
 
-This book is not about making an AI agent look clever. It is about getting work to completion. The scope does not stop at shaping a good-looking answer with prompts. It covers the full path from an ambiguous request to a spec, from a spec to repo work, and from repo work to verification and completion.
+This book is not about making an AI agent look clever. It is not satisfied with prompt tricks that produce a polished answer and then stop. It is about turning ambiguous requests into specifications, reading and changing a repo, running verification, and closing the work all the way to completion.
 
-The book focuses on only three layers: Prompt Engineering, Context Engineering, and Harness Engineering. Prompt Engineering defines the contract for one task. Context Engineering makes the required decision inputs visible and durable. Harness Engineering makes execution, verification, retry, and restart safe. The book builds these layers in order so an AI agent can move from plausible output toward completed work.
+The book stays focused on only three layers: Prompt Engineering, Context Engineering, and Harness Engineering. Prompt Engineering creates the contract for one task. Context Engineering delivers the decision inputs in a durable way. Harness Engineering makes execution, verification, and restart safe. The book builds these three layers in order so an AI agent can move from plausible output toward completed work.
 
 ## What This Book Promises
 
-By the end of the book, the reader should be able to explain and reproduce the following in practical engineering terms.
+The promise of this book is explicit. By the time the reader finishes it, the reader should be able to explain and reproduce the following in practical engineering terms.
 
 - Turn ambiguous requests into Prompt Contracts, specs, acceptance criteria, and ADRs
 - Use repo context, task briefs, Progress Notes, and context packs to keep an AI agent from losing its assumptions
-- Use a verification harness, permission policy, restart protocol, and operating model to close AI-agent work safely
+- Use a verification harness, permission policy, restart packet, and operating model to close AI-agent work safely
 
-This book does not promise benchmark comparisons between models or a collection of conversational prompt tricks. The subject is work that includes code changes, verification, review, and handoff.
+This book does not promise model benchmarks or a collection of conversational prompt tricks. The subject is work that includes code changes, verification, review, and handoff.
+
+## Fixed Assumptions for the 2026 Edition
+
+The 2026 edition fixes durable judgment criteria before it discusses short-lived UI details or product tips. Read the manuscript and supporting artifacts with the following assumptions.
+
+- Prefer durable design principles: prioritize artifact design, authority boundaries, verify, and handoff over screen layout or temporary command differences
+- Reuse recurring cases end to end: the book repeats `support-hub` and the same four recurring cases so the reader learns how to close work rather than chapter-specific tricks
+- Leave artifacts behind in every chapter: the prose should land in repo artifacts such as prompts, specs, context packs, checklists, runbooks, and evidence
+- Confirm execution conditions in primary sources: runtime behavior, permissions, pricing, and protocol details must be checked against the official docs of the tool in use and local organizational policy
 
 ## Intended Reader
 
@@ -74,6 +83,16 @@ The examples in this book are intentionally simplified for readers. When you reu
 - Pages pipeline notes (Japanese only): `docs/pages-publishing.md`
 
 Prompt, Context, and Harness tooling changes quickly. The intended reading model is the manuscript plus the latest repository state plus the official documentation of the tool in use.
+
+## Source-of-Truth Priority
+
+When the manuscript, the repo, and the live tool behavior diverge, use the following priority order.
+
+1. For execution boundaries, permissions, pricing, and protocol behavior, prefer the official docs of the tool in use together with organizational policy
+2. For recurring cases and the role of reusable artifacts, prefer the manuscript and `sample-repo`
+3. When naming drifts, prefer `docs/en/glossary.md`
+
+In other words, this book is the source for durable design principles and artifact responsibilities. It is not the source for every runtime detail that changes over time. Runtime details should be re-read from primary sources.
 
 ## How to Read the Recurring Cases
 

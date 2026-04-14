@@ -34,7 +34,7 @@ If that order drifts, the manuscript becomes too dependent on fashion, screensho
 ### CH03 Use ChatGPT to Shape Requirements and Design
 
 - Start with `sample-repo/docs/product-specs/ticket-search.md`, `sample-repo/docs/design-docs/ticket-search-adr.md`, and `sample-repo/docs/acceptance-criteria/ticket-search.md`. Exploratory dialogue does not become the implementation contract by itself.
-- If you add external sources, prefer the product-spec, acceptance-criteria, and ADR templates your organization actually uses. For requirement shaping, decision trace matters more than fluent wording.
+- If you add external sources, prefer the product-spec, acceptance-criteria, and ADR templates plus review records your organization actually uses. For requirement shaping, decision trace matters more than fluent wording.
 
 ### CH04 Evaluate Prompts
 
@@ -53,8 +53,8 @@ If that order drifts, the manuscript becomes too dependent on fashion, screensho
 
 ### CH07 Task Context and Session Memory
 
-- Start with `sample-repo/tasks/FEATURE-001-brief.md`, `sample-repo/tasks/FEATURE-001-progress.md`, `docs/en/session-memory-policy.md`, and `.github/ISSUE_TEMPLATE/task.yml`. Read the restart packet together with the latest verification result.
-- If you add external sources, prefer your issue-tracker, handoff, and change-log policies. Do not treat stale chat transcripts as the source of truth for session memory.
+- Start with `sample-repo/tasks/FEATURE-001-brief.md`, `sample-repo/tasks/FEATURE-001-progress.md`, `docs/en/session-memory-policy.md`, and `.github/ISSUE_TEMPLATE/task.yml`. Read the minimum artifact corresponding to the policy's `Restart Packet (Resume Packet)` together with the latest verification result; in this book the artifact is treated as the `restart packet`.
+- If you add external sources, prefer your issue-tracker, handoff, and change-log policies, and then the runtime's session or resume docs if needed. Do not treat stale chat transcripts as the source of truth for session memory.
 
 ### CH08 Reuse Skills and Context Packs
 
@@ -73,10 +73,10 @@ If that order drifts, the manuscript becomes too dependent on fashion, screensho
 
 ### CH11 Long-running Tasks and Multi-agent Work
 
-- Start with `sample-repo/docs/harness/feature-list.md`, `sample-repo/docs/harness/restart-protocol.md`, `sample-repo/docs/harness/multi-agent-playbook.md`, and `sample-repo/tasks/FEATURE-002-plan.md`. Multi-agent work becomes safe only after the role split and restart packet are concrete.
+- Start with `sample-repo/docs/harness/feature-list.md`, `sample-repo/docs/harness/restart-protocol.md`, `sample-repo/docs/harness/multi-agent-playbook.md`, and `sample-repo/tasks/FEATURE-002-plan.md`. Multi-agent work becomes safe only after the role split and `restart packet` are concrete.
 - If you add external sources, prefer official docs for the orchestration tool or task queue you use. Do not separate the parallelization discussion from write scope and handoff artifacts.
 
 ### CH12 Operating Model and Organizational Adoption
 
-- Start with `docs/en/operating-model.md`, `docs/en/metrics.md`, `checklists/en/repo-hygiene.md`, and `.github/pull_request_template.md`. Read the operating model through roles, review budget, cadence, and cleanup rather than through model comparisons alone.
+- Start with `docs/en/operating-model.md`, `docs/en/metrics.md`, `checklists/en/repo-hygiene.md`, and `.github/pull_request_template.md`. Read the operating model through Lead / Operator / Reviewer, the approval boundary, review budget, cadence, and cleanup.
 - If you add external sources, prefer official documents for your organization's review policy, release policy, and metric definitions. Do not reduce adoption decisions to model benchmarks.

@@ -13,11 +13,13 @@ This file is the seed for the production index. At this stage it fixes the main 
 | Entry | Return-to Chapter | Primary Artifact / Supporting Reference |
 |---|---|---|
 | acceptance criteria | CH03, CH10 | `sample-repo/docs/acceptance-criteria/ticket-search.md`, `sample-repo/tests/test_ticket_search.py` |
+| A2A | Appendix D | `docs/en/glossary.md` |
+| approval boundary | CH09, CH12 | `sample-repo/docs/harness/permission-policy.md`, `docs/en/operating-model.md` |
 | ADR | CH03 | `sample-repo/docs/design-docs/ticket-search-adr.md` |
 | AGENTS.md | CH06 | `AGENTS.md`, `manuscript-en/AGENTS.md`, `sample-repo/AGENTS.md` |
 | AI agent | CH01, CH12 | `docs/en/glossary.md`, `docs/en/operating-model.md` |
 | artifact | CH01, Appendix D | `docs/en/glossary.md` |
-| bad / good example | CH01-CH12 | Each chapter's bad / corrected example section |
+| bad / good example | CH01-CH12 | Each chapter's `## Bad / Good Example` section |
 | ChatGPT | CH03 | `docs/en/glossary.md` |
 | coding agent | CH01, CH12 | `docs/en/glossary.md`, `docs/en/operating-model.md` |
 | Codex CLI | CH06, CH12 | `docs/en/glossary.md`, `.github/pull_request_template.md` |
@@ -25,9 +27,13 @@ This file is the seed for the production index. At this stage it fixes the main 
 | Context Engineering | CH01, CH05 | `docs/en/context-model.md` |
 | done criteria | CH09 | `sample-repo/docs/harness/done-criteria.md` |
 | evidence bundle | CH10 | `artifacts/en/evidence/README.md` |
+| hygiene backlog age | CH12 | `docs/en/metrics.md` |
+| Lead / Operator / Reviewer | CH12 | `docs/en/operating-model.md`, `.github/pull_request_template.md` |
+| MCP | Appendix D | `docs/en/glossary.md` |
 | feature list | CH11 | `sample-repo/docs/harness/feature-list.md` |
 | Harness Engineering | CH01, CH09 | `sample-repo/docs/harness/single-agent-runbook.md` |
 | operating model | CH12 | `docs/en/operating-model.md` |
+| approval-stop rate | CH12 | `docs/en/metrics.md` |
 | permission policy | CH09 | `sample-repo/docs/harness/permission-policy.md` |
 | Progress Note | CH07 | `sample-repo/tasks/FEATURE-001-progress.md` |
 | Prompt Contract | CH02 | `prompts/en/bugfix-contract.md`, `prompts/en/feature-contract.md` |
@@ -37,10 +43,13 @@ This file is the seed for the production index. At this stage it fixes the main 
 | restart packet | CH11 | `sample-repo/docs/harness/restart-protocol.md` |
 | review budget | CH12 | `docs/en/operating-model.md`, `docs/en/metrics.md` |
 | rubrics | CH04 | `evals/rubrics/feature-spec.json` |
+| provenance | Appendix D | `docs/en/glossary.md`, `artifacts/en/evidence/README.md` |
 | sample-repo | CH01 | `sample-repo/README.md`, `sample-repo/docs/domain-overview.md` |
 | session memory | CH07 | `docs/en/session-memory-policy.md` |
 | skill | CH08 | `.agents/skills/draft-chapter/SKILL.md`, `sample-repo/.agents/skills/verification/SKILL.md` |
 | source notes | This backmatter | `manuscript-en/backmatter/00-source-notes.md` |
+| source hierarchy | Appendix D | `docs/en/glossary.md`, `manuscript-en/backmatter/00-source-notes.md` |
+| stale draft count | CH12 | `docs/en/metrics.md` |
 | task brief | CH07 | `sample-repo/tasks/FEATURE-001-brief.md` |
 | verification harness | CH10 | `.github/workflows/verify.yml`, `checklists/en/verification.md` |
 | work package | CH11, CH12 | `sample-repo/tasks/FEATURE-002-plan.md`, `docs/en/operating-model.md` |

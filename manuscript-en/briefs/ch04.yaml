@@ -1,23 +1,23 @@
 id: ch04
 title: Evaluate Prompts
 part: part-01-prompt
-goal: Make Prompt Engineering evaluable as an artifact and introduce prompt versioning and regression testing.
+goal: "Extend Prompt Engineering to prompt and workflow evaluation, and introduce an evaluation loop that includes trace review, cost / latency, and judge / human spot-check methods."
 reader_outcomes:
-  - Design eval cases separately from rubrics
-  - Run prompt regression checks automatically
-  - List comparison points for model or prompt updates
+  - "Design eval cases, rubrics, judges, and human spot-checks as separate tools"
+  - "Add workflow metrics and trace review to prompt regression comparison"
+  - "List quality, tool-call behavior, cost / latency, and approval signals as comparison points during model updates"
 dependencies:
   - ch02
   - ch03
 sections:
-  - Good prompts must be evaluated
-  - How to build an eval set
-  - Rubrics versus goldens
-  - Prompt regression testing
-  - Versioning and comparison workflows
+  - "Good prompts and workflows can be evaluated"
+  - "Build an eval set"
+  - "Distinguish rubrics, goldens, judges, and human spot-checks"
+  - "Run prompt regression tests and review traces"
+  - "Version and compare prompt changes"
 exercises:
-  - Create five eval cases.
-  - Compare a v1 and v2 prompt and record which is more stable.
+  - "Add eval cases that include structured output and an approval boundary."
+  - "Compare prompt v1 and v2 and record quality, cost / latency, and tool-call behavior."
 artifacts:
   - evals/prompt-contract-cases.json
   - evals/rubrics/feature-spec.json

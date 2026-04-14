@@ -6,7 +6,7 @@
 - Are there any broken reference paths?
 - Does manuscript or docs still contain absolute-path references?
 - Is the verify script aligned with the actual repo state?
-- Is wording normalized against `docs/en/glossary.md` as the source of truth?
+- Is wording normalized against `docs/glossary.md` as the source of truth?
 - Are the canonical spellings of `Prompt Contract`, `Progress Note`, and `verification harness` stable?
 - If the diff touches an approval boundary, does `Evidence / Approval` name the approver and the decision inputs?
 - Is the `needs-human-approval` wording aligned with `sample-repo/docs/harness/done-criteria.md`?

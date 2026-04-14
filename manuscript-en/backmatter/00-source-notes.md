@@ -53,7 +53,7 @@ If that order drifts, the manuscript becomes too dependent on fashion, screensho
 
 ### CH07 Task Context and Session Memory
 
-- Start with `sample-repo/tasks/FEATURE-001-brief.md`, `sample-repo/tasks/FEATURE-001-progress.md`, `docs/en/session-memory-policy.md`, and `.github/ISSUE_TEMPLATE/task.yml`. Read the minimum artifact corresponding to the policy's `Restart Packet (Resume Packet)` together with the latest verification result; in this book the artifact is treated as the `restart packet`.
+- Start with `sample-repo/tasks/FEATURE-001-brief.md`, `sample-repo/tasks/FEATURE-001-progress.md`, `docs/en/session-memory-policy.md`, and `.github/ISSUE_TEMPLATE/task.yml`. Read the minimum artifact corresponding to the policy's `Restart Packet (Resume Packet)` together with the latest verification result. In this book, that artifact is referred to as the `restart packet`.
 - If you add external sources, prefer your issue-tracker, handoff, and change-log policies, and then the runtime's session or resume docs if needed. Do not treat stale chat transcripts as the source of truth for session memory.
 
 ### CH08 Reuse Skills and Context Packs

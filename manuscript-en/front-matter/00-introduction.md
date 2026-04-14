@@ -90,7 +90,7 @@ When the manuscript, the repo, and the live tool behavior diverge, use the follo
 
 1. For execution boundaries, permissions, pricing, and protocol behavior, prefer the official docs of the tool in use together with organizational policy
 2. For recurring cases and the role of reusable artifacts, prefer the manuscript and `sample-repo`
-3. When naming drifts, prefer `docs/en/glossary.md`
+3. When naming drifts, prefer `docs/glossary.md`
 
 In other words, this book is the source for durable design principles and artifact responsibilities. It is not the source for every runtime detail that changes over time. Runtime details should be re-read from primary sources.
 

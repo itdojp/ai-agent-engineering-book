@@ -68,8 +68,7 @@ The elements become easier to write if each one answers a different operational 
 | Forbidden Actions | Name dangerous shortcuts explicitly | `Do not delete the failing test just to get green results.` |
 | Refusal / Stop Conditions | State when the agent must stop | `Stop if the source of truth conflicts.` |
 | Completion Criteria | State observable done conditions | `At least one test fails before the fix and passes after the fix.` |
-| Output Schema | Fix section structure and version | `output_version: 2026-04-01` |
-| Output Format | Fix the reader-facing final report | `Changed Files`, `Verification`, `Remaining Gaps` |
+| Output Schema | Fix section structure, version, and the reader-facing report shape | `output_version: 2026-04-01`; sections such as `Changed Files`, `Verification`, and `Remaining Gaps` |
 
 It is also important to separate constraints from forbidden actions. A constraint states a boundary that must hold. A forbidden action blocks a common shortcut that would hide failure. “Do not make out-of-scope UI or API changes” is a constraint. “Do not lock in an ambiguous requirement by guessing” is a forbidden action.
 
@@ -178,7 +177,7 @@ Forbidden Actions:
 Completion Criteria:
 - At least one test fails before the fix and passes after the fix
 - Existing tests and the required verify command pass
-Output Format:
+Output Schema:
 1. Root Cause
 2. Changed Files
 3. Verification
@@ -193,7 +192,7 @@ Comparison points:
 - The good prompt also fixes the reporting format so the result can be reviewed consistently.
 
 ## Exercises
-1. Use the search feature in `sample-repo` as the task and rewrite “add search” as a Prompt Contract. Include Objective, Inputs, Constraints, Forbidden Actions, Completion Criteria, and Output Format.
+1. Use the search feature in `sample-repo` as the task and rewrite “add search” as a Prompt Contract. Include Objective, Inputs, Constraints, Forbidden Actions, Completion Criteria, and Output Schema.
 2. Use `BUG-001` as the task and write only the Completion Criteria in five points. Each point must be verifiable rather than subjective.
 
 ## Referenced Artifacts
@@ -207,7 +206,7 @@ Comparison points:
 
 ## Chapter Summary
 - Prompt Engineering begins by designing prompts as execution contracts rather than vague instructions.
-- Single-task reliability improves when Objective, Inputs, Constraints, Forbidden Actions, Tool Contract, Refusal / Stop Conditions, Approval Gate, Completion Criteria, Output Format, and Output Schema are written as separate elements.
+- Single-task reliability improves when Objective, Inputs, Constraints, Forbidden Actions, Tool Contract, Refusal / Stop Conditions, Approval Gate, Completion Criteria, and Output Schema are written as separate elements.
 - Once the contract is stable, the next bottleneck is often an ambiguous request. CH03 addresses that by turning vague requests into product specs, acceptance criteria, ADRs, and eval-seed-ready artifacts.
 
 ## Parity Notes

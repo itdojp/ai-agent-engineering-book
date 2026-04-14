@@ -19,6 +19,10 @@ dependencies:
 ## Role in This Book
 Good Prompt Contracts and prompt evals are not enough on their own. An AI agent can still miss the target if it reads the wrong spec, follows stale notes, or gives too much weight to irrelevant logs. CH01 through CH04 established Prompt Engineering as the way to improve single-task reliability. This chapter starts the next layer: Context Engineering.
 
+A common misunderstanding here is that a longer context window makes Context Engineering unnecessary. A wider window increases how much can be transported at once, but the design work remains: decide which material should stay as stable artifacts, which parts should be summarized or compacted, and which information should be reacquired when needed. A larger window increases transport capacity, but it does not replace source-of-truth design, freshness policy, or responsibility split.
+
+As of 2026, runtimes also offer mechanisms such as prompt caching and server-side compaction / context editing that improve context economics. Those mechanisms still do not decide what should be read, what counts as fresh, or what should be synchronized into repo artifacts. In this chapter, they are treated as support for Context Engineering rather than as vendor-feature marketing.
+
 Context Engineering is not about writing a better prompt. It is about deciding what the agent should see, what should be preserved, and what should be discarded. This chapter draws the boundary between Prompt Engineering and Context Engineering, then introduces four context types: persistent, task, session, and tool context. Later chapters build repo context, task context, session memory, skills, and context packs on top of that model.
 
 ## Learning Objectives
@@ -56,6 +60,12 @@ The separation matters because the update speed is different. Architecture docs 
 A context budget is not only about token limits. It is a design policy for what should stay verbatim, what should be summarized, and what should be dropped. `docs/en/context-budget.md` gives that policy explicitly: keep acceptance criteria, interface contracts, verify commands, and destructive-change constraints verbatim; summarize exploratory logs and comparison history; drop stale test output and expired hypotheses.
 
 The reason for that split is practical. Anything that becomes dangerous when paraphrased should stay in its original wording. In `sample-repo/docs/acceptance-criteria/ticket-search.md`, the rule “return all tickets when the query is blank or only whitespace” should remain verbatim. By contrast, the historical reason why ranking became a non-goal can usually be summarized as long as the decision itself remains intact.
+
+Summarize and compact are also different operations. Summarize reduces narrative volume. Compact preserves structure by converting content into tables, bullets, or another easier-to-search form. Re-fetch then makes a different tradeoff: do not keep the material resident; reacquire it when needed. Even with a long context window, it is often safer to rerun live tool output than to keep it permanently in context.
+
+The boundary with modern runtime mechanisms should also be explicit here. Prompt caching avoids resending stable prefixes and repeatedly referenced artifacts in full and mainly improves cost / latency economics. A cache hit does not guarantee correctness or freshness. Cached content is not automatically the source of truth, and external state or verify state still has to be reacquired when needed.
+
+Server-side compaction / context editing serves a different role. When the runtime can summarize older turns or thin lower-priority context on the server side, context pressure drops. But that is only a mechanism that helps `compact` on the runtime side. It does not remove the repo or team policy that decides what must be re-fetched, what must be redacted, and which artifacts must stay synchronized. In other words, prompt caching is support for cheaper keep / persist behavior, while compaction / context editing supports compact behavior. Neither replaces re-fetch, redaction, or artifact sync.
 
 Without a context budget, noisy artifacts pull attention away from the real contract. Long terminal logs and exploratory notes can overshadow current acceptance criteria simply because they are larger or more vivid. In practice, Context Engineering is less about accumulating information and more about declaring information priority.
 
@@ -130,6 +140,7 @@ Comparison points:
 ## Chapter Summary
 - Prompt Engineering defines the work boundary. Context Engineering defines the type, freshness, and priority of the decision material inside that boundary.
 - Context becomes easier to design when it is separated into persistent, task, session, and tool context.
+- Longer context windows, prompt caching, and server-side compaction can improve transport and cost economics, but the design of keep verbatim / summarize / compact / re-fetch / persist still remains.
 - Once those types are visible, the next requirement is a stable repo entry point. The next chapter covers the role split among `AGENTS.md`, `sample-repo/docs/repo-map.md`, and `sample-repo/docs/architecture.md`.
 
 ## Parity Notes

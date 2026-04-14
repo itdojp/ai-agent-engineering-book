@@ -21,6 +21,17 @@ A context budget is not just a limit on how much text an AI agent reads. It is t
 | re-fetch | Refresh information that goes stale quickly | test output, grep results, external search results, terminal logs | Prefer rerunning over keeping it resident in chat |
 | persist | Carry conclusions into the next session | task-brief decisions, `Next Step`, ADR conclusions | Promote to a repo artifact and avoid dependence on chat history |
 
+## Runtime Economics Notes
+
+- prompt caching
+  - supports lower transfer cost and latency for stable prefixes and repeatedly referenced artifacts
+  - a cache hit does not guarantee correctness or freshness, so source-of-truth choice, verify, and refresh decisions for external data still have to be made separately
+- server-side compaction / context editing
+  - supports lower context pressure by thinning older turns or lower-priority context on the server side
+  - even when the runtime helps `compact`, it does not remove the policy for `re-fetch`, redaction, or artifact sync
+
+These two mechanisms improve context economics, but they do not replace the design of keep verbatim / summarize / compact / re-fetch / persist. As with a long context window, lower transport cost or larger resident context does not eliminate source-of-truth design itself.
+
 ## Keep Verbatim
 
 - acceptance criteria
@@ -69,6 +80,7 @@ Refresh live context before trusting a summary when:
 - verify results came from an earlier session
 - the task stopped at an approval boundary
 - the prior reasoning depended on external data
+- even if prompt caching or compaction is working, freshness still cannot be delegated to the runtime
 
 ## Drop
 

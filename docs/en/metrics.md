@@ -46,11 +46,34 @@ These metrics are not for bragging about throughput. They exist to identify wher
 ## Observability Inputs
 
 - `trace coverage`
-  - shows whether long-running work and handoffs leave enough history for failure analysis
+  - shows whether traces that satisfy the minimum trace reference contract remain for work packages with long-running work, handoff, retry, or restart
 - `current-run verify availability`
   - shows whether reviewers can inspect the latest run directly
 - `retry concentration`
   - shows whether failure loops are clustering in one stage of the flow
+
+## Trace Coverage Definition
+
+- denominator
+  - the number of work packages that involve long-running work, handoff, retry, or restart and therefore require trace references
+- numerator
+  - the number of work packages whose trace records satisfy the required fields among task / work-package id, run timestamp or run id, owner / handoff, retry / restart reason, verify reference, evidence linkage, and redaction note
+
+Use the following rule to decide what counts as “required.”
+
+- always required
+  - task / work-package id
+  - run timestamp or run id (at least one of the two)
+  - verify reference
+  - evidence linkage
+- conditionally required
+  - owner / handoff: required when the work package includes a handoff. When there is no handoff, record the current owner, and use `N/A` only in workflows that do not use an owner concept at all
+  - retry / restart reason: required when retry or restart happened. Otherwise state `N/A`
+  - redaction note: required when any part was redacted. Otherwise state `none` or `N/A`
+
+Do not leave non-applicable fields blank or silently omit them. Use a non-applicable marker such as `N/A` or `none`. A work package only counts in the numerator when all always-required fields are present and conditionally required fields are present whenever the condition applies.
+
+Trace coverage here does not mean only “a trace file exists.” It also measures whether a reviewer can explain which verify run and which task the trace belongs to.
 
 ## Intervention Rules
 
@@ -69,5 +92,6 @@ These metrics are not for bragging about throughput. They exist to identify wher
 - Is the main cause of verify failure prompt, context, or harness design?
 - Is queue wait time caused mainly by reviewer wait, verify wait, or approval wait?
 - Is low trace coverage making failure analysis impossible?
+- If trace coverage is low, is the real gap missing trace, missing verify reference, or missing evidence linkage?
 - Is worsening repo hygiene slowing the next round of work?
 - Are stale drafts and stale docs increasing at the same time?

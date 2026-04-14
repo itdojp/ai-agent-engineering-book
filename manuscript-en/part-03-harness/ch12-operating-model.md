@@ -64,15 +64,18 @@ AI-agent operations accelerate good diffs and bad diffs at the same time. The ac
 Repo hygiene stays a human responsibility for that reason. An agent can detect candidate stale artifacts, but deciding which artifact still holds source-of-truth status often requires human judgment. In this chapter, hygiene does not mean aesthetics. It means keeping the repo safe for the next agent run.
 
 ## 4. Metrics and Retrospectives
-Metrics are not here to answer whether AI agents feel useful. They exist to show whether the operating model is healthy and where it is currently blocked. `docs/en/metrics.md` groups them into three sets:
+Metrics are not here to answer whether AI agents feel useful. They exist to show whether the operating model is healthy and where it is currently blocked. `docs/en/metrics.md` groups them into four sets:
 
 | Group | Example metrics | What they reveal |
 |---|---|---|
 | throughput | `closed issues / week`, `PR cycle time` | whether work packages are small enough and flow is moving |
 | quality | `verify failure rate`, `post-merge regression count` | whether review and verification are actually catching problems |
 | hygiene | `stale docs count`, `orphaned task brief count`, `missing verification evidence count` | whether entropy cleanup is keeping pace with generation |
+| observability | `trace coverage`, `current-run verify availability`, `retry concentration` | where current-run visibility and failure analysis are weak |
 
-The critical rule is to attach action to each metric. If verify failure rate rises, the team should inspect task decomposition, briefs, or prompt quality. If PR cycle time grows, the team should inspect review budget. If stale docs count rises, the team should inspect hygiene cadence. Metrics should support operating-model adjustment, not blame allocation.
+The critical rule is to attach action to each metric. If verify failure rate rises, the team should inspect prompt or brief quality. If PR cycle time grows, the team should inspect review budget. If trace coverage falls, the team should suspect a lack of material for failure analysis. If evidence freshness failure rises, the team should suspect that reviewers can no longer confirm current-run verify. If stale docs count and hygiene backlog age worsen, cleanup work should be opened before more feature work. Metrics should support queue diagnosis, failure analysis, and review-quality improvement, not throughput bragging.
+
+Trace coverage here does not mean only “a `trace.md` file exists.” For work packages that need traces because they involve long-running work, handoff, retry, or restart, the team should ask whether the minimum trace reference contract is actually present: task / work-package id, run timestamp or run id, owner / handoff, retry / restart reason, verify reference, evidence linkage, and redaction note. That is what keeps historical traces from being confused with current-run verify while still making trace coverage useful for failure analysis.
 
 ## 5. Plan an Adoption Roadmap
 AI-agent adoption is safer when rolled out in stages instead of across the entire repo at once. `docs/en/operating-model.md` already defines three stages:
@@ -125,6 +128,7 @@ Consider a three-person team operating this repo.
   - reviews the PR template output, verification, and evidence
 
 In this setup, one reviewer should hold at most two deep reviews at once. The operator must use `.github/pull_request_template.md` so that `Goal`, `Changed Files`, `Verification`, `Evidence / Approval`, and `Remaining Gaps` are always present. Every week, the team reviews `docs/en/metrics.md`. If `PR cycle time` grows, work packages are reduced further. If stale artifacts grow, `checklists/en/repo-hygiene.md` drives the entropy-cleanup pass.
+If trace coverage drops, the team should recheck long-running-task handoff quality instead of treating the missing history as acceptable noise.
 
 The point of this example is that adoption succeeds or fails based on whether roles and cadence are artifactized. CH12 is therefore an operations chapter, not a model-selection chapter.
 

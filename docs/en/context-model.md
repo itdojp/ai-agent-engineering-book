@@ -33,6 +33,8 @@ The goal is not to maximize the number of surfaces. The goal is to avoid mixing 
 - live tool output
   - The current behavior or exploration result. Grep output, test output, and verify logs should be treated as refreshable evidence, not as permanent resident context.
 
+Modern runtime mechanisms such as prompt caching and server-side compaction / context editing sit on top of this responsibility split. Caching lowers the resend cost of stable context, while compaction / context editing lowers pressure from live context. But the repo or team still has to decide which artifact is the source of truth, when refresh is required, and where redaction must happen.
+
 ## Rules
 
 1. Do not use the prompt itself as a substitute for context.

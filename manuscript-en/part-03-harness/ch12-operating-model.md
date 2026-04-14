@@ -71,7 +71,7 @@ Metrics are not here to answer whether AI agents feel useful. They exist to show
 | throughput | `closed issues / week`, `PR cycle time` | whether work packages are small enough and flow is moving |
 | quality | `verify failure rate`, `post-merge regression count` | whether review and verification are actually catching problems |
 | hygiene | `stale docs count`, `orphaned task brief count`, `missing verification evidence count` | whether entropy cleanup is keeping pace with generation |
-| observability | `queue wait time`, `trace coverage`, `evidence freshness failure` | where the queue is blocked and where explainability is weak |
+| observability | `trace coverage`, `current-run verify availability`, `retry concentration` | where current-run visibility and failure analysis are weak |
 
 The critical rule is to attach action to each metric. If verify failure rate rises, the team should inspect prompt or brief quality. If PR cycle time grows, the team should inspect review budget. If trace coverage falls, the team should suspect a lack of material for failure analysis. If evidence freshness failure rises, the team should suspect that reviewers can no longer confirm current-run verify. If stale docs count and hygiene backlog age worsen, cleanup work should be opened before more feature work. Metrics should support queue diagnosis, failure analysis, and review-quality improvement, not throughput bragging.
 

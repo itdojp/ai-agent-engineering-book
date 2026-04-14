@@ -10,11 +10,26 @@ AIエージェントをチーム運用へ載せるための最小 operating mode
 - review budget を超えたら新規着手より queue 解消を優先する
 - entropy cleanup を cadence に組み込み、後回しにしない
 
+## Runtime-managed capability と team-owned duty
+
+runtime は background execution、hosted tools、managed context のような mechanism を提供できる。一方で、次の責務は repo / team 側で定義し続ける必要がある。
+
+| 領域 | runtime が提供しうるもの | repo / team が持つべき責務 |
+|---|---|---|
+| execution | background execution、job status、再接続 | issue 単位の work package、stop condition、retry 条件 |
+| capability | hosted tools、外部接続、resource access | permission boundary、approval rule、secret 取扱い |
+| context | managed context、session storage | source of truth、artifact sync、refresh policy |
+| verification | verify job の実行や表示 | どの verify を必須とするか、evidence の基準 |
+| review | status surface、diff 表示 | 最終レビュー、承認、merge 判断 |
+
+runtime は mechanism の提供者であり、policy の決定者ではない。この区別を曖昧にすると、便利機能が増えるほど責務の所在が見えなくなる。
+
 ## Responsibilities
-### Human
+### Human / Team
 - 目的設定と優先順位の決定
 - 設計上の重要判断
 - 破壊的変更と approval boundary の承認
+- artifact sync と source of truth の維持
 - 最終レビューと merge 判断
 - repo hygiene と entropy cleanup の維持
 
@@ -55,7 +70,7 @@ AIエージェントをチーム運用へ載せるための最小 operating mode
 
 ## Cadence
 1. issue を 1 work package に切る
-2. brief、related artifact、verify command を揃える
+2. task brief と関連 artifact を揃える
 3. agent が実装と verify を進める
 4. Human が review / approval を行う
 5. merge 後に metrics と learnings を記録する

@@ -3,15 +3,29 @@
 ## 原則
 
 - 1 issue = 1 work package として扱う
-- 入力は **issue body + chapter brief + relevant AGENTS + existing artifacts**
-- 出力は **本文 + artifact 更新 + verification result**
+- 入力は **issue body + chapter brief + relevant AGENTS + existing artifacts** を基本とする
+- 出力は **本文 + artifact 更新 + verification result** とする
 - 作業後は changed files / verification / remaining gaps を短く報告する
+- 外部 capability を使っても、repo の source of truth は repo artifact に残す
+
+## Input Layering
+
+| 層 | 役割 | 典型 artifact |
+|---|---|---|
+| Prompt Contract | 単一 task の目的と完了条件を固定する | chapter fix prompt、feature prompt |
+| `AGENTS.md` | repo entrypoint と不変条件を示す | root / local `AGENTS.md` |
+| skill | 再利用 workflow を固定する | `SKILL.md` |
+| context pack | task 固有の読み順と canonical fact を束ねる | `context-packs/*.md` |
+| MCP-connected capability | runtime に追加能力を接続する | tool / resource / prompt access |
+
+`AGENTS.md` は repo entrypoint、`SKILL.md` は repeatable work unit、context pack は task-specific read set である。MCP-connected capability は追加能力の接続面であり、repo artifact の代替ではない。
 
 ## 推奨プロンプトの構造
 
 ```text
 Read AGENTS.md, the relevant local AGENTS.md, the target brief, and the issue body.
-Draft the target chapter or artifact.
+Review the existing artifacts that define the source of truth for this task.
+Draft or revise the target chapter or artifact.
 Then update every referenced artifact if the text would otherwise drift.
 Run the required verify scripts.
 Return only:
@@ -39,12 +53,20 @@ Return only:
 - test change
 - docs / `Progress Note` 更新
 
+## Skill を small に保つルール
+
+- repo 全体の不変条件は `AGENTS.md` に置く
+- skill には repeatable workflow と output contract だけを書く
+- task-specific read order は context pack に置く
+- live な外部取得結果は repo artifact に昇格するまで source of truth にしない
+
 ## 避けること
 
 - 本文だけ先に書いて artifact を放置する
 - verify なしで「完了」とする
 - giant prompt にルールを全部書く
 - 同じ指示を毎回コピペする（skills へ昇格させる）
+- MCP や tool 接続があることを理由に brief / AGENTS / spec を省略する
 
 ## 章執筆の recommended order
 

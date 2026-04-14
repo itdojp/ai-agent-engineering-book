@@ -16,9 +16,9 @@ dependencies:
 # Long-running Tasks and Multi-agent Work
 
 ## Role in This Book
-When a task like `FEATURE-002` is forced through one long prompt, verification state, ownership, and decision history collapse quickly. CH09 defined the single-agent harness. CH10 defined the verification harness. Real work still produces tasks that do not fit inside one session. That is where feature lists, restart protocols, and role separation become necessary.
+If a long task such as `FEATURE-002` is pushed through one long prompt, verify state and decision history collapse quickly. CH09 defined the single-agent harness. CH10 defined the verification harness. Real work still produces tasks that do not fit inside one session. That is where a feature list, a restart protocol, and explicit role separation become necessary.
 
-The purpose of this chapter is not to jump to multi-agent execution by default. The first step is to design the minimal structure that keeps a long-running task from breaking. Only after that should the work be split across multiple agents. The running example is `FEATURE-002`, which combines assignee-filter semantics with assignment-change audit logging and must be broken into safe work packages.
+The purpose of this chapter is not to jump to multi-agent execution by default. The first step is to design the minimum structure that keeps a long-running task from breaking. Only after that should the work be split across multiple agents. The running example is `FEATURE-002`, where assignee-filter semantics and assignment-change audit logging must be broken into safe work packages.
 
 ## Learning Objectives
 - Explain why long-running tasks break
@@ -28,142 +28,129 @@ The purpose of this chapter is not to jump to multi-agent execution by default. 
 ## Outline
 ### 1. Where long-running tasks break
 ### 2. Feature lists and progress tracking
-### 3. Design a restart protocol
-### 4. Separate planner, coder, reviewer, and verifier work
-### 5. Decide when multi-agent work is justified
+### 3. Restart protocol
+### 4. Separating planner / coder / reviewer / verifier work
+### 5. When to use multi-agent and when not to
 
 ## 1. Where Long-running Tasks Break
-Long-running tasks usually break because state management collapses, not because the model suddenly becomes less capable. Four failure modes appear repeatedly:
+Long-running tasks usually break because state management collapses, not because the model suddenly becomes less capable. In practice, four failure modes appear repeatedly: scope expands, the latest verify state becomes unclear, earlier decisions drift away from current ones, and the next move grows too large for one safe work package.
 
-- scope expands without a deliberate decision
-- the latest verify state becomes unclear
-- previous decisions drift away from current decisions
-- the next step grows too large to fit a safe work package
+`FEATURE-002` shows the problem clearly. If the instruction is “handle assignee filters and audit logs end to end,” the agent tends to mix the assignee-filter track and the audit-log track, lose track of what was already verified, update docs, tests, and task artifacts in the wrong order, and restart from guesswork after interruption.
 
-`FEATURE-002` is a clear example. If the instruction is “handle assignee filters and audit logs end to end,” the coding agent tends to mix unrelated tracks, lose track of what was already verified, update docs and tests in the wrong order, and restart from guesswork after interruption.
-
-This is a combined form of the CH01 failures “forgetting” and “stopping early.” Long-running work requires more than extra context. It requires artifacts that preserve state across sessions.
+This is a combined form of the CH01 failures of forgetting and stopping early. Long-running work requires more than extra context. It requires artifacts that preserve state across sessions.
 
 ## 2. Feature Lists and Progress Tracking
-The first long-running-task artifact is the feature list. A feature list is not just another backlog. It exists to break a multi-session task into tracks and make progress visible at the workstream level.
+The first long-running-task artifact is the feature list. A feature list is not just another backlog. It exists to split a multi-session task into tracks and make progress visible at the workstream level.
 
-`sample-repo/docs/harness/feature-list.md` splits `FEATURE-002` into three tracks:
+`sample-repo/docs/harness/feature-list.md` splits `FEATURE-002` into three tracks: `Track A: Assignee Filter Semantics`, `Track B: Assignment Change Audit Log`, and `Track C: Verification And Docs Sync`.
 
-- `Track A`: assignee-filter semantics
-- `Track B`: assignment-change audit log
-- `Track C`: verification and docs sync
+The important point is that the feature list is not merely a list of things to do. It is the artifact that keeps a long-running task stable across sessions. Because each track has a goal, major files, a verify signal, and dependencies, the team can decide which chunk is being closed right now.
 
-Each track has a goal, primary files, and a verify signal. That matters because the team needs to know which chunk is being closed right now, not just which tickets exist in theory.
+Progress tracking then connects the feature list to the CH07 artifacts. The feature list is the map of the task. The `Progress Note` is the current location. Without both, a resumed session cannot reconnect the previous verify state to the next safe step. If only a summary survives and the primary artifacts are missing, summary drift follows quickly.
 
-Progress tracking then connects the feature list to the existing CH07 artifacts. The feature list is the map of the task. The Progress Note is the current location. Without both, a resumed session cannot reconnect the previous verify state to the next safe step.
+## 3. Restart Protocol
+A restart protocol exists so that a resumed session does not begin by guessing what “the previous session was probably doing.” `sample-repo/docs/harness/restart-protocol.md` makes both the restart packet and the restart steps explicit.
 
-CH11 does not add a new Progress Note template. Instead, it connects the existing session-memory policy to long-running task control through the feature list and restart protocol.
-
-## 3. Design a Restart Protocol
-A restart protocol exists so that a resumed session does not begin by guessing what “the previous session was probably doing.” `sample-repo/docs/harness/restart-protocol.md` fixes both the restart packet and the restart steps.
-
-The minimum restart packet is five items:
+The minimum restart packet for this long-running task has six items:
 
 1. the `FEATURE-002` plan
-2. the latest feature list
-3. the latest Progress Note
-4. the most recent verify result
-5. unresolved open questions and approval waits
+2. the latest `sample-repo/docs/harness/feature-list.md`
+3. the current owned files and merge order
+4. the latest `Progress Note`
+5. the most recent verify result
+6. unresolved open questions and pending approvals
 
-If the session restarts without that packet, the agent keeps working from stale assumptions. For example, the previous session may have finished only the assignee-filter semantics track, but the next session may jump into audit-log design without a verified handoff point.
+If work restarts without that packet, the agent keeps working from stale assumptions. A summary is still necessary as a session summary, but it is not the source of truth on its own. On restart, the operator should reread the plan, feature list, `Progress Note`, verify state, and owned files, then reacquire live verify if needed.
 
-The most important part of the restart protocol is not “continue the previous plan exactly.” It is “choose the next smallest safe step again.” Restarting a long-running task means re-reading the latest verify state, re-checking open questions, and choosing one work package that still fits the current track.
+## 4. Separating Planner / Coder / Reviewer / Verifier Work
+When a task is split across multiple agents, the first thing to separate is responsibility, not headcount. `sample-repo/docs/harness/multi-agent-playbook.md` and `sample-repo/tasks/FEATURE-002-plan.md` define four roles: `planner`, `coder`, `reviewer`, and `verifier`.
 
-## 4. Separate Planner, Coder, Reviewer, and Verifier Work
-When a task is split across multiple agents, the first thing to separate is responsibility, not headcount. `sample-repo/docs/harness/multi-agent-playbook.md` and `sample-repo/tasks/FEATURE-002-plan.md` define four roles:
+This four-role split works because write scope and decision scope are different.
 
 | Role | Primary responsibility | Main artifacts |
 |---|---|---|
-| planner | freeze scope, define workstreams, set handoffs | `FEATURE-002-plan.md`, feature list |
+| planner | freeze scope, split workstreams, define handoffs | `FEATURE-002-plan.md`, feature list |
 | coder | implement and update tests | `src/`, `tests/` |
-| reviewer | inspect diff, risk, docs drift, and scope drift | docs, task artifacts, diff |
-| verifier | run verify, collect evidence, report | verify commands, evidence, final report |
+| reviewer | inspect diff, docs drift, and scope drift | docs, task artifacts, diff |
+| verifier | run verify, collect evidence, and prepare the report | verify commands, evidence bundle |
 
-This split works because write scope and decision scope are different. The planner should fix scope and ownership before coder work begins. Otherwise, parallelism only makes conflicts happen faster.
-
-`FEATURE-002-plan.md` shows the intended separation: one coding track for assignee-filter semantics, another for assignment-change audit logging, then reviewer and verifier passes to integrate the result. Multi-agent work is useful only when those streams are truly separable.
+The important point here is that local multi-agent orchestration is a same-repo / same-runtime role split. It becomes safe only after owned files, merge order, and exit states are fixed in advance. If agents are added before the plan is stable, write scopes collide. The planner should fix scope, shared-file rules, and ownership first. Only disjoint workstreams should be parallelized.
 
 ## 5. When to Use Multi-agent and When Not To
-Multi-agent work is not the default. Without an explicit decision rule, coordination cost can exceed any speed gain.
+Multi-agent work is not the default. If the decision rule is unclear, coordination cost can exceed any speed gain.
 
-This chapter needs only a simple rule set:
+For this chapter, the following table is enough.
 
-| Decision | Use single-agent when | Use multi-agent when |
+| Decision | Use it when | Do not use it when |
 |---|---|---|
-| task shape | one track can close safely inside one session | two or more disjoint tracks exist |
-| restart cost | one person can recover state from the restart packet | handoff is expected and must be explicit |
-| write scope | most edits stay in one bounded area | roles can own separate files or phases |
-| integration cost | review and verify are simple enough to stay serial | review and verify can run in parallel without collision |
+| single-agent | scope is narrow, the work can close in one session, write scope stays in one area, and one verify path is enough | artifact synchronization is already heavy or long-running work is visible from the start |
+| multi-agent | disjoint workstreams exist, review or verify can run in parallel, and the restart packet is explicit | the plan is unclear, write scopes overlap, or explanation cost is too high |
 
-The important idea is not “complex means multi-agent.” The important idea is “split only when the split reduces integration cost.” If the feature list is weak and the restart packet is incomplete, adding more agents only parallelizes confusion.
+Local orchestration and remote interoperability also need to be separated. MCP covers context and tool connectivity: it connects tools, resources, and prompts to a runtime. A2A covers remote interoperability such as agent discovery and task handoff. When designing same-repo / same-runtime sub-agent work, MCP and A2A do not need to be treated as the same thing. The subject of this chapter is local multi-agent orchestration, not cross-service or cross-organization interoperability itself.
 
-That is why the prerequisites for multi-agent work are a feature list, a restart protocol, and explicit ownership. When those exist, multi-agent execution becomes a controlled harness choice instead of a reflex.
+In practice, the decision should not be “complex means multi-agent.” It should be “split only when the split reduces integration cost.” In `FEATURE-002`, assignee-filter semantics and audit logging are related, but their owners and verify checkpoints can still be separated. Only tasks that can be separated that way should be moved into multi-agent work.
 
 ## Bad / Good Example
 Bad:
 
 ```text
-Finish FEATURE-002.
+Finish FEATURE-002 end to end.
 Add more agents if necessary.
-If the work stops, read the old chat and continue.
+Keep only a summary and resume from that.
+Because MCP is available, treat it as if A2A-style role splitting is already covered.
 ```
 
-This method has no track split, no restart packet, and no role ownership. The moment interruption or handoff appears, state starts to drift.
+This method has no track split, no restart packet, no owned files, and no role ownership. The moment interruption or handoff appears, state starts to drift.
 
-Corrected:
+good:
 
 ```text
 First split the workstreams in `sample-repo/docs/harness/feature-list.md`.
-Then use `sample-repo/tasks/FEATURE-002-plan.md` to fix planner,
-coder, reviewer, and verifier responsibilities.
-At interruption, update the restart packet defined in
-`sample-repo/docs/harness/restart-protocol.md`.
-Keep single-agent execution for tracks that still close safely,
-and use multi-agent only for disjoint tracks.
+Then use `sample-repo/tasks/FEATURE-002-plan.md` to fix planner / coder / reviewer / verifier responsibilities.
+Follow `sample-repo/docs/harness/restart-protocol.md` and restart only after checking the plan, feature list, verify state, and owned files, not a summary alone.
+Use multi-agent only for tracks that stay local, and keep MCP as tool connectivity and A2A as remote handoff as separate concepts.
 ```
 
-This version stores long-running-task state and the conditions for multi-agent use in artifacts before coordination begins.
+This corrected version stores long-running-task state, ownership, and the conditions for multi-agent use in artifacts before coordination begins.
 
 Comparison points:
-- The bad version depends on chat history as session memory.
-- The bad version reaches for multi-agent as a reflex.
-- The corrected version fixes feature lists, restart packets, and role ownership first.
+- the bad version depends on summary alone as session memory
+- the bad version treats MCP and A2A as the same kind of mechanism
+- the good version fixes the feature list, restart packet, owned files, and merge order first
 
 ## Worked Example
-Break `FEATURE-002` into three stages.
+Break `FEATURE-002` into four stages.
 
 1. planner
-   - fix scope and non-goals in `FEATURE-002-plan.md`
-   - create tracks and verify checkpoints in `sample-repo/docs/harness/feature-list.md`
+   - fix scope, non-goals, and shared-file rules in `FEATURE-002-plan.md`
+   - create tracks, owners, and verify checkpoints in `feature-list.md`
+   - define owned files and merge order for each role
 2. coder
-   - implement assignee-filter semantics and audit-log behavior as separate workstreams
-   - run local verify inside each track
-3. reviewer / verifier
-   - check docs drift, scope drift, verify results, and final report together
+   - implement assignee-filter semantics and audit logging as separate workstreams
+   - run local verify in each workstream and update the `Progress Note`
+3. reviewer
+   - inspect docs drift, scope drift, and shared-file collisions
+4. verifier
+   - confirm current-run verify, evidence, and the final `Remaining Gaps`
 
-If a coder stops mid-task, the next operator uses `restart-protocol.md` to inspect the latest Progress Note and verify result, then decides whether work should resume in coder mode or return to planner mode first. In other words, the restart protocol is both a continuation mechanism and a role-reset mechanism.
+If a coder stops mid-task, the next operator follows `restart-protocol.md`, checks the feature list, `Progress Note`, and verify state, and decides whether the work can continue in coder mode or must return to planner mode first. The restart protocol is therefore both a continuation procedure and a role-reset procedure.
 
-The key lesson from this example is that multi-agent work is not mainly about simultaneous execution. It is about responsibility separation supported by restartable artifacts.
+The key lesson from this worked example is that the essence of multi-agent work is not simultaneity. It is responsibility separation supported by restartable artifacts.
 
 ## Reader-facing Table
-### Long-running / Multi-agent Decision Card
+### Local Multi-agent / Remote Interoperability Decision Card
 
-| Decision point | Continue as single-agent when | Split into multi-agent when | Main artifact |
+| Decision point | local multi-agent orchestration | remote interoperability | Main artifact |
 |---|---|---|---|
-| feature list | one track can close directly | multiple disjoint tracks exist | `sample-repo/docs/harness/feature-list.md` |
-| restart packet | one person can restore state safely | handoff is expected across sessions or roles | `sample-repo/docs/harness/restart-protocol.md` |
-| role split | planner and coder can stay one role safely | planner / coder / reviewer / verifier reduce collisions | `sample-repo/docs/harness/multi-agent-playbook.md` |
-| plan | one work package is enough | checkpoints are needed per workstream | `sample-repo/tasks/FEATURE-002-plan.md` |
+| boundary | same-repo / same-runtime role split | cross-service / cross-organization handoff | playbook, restart protocol |
+| main concern | owned files, merge order, exit state | discovery, task transfer, trust boundary | plan, protocol docs |
+| relationship to MCP | a supporting layer for tools and resources | not a substitute | runtime docs |
+| relationship to A2A | not required | one possible handoff layer | protocol docs |
 
-This card keeps the decision grounded in integration cost instead of surface complexity. Without a strong feature list and restart packet, multi-agent work is just parallelized state loss.
+This card keeps the decision grounded in integration cost instead of surface complexity. Without a strong feature list and restart packet, multi-agent work only parallelizes state loss. If the plan and role split are clear, local multi-agent orchestration can reduce the coordination cost of long-running work.
 
 ## Exercises
-1. Split case C into planner, coder, and reviewer responsibilities.
+1. Split case C into planner / coder / reviewer / verifier responsibilities.
 2. Restart a failed long-running task through a restart protocol.
 
 ## Referenced Artifacts
@@ -173,14 +160,14 @@ This card keeps the decision grounded in integration cost instead of surface com
 - `sample-repo/tasks/FEATURE-002-plan.md`
 
 ## Source Notes / Further Reading
-- To revisit this chapter, start with `sample-repo/docs/harness/feature-list.md`, `sample-repo/docs/harness/restart-protocol.md`, `sample-repo/docs/harness/multi-agent-playbook.md`, and `sample-repo/tasks/FEATURE-002-plan.md`. Read multi-agent work only after the role split and restart packet are concrete.
+- To revisit this chapter, start with `sample-repo/docs/harness/feature-list.md`, `sample-repo/docs/harness/restart-protocol.md`, `sample-repo/docs/harness/multi-agent-playbook.md`, and `sample-repo/tasks/FEATURE-002-plan.md`. Read multi-agent work only after owned files and the restart packet are concrete.
 - For the backmatter path, see `manuscript-en/backmatter/00-source-notes.md` under `### CH11 Long-running Tasks and Multi-agent Work` and `manuscript-en/backmatter/01-reading-guide.md` under `## Verification, Reliability, and Operations`.
 
 ## Chapter Summary
-- Long-running tasks need a feature list, a Progress Note, and a restart packet to keep state stable across sessions.
-- Multi-agent work is not the default. It becomes useful only when ownership and write scope can be split cleanly.
-- Once long-running task control is in place, the remaining problem is team-wide operation. The next chapter moves into roles, review budget, metrics, and repo hygiene.
+- Long-running tasks need a feature list, a `Progress Note`, and a restart packet to keep state stable across sessions.
+- Multi-agent work is not the default. It becomes useful only when role ownership, owned files, and merge order can be split cleanly.
+- MCP is about context and tool connectivity, while A2A is about remote interoperability. Same-repo local orchestration is a different design problem. The next chapter moves from that boundary into the team-wide operating model.
 
 ## Parity Notes
 - Japanese source: `manuscript/part-03-harness/ch11-long-running-and-multi-agent.md`
-- This English draft preserves the same long-running task model, restart rules, and role-ownership guidance as the Japanese chapter.
+- This English chapter preserves the same long-running-task model, restart rules, local-orchestration framing, and MCP / A2A distinction as the Japanese chapter.

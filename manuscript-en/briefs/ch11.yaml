@@ -13,10 +13,10 @@ sections:
   - Where long-running tasks break
   - Feature lists and progress tracking
   - Restart protocol
-  - Separating planner / coder / reviewer
+  - Separating planner / coder / reviewer / verifier
   - When to use multi-agent and when not to
 exercises:
-  - Split case C into planner / coder / reviewer responsibilities.
+  - Split case C into planner / coder / reviewer / verifier responsibilities.
   - Restart a failed long-running task through a restart protocol.
 artifacts:
   - sample-repo/docs/harness/feature-list.md

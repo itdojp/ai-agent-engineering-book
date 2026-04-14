@@ -1,3 +1,8 @@
+---
+name: issue-to-plan
+description: Use when translating a sample-repo issue or brief into a concrete implementation plan with read files, change files, and verification scope.
+---
+
 # Issue to Plan
 
 ## Purpose
@@ -8,6 +13,8 @@ sample-repo 向け issue / brief を実装計画に変換する。
 - code / docs / tests / task artifact の更新範囲を先に固定したいとき
 
 ## Read First
+- `AGENTS.md`
+- `sample-repo/AGENTS.md`
 - `docs/repo-map.md`
 - `docs/architecture.md`
 - `docs/coding-standards.md`
@@ -22,6 +29,9 @@ sample-repo 向け issue / brief を実装計画に変換する。
 - verify command
 
 ## Guardrails
+- `AGENTS.md` と brief が定義する source of truth を plan に取り込む
 - plan に issue 外の拡張を入れない
 - verify と docs 更新を省略しない
 - public behavior を変える場合は tests を先に挙げる
+- context pack は task-specific read order、skill は repeatable workflow として混ぜない
+- MCP や外部 tool は live な補助情報には使えても、repo artifact の代替にはしない

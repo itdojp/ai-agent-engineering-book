@@ -45,7 +45,7 @@ AI agent、coding agent、ChatGPT、Codex CLI は同じではない。
 - `acceptance criteria`: 機能または変更が満たすべき受け入れ条件
 - `done criteria`: harness 上で完了扱いにする条件
 - `evidence bundle`: reviewer が変更を検証できるように残す証跡一式
-- `restart packet`: plan、feature list、最新 `Progress Note`、verify evidence、open questions から成る再開時の canonical input
+- `restart packet`: plan、feature list、owned files、merge order、最新 `Progress Note`、verify evidence、open questions から成る再開時の canonical input
 - `permission policy`: 自律実行と human approval の境界を定義する規則
 - `approval boundary`: 破壊的変更、public contract 変更、運用ポリシー変更の前に human approval が必要になる境界
 - `work package`: 1 回の session または 1 人の担当で安全に進められる最小単位

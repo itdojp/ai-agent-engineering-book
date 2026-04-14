@@ -160,15 +160,25 @@ def normalize_text(text: str) -> str:
     return re.sub(r"\s+", " ", html.unescape(text)).strip()
 
 
+def normalize_markdown_text(text: str) -> str:
+    rendered_html = markdown.markdown(text, extensions=["extra", "sane_lists"])
+    plain_text = re.sub(r"<[^>]+>", "", rendered_html)
+    return normalize_text(plain_text)
+
+
 def remove_duplicate_excerpt_paragraph(body_html: str, excerpt: str) -> str:
-    target = normalize_text(excerpt)
+    target = normalize_markdown_text(excerpt)
     if not target:
         return body_html
 
     paragraph_re = re.compile(r"<p>.*?</p>", re.DOTALL)
     tag_re = re.compile(r"<[^>]+>")
+    heading_re = re.compile(r"<h2\b")
+    first_heading = heading_re.search(body_html)
+    second_heading = heading_re.search(body_html, first_heading.end()) if first_heading else None
+    search_scope = body_html[: second_heading.start()] if second_heading else body_html
 
-    for match in paragraph_re.finditer(body_html):
+    for match in paragraph_re.finditer(search_scope):
         paragraph_html = match.group(0)
         paragraph_text = normalize_text(tag_re.sub("", paragraph_html))
         if paragraph_text == target:

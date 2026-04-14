@@ -53,6 +53,19 @@ throughput の自慢ではなく、どこで運用が詰まり、どの artifact
 - 分子
   - task / work-package id、run timestamp または run id、owner / handoff、retry / restart reason、verify reference、evidence linkage、redaction note のうち必要項目を満たす trace を残した work package 数
 
+必要項目の判定は次のルールで揃える。
+- 常に必須
+  - task / work-package id
+  - run timestamp または run id（どちらか一方は必須）
+  - verify reference
+  - evidence linkage
+- 条件付き必須
+  - owner / handoff: handoff がある work package では必須。handoff がない場合も current owner を書き、owner 概念を置かない運用だけ `N/A` を使う
+  - retry / restart reason: retry または restart があれば必須。無ければ `N/A` を明示する
+  - redaction note: redact した箇所があれば必須。無ければ `none` または `N/A` を明示する
+
+未該当項目は空欄や省略ではなく、`N/A` や `none` のような非該当表記で残す。分子に数えるには、常に必須の項目が埋まっており、条件付き必須の項目は該当時に埋まっている必要がある。
+
 ここでの trace coverage は trace file の有無だけではない。reviewer が「どの verify とどの task に紐づく trace か」を説明できるかまで含めて測る。
 
 ## Intervention Rules

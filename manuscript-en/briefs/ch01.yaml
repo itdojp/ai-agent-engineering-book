@@ -1,21 +1,21 @@
 id: ch01
 title: Where AI Agents Fail
 part: part-00
-goal: Organize the major failure modes of AI agents and introduce the book's maturity model: Prompt Engineering -> Context Engineering -> Harness Engineering.
+goal: "Expand the AI-agent failure model for 2026 engineering practice and introduce the boundaries among Prompt -> Context -> Harness plus agent types."
 reader_outcomes:
-  - Explain the difference between a one-off correct answer and actual work completion on a long-running task
-  - Understand the roles of the sample-repo, ChatGPT, and Codex CLI in this book
-  - Understand which artifacts later chapters will add
+  - "Distinguish a one-off wrong answer from execution failures that include context, permissions, verify, and approvals"
+  - "Explain the role differences among an interactive assistant, a local CLI coding agent, and a cloud / background agent"
+  - "Understand which artifacts later chapters will add and which signals act as verification evidence"
 dependencies:
 sections:
-  - Getting one answer right is different from getting work done
-  - Four failure modes: wrong answer, forgetting, breaking things, stopping early
-  - Mapping Prompt Engineering / Context Engineering / Harness Engineering
-  - The recurring cases, sample-repo, ChatGPT, and Codex CLI
-  - Read this book as a book about artifacts, not slogans
+  - "Getting one answer right is different from getting work done"
+  - "Eight failure classes: wrong answer, poisoning, misuse, omission, and stop"
+  - "Design surfaces that reduce failure, and agent types"
+  - "The recurring cases and the sample-repo"
+  - "Read this book as a book about artifacts"
 exercises:
-  - Read a failed coding agent transcript and identify three missing artifacts.
-  - Classify a weak task request by failure mode and propose a better direction.
+  - "Assign the four agent types to one task and identify where the human approval gate should sit."
+  - "Read a failed coding-agent transcript, identify which failure classes chained together, and name the missing artifacts."
 artifacts:
   - sample-repo/README.md
   - sample-repo/docs/domain-overview.md

@@ -7,7 +7,7 @@
 
 ## During Change
 - Keep the diff inside one work package.
-- Check for missing updates in docs, task artifacts, or the Progress Note.
+- Check for missing updates in docs, task artifacts, or the `Progress Note`.
 - Classify verify failures instead of treating every red result the same way.
 
 ## Before Review

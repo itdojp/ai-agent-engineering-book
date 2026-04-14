@@ -1,6 +1,6 @@
 # How to Read This Book
 
-The book has three parts, and the order is intentional. Prompts alone cannot preserve assumptions. Context alone cannot close execution and verification. Harnesses alone can still make the wrong assumptions fail more efficiently. The three layers need to stack in order.
+The book has three parts, and the order is intentional. Prompts alone cannot preserve assumptions. Context alone cannot close execution and verification. Harnesses alone can still make the wrong assumptions fail more carefully. The three layers need to stack in order.
 
 ## Three-Part Structure
 
@@ -14,7 +14,17 @@ The second goal is to fix the decision inputs. This part covers repo context, ta
 
 ### Part III Harness Engineering
 
-The final goal is to fix execution boundaries and operating rules. This part covers the single-agent harness, verification harness, restart protocol, and operating model. The point is to keep the AI agent from stopping before verification or drifting into unsafe autonomy.
+The final goal is to fix execution boundaries and operating rules. This part covers the single-agent harness, verification harness, restart protocol, and operating model. The point is to keep the AI agent from stopping before verification and to keep retry, handoff, and review safe.
+
+## Reading Rules for the 2026 Edition
+
+In the 2026 edition, read the prose and repo artifacts as durable judgment criteria, and fill in runtime detail from primary sources. Keep the following priority order while reading.
+
+1. Use the chapter prose to identify which failure mode the chapter is trying to reduce
+2. Use `sample-repo` and supporting artifacts to inspect the actual inputs and evidence that should remain in the repo
+3. Use the official docs of the tool in use to confirm permissions, protocol behavior, pricing, and execution boundaries
+
+If you keep this order, it becomes easier to stabilize the design for closing work before getting distracted by short-lived UI or CLI differences.
 
 ## Three Ways to Read This Book
 
@@ -53,10 +63,10 @@ The book is written around artifact design rather than a single UI or one model 
 Use this order when the tooling in front of you does not match the exact screenshots or steps you expect.
 
 1. Understand which artifact and decision boundary the chapter is trying to stabilize
-2. Check the latest repository state together with `docs/pages-publishing.md` (Japanese only) and `docs/en/operating-model.md`
-3. Confirm the active permission, execution, and verification behavior in the official documentation for the tool you actually use
+2. Check the latest repository state together with `docs/pages-publishing.md` and `docs/en/operating-model.md`
+3. Confirm the active permission, execution, and verification behavior in the official docs and protocol specs for the tool you actually use
 
-If the manuscript and the live tool differ, prefer the artifact model and read the operational steps through the current official source.
+In the 2026 edition, official docs from OpenAI / Codex, the MCP / A2A specifications, and primary-source docs from GitHub, Anthropic, or Google take priority. If the manuscript and the live tool differ, prefer the artifact model and re-read the operational steps through the current primary source.
 
 ## How to Track the Recurring Cases
 

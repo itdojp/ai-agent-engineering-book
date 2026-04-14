@@ -13,7 +13,7 @@ This file is the source of truth for building the figure list and table list in 
 - Treat `manuscript-en/figures/figure-plan.md` as the source of truth for figure ID, chapter, caption, and first mention
 - Keep each caption reader-facing so the main lesson of the figure is visible in one line
 - Preserve the rule of one figure for one main message, then swap only the production numbering later
-- Keep figure IDs aligned with the Japanese edition so cross-edition editorial work stays stable
+- Keep captions and first mentions aligned with glossary and chapter wording so `restart packet`, `Progress Note`, and `approval boundary` do not drift
 
 ## Current Figure Seed
 
@@ -24,7 +24,7 @@ This file is the source of truth for building the figure list and table list in 
 | `fig-03` | CH07 | The minimum input for resuming a session | `manuscript-en/figures/fig-03-resume-packet.mmd` |
 | `fig-04` | CH09 | The overall single-agent harness flow | `manuscript-en/figures/fig-04-single-agent-harness.mmd` |
 | `fig-05` | CH10 | The order of lint, typecheck, unit, and e2e | `manuscript-en/figures/fig-05-verification-pipeline.mmd` |
-| `fig-06` | CH11 | The split among planner, coder, and reviewer | `manuscript-en/figures/fig-06-long-running-multi-agent.mmd` |
+| `fig-06` | CH11 | The split among planner / coder / reviewer / verifier | `manuscript-en/figures/fig-06-long-running-multi-agent.mmd` |
 | `fig-07` | CH12 | The responsibilities that remain with humans | `manuscript-en/figures/fig-07-operating-model.mmd` |
 
 ## Table List Policy
@@ -38,10 +38,10 @@ This file is the source of truth for building the figure list and table list in 
 | Return-to Chapter | Nearby Heading | Table Role |
 |---|---|---|
 | CH01 | Getting one answer right is different from getting work done | Shows the difference between plausible output and completed work |
-| CH02 | Separate objective, constraints, completion criteria, and forbidden actions | Shows the Prompt Contract elements and the failures caused by missing ones |
-| CH04 | Evaluate prompts as operational artifacts | Shows the boundary among prompt, context, and harness evaluation |
-| CH07 | Task context and session memory | Shows the minimum elements required for a restart |
-| CH09 | Foundations of Harness Engineering | Compresses the flow from init to final report |
-| CH10 | Verification is a system, not a single test run | Shows the order from failing test to approval |
-| CH11 | Decide when to stay single-agent and when to split roles | Shows the branching conditions between single-agent and multi-agent work |
-| CH12 | Operate by metrics, review budget, and hygiene | Shows the measurement group for throughput, quality, and hygiene |
+| CH02 | A prompt is not an instruction sentence but an input/output contract | Shows the Prompt Contract elements and the failures caused by missing ones |
+| CH04 | Good prompts and workflows can be evaluated | Shows the boundary among prompt, context, and harness evaluation |
+| CH07 | Minimum restart packet | Shows the minimum elements required for a restart |
+| CH09 | Single-agent harness flow | Compresses the flow from init to final report |
+| CH10 | Verification pipeline | Shows the order from failing test to approval |
+| CH11 | Long-running / Multi-agent decision card | Shows the branching conditions between single-agent and multi-agent work |
+| CH12 | Metrics and retrospectives | Shows the measurement group for throughput, quality, and hygiene |

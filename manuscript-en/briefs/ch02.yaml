@@ -1,22 +1,22 @@
 id: ch02
 title: Design Prompts as Contracts
 part: part-01-prompt
-goal: Define Prompt Engineering as input/output contract design rather than prompt phrasing tricks, and build reusable Prompt Contract artifacts.
+goal: "Define Prompt Engineering as a single-task contract that includes structured output, tool contracts, and approval conditions rather than mere instruction phrasing."
 reader_outcomes:
-  - Separate objective, constraints, completion criteria, and forbidden actions
-  - Compare weak prompts and operational prompts with explicit review criteria
-  - Build different Prompt Contracts for feature work and bugfix work
+  - "Separate objective, constraints, completion criteria, and forbidden actions together with tool-contract and approval conditions"
+  - "Design a Prompt Contract that includes schema and output version"
+  - "Build different Prompt Contracts for feature work and bugfix work and define review criteria"
 dependencies:
   - ch01
 sections:
-  - A prompt is an input/output contract, not a generic instruction
-  - Separate objective, constraints, completion criteria, and forbidden actions
-  - How to state assumptions and handle missing information
-  - Comparing bad prompts and good prompts
-  - How to review a prompt contract
+  - "A prompt is not an instruction sentence but an input/output contract"
+  - "Separate objective, constraints, tool contract, and completion criteria"
+  - "Handle assumptions, approval, and refusal conditions"
+  - "Compare bad prompts and good prompts"
+  - "Review prompt contracts through failure modes"
 exercises:
-  - Rewrite “add search” as a contract prompt.
-  - Make `done` explicit for a bugfix task in five points.
+  - "Write a Prompt Contract for a feature task that includes structured output and output version."
+  - "Use a bugfix task that includes approval-required actions and state exactly where the agent must stop and wait for approval."
 artifacts:
   - prompts/en/bugfix-contract.md
   - prompts/en/feature-contract.md

@@ -220,5 +220,5 @@ done と言ってよいのは `sample-repo/docs/harness/done-criteria.md` を満
 
 ## 章末まとめ
 - Context Engineering が「何を見せるか」を決めるのに対し、Harness Engineering は「どう始め、どこで止まり、いつ done と言えるか」を決める。
-- single-agent harness の最小構成は、init、work boundary、permission policy、done criteria、verify command、retry rule である。
+- single-agent harness の最小構成は、init、work boundary、permission policy、external input boundary、done criteria、verify command、retry rule である。
 - runtime-managed capability が増えても、approval boundary、artifact sync、verify、review は repo / team 側の責務として残る。次章では test、CI、evidence を束ねる verification harness を扱う。

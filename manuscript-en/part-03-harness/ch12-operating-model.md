@@ -74,8 +74,8 @@ Metrics are not here to answer whether AI agents feel useful. They exist to show
 
 | Group | Example metrics | What they reveal |
 |---|---|---|
-| throughput | `closed issues / week`, `PR cycle time` | whether work packages are small enough and flow is moving |
-| quality | `verify failure rate`, `review completion rate`, `post-merge regression count` | whether review and verification are actually catching problems |
+| throughput | `closed issues / week`, `PR cycle time`, `review completion rate` | whether work packages are small enough and flow is moving |
+| quality | `verify failure rate`, `post-merge regression count` | whether review and verification are actually catching problems |
 | hygiene | `stale docs count`, `orphaned task brief count`, `missing verification evidence count` | whether entropy cleanup is keeping pace with generation |
 | observability | `trace coverage`, `current-run verify availability`, `retry concentration` | where current-run visibility and failure analysis are weak |
 

@@ -5,6 +5,8 @@
 - Have you decided whether a failing test should be added or updated first?
 - Have you identified the local verify command and the matching CI job before starting the change?
 - If an evidence bundle is required, can you explain that requirement before editing?
+- If the work mentions a model name, API, SDK, or vendor-specific feature, have you chosen where to record the model/runtime profile and official-doc confirmation date?
+- If issues, PRs, logs, eval cases, traces, or evidence may enter an AI or external service, have you checked classification, redaction, provider terms, and approval requirements?
 - Are you sure that a referenced trace or old log is not being treated as a substitute for current-run verify?
 
 ## During Change
@@ -24,8 +26,11 @@
 - Are `Changed Files`, `Verification`, and `Remaining Gaps` consistent with the current diff?
 - If a trace is cited in review, are the verify reference and evidence linkage explicit?
 - Have you checked whether traces or screenshots need redaction / privacy treatment?
+- If the model/runtime profile changed, did you rerun the eval or smoke check?
+- If AI / external-service submission is involved, did you record the submitted data class, redaction, provider terms, and approval decision under `Evidence / Approval`?
 - If evidence is not required, can you explain why?
 - Have you called out the points that still require human approval?
+- Is there a plan to inspect review bodies, inline comments, suggestions, and confirm zero unresolved review threads?
 - If any check was skipped, is that decision recorded in `Remaining Gaps`?
 
 ## Stop Instead Of Merge
@@ -33,3 +38,5 @@
 - Is current-run evidence missing even though the change requires it?
 - Do local verify and CI disagree without an explanation?
 - Are there changes that require approval before merge?
+- Do review comments, suggestions, or unresolved threads remain while merge is being attempted?
+- Did the model/runtime profile change without rerunning evals or smoke checks?

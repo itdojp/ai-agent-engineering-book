@@ -12,6 +12,8 @@ These metrics are not for bragging about throughput. They exist to identify wher
   - shows whether the review budget is backing up
 - `draft-to-merge time`
   - measures how long verify and review are delaying closure
+- `review completion rate`
+  - measures the share of PRs whose review bodies, inline comments, suggestions, and zero unresolved threads were handled before merge
 - `queue wait time`
   - shows where PRs are stalling in the flow
 - `stale draft count`
@@ -29,6 +31,10 @@ These metrics are not for bragging about throughput. They exist to identify wher
   - shows missed synchronization among docs, tests, and task artifacts
 - `reviewer re-open rate`
   - shows whether review churn is increasing
+- `unresolved review thread residual count`
+  - detects whether unresolved threads remain before merge
+- `eval rerun coverage`
+  - detects whether evals or smoke checks reran after prompt, model/runtime profile, or tool-policy changes
 
 ## Hygiene
 
@@ -40,6 +46,10 @@ These metrics are not for bragging about throughput. They exist to identify wher
   - detects weak review evidence for user-visible changes
 - `evidence freshness failures`
   - shows whether stale verify results or screenshots are reaching review
+- `model/runtime profile drift count`
+  - detects whether model, API, SDK, runtime, or tool-set changes entered without confirmation dates and eval reruns
+- `external-input exception count`
+  - detects rising exceptions around redaction, provider terms, and approval for AI / external-service submission
 - `hygiene backlog age`
   - shows whether the cleanup backlog is being neglected
 
@@ -49,6 +59,8 @@ These metrics are not for bragging about throughput. They exist to identify wher
   - shows whether traces that satisfy the minimum trace reference contract remain for work packages with long-running work, handoff, retry, or restart
 - `current-run verify availability`
   - shows whether reviewers can inspect the latest run directly
+- `review-response evidence availability`
+  - shows whether reviewers can inspect responses to review bodies, inline comments, suggestions, and thread resolution
 - `retry concentration`
   - shows whether failure loops are clustering in one stage of the flow
 
@@ -81,8 +93,14 @@ Trace coverage here does not mean only “a trace file exists.” It also measur
   - cut work packages smaller and suspect review-budget overflow first
 - when `verify failure rate` stays high
   - suspect missing prompt, brief, or context-pack inputs before blaming the model
+- when `review completion rate` is low or `unresolved review thread residual count` remains nonzero
+  - revisit the PR template, review-response workflow, and pre-merge gate
 - when `artifact drift incidents` increase
   - revisit done criteria and checklists
+- when `model/runtime profile drift count` rises or `eval rerun coverage` falls
+  - restore confirmation-date recording and eval reruns to the pre-merge gate for model / API / SDK changes
+- when `external-input exception count` increases
+  - revisit redaction policy, provider-term checks, and the approval boundary
 - when `stale docs count`, `evidence freshness failures`, or `hygiene backlog age` worsen
   - open cleanup work packages before adding more feature work
 
@@ -93,5 +111,8 @@ Trace coverage here does not mean only “a trace file exists.” It also measur
 - Is queue wait time caused mainly by reviewer wait, verify wait, or approval wait?
 - Is low trace coverage making failure analysis impossible?
 - If trace coverage is low, is the real gap missing trace, missing verify reference, or missing evidence linkage?
+- When review completion rate is low, is the cause unanswered comments, unapplied suggestions, or unresolved thread cleanup?
+- Are eval reruns missing after model/runtime profile changes?
+- Where are AI / external-service submission exceptions increasing: redaction, approval, or provider-term checks?
 - Is worsening repo hygiene slowing the next round of work?
 - Are stale drafts and stale docs increasing at the same time?

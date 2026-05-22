@@ -56,6 +56,12 @@ CH12 does not treat throughput as “number of PRs.” `docs/en/metrics.md` fram
 
 The rule is simple: do not increase agent speed before protecting review flow. Smaller PRs, smaller work packages, and a stable PR template usually improve throughput more than a more aggressive model does. `.github/pull_request_template.md` supports this by fixing `Goal`, `Changed Files`, `Verification`, `Evidence / Approval`, and `Remaining Gaps`.
 
+#### PR completion gate and review response
+
+In AI-agent work, a PR can easily be treated as complete merely because CI is green. To stay aligned with the Phase 2 GitHub / AgentOps books, the completion gate should include review bodies, inline comments, suggestions, unresolved review threads, CI, and post-merge checks. `.github/pull_request_template.md` should let the operator record whether Copilot review was requested, whether every comment was fixed or answered with a reason, whether unresolved threads are zero, and whether main checks and public-site reflection were confirmed after merge.
+
+This `review completion gate` exists to protect review budget, not to add more ceremony. If suggestions or unresolved threads remain at merge time, the team cannot tell whether a post-merge regression came from review miss, verify miss, or a product decision. The operator leaves current-run verify and review-response evidence in the PR body, and the reviewer treats zero unresolved threads plus green CI as merge preconditions.
+
 ## 3. Repo Hygiene and AI Slop Control
 AI-agent operations accelerate good diffs and bad diffs at the same time. The accumulated low-quality residue is AI slop. It includes more than obvious bugs. It also includes stale docs, broken paths, orphaned task briefs, drift between verify scripts and the repo, terminology inconsistency, and long explanations that are no longer tied to real artifacts.
 
@@ -69,11 +75,11 @@ Metrics are not here to answer whether AI agents feel useful. They exist to show
 | Group | Example metrics | What they reveal |
 |---|---|---|
 | throughput | `closed issues / week`, `PR cycle time` | whether work packages are small enough and flow is moving |
-| quality | `verify failure rate`, `post-merge regression count` | whether review and verification are actually catching problems |
+| quality | `verify failure rate`, `review completion rate`, `post-merge regression count` | whether review and verification are actually catching problems |
 | hygiene | `stale docs count`, `orphaned task brief count`, `missing verification evidence count` | whether entropy cleanup is keeping pace with generation |
 | observability | `trace coverage`, `current-run verify availability`, `retry concentration` | where current-run visibility and failure analysis are weak |
 
-The critical rule is to attach action to each metric. If verify failure rate rises, the team should inspect prompt or brief quality. If PR cycle time grows, the team should inspect review budget. If trace coverage falls, the team should suspect a lack of material for failure analysis. If evidence freshness failure rises, the team should suspect that reviewers can no longer confirm current-run verify. If stale docs count and hygiene backlog age worsen, cleanup work should be opened before more feature work. Metrics should support queue diagnosis, failure analysis, and review-quality improvement, not throughput bragging.
+The critical rule is to attach action to each metric. If verify failure rate rises, the team should inspect prompt or brief quality. If PR cycle time grows, the team should inspect review budget. If review completion rate falls or unresolved review thread residuals remain, the team should inspect the pre-merge gate and PR template. If trace coverage falls, the team should suspect a lack of material for failure analysis. If evidence freshness failure rises, the team should suspect that reviewers can no longer confirm current-run verify. If stale docs count and hygiene backlog age worsen, cleanup work should be opened before more feature work. Metrics should support queue diagnosis, failure analysis, and review-quality improvement, not throughput bragging.
 
 Trace coverage here does not mean only “a `trace.md` file exists.” For work packages that need traces because they involve long-running work, handoff, retry, or restart, the team should ask whether the minimum trace reference contract is actually present: task / work-package id, run timestamp or run id, owner / handoff, retry / restart reason, verify reference, evidence linkage, and redaction note. That is what keeps historical traces from being confused with current-run verify while still making trace coverage useful for failure analysis.
 
@@ -105,6 +111,8 @@ Corrected:
 Keep 1 issue = 1 work package.
 Use the PR template to require Goal, Changed Files, Verification,
 Evidence / Approval, and Remaining Gaps.
+Make Copilot review, responses to inline comments and suggestions,
+zero unresolved threads, green CI, and post-merge checks part of completion.
 Humans own goal setting, approval, final review, and entropy cleanup.
 Review metrics and repo hygiene every week, and reduce input volume
 before review budget is exceeded.
@@ -127,13 +135,13 @@ Consider a three-person team operating this repo.
 - reviewer
   - reviews the PR template output, verification, and evidence
 
-In this setup, one reviewer should hold at most two deep reviews at once. The operator must use `.github/pull_request_template.md` so that `Goal`, `Changed Files`, `Verification`, `Evidence / Approval`, and `Remaining Gaps` are always present. Every week, the team reviews `docs/en/metrics.md`. If `PR cycle time` grows, work packages are reduced further. If stale artifacts grow, `checklists/en/repo-hygiene.md` drives the entropy-cleanup pass.
+In this setup, one reviewer should hold at most two deep reviews at once. The operator must use `.github/pull_request_template.md` so that `Goal`, `Changed Files`, `Verification`, `Evidence / Approval`, and `Remaining Gaps` are always present. Every week, the team reviews `docs/en/metrics.md`. If `PR cycle time` grows, work packages are reduced further. If review completion rate falls or unresolved review thread residuals appear, the team tightens the pre-merge gate and review-response evidence. If stale artifacts grow, `checklists/en/repo-hygiene.md` drives the entropy-cleanup pass.
 If trace coverage drops, the team should recheck long-running-task handoff quality instead of treating the missing history as acceptable noise.
 
 The point of this example is that adoption succeeds or fails based on whether roles and cadence are artifactized. CH12 is therefore an operations chapter, not a model-selection chapter.
 
 ## Exercises
-1. Define an operating model for a three-person team.
+1. Define an operating model for a three-person team, including ownership for the review completion gate and zero unresolved threads.
 2. Create a weekly entropy cleanup checklist.
 
 ## Referenced Artifacts

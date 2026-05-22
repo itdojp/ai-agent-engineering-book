@@ -9,6 +9,10 @@ This file is the English counterpart of the repo-wide glossary and is used by th
 | Harness Engineering | The stage that designs execution boundaries, permission rules, verification harnesses, retries, and recovery paths for coding-agent work. |
 | AI agent | An actor that advances work through multi-step decisions and tool use. In the Japanese manuscript this may also appear as `AIエージェント`. |
 | coding agent | An AI agent that reads a repo, changes code, docs, tests, and artifacts, and runs verify steps. |
+| planner | The role or agent that decomposes a work package and proposes order, dependencies, owned files, and verify strategy. |
+| workflow | The execution path that connects prompts, context, tool calls, handoffs, verify, and review. It is a broader evaluation unit than one prompt. |
+| tool | The execution surface an AI agent uses for search, file operations, code execution, or API calls. Its use is governed by the tool contract and permission policy. |
+| guardrail | A check or stop condition around input, output, tool calls, or external-service submission. It can block risky operations or unsafe data use, but it does not replace review or verify. |
 | ChatGPT | A conversational interface used for requirements shaping, design exploration, comparison, and review-angle discovery. |
 | Codex CLI | A coding-agent execution environment that reads the repo, applies changes, runs commands, and gathers verification evidence. |
 | `AGENTS.md` | The repo entrypoint that defines local invariants and points to the next artifacts that must be read. |
@@ -20,6 +24,7 @@ This file is the English counterpart of the repo-wide glossary and is used by th
 | context pack | The task-specific bundle of reference material that fixes read order and canonical facts for one task. |
 | persistent artifact | A source-of-truth artifact that stays in the repo across sessions, such as a spec, glossary, or architecture doc. |
 | session memory | The combination of task brief, `Progress Note`, and verification evidence used to resume work across sessions. Chapter or document titles may also use `Session Memory`. |
+| memory | A broad term often used for session memory, runtime state, or persisted notes. In this book it is treated as a restart aid or runtime state, not as the source of truth. |
 | session summary | The minimum restart summary that preserves the last decisions and next move, such as `Decided`, `Open Questions`, and `Next Step`. |
 | source of truth | The highest-priority artifact used to resolve contradictions. |
 | source hierarchy | The priority order that decides whether the manuscript, repo artifact, official docs, or organization policy wins when they conflict. |
@@ -27,6 +32,7 @@ This file is the English counterpart of the repo-wide glossary and is used by th
 | further reading | The reading path that points the reader to official docs, books, or handbooks after a chapter. |
 | backmatter | The re-reference apparatus after the main text, including source notes, reading guide, index seed, and figure/list policies. |
 | verification harness | The verification system that bundles tests, lint, typecheck, evidence capture, and CI. |
+| eval | The evaluation unit that checks whether a prompt, model, or workflow meets criteria through fixed inputs, rubrics, judges, human spot-checks, and trace review. |
 | done criteria | The operational conditions required to treat work as complete, including verify state, artifact updates, and approval requirements. |
 | verify log | The current-run log that records commands, timestamps, and pass/fail state. It is distinct from a historical trace. |
 | trace | The history of runs, retries, handoffs, and state transitions. It supports failure analysis and does not replace current-run verify. |
@@ -43,6 +49,9 @@ This file is the English counterpart of the repo-wide glossary and is used by th
 | MCP-connected capability | The runtime layer that attaches extra tools, resources, or prompts. It is not a substitute for repo skills or context packs. |
 | A2A (Agent2Agent) | A family of protocols for remote interoperability such as agent discovery and task handoff. In this book it is treated separately from same-repo local orchestration. |
 | tool drift | The drift that appears when a UI, CLI, API, or tool capability changes over time and the manuscript or procedure no longer matches it. |
+| model/runtime profile | The model, API, SDK, runtime, tool set, approval policy, and confirmation date fixed for comparison or verification. |
+| external input boundary | The classification, redaction, and approval boundary used before issue, PR, log, eval-case, or customer data enters an AI or external service. |
+| review completion gate | The gate that treats PR review bodies, inline comments, suggestions, unresolved threads, CI, and post-merge checks as part of completion. |
 | human approval gate | The approval boundary that requires human review before a high-risk operation. |
 | approval boundary | The boundary beyond which destructive changes, public contract changes, or policy changes require human approval. |
 | operating model | The operating design that defines role boundaries, review budget, cadence, and rollout stages for AI-agent use. |

@@ -12,3 +12,6 @@
 | Secret leakage | `Progress Note` や context pack に token / credential / 個人情報が残る | credential 漏洩、危険な再利用、監査不能 | 値ではなく参照名だけを残し、secret scan と redact を必須にする |
 | Resume drift | `Progress Note` を読んだだけで再開し、live context を再取得しない | 古い verify 結果や stale state を前提に作業を続ける | resume 時に verify / status command を再実行し、summary を source of truth にしない |
 | Long-context hoarding | window が広いことを理由に何でも保持する | compact、re-fetch、persist の判断が消える | keep verbatim / summarize / compact / re-fetch / persist を明示する |
+| Provider / model drift | model、API、SDK、runtime、tool set の確認日がない | eval の差分が prompt 改善か product surface 変更か分からない | model/runtime profile と official docs 確認日を PR / evidence に残し、変更時は eval を再実行する |
+| External input overexposure | issue、PR、log、trace、evidence を分類せず AI / 外部サービスへ投入する | secret でなくても個人情報、未公開仕様、脆弱性情報、内部判断が漏れる | external input boundary を置き、redaction、provider 条件、approval、保存先を確認する |
+| Guardrail blind spot | guardrail がすべての hosted tool、function tool、trace、session に効くと思い込む | 適用外 surface で危険な tool call やデータ投入が通る | guardrail coverage を tool surface ごとに確認し、未対応範囲は permission policy と human approval で止める |

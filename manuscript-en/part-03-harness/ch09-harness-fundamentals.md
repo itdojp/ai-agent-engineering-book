@@ -28,6 +28,7 @@ Modern runtimes may provide convenience features such as background execution, h
 ## Learning Objectives
 - Explain the components of a single-agent harness
 - Understand why permission policy and escalation matter
+- Explain the boundary for AI / external-service submission and tool guardrails
 - Make done criteria explicit
 
 ## Outline
@@ -40,13 +41,14 @@ Modern runtimes may provide convenience features such as background execution, h
 ## 1. The Shape of a Single-Agent Harness
 A single-agent harness is the execution frame for one coding agent working on one work package. A harness is not another name for a prompt. Even if the prompt and context pack are good, the work still fails when startup steps, work boundaries, permissions, verification, and exit conditions are left implicit.
 
-In this repo, the single-agent harness has six parts:
+In this repo, the single-agent harness has seven parts:
 
 | Component | Role | Artifact in this chapter |
 |---|---|---|
 | init | fixes what to read first and which verify command to use | `scripts/init.sh` |
 | work boundary | limits what the current task may touch | task brief, `sample-repo/docs/harness/single-agent-runbook.md` |
 | permission policy | separates autonomous changes from approval-required changes | `sample-repo/docs/harness/permission-policy.md` |
+| external input boundary | checks classification, redaction, provider terms, and guardrail coverage before AI / external-service submission | permission policy and `checklists/en/verification.md` |
 | done criteria | defines `done`, `blocked`, and `needs-human-approval` | `sample-repo/docs/harness/done-criteria.md` |
 | verify command | fixes the minimum local validation | `scripts/verify-sample.sh` |
 | report format | standardizes what must be reported at finish | runbook and done criteria |
@@ -83,6 +85,12 @@ The output is not a convenience banner. It is the startup contract for the harne
 The next requirement is a permission policy. `sample-repo/docs/harness/permission-policy.md` allows the agent to update code, docs, and tests within the task brief, add or update failing tests, run read-only investigation commands, run `./scripts/verify-sample.sh`, and update the in-scope Progress Note. But it requires human approval for public-interface changes, domain-assumption changes, verify or CI changes, dependency additions, external services, secrets, or scope expansion outside the stated work package.
 
 The key question is not whether the agent is trustworthy in general. The key question is whether the approval boundary is embedded in repo artifacts before execution starts. A coding agent such as Codex CLI can run commands. That is exactly why the allowed surface must be narrow and explicit.
+
+#### AI / external-service submission and tool guardrails
+
+AI / external-service submission does not become safe just because secrets are absent. Issues, PRs, logs, eval cases, traces, and evidence bundles may contain customer data, personal data, sensitive data, unpublished specifications, vulnerability information, or internal decision traces. Before sending them to an external API, hosted tool, web search, tracing surface, or eval judge, confirm the data classification, redaction, provider retention / training-use / logging terms, storage location, and approver.
+
+Treat that check as the `external input boundary`. This boundary covers not only whether a tool call is allowed, but also what granularity may be sent, where output may be stored, and what trace may be retained. Guardrails sit before and after the boundary to block secret values, personal data, out-of-scope tool calls, and approval-required operations. They do not replace final review, current-run verify, or human approval. Use the official docs for the runtime in use to confirm which tool surfaces, hosted tools, function tools, traces, and sessions the guardrail actually covers, and keep uncovered areas stopped by the permission policy.
 
 Work boundaries matter for the same reason. In `BUG-001`, the agent should begin with the task brief, the repo map, the architecture doc, and the relevant tests. At this stage, it should not wander across the entire repo. A smaller work package produces a smaller verify unit and a safer rollback unit.
 
@@ -171,7 +179,7 @@ This version fixes startup, boundary, verification, and exit as one execution fr
 Comparison points:
 - The bad version tries to run the task with prompt text alone.
 - The bad version leaves a large gap for stopping before verification.
-- The corrected version defines init, permission policy, done criteria, and verify as one harness.
+- The corrected version defines init, permission policy, done criteria, verify, and external-input boundaries as one harness.
 
 ## Worked Example
 Use the single-agent harness for `BUG-001`, the case where stale state appears after a status update and reload.
@@ -212,12 +220,12 @@ The point of this example is not automation theater. The point is to show that H
 - `sample-repo/docs/harness/done-criteria.md`
 
 ## Source Notes / Further Reading
-- To revisit this chapter, start with `scripts/init.sh`, `sample-repo/docs/harness/single-agent-runbook.md`, `sample-repo/docs/harness/permission-policy.md`, and `sample-repo/docs/harness/done-criteria.md`. Read the single-agent harness as a bundle of startup, boundary, and exit conditions rather than as a prompt variant.
+- To revisit this chapter, start with `scripts/init.sh`, `sample-repo/docs/harness/single-agent-runbook.md`, `sample-repo/docs/harness/permission-policy.md`, and `sample-repo/docs/harness/done-criteria.md`. Read the single-agent harness as a bundle of startup, external-input boundary, and exit conditions rather than as a prompt variant.
 - For the backmatter path, see `manuscript-en/backmatter/00-source-notes.md` under `### CH09 Foundations of Harness Engineering` and `manuscript-en/backmatter/01-reading-guide.md` under `## Verification, Reliability, and Operations`.
 
 ## Chapter Summary
 - Context Engineering decides what the agent sees. Harness Engineering decides how the agent starts, where it must stop, and what must be true before it may declare completion.
-- The minimum single-agent harness consists of init, work boundary, permission policy, done criteria, verify command, and retry rule.
+- The minimum single-agent harness consists of init, work boundary, permission policy, external-input boundary, done criteria, verify command, and retry rule.
 - Runtime-managed loops may improve mechanism, but approval boundaries, artifact sync, and review-ready reporting still remain repo-owned duties.
 - Once start and exit conditions are stable, the next missing piece is a verification chain that reviewers can trust. The next chapter focuses on the verification harness itself.
 

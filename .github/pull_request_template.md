@@ -13,6 +13,12 @@
 - [ ] CI-equivalent local checks or documented differences
 - [ ] If the model/runtime profile changed: eval or smoke check rerun, with profile and confirmation date recorded
 
+Current-run command list:
+- `TODO: ./scripts/verify-book.sh`
+- `TODO: ./scripts/verify-pages.sh`
+- `TODO: ./scripts/verify-sample.sh`
+- `TODO: <additional command or reason omitted>`
+
 ## AI / External Service Boundary
 - [ ] No secrets, credentials, personal data, unreleased specs, vulnerability details, or sensitive logs are pasted into AI / external services without classification and redaction
 - [ ] Provider retention / training-use / logging terms are acceptable, or no external submission occurred

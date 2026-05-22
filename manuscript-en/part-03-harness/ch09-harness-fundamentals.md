@@ -126,31 +126,34 @@ Rollback is equally important. In this chapter, rollback does not mean resetting
 Safe retry always includes reclassification and scope reduction. Repeating the same verify command with no new hypothesis and no new input is a harness failure.
 
 ## 5. What Lets a Coding Agent Finish the Work
-For a coding agent to finish work reliably, five conditions must be present:
+For a coding agent to finish work reliably, the seven harness components must be explicit in artifacts and commands:
 
-1. one clear startup command
-2. artifact-defined work and permission boundaries
-3. explicit exit states: `done`, `blocked`, `needs-human-approval`
-4. one fixed verify command
-5. retry and rollback units that stay small
+1. a clear `init` command
+2. an artifact-defined work boundary, including owned files
+3. a permission policy that stops approval-required operations
+4. an external-input boundary with guardrail-coverage checks before AI / external-service submission
+5. done criteria that separate `done`, `blocked`, and `needs-human-approval`
+6. one fixed verify command that must pass before completion
+7. a report format that includes Exit State, Changed Files, Verification, and Remaining Gaps
 
-Without these conditions, the agent either stops too early or keeps going past the correct stopping point. The first failure mode maps to “stopping early.” The second maps to “breaking things.” From the CH01 perspective, Harness Engineering is one way to suppress those failure modes with artifacts instead of hope.
+Retry and rollback are operating rules applied by failure mode without weakening those seven components. Without these components, the agent either stops too early or keeps going past the correct stopping point. The first failure mode maps to “stopping early.” The second maps to “breaking things.” From the CH01 perspective, Harness Engineering is one way to suppress those failure modes with artifacts instead of hope.
 
-Even when task briefs, context packs, and skills are present, the last ten percent of the work still fails if startup, permission, exit, and retry remain vague. In practice, that last ten percent is where teams lose trust. Harness Engineering exists to make that part explicit.
+Even when task briefs, context packs, and skills are present, the last ten percent of the work still fails if init, work boundary, permission policy, external-input boundary, done criteria, verify command, and report format remain vague. In practice, that last ten percent is where teams lose trust. Harness Engineering exists to make that part explicit.
 
 ## Reader-facing Table
-### Single-Agent Harness Flow
+### Single-Agent Harness Components
 
-| Stage | What it fixes | Main artifact or command | Failure it prevents |
+| Component | What it fixes | Main artifact or command | Failure it prevents |
 |---|---|---|---|
 | init | reading order and verify command | `./scripts/init.sh sample-repo/tasks/BUG-001-brief.md` | confusion at task start |
-| boundary | task scope and editable surface | task brief, runbook | scope expansion |
-| permission | approval-required changes | `sample-repo/docs/harness/permission-policy.md` | unauthorized contract changes |
-| verify | minimum validation line | `./scripts/verify-sample.sh` | stopping before verification |
-| exit | `done / blocked / needs-human-approval` | `sample-repo/docs/harness/done-criteria.md` | ambiguous finish conditions |
-| report | `Changed Files`, `Verification`, `Remaining Gaps` | runbook, done criteria | non-reviewable completion reports |
+| work boundary | task scope and editable surface | task brief, runbook | scope expansion |
+| permission policy | approval-required changes | `sample-repo/docs/harness/permission-policy.md` | unauthorized contract changes |
+| external input boundary | AI / external-service submission and guardrail coverage | permission policy and verification checklist | sensitive data or out-of-scope tool use |
+| done criteria | `done / blocked / needs-human-approval` | `sample-repo/docs/harness/done-criteria.md` | ambiguous finish conditions |
+| verify command | minimum validation line | `./scripts/verify-sample.sh` | stopping before verification |
+| report format | `Changed Files`, `Verification`, `Remaining Gaps` | runbook, done criteria | non-reviewable completion reports |
 
-This order shows that the single-agent harness is not advanced automation. It is a disciplined way to fix start and finish conditions. It is also why `verify` and `exit` stay separate. Green tests alone do not guarantee that scope, approvals, or reporting obligations were handled correctly.
+This component list shows that the single-agent harness is not advanced automation. It is a disciplined way to fix start and finish conditions. It is also why `verify` and `exit` stay separate. Green tests alone do not guarantee that scope, approvals, external-input boundaries, or reporting obligations were handled correctly.
 
 ## Bad / Good Example
 Bad:
@@ -167,19 +170,21 @@ Corrected:
 ```text
 Use `sample-repo/tasks/BUG-001-brief.md` as the source of truth.
 Start by running `./scripts/init.sh sample-repo/tasks/BUG-001-brief.md`.
+Limit owned files to `sample-repo/src/support_hub/service.py` and `sample-repo/tests/test_service.py`.
 Any change beyond `sample-repo/docs/harness/permission-policy.md`
 requires approval.
+Classify and redact issue, PR, log, and evidence data before sending it to AI or external services.
 You may say `done` only if `sample-repo/docs/harness/done-criteria.md`
 is satisfied and `./scripts/verify-sample.sh` passes.
 Report `Changed Files`, `Verification`, and `Remaining Gaps`.
 ```
 
-This version fixes startup, boundary, verification, and exit as one execution frame.
+This version fixes init, work boundary, permission policy, external-input boundary, done criteria, verify command, and report format as one execution frame.
 
 Comparison points:
 - The bad version tries to run the task with prompt text alone.
 - The bad version leaves a large gap for stopping before verification.
-- The corrected version defines init, permission policy, done criteria, verify, and external-input boundaries as one harness.
+- The corrected version defines init, work boundary, permission policy, external-input boundary, done criteria, verify command, and report format as one harness.
 
 ## Worked Example
 Use the single-agent harness for `BUG-001`, the case where stale state appears after a status update and reload.
@@ -195,7 +200,9 @@ Use the single-agent harness for `BUG-001`, the case where stale state appears a
    - `sample-repo/tests/test_service.py`
 3. Confirm boundaries
    - do not change the public interface
+   - limit owned files to `src/support_hub/service.py` and `tests/test_service.py`
    - do not change the verify script
+   - make no AI / external-service submission; if it becomes necessary, stop at the external-input boundary and permission policy
    - keep the diff limited to the minimum bugfix and regression guard
 4. Execute
    - reproduce the failing behavior in a test, or extend the existing regression guard
@@ -220,12 +227,12 @@ The point of this example is not automation theater. The point is to show that H
 - `sample-repo/docs/harness/done-criteria.md`
 
 ## Source Notes / Further Reading
-- To revisit this chapter, start with `scripts/init.sh`, `sample-repo/docs/harness/single-agent-runbook.md`, `sample-repo/docs/harness/permission-policy.md`, and `sample-repo/docs/harness/done-criteria.md`. Read the single-agent harness as a bundle of startup, external-input boundary, and exit conditions rather than as a prompt variant.
+- To revisit this chapter, start with `scripts/init.sh`, `sample-repo/docs/harness/single-agent-runbook.md`, `sample-repo/docs/harness/permission-policy.md`, and `sample-repo/docs/harness/done-criteria.md`. Read the single-agent harness as a bundle of init, work boundary, permission policy, external-input boundary, done criteria, verify command, and report format rather than as a prompt variant.
 - For the backmatter path, see `manuscript-en/backmatter/00-source-notes.md` under `### CH09 Foundations of Harness Engineering` and `manuscript-en/backmatter/01-reading-guide.md` under `## Verification, Reliability, and Operations`.
 
 ## Chapter Summary
 - Context Engineering decides what the agent sees. Harness Engineering decides how the agent starts, where it must stop, and what must be true before it may declare completion.
-- The minimum single-agent harness consists of init, work boundary, permission policy, external-input boundary, done criteria, verify command, and retry rule.
+- The minimum single-agent harness consists of init, work boundary, permission policy, external-input boundary, done criteria, verify command, and report format. Retry rules are operating rules applied to failure modes on top of that structure.
 - Runtime-managed loops may improve mechanism, but approval boundaries, artifact sync, and review-ready reporting still remain repo-owned duties.
 - Once start and exit conditions are stable, the next missing piece is a verification chain that reviewers can trust. The next chapter focuses on the verification harness itself.
 

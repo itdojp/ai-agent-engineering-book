@@ -20,6 +20,10 @@ AI agent、coding agent、ChatGPT、Codex CLI は同じではない。
 
 - `AI agent`: 複数 step の判断とツール利用で作業を進める主体
 - `coding agent`: repo を読み、code / docs / tests / artifact を変更し verify する AI agent
+- `planner`: work package を分解し、順序、依存、owned files、verify 方針を提案する役割
+- `tool`: 検索、ファイル操作、code 実行、API 呼び出しなど、agent が外部へ作用する実行面
+- `workflow`: prompt、context、tool call、handoff、verify、review をつないだ作業手順
+- `guardrail`: input / output / tool call / 外部投入の前後に置く検査・停止条件
 - `ChatGPT`: 要件整理、比較、レビュー観点の洗い出しに向く対話環境
 - `Codex CLI`: repo に対して実際の変更と verify を行う実行環境
 
@@ -34,6 +38,8 @@ AI agent、coding agent、ChatGPT、Codex CLI は同じではない。
 - `Progress Note`: 中断、handoff、再開のための短い進捗記録
 - `context pack`: 特定タスクで読む最小参照情報の束
 - `verification harness`: test、lint、typecheck、evidence、CI、approval を束ねた検証系
+- `eval`: prompt、model、workflow が基準を満たすかを、固定入力、rubric、judge、人間 spot-check、trace review で確認する評価単位
+- `model/runtime profile`: 比較や検証時に固定する model、API、SDK、runtime、tool set、approval policy、確認日の組
 - `recurring case`: 章を跨いで同じ repo / issue / failure mode を追跡するための継続ケース
 
 ここで重要なのは、どの artifact も「説明文」ではなく「運用のための入力」であることだ。artifact は人が読むだけでは不十分で、agent が使っても誤解しにくい形でなければならない。
@@ -47,6 +53,8 @@ AI agent、coding agent、ChatGPT、Codex CLI は同じではない。
 - `evidence bundle`: reviewer が変更を検証できるように残す証跡一式
 - `restart packet`: plan、feature list、owned files、merge order、最新 `Progress Note`、verify evidence、open questions から成る再開時の canonical input
 - `permission policy`: 自律実行と human approval の境界を定義する規則
+- `external input boundary`: issue、PR、log、eval case、customer data などを AI / 外部サービスへ投入する前の分類・redaction・approval 境界
+- `review completion gate`: review 本文、inline comment、suggestion、未解決 thread、CI、merge 後確認を完了判定に含める gate
 - `approval boundary`: 破壊的変更、public contract 変更、運用ポリシー変更の前に human approval が必要になる境界
 - `work package`: 1 回の session または 1 人の担当で安全に進められる最小単位
 - `Lead`: issue 優先順位と承認境界を管理する human role

@@ -10,6 +10,8 @@ throughput の自慢ではなく、どこで運用が詰まり、どの artifact
   - review budget が詰まっていないかを見る
 - draft-to-merge time
   - verify と review の待ち時間を測る
+- review completion rate
+  - review body、inline comment、suggestion への応答と未解決 thread 0 が merge 前に揃った比率を見る
 - queue wait time
   - どの段階で PR が滞留しているかを見る
 - stale draft count
@@ -26,6 +28,10 @@ throughput の自慢ではなく、どこで運用が詰まり、どの artifact
   - docs / tests / task artifact の同期漏れを見る
 - reviewer re-open rate
   - review で差し戻しが増えていないかを見る
+- unresolved review thread residual count
+  - merge 前に未解決 thread が残っていないかを見る
+- eval rerun coverage
+  - prompt、model/runtime profile、tool policy 変更時に eval / smoke check が再実行されているかを見る
 
 ## Hygiene
 - stale docs count
@@ -36,6 +42,10 @@ throughput の自慢ではなく、どこで運用が詰まり、どの artifact
   - user-visible change に対する review 根拠不足を検知する
 - evidence freshness failures
   - stale な verify や screenshot が review に流れていないかを見る
+- model/runtime profile drift count
+  - model、API、SDK、runtime、tool set の変更が確認日と eval 再実行なしに入っていないかを見る
+- external-input exception count
+  - AI / 外部サービス投入で redaction、provider 条件、approval の例外が増えていないかを見る
 - hygiene backlog age
   - cleanup backlog が放置されていないかを見る
 
@@ -44,6 +54,8 @@ throughput の自慢ではなく、どこで運用が詰まり、どの artifact
   - long-running task、handoff、retry、restart がある work package に対して、minimum trace reference contract を満たす trace が残っているかを見る
 - current-run verify availability
   - reviewer が最新 run を確認できるかを見る
+- review-response evidence availability
+  - review body / inline comment / suggestion への応答と thread 解決の証跡を reviewer が確認できるかを見る
 - retry concentration
   - 同じ段階で failure loop が起きていないかを見る
 
@@ -73,8 +85,14 @@ throughput の自慢ではなく、どこで運用が詰まり、どの artifact
   - work package を小さく切り直し、review budget 超過を疑う
 - verify failure rate が高いなら
   - prompt / brief / context pack の不足を先に疑う
+- review completion rate が低い、または unresolved review thread residual が残るなら
+  - PR template、review-response 手順、merge 前 gate を見直す
 - artifact drift incidents が増えたら
   - done criteria と checklist を見直す
+- model/runtime profile drift count や eval rerun coverage が悪化したら
+  - model / API / SDK 変更時の確認日記録と eval 再実行を merge 前 gate に戻す
+- external-input exception count が増えたら
+  - redaction policy、provider 条件確認、approval boundary を見直す
 - stale docs count、evidence freshness failures、hygiene backlog age が悪化したら
   - cleanup 専用の work package を先に開く
 
@@ -84,5 +102,8 @@ throughput の自慢ではなく、どこで運用が詰まり、どの artifact
 - queue wait time が長いのは reviewer 待ちか、verify 待ちか、approval 待ちか
 - trace coverage が不足して failure analysis ができなくなっていないか
 - trace coverage の不足は、trace 不在なのか、verify reference 不足なのか、evidence linkage 不足なのか
+- review completion rate が低い原因は、コメント未返信なのか、suggestion 未処理なのか、thread 解決漏れなのか
+- model/runtime profile 変更時に eval rerun が抜けていないか
+- AI / 外部サービス投入の例外が redaction / approval / provider 条件のどこで増えているか
 - repo hygiene の悪化が次の作業速度を落としていないか
 - stale draft と stale docs を同時に増やしていないか

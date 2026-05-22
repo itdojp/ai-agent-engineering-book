@@ -124,12 +124,17 @@ Aggregate scores are not enough on their own. Two prompts can have similar avera
 A practical comparison record should track at least:
 
 - prompt version
-- model or runtime version
+- model / API / SDK / runtime profile
 - eval suite version
 - rubric version
 - tool / approval policy version
+- confirmation date for the model, API, SDK, and tool docs
 
 Once those variables are explicit, the team can explain why a prompt passed last week and failed this week. Versioning is not only about the prompt text. It is about the workflow contract around the prompt.
+
+The `model/runtime profile` is more than a model-name note. It fixes the model, API family, SDK, runtime, tool set, approval policy, and confirmation date as one comparison unit. When the manuscript or a PR mentions model names, APIs, SDKs, or vendor-specific features, check the official docs in use at that point and record the date. Tool use, structured output, session or memory features, guardrails, tracing, and eval frameworks are product surfaces that change quickly. If this record is vague, the team cannot tell whether an eval delta came from prompt improvement or runtime change.
+
+Do not write “the latest model is better” as the comparison rule. Make the adoption decision by rerunning the same eval suite and rubric against a recorded model/runtime profile. When the model or SDK changes, inspect quality, tool-call behavior, cost / latency, approval signals, and trace / evidence capture together. A PR that changes the model/runtime profile without rerunning the eval is not review-ready; it is waiting for more verification.
 
 ## Bad / Good Example
 Bad:
@@ -187,7 +192,7 @@ The important point is that prompt quality is not described as a feeling. It is 
 
 ## Exercises
 1. Create five eval cases for `feature-contract`. Include at least one case each for `scope creep`, `missing information`, and `artifact sync`.
-2. Create a comparison record template for prompt v1 and v2 on the same feature task. It must preserve per-case pass/fail, severe failures, and observation notes.
+2. Create a comparison record template for prompt v1 and v2 on the same feature task. It must preserve per-case pass/fail, severe failures, observation notes, the model/runtime profile, and the official-doc confirmation date.
 
 ## Referenced Artifacts
 - `evals/prompt-contract-cases.json`

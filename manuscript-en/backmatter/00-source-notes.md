@@ -39,7 +39,7 @@ If that order drifts, the manuscript becomes too dependent on fashion, screensho
 ### CH04 Evaluate Prompts
 
 - Start with `evals/prompt-contract-cases.json`, `evals/rubrics/feature-spec.json`, and `scripts/run-prompt-evals.py`. Prompt quality should be read through reusable cases and rubrics, not through vibes.
-- If you add external sources, prefer official docs for the model or eval framework you are using. Screenshots of one-off prompt comparisons are not stable regression evidence.
+- If you add external sources, prefer official docs for the model or eval framework you are using. Record confirmation dates for model names, APIs, SDKs, tool use, guardrails, tracing, and eval frameworks. Screenshots of one-off prompt comparisons are not stable regression evidence.
 
 ### CH05 Foundations of Context Engineering
 
@@ -64,7 +64,7 @@ If that order drifts, the manuscript becomes too dependent on fashion, screensho
 ### CH09 Foundations of Harness Engineering
 
 - Start with `scripts/init.sh`, `scripts/verify-sample.sh`, `sample-repo/docs/harness/single-agent-runbook.md`, `sample-repo/docs/harness/permission-policy.md`, and `sample-repo/docs/harness/done-criteria.md`. A single-agent harness is a bundle of start conditions and exit conditions, not a prompt variant.
-- If you add external sources, prefer official docs for the shell, CI runner, and permission model you use. Authority boundaries should come from the execution environment, not from intuition.
+- If you add external sources, prefer official docs for the shell, CI runner, permission model, and the agent runtime's tool / guardrail / tracing behavior. Authority boundaries and external-input boundaries should come from the execution environment and provider terms, not from intuition.
 
 ### CH10 Build a Verification Harness
 
@@ -79,4 +79,4 @@ If that order drifts, the manuscript becomes too dependent on fashion, screensho
 ### CH12 Operating Model and Organizational Adoption
 
 - Start with `docs/en/operating-model.md`, `docs/en/metrics.md`, `checklists/en/repo-hygiene.md`, and `.github/pull_request_template.md`. Read the operating model through Lead / Operator / Reviewer, the approval boundary, review budget, cadence, and cleanup.
-- If you add external sources, prefer official documents for your organization's review policy, release policy, and metric definitions. Do not reduce adoption decisions to model benchmarks.
+- If you add external sources, prefer official documents for your organization's review policy, release policy, metric definitions, and GitHub review / Actions / secret-handling behavior. Do not reduce adoption decisions to model benchmarks; include the review completion gate and public-site reflection checks.

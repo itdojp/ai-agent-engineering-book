@@ -27,6 +27,10 @@ The order is deliberate. If the prompt contract is weak, adding more context onl
 
 - `AI agent`: an actor that advances work through multi-step decisions and tool use
 - `coding agent`: an AI agent that reads a repo, changes code or docs or tests or artifacts, and runs verify steps
+- `planner`: the role that decomposes a work package and proposes order, dependencies, owned files, and verify strategy
+- `tool`: the execution surface for search, file operations, code execution, API calls, and other external effects
+- `workflow`: the work path connecting prompts, context, tool calls, handoffs, verify, and review
+- `guardrail`: a check or stop condition placed around input, output, tool calls, or external-service submission
 - `ChatGPT`: a conversational environment for shaping requirements, comparing options, and surfacing review angles
 - `Codex CLI`: an execution environment for making repo changes, running commands, and collecting verification evidence
 
@@ -41,6 +45,8 @@ The most reused artifacts in the book are these.
 - `Progress Note`: a short progress record for interruption, handoff, and restart
 - `context pack`: the smallest bundle of reference material required for one task
 - `verification harness`: the verification system that bundles tests, lint, typecheck, evidence, CI, and approval rules
+- `eval`: an evaluation unit for checking a prompt, model, or workflow through fixed inputs, rubrics, judges, human spot-checks, and trace review
+- `model/runtime profile`: the model, API, SDK, runtime, tool set, approval policy, and confirmation date fixed for comparison or verification
 
 These are not just explanatory documents. They are operational inputs. A good artifact must be readable by humans and difficult for an agent to misuse.
 
@@ -53,6 +59,8 @@ The later chapters depend on a second layer of terminology.
 - `evidence bundle`: the logs, commands, screenshots, and summaries that let a reviewer verify the result
 - `restart packet`: the canonical input needed to resume work after interruption, including the plan, feature list, owned files, merge order, latest `Progress Note`, verify evidence, and open questions
 - `permission policy`: the rule set that separates autonomous execution from human approval
+- `external input boundary`: the classification, redaction, and approval boundary used before issue, PR, log, eval-case, or customer data enters an AI or external service
+- `review completion gate`: the gate that treats review bodies, inline comments, suggestions, unresolved threads, CI, and post-merge checks as part of completion
 - `work package`: the smallest unit of work that can be completed safely in one session or by one owner
 
 The near-miss pairs matter. `acceptance criteria` and `done criteria` are close, but not identical. Meeting the spec without running verify is not done. Running verify without meeting the spec is also not done.

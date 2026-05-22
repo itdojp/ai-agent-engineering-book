@@ -7,6 +7,10 @@
 | Harness Engineering | coding agent の実行境界、権限、verification harness、再試行、回復を設計する工程 |
 | AI agent | 複数 step の判断とツール利用で作業を進める主体。本書の日本語本文では「AIエージェント」とも表記する |
 | coding agent | repo を読み、コード・docs・tests・artifact を変更し verify する AI agent |
+| planner | work package を分解し、順序、依存、owned files、verify 方針を提案する役割または agent |
+| workflow | prompt、context、tool call、handoff、verify、review をつないだ実行手順。単発 prompt より広い評価単位 |
+| tool | AI agent が検索、ファイル操作、code 実行、API 呼び出しなどを行うための実行面。使用可否は tool contract と permission policy で決める |
+| guardrail | input、output、tool call、外部投入の前後で危険な操作や不適切なデータ利用を止める検査・停止条件。review や verify の代替ではない |
 | ChatGPT | 要件整理、設計検討、比較、レビュー観点の洗い出しに使う対話インターフェース |
 | Codex CLI | repo を読んで変更し、コマンド実行と verify を行う coding agent 実行環境 |
 | `AGENTS.md` | repo entrypoint。対象領域で外してはいけない不変条件と、次に読むべき artifact への入口を定義する |
@@ -18,6 +22,7 @@
 | context pack | 特定タスクに必要な参照情報一式。task-specific な読み順と canonical fact を束ねる |
 | persistent artifact | repo をまたいで残す source of truth。spec、glossary、architecture doc のような stable な artifact を指す |
 | session memory | セッションを跨いで再開するために残す task brief、Progress Note、verify 根拠の組。章タイトルや doc title では `Session Memory` と表記することがある |
+| memory | session memory、runtime state、persisted note の総称として使われやすい語。本書では source of truth ではなく、再開補助または実行時状態として扱う |
 | session summary | 再開時に読む最小情報。`Decided`、`Open Questions`、`Next Step` のように、前回判断を短く残した summary を指す |
 | source of truth | もっとも優先される正本の artifact。矛盾時の判断基準になる |
 | source hierarchy | 本文、repo artifact、official docs、組織ポリシーのどれを何の判断で優先するかを定めた優先順位 |
@@ -25,6 +30,7 @@
 | further reading | 章の理解を深めるために official docs、書籍、handbook へつなぐ導線 |
 | backmatter | source notes、読書案内、索引、図表一覧など、通読後の再参照装置 |
 | verification harness | テスト、lint、typecheck、証跡収集、CI を束ねた検証系 |
+| eval | prompt、model、workflow が基準を満たすかを、固定入力、rubric、judge、人間 spot-check、trace review で確認する評価単位 |
 | done criteria | harness 上で完了扱いにする条件。verify、artifact 更新、approval の要否を含む |
 | verify log | current-run の command、timestamp、pass / fail を残すログ。historical trace とは分けて扱う |
 | trace | run、retry、handoff、状態遷移を示す履歴。current-run verify の代わりではなく、failure analysis の材料になる |
@@ -41,6 +47,9 @@
 | MCP-connected capability | runtime に tools、resources、prompts などの追加 capability を接続する面。repo skill や context pack の代替ではない |
 | A2A (Agent2Agent) | agent-to-agent discovery や task handoff のような remote interoperability を扱う protocol 群。本書では same-repo の local orchestration と分けて扱う |
 | tool drift | UI、CLI、API、tool capability が時間経過で変わり、本文や手順の記述とズレる現象 |
+| model/runtime profile | 比較や検証時に固定する model、API、SDK、runtime、tool set、approval policy、確認日の組 |
+| external input boundary | issue、PR、log、eval case、customer data などを AI / 外部サービスへ投入する前に分類、redaction、approval を行う境界 |
+| review completion gate | PR review body、inline comment、suggestion、未解決 thread、CI、merge 後確認を完了判定に含める gate |
 | human approval gate | 高リスク操作の前に human reviewer の確認を必須にする承認境界 |
 | approval boundary | 破壊的変更、public contract 変更、運用ポリシー変更の前に human approval が必要になる境界 |
 | operating model | AIエージェント運用の責務分担、review budget、cadence、導入段階を定義する運用設計 |

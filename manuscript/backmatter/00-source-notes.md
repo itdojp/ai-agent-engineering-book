@@ -39,7 +39,7 @@
 ### CH04 プロンプトを評価する
 
 - 最初に信頼するのは `evals/prompt-contract-cases.json`、`evals/rubrics/feature-spec.json`、`scripts/run-prompt-evals.py` である。prompt の良し悪しは雰囲気ではなく比較可能な case と rubric で読む。
-- 外部 source を足すなら、利用中モデルや eval framework の公式 docs を優先する。スクリーンショットだけの prompt comparison は回帰検知の source にならない。
+- 外部 source を足すなら、利用中モデルや eval framework の公式 docs を優先する。モデル名、API、SDK、tool use、guardrail、tracing、eval framework は確認日を残し、スクリーンショットだけの prompt comparison を回帰検知の source にしない。
 
 ### CH05 Context Engineering の基礎
 
@@ -64,7 +64,7 @@
 ### CH09 Harness Engineering の基礎
 
 - 最初に信頼するのは `scripts/init.sh`、`scripts/verify-sample.sh`、`sample-repo/docs/harness/single-agent-runbook.md`、`sample-repo/docs/harness/permission-policy.md`、`sample-repo/docs/harness/done-criteria.md` である。single-agent harness は prompt の言い換えではなく、開始条件と終了条件の束である。
-- 外部 source を足すなら、shell、CI runner、permission model の公式 docs を優先する。権限境界は agent の印象論ではなく、実行環境の仕様で決める。
+- 外部 source を足すなら、shell、CI runner、permission model、agent runtime の tool / guardrail / tracing docs を優先する。権限境界と外部投入境界は agent の印象論ではなく、実行環境と provider 条件で決める。
 
 ### CH10 Verification Harness を作る
 
@@ -79,4 +79,4 @@
 ### CH12 運用モデルと組織導入
 
 - 最初に信頼するのは `docs/operating-model.md`、`docs/metrics.md`、`checklists/repo-hygiene.md`、`.github/pull_request_template.md` である。運用モデルは Lead / Operator / Reviewer、approval boundary、review budget、cadence、cleanup の組で読む。
-- 外部 source を足すなら、組織が採用する review policy、release policy、metrics definition の公式文書を優先する。導入判断をモデル比較だけで閉じない。
+- 外部 source を足すなら、組織が採用する review policy、release policy、metrics definition、GitHub review / Actions / secret handling の公式文書を優先する。導入判断をモデル比較だけで閉じず、review completion gate と公開反映確認まで含める。

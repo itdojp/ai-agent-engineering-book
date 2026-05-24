@@ -56,7 +56,7 @@ The purpose of this format is not to preserve every step of exploration. Its pur
 The most common mistake is to paste brief content into the Progress Note. Goal, constraints, and acceptance criteria already belong in the task brief. The Progress Note should record session delta, not duplicate stable context.
 
 ## 3. Design Handoff and Restart
-Good handoff is not a long narrative. It is a restart procedure. `docs/en/session-memory-policy.md` defines the "Minimum Input for a Restart Packet (Resume Packet)" as four items. In this chapter, that same minimal set is also referred to as a `restart packet (Resume Packet)`:
+Good handoff is not a long narrative. It is a restart procedure. `docs/en/session-memory-policy.md` uses **Resume Packet** as the canonical policy label and defines its minimum inputs as four items. In this chapter, that same minimal set is also referred to as a `restart packet (Resume Packet)` for reader-facing prose:
 
 1. the task brief
 2. the latest Progress Note
@@ -68,7 +68,7 @@ That set is small, but it is enough. In `FEATURE-001`, a new agent can read `tas
 Without that packet, handoff turns into vague memory: “we were probably still discussing search behavior.” That is not operational context. A useful handoff brings the next session back to the same canonical artifacts.
 
 ## Reader-facing Table
-### Restart Packet (Resume Packet) and Its Role
+### restart packet (Resume Packet) and Its Role
 
 | Artifact | Why it exists | What it stabilizes |
 |---|---|---|
@@ -83,14 +83,14 @@ This packet works because it separates stable task context from mutable session 
 Summary drift gets worse every time work crosses a session boundary. The main causes are predictable:
 
 - an unverified hypothesis is written as if it were already decided
-- the Progress Note paraphrases the brief and quietly changes the meaning
+- the Progress Note paraphrases `Goal`, `Constraints`, or `Acceptance Criteria` from the brief and quietly changes their meaning
 - pre-verify and post-verify states are mixed into one summary
 
 `FEATURE-001` gives a concrete example. Writing “search and status / assignee filters will be unified” into `Decided` is unsafe. The brief treats that as an open question for later work. If the note upgrades it to a decision too early, the next session may implement new scope that was never approved.
 
 The discipline is simple:
 
-- copy acceptance criteria from the task brief instead of rewording them casually
+- copy acceptance criteria from the task brief instead of rewording them casually, and do not restate `Goal` or `Constraints` in the Progress Note
 - keep unresolved points inside `Open Questions`
 - record verify results explicitly as pass or fail
 
@@ -148,7 +148,7 @@ Comparison points:
 - `.github/ISSUE_TEMPLATE/task.yml`
 
 ## Source Notes / Further Reading
-- To revisit this chapter quickly, start with `sample-repo/tasks/FEATURE-001-brief.md`, `sample-repo/tasks/FEATURE-001-progress.md`, and `docs/en/session-memory-policy.md`. These three artifacts show the boundary between stable task context and mutable session context. The policy refers to this minimal restart artifact as a `Restart Packet (Resume Packet)`, and this chapter discusses the same concept as a `restart packet (Resume Packet)`.
+- To revisit this chapter quickly, start with `sample-repo/tasks/FEATURE-001-brief.md`, `sample-repo/tasks/FEATURE-001-progress.md`, and `docs/en/session-memory-policy.md`. These three artifacts show the boundary between stable task context and mutable session context. The policy refers to this minimal restart artifact as a **Resume Packet**, and this chapter discusses the same concept as a `restart packet (Resume Packet)`.
 - For the backmatter navigation path, see `manuscript-en/backmatter/00-source-notes.md` under `### CH07 Task Context and Session Memory` and `manuscript-en/backmatter/01-reading-guide.md` under `## Context and Repo Design`.
 
 ## Chapter Summary

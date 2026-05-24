@@ -6,7 +6,7 @@
 - 変更ファイルが current issue / work package の範囲に収まっている
 - code、docs、tests、task artifact の間に drift がない
 - required artifact が存在し、init 契約を満たしている
-- `./scripts/verify-sample.sh` が current session で通っている
+- `./scripts/verify-sample.sh` が `current session` で通っている
 - `Changed Files`、`Verification`、`Remaining Gaps` を報告できる
 
 ## Chosen Policy Direction
@@ -15,7 +15,7 @@ Issue #227 の方針として、`done` は **approval boundary check + current-r
 簡単な docs 変更であっても、古い verify 結果や推測だけでは `done` にしない。
 
 - `current session` の foreground command 実行は許可されるが、実行した command と結果を `Verification` に残す。
-- destructive git command、background process、repo-external write、parallel agent、secret / credential 操作を実行していないことを確認する。
+- destructive git command、永続的な background process、repo 外への書き込み、追加 agent の spawn、parallel writer の起動、secret / credential 操作を実行していないことを確認する。
 - missing required artifact、approval pending、または未解決の verify failure がある場合は `done` ではなく `blocked` または `needs-human-approval` にする。
 - Evidence Minimum は緩和せず、少なくとも verify command、実行結果、未実行 check の理由を報告できる状態にする。
 
@@ -29,7 +29,7 @@ Issue #227 の方針として、`done` は **approval boundary check + current-r
 
 - 実行した verify command をそのまま言える
 - pass / fail と、未実行の check があればその理由を言える
-- verify が古い実行結果ではなく current run に紐づいている
+- verify が古い実行結果ではなく `current run` に紐づいている
 - required artifact の有無を current tree で確認している
 
 ## Bugfix Addendum

@@ -13,7 +13,8 @@ This file is the source of truth for building the figure list and table list in 
 - Treat `manuscript-en/figures/figure-plan.md` as the source of truth for figure ID, chapter, caption, and first mention
 - Keep each caption reader-facing so the main lesson of the figure is visible in one line
 - Preserve the rule of one figure for one main message, then swap only the production numbering later
-- Keep captions and first mentions aligned with glossary and chapter wording so `restart packet`, `Progress Note`, and `approval boundary` do not drift
+- Keep captions and first mentions aligned with glossary and chapter wording so `restart packet`, `Progress Note`, `approval boundary`, and Lead / Operator / Reviewer do not drift
+- Do not make vendor or product names the source of truth for the figure list. Align only canonical terms with chapter prose and keep explanatory wording neutral for re-reference
 
 ## Current Figure Seed
 
@@ -25,7 +26,7 @@ This file is the source of truth for building the figure list and table list in 
 | `fig-04` | CH09 | The overall single-agent harness flow | `manuscript-en/figures/fig-04-single-agent-harness.mmd` |
 | `fig-05` | CH10 | The order of lint, typecheck, unit, and e2e | `manuscript-en/figures/fig-05-verification-pipeline.mmd` |
 | `fig-06` | CH11 | The split among planner / coder / reviewer / verifier | `manuscript-en/figures/fig-06-long-running-multi-agent.mmd` |
-| `fig-07` | CH12 | The responsibilities that remain with humans | `manuscript-en/figures/fig-07-operating-model.mmd` |
+| `fig-07` | CH12 | The responsibilities that remain with Lead / Operator / Reviewer | `manuscript-en/figures/fig-07-operating-model.mmd` |
 
 ## Table List Policy
 

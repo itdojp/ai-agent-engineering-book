@@ -4,6 +4,14 @@
 
 Make it possible to return to the same task brief and the same verification evidence even after the session changes.
 
+## Policy Decision
+
+For Issue #228, the policy artifact uses **Resume Packet** as the canonical label. Chapter prose may use `restart packet (Resume Packet)` as reader-facing wording, but the policy source of truth is Resume Packet.
+
+- `Blocking / Approval` remains optional and is used only when work stops at an approval boundary.
+- A Progress Note must not overwrite stable task context. Goal, Constraints, and Acceptance Criteria remain canonical in the task brief and should not be paraphrased in the Progress Note.
+- Pauses pending approval remain an explicit update timing.
+
 ## Required Fields for a Progress Note
 
 - `Current Goal`: the current one-task target
@@ -27,14 +35,14 @@ Make it possible to return to the same task brief and the same verification evid
 - unverified assertions
 - duplicated information that already exists in the task brief
 
-## Minimum Input for a Restart Packet (Resume Packet)
+## Minimum Input for a Resume Packet
 
 1. the task brief
 2. the latest Progress Note
 3. the latest verify result
 4. the list of files that should be read first when resuming
 
-When the task stops at an approval boundary, also record the pending decision, attached evidence, and the human input required to restart in `Blocking / Approval`.
+When the task stops at an approval boundary, also record the pending decision, attached evidence, and the human input required to restart in `Blocking / Approval`. When chapter prose says `restart packet (Resume Packet)`, it refers to this same minimum input set.
 
 ## Drift Guard
 
@@ -42,7 +50,7 @@ When the task stops at an approval boundary, also record the pending decision, a
 - do not put unresolved items into `Decided`
 - do not split the summary into separate before-verify and after-verify narratives
 - when an open question is resolved, promote it to `Decided` instead of silently deleting it
-- do not let the Progress Note restate Goal or Constraints in a way that overwrites the stable task context
+- do not let the Progress Note restate Goal, Constraints, or Acceptance Criteria in a way that overwrites the stable task context
 - if work stops at an approval boundary, state what kind of change would cross that boundary
 
 ## Update Timing

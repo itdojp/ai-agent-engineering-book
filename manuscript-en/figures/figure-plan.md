@@ -2,6 +2,10 @@
 
 This plan fixes the book's main ideas as reader-facing figures for the English edition. Production figure numbers will be decided later, but this file remains the source of truth for source files and chapter progression.
 
+## Editorial Wording Policy
+
+Figure captions should preserve canonical terms from the glossary and chapter prose. Terms such as `restart packet`, `approval boundary`, and Lead / Operator / Reviewer must not drift inside figures. At the same time, captions should be neutral re-reference text rather than sentence-level copies of chapter prose. Vendor and product names are not the source of truth for the figure plan.
+
 | Figure ID | Chapter | Suggested Placement | Caption | Reader Value | Source |
 |---|---|---|---|---|---|
 | `fig-01` | CH01 | Right after the map from Prompt Engineering to Context Engineering to Harness Engineering | Prompt / Context / Harness stack in the order that reduces wrong answers, forgetting, and breaking things or stopping early. | Even a quick browse should make the book's promise and progression visible in one page. | `fig-01-maturity-model.mmd` |
@@ -10,4 +14,4 @@ This plan fixes the book's main ideas as reader-facing figures for the English e
 | `fig-04` | CH09 | Right after the section that explains the single-agent harness as a whole | A single-agent harness combines init, boundary, permission, verify, exit, and report inside one execution frame. | Makes it clear that Harness Engineering is not prompt wording but the design of start and stop conditions. | `fig-04-single-agent-harness.mmd` |
 | `fig-05` | CH10 | Right after the section on lint, typecheck, unit, and e2e order | A verification harness connects failing test, local verify, CI, evidence, and approval in a fixed sequence. | Helps the reader see verification as a review-ready pipeline rather than a single command. | `fig-05-verification-pipeline.mmd` |
 | `fig-06` | CH11 | Right after the section that separates planner / coder / reviewer / verifier | A long-running task becomes safe to split into multi-agent work only after the feature list, `restart packet`, `approval boundary`, and role split are in place. | Makes the relationship between long-running work and multi-agent delegation easy to re-find later as a responsibility map. | `fig-06-long-running-multi-agent.mmd` |
-| `fig-07` | CH12 | Right after the section on the responsibilities that remain with humans | An operating model stays stable by cycling through human and agent responsibilities, review budget, metrics, and cleanup cadence. | Helps teams read adoption as a design problem of responsibility and cadence, not only of model choice. | `fig-07-operating-model.mmd` |
+| `fig-07` | CH12 | Right after the section on the responsibilities that remain with Lead / Operator / Reviewer | An operating model stays stable by cycling through Lead / Operator / Reviewer and agent responsibilities, `approval boundary`, review budget, metrics, and cleanup cadence. | Helps teams read adoption as a design problem of responsibility, approval boundaries, and cadence, not only of model choice. | `fig-07-operating-model.mmd` |

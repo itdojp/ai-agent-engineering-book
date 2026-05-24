@@ -19,6 +19,12 @@ Keep the trust order fixed.
 
 If that order drifts, the manuscript becomes too dependent on fashion, screenshots, or one-off success stories. This is especially important around AI agents, where behavior and product surfaces change quickly. Prefer the official behavior of the tool you are actually using over generalized commentary.
 
+## Source Specificity
+
+By default, this book keeps source guidance at the tool-category level: coding-agent runtime, VCS, CI, issue tracker, test framework, orchestration tool, and organizational policy. Name a specific vendor or product document only when the chapter depends on current API, CLI, permission, pricing, or protocol behavior. When that happens, record the confirmation date and `model/runtime profile` with the evidence rather than treating the product name as a stable backmatter anchor.
+
+For CH07, CH11, and CH12, backmatter should explicitly name the operating-model terms that define artifacts or responsibilities: `restart packet (Resume Packet)`, `Progress Note`, `approval boundary`, and Lead / Operator / Reviewer. Source notes and figure plans should still remain neutral navigation aids, not sentence-level mirrors of chapter prose.
+
 ## Chapter-by-Chapter Source Notes
 
 ### CH01 Where AI Agents Fail
@@ -73,8 +79,8 @@ If that order drifts, the manuscript becomes too dependent on fashion, screensho
 
 ### CH11 Long-running Tasks and Multi-agent Work
 
-- Start with `sample-repo/docs/harness/feature-list.md`, `sample-repo/docs/harness/restart-protocol.md`, `sample-repo/docs/harness/multi-agent-playbook.md`, and `sample-repo/tasks/FEATURE-002-plan.md`. Multi-agent work becomes safe only after the role split and `restart packet` are concrete.
-- If you add external sources, prefer official docs for the orchestration tool or task queue you use. Do not separate the parallelization discussion from write scope and handoff artifacts.
+- Start with `sample-repo/docs/harness/feature-list.md`, `sample-repo/docs/harness/restart-protocol.md`, `sample-repo/docs/harness/multi-agent-playbook.md`, and `sample-repo/tasks/FEATURE-002-plan.md`. Multi-agent work becomes safe only after the planner / coder / reviewer / verifier split, `restart packet`, and `approval boundary` are concrete.
+- If you add external sources, prefer official docs for the orchestration tool or task queue you use. Do not separate the parallelization discussion from write scope, handoff artifacts, and pending approval items.
 
 ### CH12 Operating Model and Organizational Adoption
 

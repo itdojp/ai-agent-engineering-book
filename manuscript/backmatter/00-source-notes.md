@@ -19,6 +19,12 @@
 
 この順番を崩すと、本文の主張が流行語や一発成功例に引きずられやすい。特に AI agent 周辺は情報の更新が速いため、一般論より「いま自分が使っている tool の official behavior」を優先する。
 
+## Source Specificity
+
+本書の source guidance は、原則として tool category level で書く。coding agent runtime、VCS、CI、issue tracker、test framework、orchestration tool、組織ポリシーのように、読者が自分の環境へ対応づけられる粒度を正本にする。特定 vendor / product の document 名は、章本文が現在の API、CLI、permission、pricing、protocol behavior に依存するときだけ例示し、その場合は確認日と `model/runtime profile` を evidence 側へ残す。
+
+CH07、CH11、CH12 の後付けでは、`restart packet（Resume Packet）`、`Progress Note`、`approval boundary`、Lead / Operator / Reviewer のような operating-model term を明示する。ただし、source notes と figure plan は章本文の言い換えではなく、読者が再参照するための中立的な案内に留める。
+
 ## 章別 Source Notes
 
 ### CH01 AIエージェントはどこで失敗するか
@@ -73,8 +79,8 @@
 
 ### CH11 Long-running Task と Multi-agent
 
-- 最初に信頼するのは `sample-repo/docs/harness/feature-list.md`、`sample-repo/docs/harness/restart-protocol.md`、`sample-repo/docs/harness/multi-agent-playbook.md`、`sample-repo/tasks/FEATURE-002-plan.md` である。multi-agent は role split と `restart packet` が揃って初めて扱う。
-- 外部 source を足すなら、使っている orchestration tool や task queue の公式 docs を優先する。並列化の議論を、write scope と handoff artifact から切り離さない。
+- 最初に信頼するのは `sample-repo/docs/harness/feature-list.md`、`sample-repo/docs/harness/restart-protocol.md`、`sample-repo/docs/harness/multi-agent-playbook.md`、`sample-repo/tasks/FEATURE-002-plan.md` である。multi-agent は planner / coder / reviewer / verifier の role split、`restart packet`、`approval boundary` が揃って初めて扱う。
+- 外部 source を足すなら、使っている orchestration tool や task queue の公式 docs を優先する。並列化の議論を、write scope、handoff artifact、approval 待ち項目から切り離さない。
 
 ### CH12 運用モデルと組織導入
 

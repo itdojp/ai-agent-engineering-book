@@ -19,6 +19,8 @@ In the 2026 edition, use sources in the following order.
 
 If the prose and the live tool differ, keep the design principle from the manuscript and re-read the execution conditions in the primary source.
 
+Keep the naming rule explicit. This guide normally points to categories such as the agent runtime in use, the VCS / CI system in use, and internal policy. Name a specific vendor or product document only when you must confirm API, CLI, permission, pricing, or protocol behavior, and track the confirmation date plus `model/runtime profile` with the evidence.
+
 ## Prompts and Requirements Shaping
 
 | Source | What It Strengthens | Related Chapters |
@@ -35,7 +37,7 @@ If the prose and the live tool differ, keep the design principle from the manusc
 | Official docs for the agent runtime in use | Instruction layering, workspace access, and session handling | CH05, CH06, CH07, CH08 |
 | Official docs for the VCS, CI, and package manager in use | Issues, pull requests, review flow, branch protection, and artifact traceability | CH03, CH06, CH10 |
 | Internal repo maps, architecture docs, and coding standards | Canonical repo context and clearer ownership | CH06 |
-| Internal handoff, incident, and change-log rules | Session memory, `restart packet`, handoff contracts, and approval boundaries | CH07, CH11 |
+| Internal handoff, incident, and change-log rules | Session memory, `restart packet (Resume Packet)`, `Progress Note`, handoff contracts, and `approval boundary` | CH07, CH11, CH12 |
 
 ## Verification, Reliability, and Operations
 
@@ -46,7 +48,7 @@ If the prose and the live tool differ, keep the design principle from the manusc
 | Betsy Beyer et al., *The Site Reliability Workbook* | Checklists, runbooks, and implementation-focused operations design | CH09, CH10, CH11, CH12 |
 | Nicole Forsgren, Jez Humble, Gene Kim, *Accelerate* | Metrics, throughput, and operational improvement | CH10, CH12 |
 | Internal approval and permission policy | Human approval gates, authority boundaries, and auditability | CH09, CH12 |
-| Internal PR templates, review checklists, and merge policy | `Goal`, `Changed Files`, `Scope and Non-goals`, `Verification`, `Evidence / Approval`, and review-budget operations | CH10, CH12 |
+| Internal PR templates, review checklists, and merge policy | Lead / Operator / Reviewer responsibilities, `Goal`, `Changed Files`, `Scope and Non-goals`, `Verification`, `Evidence / Approval`, and review-budget operations | CH10, CH12 |
 
 ## How to Choose Which Source to Read Next
 

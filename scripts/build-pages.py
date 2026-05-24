@@ -550,7 +550,6 @@ def page_chrome(page: Page, body: str, current_search_placeholder: str) -> str:
         "function closeSidebar(){cb.checked=false;syncSidebarState();}"
         "cb.checked=false;"
         "syncSidebarState();"
-        "cb.addEventListener('input',syncSidebarState);"
         "cb.addEventListener('change',syncSidebarState);"
         "toggle.addEventListener('click',function(){cb.checked=!cb.checked;syncSidebarState();});"
         "if(overlay){overlay.addEventListener('click',function(){closeSidebar();});}"

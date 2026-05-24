@@ -83,14 +83,14 @@ This packet works because it separates stable task context from mutable session 
 Summary drift gets worse every time work crosses a session boundary. The main causes are predictable:
 
 - an unverified hypothesis is written as if it were already decided
-- the Progress Note paraphrases Goal, Constraints, or Acceptance Criteria from the brief and quietly changes their meaning
+- the Progress Note paraphrases `Goal`, `Constraints`, or `Acceptance Criteria` from the brief and quietly changes their meaning
 - pre-verify and post-verify states are mixed into one summary
 
 `FEATURE-001` gives a concrete example. Writing “search and status / assignee filters will be unified” into `Decided` is unsafe. The brief treats that as an open question for later work. If the note upgrades it to a decision too early, the next session may implement new scope that was never approved.
 
 The discipline is simple:
 
-- copy acceptance criteria from the task brief instead of rewording them casually, and do not restate Goal or Constraints in the Progress Note
+- copy acceptance criteria from the task brief instead of rewording them casually, and do not restate `Goal` or `Constraints` in the Progress Note
 - keep unresolved points inside `Open Questions`
 - record verify results explicitly as pass or fail
 

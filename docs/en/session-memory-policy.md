@@ -9,7 +9,7 @@ Make it possible to return to the same task brief and the same verification evid
 For Issue #228, the policy artifact uses **Resume Packet** as the canonical label. Chapter prose may use `restart packet (Resume Packet)` as reader-facing wording, but the policy source of truth is Resume Packet.
 
 - `Blocking / Approval` remains optional and is used only when work stops at an approval boundary.
-- A Progress Note must not overwrite stable task context. Goal, Constraints, and Acceptance Criteria remain canonical in the task brief and should not be paraphrased in the Progress Note.
+- A Progress Note must not overwrite stable task context. `Goal`, `Constraints`, and `Acceptance Criteria` remain canonical in the task brief and should not be paraphrased in the Progress Note.
 - Pauses pending approval remain an explicit update timing.
 
 ## Required Fields for a Progress Note
@@ -46,11 +46,11 @@ When the task stops at an approval boundary, also record the pending decision, a
 
 ## Drift Guard
 
-- quote Acceptance Criteria verbatim from the task brief
+- quote `Acceptance Criteria` verbatim from the task brief
 - do not put unresolved items into `Decided`
 - do not split the summary into separate before-verify and after-verify narratives
 - when an open question is resolved, promote it to `Decided` instead of silently deleting it
-- do not let the Progress Note restate Goal, Constraints, or Acceptance Criteria in a way that overwrites the stable task context
+- do not let the Progress Note restate `Goal`, `Constraints`, or `Acceptance Criteria` in a way that overwrites the stable task context
 - if work stops at an approval boundary, state what kind of change would cross that boundary
 
 ## Update Timing

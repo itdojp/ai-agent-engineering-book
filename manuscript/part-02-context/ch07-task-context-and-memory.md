@@ -53,7 +53,7 @@ summary drift は、セッションを跨ぐほど増える。主な原因は、
 
 たとえば `FEATURE-001` の `Progress Note` に「search と status / assignee filter は統合予定」と書くのは危険である。現時点では open question であり、task brief にも acceptance criteria にもない。これを `Decided` に入れると、次のセッションがそれを実装義務だと誤解する。正しくは `Open Questions` に置き、scope 変更が承認されたら brief と spec を更新してから `Decided` に移すべきである。
 
-summary drift を避けるには、要約より source of truth を優先する。Acceptance Criteria は brief から原文で引用し、Goal や Constraints も `Progress Note` で言い換えない。verify 結果は pass / fail を明示し、推測は未確定のまま隔離する。Session Memory は短いほどよいが、短ければ何でもよいわけではない。
+summary drift を避けるには、要約より source of truth を優先する。Acceptance Criteria は brief から原文で引用し、`Goal` や `Constraints` も `Progress Note` で言い換えない。verify 結果は pass / fail を明示し、推測は未確定のまま隔離する。Session Memory は短いほどよいが、短ければ何でもよいわけではない。
 
 ### 5. セッション再開時の最低入力
 再開時に必要なのは、前回会話の全文ではない。順序を付けるなら次の 4 つで十分である。

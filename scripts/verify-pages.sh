@@ -2,7 +2,9 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-TMPDIR="$(mktemp -d)"
+TMP_ROOT="$ROOT/.tmp"
+mkdir -p "$TMP_ROOT"
+TMPDIR="$(mktemp -d "$TMP_ROOT/verify-pages.XXXXXX")"
 trap 'rm -rf "$TMPDIR"' EXIT
 
 python3 -m venv "$TMPDIR/.venv"

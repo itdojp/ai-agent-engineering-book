@@ -82,7 +82,7 @@ for path in "${required[@]}"; do
 done
 
 python3 "$ROOT/scripts/run-prompt-evals.py"
-python3 "$ROOT/scripts/build-pages.py" --verify-reader-resources
+python3 -S "$ROOT/scripts/build-pages.py" --verify-reader-resources
 
 if [[ -n "$TARGET" ]]; then
   brief="$ROOT/manuscript/briefs/${TARGET}.yaml"

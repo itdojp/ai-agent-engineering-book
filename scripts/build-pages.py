@@ -9,9 +9,6 @@ import shutil
 from dataclasses import dataclass, replace
 from pathlib import Path
 
-import markdown
-
-
 ROOT = Path(__file__).resolve().parents[1]
 REPO_URL = "https://github.com/itdojp/ai-agent-engineering-book"
 PAGES_BASE_URL = "https://itdojp.github.io/ai-agent-engineering-book"
@@ -194,6 +191,8 @@ def normalize_text(text: str) -> str:
 
 
 def normalize_markdown_text(text: str) -> str:
+    import markdown
+
     rendered_html = markdown.markdown(text, extensions=["extra", "sane_lists"])
     plain_text = re.sub(r"<[^>]+>", "", rendered_html)
     return normalize_text(plain_text)
@@ -360,6 +359,8 @@ def nav_title_for(language: str, page_kind: str, page_label: str, title: str) ->
 
 
 def load_page(language: str, section: SectionSpec, source_path: Path) -> Page:
+    import markdown
+
     spec = BOOK_SPECS[language]
     raw = source_path.read_text(encoding="utf-8")
     body = strip_frontmatter(raw).strip()
@@ -395,6 +396,8 @@ def load_reader_resource_page(language: str, resource: ReaderResourceSpec) -> Pa
     spec = BOOK_SPECS[language]
     source_path = ROOT / resource.source_rel if resource.source_rel else None
     if source_path:
+        import markdown
+
         raw = source_path.read_text(encoding="utf-8")
         body = strip_frontmatter(raw).strip()
         title = extract_title(body, resource.nav_title)

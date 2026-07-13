@@ -9,6 +9,7 @@ required=(
   "README.md"
   "STATUS.md"
   "docs/pages-publishing.md"
+  "docs/troubleshooting.md"
   "artifacts/en/README.md"
   "artifacts/en/evidence/README.md"
   "docs/glossary.md"
@@ -20,6 +21,7 @@ required=(
   "docs/en/session-memory-policy.md"
   "docs/en/operating-model.md"
   "docs/en/metrics.md"
+  "docs/en/troubleshooting.md"
   "manuscript/AGENTS.md"
   "manuscript/front-matter/00-はじめに.md"
   "manuscript/front-matter/01-本書の読み方.md"
@@ -80,6 +82,7 @@ for path in "${required[@]}"; do
 done
 
 python3 "$ROOT/scripts/run-prompt-evals.py"
+python3 -S "$ROOT/scripts/build-pages.py" --verify-reader-resources
 
 if [[ -n "$TARGET" ]]; then
   brief="$ROOT/manuscript/briefs/${TARGET}.yaml"

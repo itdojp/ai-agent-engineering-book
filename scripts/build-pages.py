@@ -645,7 +645,7 @@ def render_checklist_index(page: Page, pages: list[Page]) -> str:
         for checklist in checklist_pages
     )
     heading = "収録チェックリスト" if page.language == "ja" else "Included Checklists"
-    return f"<p>{html.escape(intro)}</p><h2>{heading}</h2><ul>{items}</ul>"
+    return f"<p>{html.escape(intro)}</p><h2>{html.escape(heading)}</h2><ul>{items}</ul>"
 
 
 def rendered_body(page: Page, pages: list[Page]) -> str:

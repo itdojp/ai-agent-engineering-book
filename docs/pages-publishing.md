@@ -7,7 +7,7 @@
 ## 構成
 
 - `scripts/build-pages.py`
-  - 日本語版と英語版の原稿から book-formatter 互換の static HTML を生成する
+  - 日本語版と英語版の原稿、および reader resource の source mapping から book-formatter 互換の static HTML を生成する
 - `scripts/verify-pages.sh`
   - local で Pages build が成立するか検証する
 - `.github/workflows/verify.yml`
@@ -35,6 +35,18 @@
 - formatter shared asset と custom CSS / JS が配置される
 - author / canonical / Open Graph / Twitter Card / favicon metadata が出力される
 - 公開トップに operator wording (`Publishing Guide` / `canonical source`) が残っていない
+- checklist source、JA/EN counterpart、固定 route、sidebar、prev/next、troubleshooting flow の正契約と負契約
+
+## Reader Resources
+
+`scripts/build-pages.py` の `reader_resource_specs()` が、公開 route と source artifact の唯一の mapping を持つ。チェックリスト index はこの mapping から生成し、チェックリスト本文を別の Markdown へ複製しない。
+
+- 日本語: `/checklists/`、`/checklists/prompt-contract-review/`、`/checklists/verification/`、`/checklists/repo-hygiene/`、`/troubleshooting/`
+- English: `/en/checklists/`、`/en/checklists/prompt-contract-review/`、`/en/checklists/verification/`、`/en/checklists/repo-hygiene/`、`/en/troubleshooting/`
+
+チェックリスト個別ページは `checklists/` と `checklists/en/` の既存 artifact を直接 source とする。トラブルシューティングは `docs/troubleshooting.md` と `docs/en/troubleshooting.md` を source とし、症状、再現、最小安全確認、Prompt / Context / Harness、停止 / エスカレーション、証跡の順で安全優先に扱う。
+
+`./scripts/verify-book.sh` と `./scripts/verify-pages.sh` はともに `build-pages.py --verify-reader-resources` を実行する。この isolated negative regression は、JA/EN counterpart、route、navigation、checklist mapping、flow marker、duplicate route の欠落を拒否する。
 
 ## GitHub Actions
 
@@ -52,6 +64,10 @@
   - 日本語版の導入ページ
 - `/en/`
   - 英語版の導入ページ
+- `/checklists/` と `/troubleshooting/`
+  - 日本語版の reader resources
+- `/en/checklists/` と `/en/troubleshooting/`
+  - 英語版の reader resources
 - `/chapters/ch01/` 以降
   - 日本語版 chapter / appendix / backmatter
 - `/en/chapters/ch01/` 以降

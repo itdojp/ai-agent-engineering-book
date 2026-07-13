@@ -6,7 +6,7 @@ import html
 import os
 import re
 import shutil
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from pathlib import Path
 
 import markdown
@@ -28,13 +28,22 @@ class SectionSpec:
     part: bool = False
 
 
+@dataclass(frozen=True)
+class ReaderResourceSpec:
+    logical_id: str
+    route: str
+    source_rel: str | None
+    nav_title: str
+    kind: str
+
+
 @dataclass
 class Page:
     language: str
     language_label: str
     lang_attr: str
     source_root: Path
-    source_path: Path
+    source_path: Path | None
     section_key: str
     section_title: str
     title: str
@@ -47,6 +56,25 @@ class Page:
     nav_title: str
     nav_group: str
     logical_id: str
+    resource_kind: str | None
+
+
+READER_RESOURCE_ROUTES = {
+    "checklists": "checklists",
+    "checklist:prompt-contract-review": "checklists/prompt-contract-review",
+    "checklist:verification": "checklists/verification",
+    "checklist:repo-hygiene": "checklists/repo-hygiene",
+    "troubleshooting": "troubleshooting",
+}
+CHECKLIST_RESOURCE_IDS = (
+    "checklist:prompt-contract-review",
+    "checklist:verification",
+    "checklist:repo-hygiene",
+)
+TROUBLESHOOTING_FLOW_MARKERS = {
+    "ja": ("症状", "再現", "最小安全確認", "Prompt", "Context", "Harness", "停止", "エスカレーション", "証跡"),
+    "en": ("Symptoms", "Reproduce", "Minimum Safe Check", "Prompt", "Context", "Harness", "Stop", "Escalate", "Evidence"),
+}
 
 
 BOOK_SPECS = {
@@ -121,6 +149,11 @@ def parse_args() -> argparse.Namespace:
         "--output",
         default=str(ROOT / "dist" / "pages"),
         help="Output directory for the built site.",
+    )
+    parser.add_argument(
+        "--verify-reader-resources",
+        action="store_true",
+        help="Run isolated reader-resource source, route, navigation, and negative-contract checks.",
     )
     return parser.parse_args()
 
@@ -198,6 +231,69 @@ def page_token(path: Path) -> str:
 
 def page_prefix(language: str) -> Path:
     return Path() if language == "ja" else Path("en")
+
+
+def reader_resource_specs(language: str) -> list[ReaderResourceSpec]:
+    if language == "ja":
+        labels = {
+            "checklists": "チェックリスト集",
+            "checklist:prompt-contract-review": "Prompt Contract Review Checklist",
+            "checklist:verification": "Verification Checklist",
+            "checklist:repo-hygiene": "Repo Hygiene Checklist",
+            "troubleshooting": "トラブルシューティング",
+        }
+        source_prefix = ""
+        troubleshooting_source = "docs/troubleshooting.md"
+    else:
+        labels = {
+            "checklists": "Checklists",
+            "checklist:prompt-contract-review": "Prompt Contract Review Checklist",
+            "checklist:verification": "Verification Checklist",
+            "checklist:repo-hygiene": "Repo Hygiene Checklist",
+            "troubleshooting": "Troubleshooting",
+        }
+        source_prefix = "en/"
+        troubleshooting_source = "docs/en/troubleshooting.md"
+
+    return [
+        ReaderResourceSpec("checklists", READER_RESOURCE_ROUTES["checklists"], None, labels["checklists"], "checklist-index"),
+        ReaderResourceSpec(
+            "checklist:prompt-contract-review",
+            READER_RESOURCE_ROUTES["checklist:prompt-contract-review"],
+            f"checklists/{source_prefix}prompt-contract-review.md",
+            labels["checklist:prompt-contract-review"],
+            "checklist",
+        ),
+        ReaderResourceSpec(
+            "checklist:verification",
+            READER_RESOURCE_ROUTES["checklist:verification"],
+            f"checklists/{source_prefix}verification.md",
+            labels["checklist:verification"],
+            "checklist",
+        ),
+        ReaderResourceSpec(
+            "checklist:repo-hygiene",
+            READER_RESOURCE_ROUTES["checklist:repo-hygiene"],
+            f"checklists/{source_prefix}repo-hygiene.md",
+            labels["checklist:repo-hygiene"],
+            "checklist",
+        ),
+        ReaderResourceSpec(
+            "troubleshooting",
+            READER_RESOURCE_ROUTES["troubleshooting"],
+            troubleshooting_source,
+            labels["troubleshooting"],
+            "troubleshooting",
+        ),
+    ]
+
+
+def reader_resource_group_title(language: str) -> str:
+    return "読者向けリソース" if language == "ja" else "Reader Resources"
+
+
+def reader_output_rel(language: str, route: str) -> Path:
+    return page_prefix(language) / route / "index.html"
 
 
 def output_rel(language: str, section: SectionSpec, source_path: Path) -> Path:
@@ -291,6 +387,51 @@ def load_page(language: str, section: SectionSpec, source_path: Path) -> Page:
         nav_title=nav_title_for(language, page_kind, page_label, title),
         nav_group=section.title,
         logical_id=f"{section.key}:{page_token(source_path)}",
+        resource_kind=None,
+    )
+
+
+def load_reader_resource_page(language: str, resource: ReaderResourceSpec) -> Page:
+    spec = BOOK_SPECS[language]
+    source_path = ROOT / resource.source_rel if resource.source_rel else None
+    if source_path:
+        raw = source_path.read_text(encoding="utf-8")
+        body = strip_frontmatter(raw).strip()
+        title = extract_title(body, resource.nav_title)
+        content_body = strip_leading_h1_markdown(body)
+        md = markdown.Markdown(extensions=["extra", "toc", "sane_lists"])
+        excerpt = extract_excerpt(body)
+        body_html = remove_duplicate_excerpt_paragraph(md.convert(content_body), excerpt)
+        toc_html = md.toc if md.toc else ""
+    else:
+        title = resource.nav_title
+        excerpt = (
+            "既存のチェックリスト artifact を用途別に読む。"
+            if language == "ja"
+            else "Read the existing checklist artifacts by use case."
+        )
+        body_html = ""
+        toc_html = ""
+
+    return Page(
+        language=language,
+        language_label=spec["label"],
+        lang_attr=spec["lang_attr"],
+        source_root=ROOT,
+        source_path=source_path,
+        section_key="reader-resources",
+        section_title=reader_resource_group_title(language),
+        title=title,
+        excerpt=excerpt,
+        output_rel=reader_output_rel(language, resource.route),
+        body_html=body_html,
+        toc_html=toc_html,
+        page_kind="reader-resource",
+        page_label=reader_resource_group_title(language),
+        nav_title=resource.nav_title,
+        nav_group=reader_resource_group_title(language),
+        logical_id=f"reader-resource:{resource.logical_id}",
+        resource_kind=resource.kind,
     )
 
 
@@ -441,6 +582,31 @@ def render_pager(page: Page, previous_page: Page | None, next_page: Page | None)
     )
 
 
+def render_checklist_index(page: Page, pages: list[Page]) -> str:
+    resources = {resource.logical_id: resource for resource in pages if resource.section_key == "reader-resources"}
+    checklist_pages = [resources[f"reader-resource:{resource_id}"] for resource_id in CHECKLIST_RESOURCE_IDS]
+    intro = (
+        "各チェックリストは repository 内の既存 artifact をそのまま公開している。"
+        "この索引は本文を複製せず、用途に応じた artifact への導線だけを提供する。"
+        if page.language == "ja"
+        else "Each checklist is published directly from its existing repository artifact. "
+        "This index does not duplicate checklist content; it only provides task-oriented routes to those artifacts."
+    )
+    items = "".join(
+        f"<li><a href=\"{html.escape(rel_link(page.output_rel, checklist.output_rel))}\">{html.escape(checklist.title)}</a>"
+        f"{f'<p>{html.escape(checklist.excerpt)}</p>' if checklist.excerpt else ''}</li>"
+        for checklist in checklist_pages
+    )
+    heading = "収録チェックリスト" if page.language == "ja" else "Included Checklists"
+    return f"<p>{html.escape(intro)}</p><h2>{heading}</h2><ul>{items}</ul>"
+
+
+def rendered_body(page: Page, pages: list[Page]) -> str:
+    if page.resource_kind == "checklist-index":
+        return render_checklist_index(page, pages)
+    return page.body_html
+
+
 def page_chrome(page: Page, body: str, current_search_placeholder: str) -> str:
     css_main = rel_link(page.output_rel, Path("assets") / "css" / "main.css")
     css_syntax = rel_link(page.output_rel, Path("assets") / "css" / "syntax-highlighting.css")
@@ -577,6 +743,11 @@ def render_page(
     spec = BOOK_SPECS[page.language]
     first_chapter = next(candidate for candidate in pages if candidate.page_kind == "chapter")
     sidebar_html = render_nav(pages, page, counterpart)
+    source_link = (
+        f"<a href=\"{html.escape(REPO_URL)}/blob/main/{html.escape(page.source_path.relative_to(ROOT).as_posix())}\" target=\"_blank\" rel=\"noopener\">Source Markdown</a>"
+        if page.source_path
+        else ""
+    )
     footer = (
         "<footer class=\"book-footer\" role=\"contentinfo\">"
         "<div class=\"book-footer-inner\">"
@@ -585,7 +756,7 @@ def render_page(
         "</div>"
         "<div class=\"book-footer-links\">"
         f"<a href=\"{html.escape(REPO_URL)}\" target=\"_blank\" rel=\"noopener\">GitHub</a>"
-        f"<a href=\"{html.escape(REPO_URL)}/blob/main/{html.escape(page.source_path.relative_to(ROOT).as_posix())}\" target=\"_blank\" rel=\"noopener\">Source Markdown</a>"
+        f"{source_link}"
         "</div>"
         "</div>"
         "</footer>"
@@ -596,7 +767,7 @@ def render_page(
         "<div class=\"book-content\">"
         "<article class=\"page-content\">"
         f"{render_lead(page, counterpart, first_chapter)}"
-        f"{page.body_html}"
+        f"{rendered_body(page, pages)}"
         "</article>"
         f"{render_pager(page, previous_page, next_page)}"
         f"{footer}"
@@ -608,12 +779,145 @@ def render_page(
     target.write_text(page_chrome(page, body, spec["search_placeholder"]), encoding="utf-8")
 
 
+def validate_troubleshooting_flow(language: str, text: str) -> None:
+    missing = [marker for marker in TROUBLESHOOTING_FLOW_MARKERS[language] if marker not in text]
+    if missing:
+        raise ValueError(
+            f"{language} troubleshooting flow is missing safety-first markers: {', '.join(missing)}"
+        )
+
+
+def validate_reader_resource_specs(resources_by_language: dict[str, list[ReaderResourceSpec]]) -> None:
+    expected_by_language = {
+        language: {resource.logical_id: resource for resource in reader_resource_specs(language)}
+        for language in ("ja", "en")
+    }
+    actual_ids = {
+        language: {resource.logical_id for resource in resources_by_language[language]}
+        for language in ("ja", "en")
+    }
+    if actual_ids["ja"] != actual_ids["en"]:
+        raise ValueError("reader resources have a missing JA/EN counterpart")
+
+    for language in ("ja", "en"):
+        resources = resources_by_language[language]
+        ids = [resource.logical_id for resource in resources]
+        if len(ids) != len(set(ids)):
+            raise ValueError(f"duplicate {language} reader-resource logical id")
+        routes = [resource.route for resource in resources]
+        if len(routes) != len(set(routes)):
+            raise ValueError(f"duplicate {language} reader-resource route")
+
+        expected = expected_by_language[language]
+        if set(ids) != set(expected):
+            missing_checklists = set(CHECKLIST_RESOURCE_IDS) - set(ids)
+            if missing_checklists:
+                raise ValueError(f"missing {language} checklist resource: {', '.join(sorted(missing_checklists))}")
+            raise ValueError(f"unexpected {language} reader-resource mapping")
+
+        for resource in resources:
+            canonical = expected[resource.logical_id]
+            if resource.route != canonical.route:
+                raise ValueError(f"invalid {language} reader-resource route for {resource.logical_id}")
+            if resource.nav_title != canonical.nav_title:
+                raise ValueError(f"invalid {language} reader-resource navigation for {resource.logical_id}")
+            if resource.kind != canonical.kind or resource.source_rel != canonical.source_rel:
+                raise ValueError(f"invalid {language} reader-resource source mapping for {resource.logical_id}")
+            if resource.source_rel is None:
+                continue
+            source_path = ROOT / resource.source_rel
+            if not source_path.is_file():
+                raise ValueError(f"missing {language} reader-resource source: {resource.source_rel}")
+            source_text = source_path.read_text(encoding="utf-8")
+            if not source_text.startswith("# "):
+                raise ValueError(f"invalid {language} reader-resource source heading: {resource.source_rel}")
+            if resource.kind == "troubleshooting":
+                validate_troubleshooting_flow(language, source_text)
+
+
+def validate_page_paths(books: dict[str, list[Page]]) -> None:
+    for language, pages in books.items():
+        routes = [page.output_rel.as_posix() for page in pages]
+        if len(routes) != len(set(routes)):
+            raise ValueError(f"duplicate {language} generated page route")
+
+
+def assert_reader_resource_failure(name: str, resources: dict[str, list[ReaderResourceSpec]], expected: str) -> None:
+    try:
+        validate_reader_resource_specs(resources)
+    except ValueError as error:
+        if expected not in str(error):
+            raise SystemExit(f"{name} regression produced an unexpected error: {error}") from error
+        return
+    raise SystemExit(f"{name} regression was accepted")
+
+
+def run_reader_resource_negative_regressions() -> None:
+    baseline = {language: reader_resource_specs(language) for language in ("ja", "en")}
+    assert_reader_resource_failure(
+        "missing counterpart",
+        {"ja": baseline["ja"], "en": [item for item in baseline["en"] if item.logical_id != "troubleshooting"]},
+        "missing JA/EN counterpart",
+    )
+    assert_reader_resource_failure(
+        "route",
+        {
+            "ja": [
+                replace(item, route="checklists/wrong-route") if item.logical_id == "checklists" else item
+                for item in baseline["ja"]
+            ],
+            "en": baseline["en"],
+        },
+        "invalid ja reader-resource route",
+    )
+    assert_reader_resource_failure(
+        "navigation",
+        {
+            "ja": [
+                replace(item, nav_title="Unexpected navigation") if item.logical_id == "checklists" else item
+                for item in baseline["ja"]
+            ],
+            "en": baseline["en"],
+        },
+        "invalid ja reader-resource navigation",
+    )
+    assert_reader_resource_failure(
+        "checklist",
+        {
+            language: [item for item in baseline[language] if item.logical_id != "checklist:verification"]
+            for language in ("ja", "en")
+        },
+        "missing ja checklist resource",
+    )
+    assert_reader_resource_failure(
+        "duplicate route",
+        {
+            "ja": [
+                replace(item, route=READER_RESOURCE_ROUTES["checklists"])
+                if item.logical_id == "troubleshooting"
+                else item
+                for item in baseline["ja"]
+            ],
+            "en": baseline["en"],
+        },
+        "duplicate ja reader-resource route",
+    )
+    try:
+        validate_troubleshooting_flow("ja", "症状\n再現\n最小安全確認\nPrompt\nContext\nHarness\n停止\nエスカレーション")
+    except ValueError as error:
+        if "証跡" not in str(error):
+            raise SystemExit(f"flow regression produced an unexpected error: {error}") from error
+    else:
+        raise SystemExit("flow regression was accepted")
+
+
 def collect_pages(language: str) -> list[Page]:
     spec = BOOK_SPECS[language]
     pages: list[Page] = []
     for section in spec["section_sequence"]:
         for source_path in ordered_section_paths(spec["root"], section):
             pages.append(load_page(language, section, source_path))
+    pages.extend(load_reader_resource_page(language, resource) for resource in reader_resource_specs(language))
     return pages
 
 
@@ -639,12 +943,21 @@ def build_counterpart_map(books: dict[str, list[Page]]) -> dict[tuple[str, str],
     lookup: dict[tuple[str, str], Page] = {}
     for language, pages in books.items():
         for page in pages:
-            lookup[(language, page.logical_id)] = page
+            key = (language, page.logical_id)
+            if key in lookup:
+                raise ValueError(f"duplicate {language} page logical id: {page.logical_id}")
+            lookup[key] = page
     return lookup
 
 
 def main() -> None:
     args = parse_args()
+    reader_resources = {language: reader_resource_specs(language) for language in ("ja", "en")}
+    validate_reader_resource_specs(reader_resources)
+    if args.verify_reader_resources:
+        run_reader_resource_negative_regressions()
+        print("reader-resource source and negative contracts look consistent")
+        return
     output_dir = Path(args.output).resolve()
     if output_dir.exists():
         shutil.rmtree(output_dir)
@@ -652,6 +965,7 @@ def main() -> None:
     copy_assets(output_dir)
 
     books = {language: collect_pages(language) for language in ("ja", "en")}
+    validate_page_paths(books)
     lookup = build_counterpart_map(books)
 
     for language, pages in books.items():

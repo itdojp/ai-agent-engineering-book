@@ -72,6 +72,50 @@ TROUBLESHOOTING_FLOW_MARKERS = {
     "ja": ("症状", "再現", "最小安全確認", "Prompt", "Context", "Harness", "停止", "エスカレーション", "証跡"),
     "en": ("Symptoms", "Reproduce", "Minimum Safe Check", "Prompt", "Context", "Harness", "Stop", "Escalate", "Evidence"),
 }
+TROUBLESHOOTING_FLOW_HEADINGS = {
+    "ja": (
+        "## 0. 直ちに停止して保護する",
+        "## 1. 症状を記録する",
+        "## 2. 再現を最小化する",
+        "## 3. 最小安全確認を行う",
+        "## 4. Prompt を切り分ける",
+        "## 5. Context を切り分ける",
+        "## 6. Harness を切り分ける",
+        "## 7. 停止とエスカレーションを判断する",
+        "## 8. 証跡を残す",
+    ),
+    "en": (
+        "## 0. Stop Immediately and Protect the Boundary",
+        "## 1. Record the Symptoms",
+        "## 2. Reproduce with the Smallest Input",
+        "## 3. Perform a Minimum Safe Check",
+        "## 4. Diagnose the Prompt",
+        "## 5. Diagnose the Context",
+        "## 6. Diagnose the Harness",
+        "## 7. Decide When to Stop and Escalate",
+        "## 8. Preserve Evidence",
+    ),
+}
+
+# Independent test oracle. Keep this literal separate from
+# reader_resource_specs() so the dependency-free verifier rejects accidental
+# changes to a route, navigation label, kind, or canonical source mapping.
+EXPECTED_READER_RESOURCE_CONTRACT = {
+    "ja": {
+        "checklists": ReaderResourceSpec("checklists", "checklists", None, "チェックリスト集", "checklist-index"),
+        "checklist:prompt-contract-review": ReaderResourceSpec("checklist:prompt-contract-review", "checklists/prompt-contract-review", "checklists/prompt-contract-review.md", "Prompt Contract Review Checklist", "checklist"),
+        "checklist:verification": ReaderResourceSpec("checklist:verification", "checklists/verification", "checklists/verification.md", "Verification Checklist", "checklist"),
+        "checklist:repo-hygiene": ReaderResourceSpec("checklist:repo-hygiene", "checklists/repo-hygiene", "checklists/repo-hygiene.md", "Repo Hygiene Checklist", "checklist"),
+        "troubleshooting": ReaderResourceSpec("troubleshooting", "troubleshooting", "docs/troubleshooting.md", "トラブルシューティング", "troubleshooting"),
+    },
+    "en": {
+        "checklists": ReaderResourceSpec("checklists", "checklists", None, "Checklists", "checklist-index"),
+        "checklist:prompt-contract-review": ReaderResourceSpec("checklist:prompt-contract-review", "checklists/prompt-contract-review", "checklists/en/prompt-contract-review.md", "Prompt Contract Review Checklist", "checklist"),
+        "checklist:verification": ReaderResourceSpec("checklist:verification", "checklists/verification", "checklists/en/verification.md", "Verification Checklist", "checklist"),
+        "checklist:repo-hygiene": ReaderResourceSpec("checklist:repo-hygiene", "checklists/repo-hygiene", "checklists/en/repo-hygiene.md", "Repo Hygiene Checklist", "checklist"),
+        "troubleshooting": ReaderResourceSpec("troubleshooting", "troubleshooting", "docs/en/troubleshooting.md", "Troubleshooting", "troubleshooting"),
+    },
+}
 
 
 BOOK_SPECS = {
@@ -788,13 +832,19 @@ def validate_troubleshooting_flow(language: str, text: str) -> None:
         raise ValueError(
             f"{language} troubleshooting flow is missing safety-first markers: {', '.join(missing)}"
         )
+    headings = TROUBLESHOOTING_FLOW_HEADINGS[language]
+    duplicate = [heading for heading in headings if text.count(heading) != 1]
+    if duplicate:
+        raise ValueError(
+            f"{language} troubleshooting flow heading must occur exactly once: {', '.join(duplicate)}"
+        )
+    positions = [text.index(heading) for heading in headings]
+    if positions != sorted(positions):
+        raise ValueError(f"{language} troubleshooting flow headings are out of order")
 
 
 def validate_reader_resource_specs(resources_by_language: dict[str, list[ReaderResourceSpec]]) -> None:
-    expected_by_language = {
-        language: {resource.logical_id: resource for resource in reader_resource_specs(language)}
-        for language in ("ja", "en")
-    }
+    expected_by_language = EXPECTED_READER_RESOURCE_CONTRACT
     actual_ids = {
         language: {resource.logical_id for resource in resources_by_language[language]}
         for language in ("ja", "en")
@@ -912,6 +962,14 @@ def run_reader_resource_negative_regressions() -> None:
             raise SystemExit(f"flow regression produced an unexpected error: {error}") from error
     else:
         raise SystemExit("flow regression was accepted")
+    out_of_order = "\n".join(reversed(TROUBLESHOOTING_FLOW_HEADINGS["ja"]))
+    try:
+        validate_troubleshooting_flow("ja", out_of_order)
+    except ValueError as error:
+        if "out of order" not in str(error):
+            raise SystemExit(f"flow order regression produced an unexpected error: {error}") from error
+    else:
+        raise SystemExit("flow order regression was accepted")
 
 
 def collect_pages(language: str) -> list[Page]:
@@ -953,6 +1011,15 @@ def build_counterpart_map(books: dict[str, list[Page]]) -> dict[tuple[str, str],
     return lookup
 
 
+def pager_neighbors(pages: list[Page], page: Page) -> tuple[Page | None, Page | None]:
+    is_resource = page.section_key == "reader-resources"
+    sequence = [candidate for candidate in pages if (candidate.section_key == "reader-resources") == is_resource]
+    index = sequence.index(page)
+    previous_page = sequence[index - 1] if index > 0 else None
+    next_page = sequence[index + 1] if index < len(sequence) - 1 else None
+    return previous_page, next_page
+
+
 def main() -> None:
     args = parse_args()
     reader_resources = {language: reader_resource_specs(language) for language in ("ja", "en")}
@@ -972,11 +1039,10 @@ def main() -> None:
     lookup = build_counterpart_map(books)
 
     for language, pages in books.items():
-        for index, page in enumerate(pages):
+        for page in pages:
             other_language = "en" if language == "ja" else "ja"
             counterpart = lookup.get((other_language, page.logical_id))
-            previous_page = pages[index - 1] if index > 0 else None
-            next_page = pages[index + 1] if index < len(pages) - 1 else None
+            previous_page, next_page = pager_neighbors(pages, page)
             render_page(output_dir, pages, page, previous_page, next_page, counterpart)
 
     print(f"pages site built at {output_dir}")

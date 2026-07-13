@@ -161,6 +161,12 @@ for language, group_title, index_title, counterpart_label in (
     require(out / verification, f'href="{href_to(verification, hygiene)}" class="nav-next"')
     require(out / hygiene, f'href="{href_to(hygiene, troubleshooting)}" class="nav-next"')
     require(out / troubleshooting, f'href="{href_to(troubleshooting, hygiene)}" class="nav-prev"')
+    require(out / first, '<span class="nav-disabled nav-prev">')
+
+    # Reader resources have their own pager sequence. Existing manuscript
+    # backmatter must remain terminal instead of acquiring a new next link.
+    terminal = prefix / Path("backmatter/03/index.html")
+    require(out / terminal, '<span class="nav-disabled nav-next">')
 
 print("reader resource routes, navigation, counterparts, and flow look consistent")
 PY

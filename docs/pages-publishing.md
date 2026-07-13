@@ -46,6 +46,8 @@
 
 チェックリスト個別ページは `checklists/` と `checklists/en/` の既存 artifact を直接 source とする。トラブルシューティングは `docs/troubleshooting.md` と `docs/en/troubleshooting.md` を source とし、症状、再現、最小安全確認、Prompt / Context / Harness、停止 / エスカレーション、証跡の順で安全優先に扱う。
 
+reader resource の prev/next は5ページだけの独立系列とする。既存 manuscript / backmatter の系列には接続せず、従来どおり最終 backmatter を終端に保つ。
+
 `./scripts/verify-book.sh` と `./scripts/verify-pages.sh` はともに `build-pages.py --verify-reader-resources` を実行する。この isolated negative regression は、JA/EN counterpart、route、navigation、checklist mapping、flow marker、duplicate route の欠落を拒否する。
 
 ## GitHub Actions

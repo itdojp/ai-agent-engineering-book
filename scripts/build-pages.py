@@ -630,8 +630,8 @@ def render_pager(page: Page, previous_page: Page | None, next_page: Page | None)
 
 
 def render_checklist_index(page: Page, pages: list[Page]) -> str:
-    resources = {resource.logical_id: resource for resource in pages if resource.section_key == "reader-resources"}
-    checklist_pages = [resources[f"reader-resource:{resource_id}"] for resource_id in CHECKLIST_RESOURCE_IDS]
+    reader_pages = {candidate.logical_id: candidate for candidate in pages if candidate.section_key == "reader-resources"}
+    checklist_pages = [reader_pages[f"reader-resource:{resource_id}"] for resource_id in CHECKLIST_RESOURCE_IDS]
     intro = (
         "各チェックリストは repository 内の既存 artifact をそのまま公開している。"
         "この索引は本文を複製せず、用途に応じた artifact への導線だけを提供する。"

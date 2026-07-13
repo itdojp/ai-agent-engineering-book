@@ -103,7 +103,7 @@ if grep -q "canonical source" "$OUT/index.html"; then
   exit 1
 fi
 
-python3 - <<'PY' "$OUT"
+python - <<'PY' "$OUT"
 from pathlib import Path
 import posixpath
 import sys

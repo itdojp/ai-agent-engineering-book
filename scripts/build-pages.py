@@ -1011,13 +1011,17 @@ def build_counterpart_map(books: dict[str, list[Page]]) -> dict[tuple[str, str],
     return lookup
 
 
-def pager_neighbors(pages: list[Page], page: Page) -> tuple[Page | None, Page | None]:
-    is_resource = page.section_key == "reader-resources"
-    sequence = [candidate for candidate in pages if (candidate.section_key == "reader-resources") == is_resource]
-    index = sequence.index(page)
-    previous_page = sequence[index - 1] if index > 0 else None
-    next_page = sequence[index + 1] if index < len(sequence) - 1 else None
-    return previous_page, next_page
+def build_pager_map(pages: list[Page]) -> dict[Path, tuple[Page | None, Page | None]]:
+    pager_map: dict[Path, tuple[Page | None, Page | None]] = {}
+    for is_resource in (False, True):
+        sequence = [page for page in pages if (page.section_key == "reader-resources") == is_resource]
+        for index, page in enumerate(sequence):
+            previous_page = sequence[index - 1] if index > 0 else None
+            next_page = sequence[index + 1] if index < len(sequence) - 1 else None
+            pager_map[page.output_rel] = (previous_page, next_page)
+    if len(pager_map) != len(pages):
+        raise ValueError("pager map requires unique generated page routes")
+    return pager_map
 
 
 def main() -> None:
@@ -1037,12 +1041,13 @@ def main() -> None:
     books = {language: collect_pages(language) for language in ("ja", "en")}
     validate_page_paths(books)
     lookup = build_counterpart_map(books)
+    pagers = {language: build_pager_map(pages) for language, pages in books.items()}
 
     for language, pages in books.items():
         for page in pages:
             other_language = "en" if language == "ja" else "ja"
             counterpart = lookup.get((other_language, page.logical_id))
-            previous_page, next_page = pager_neighbors(pages, page)
+            previous_page, next_page = pagers[language][page.output_rel]
             render_page(output_dir, pages, page, previous_page, next_page, counterpart)
 
     print(f"pages site built at {output_dir}")

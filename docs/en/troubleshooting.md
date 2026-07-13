@@ -10,7 +10,7 @@ Do not retry or take additional action when any of the following applies:
 - the Permission Policy, Tool Contract, or Approval Gate boundary is unclear
 - the failure has produced unexpected file changes, external submission, privilege escalation, or missing data
 
-Stopping is not failure. It preserves the safety boundary so that the next owner can make an informed decision.
+Stopping is not a failure. It preserves the safety boundary so that the next owner can make an informed decision.
 
 ## 1. Record the Symptoms
 

@@ -71,12 +71,17 @@ runtime は mechanism の提供者であり、policy の決定者ではない。
 - docs drift、artifact drift、scope 逸脱を確認する
 - merge 可能か、追加 verify が必要かを判定する
 
+### Approver
+- environment protection 等で必要な deployment 承認を行い、承認記録を残す
+- 承認が不要な場合は `N/A` と根拠を記録する
+- deployment を開始してよいという control decision と、deployment success / production confirmation を混同しない
+
 ### Delivery Owner
 - production-ready plan の target、marker、metric、halt / rollback / restart 条件を確定する
 - 対象 deployment と production evidence を確認し、`Production Confirmed` または `Halted` を記録する
 - rollback と再開の判断、owner、timestamp、evidence location を残す
 
-1人運用では、同じ人が Lead、Operator、Reviewer、Delivery Owner を兼任してよい。ただし、review 完了、deployment 承認、production 確認を1つのチェックで代替してはならない。各判断の時刻、対象SHA、根拠を分けて残す。
+1 人運用では、同じ人が Lead、Operator、Reviewer、Approver、Delivery Owner を兼任してよい。ただし、review 完了、deployment 承認、production 確認を 1 つのチェックで代替してはならない。各判断の時刻、対象 SHA、根拠を分けて残す。
 
 ## Delivery State Model
 

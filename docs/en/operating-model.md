@@ -80,13 +80,19 @@ The key test is not whether the runtime feels convenient. The key test is how mu
 - check docs drift, artifact drift, and scope drift
 - decide whether the PR is mergeable or whether more verify is required
 
+### Approver
+
+- grant required deployment approval under environment protection or an equivalent control and preserve the approval record
+- record `N/A` and the rationale when no approval is required
+- keep the control decision to start deployment separate from deployment success and production confirmation
+
 ### Delivery Owner
 
 - finalize the target, marker, metric, and halt / rollback / restart conditions in the production-ready plan
 - inspect the target deployment and production evidence, then record either `Production Confirmed` or `Halted`
 - record rollback and restart decisions with owner, timestamp, and evidence location
 
-In a one-person operation, the same person may hold Lead, Operator, Reviewer, and Delivery Owner roles. That person must not collapse review completion, deployment approval, and production confirmation into one checkbox. Keep separate timestamps, target SHAs, and evidence for each decision.
+In a one-person operation, the same person may hold Lead, Operator, Reviewer, Approver, and Delivery Owner roles. That person must not collapse review completion, deployment approval, and production confirmation into one checkbox. Keep separate timestamps, target SHAs, and evidence for each decision.
 
 ## Delivery State Model
 

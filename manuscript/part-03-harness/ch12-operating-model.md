@@ -147,7 +147,7 @@ productionへ影響する変更は、merge前にtarget/marker/metric/owner/rollb
 この例で分かるのは、導入の成否が「どのモデルを使ったか」ではなく、「役割と cadence が artifact で固定されているか」にかかっていることだ。CH12 の operating model は、技術選定ではなく運用設計の章である。
 
 ## 演習
-1. 3人チーム向けの operating model を定義する。review completion gate、未解決 thread 0、production-ready plan、post-deploy確認、rollback/restartの責任も含めること。success、deploy failure、metric regressionの3scenarioをwalkthroughする。
+1. 3 人チーム向けの operating model を定義する。review completion gate、未解決 thread 0、production-ready plan、post-deploy 確認、rollback / restart の責任も含めること。success、deploy failure、metric regression の 3 scenario を walkthrough する。
 2. 週次の entropy cleanup checklist を作る。
 
 ## 参照する artifact

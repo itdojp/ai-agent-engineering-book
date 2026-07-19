@@ -19,7 +19,7 @@ sections:
   - metrics とふりかえり
   - 導入ロードマップ
 exercises:
-  - 3人チーム向けに review completion、production-ready plan、post-deploy 確認、rollback / restart の責任と3 scenarioを含む operating model を定義する。
+  - 3 人チーム向けに review completion、production-ready plan、post-deploy 確認、rollback / restart の責任と 3 scenario を含む operating model を定義する。
   - 週次の entropy cleanup checklist を作る。
 artifacts:
   - docs/operating-model.md

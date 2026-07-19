@@ -1,11 +1,12 @@
 id: ch12
 title: 運用モデルと組織導入
 part: part-03-harness
-goal: AIエージェントをチームに導入する際の operating model と hygiene を定義する。
+goal: AIエージェントをチームに導入する際の operating model、production gate、hygiene を定義する。
 reader_outcomes:
   - 人間が残す責務を明確にできる
   - review budget と throughput のトレードオフを説明できる
   - repo hygiene と entropy cleanup の運用を設計できる
+  - merge から production 確認、停止、rollback、再開までの gate を設計できる
 dependencies:
   - ch09
   - ch10
@@ -13,15 +14,17 @@ dependencies:
 sections:
   - 人間が残す責務
   - review budget と throughput
+  - merge から production 確認までの delivery state
   - repo hygiene と AI slop 対策
   - metrics とふりかえり
   - 導入ロードマップ
 exercises:
-  - 3人チーム向けの operating model を定義する。
+  - 3 人チーム向けに review completion、production-ready plan、post-deploy 確認、rollback / restart の責任と 3 scenario を含む operating model を定義する。
   - 週次の entropy cleanup checklist を作る。
 artifacts:
   - docs/operating-model.md
   - docs/metrics.md
+  - checklists/verification.md
   - checklists/repo-hygiene.md
   - .github/pull_request_template.md
 acceptance_criteria:
@@ -29,4 +32,5 @@ acceptance_criteria:
   - bad / good example を最低 1 組含む
   - 演習を 2 問含む
   - brief で参照する artifact が repo 上に存在する
+  - success、deployment failure、metric regression / rollback の scenario を追跡できる
   - verify が通る

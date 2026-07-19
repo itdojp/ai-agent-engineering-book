@@ -33,6 +33,25 @@
 - review body、inline comment、suggestion を確認し、未解決 review thread が 0 であることを確認する段取りがあるか
 - skipped check がある場合、その理由を `Remaining Gaps` に残したか
 
+## Production Gate（該当する場合）
+
+### Before Merge / Production-ready Plan
+- target environment と公開 URL を記録したか
+- merge 後の SHA/version の記録場所と production で照合する semantic marker を決めたか
+- deploy owner、production confirmation owner、必要な承認者を決めたか
+- root smoke、代表 route、期待 HTTP status / content marker を決めたか
+- metric の baseline、threshold、window、source、owner を決めたか
+- halt 条件、rollback 手段、restart 条件、evidence location を決めたか
+
+### After Merge / Production Evidence
+- 対象 SHA/version と deployment/workflow run が一致しているか
+- 対象 run が後続 run により `cancelled` となった場合、後続 SHA が対象 change を含むこと、両 run URL、後続 deployment の確認結果を `Superseded` evidence として残したか
+- deployment approval、deployment success、production confirmation を別々に記録したか
+- root と代表 route の HTTP status、semantic marker を確認したか
+- metric を定義した window で確認したか、対象外なら `N/A` と理由を残したか
+- owner、UTC timestamp、観測値、evidence URL を PR または linked Issue へ記録したか
+- rollback 後は新しい main SHA の deployment、HTTP、marker、metric を再確認したか
+
 ## Stop Instead Of Merge
 - 現在の diff と無関係な verify failure が残っている
 - evidence が必要な変更なのに current run の証跡がない
@@ -40,3 +59,7 @@
 - approval が必要な変更を、承認なしで進めている
 - review comment / suggestion / unresolved thread が残っているのに merge しようとしている
 - model/runtime profile が変わったのに eval や smoke check を再実行していない
+- production-ready plan が未記入なのに production へ影響する変更を merge しようとしている
+- deployment が failed / unknown、SHA または marker が不一致、代表 route が異常、metric が threshold を超えているのに完了扱いにしようとしている
+- deployment success または approval だけで production confirmation を代替している
+- `cancelled` を、後続 SHA の包含関係と production 確認なしに `Superseded` または成功として扱っている

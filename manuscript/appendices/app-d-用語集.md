@@ -23,7 +23,7 @@ AI agent、coding agent、ChatGPT、Codex CLI は同じではない。
 - `planner`: work package を分解し、順序、依存、owned files、verify 方針を提案する役割
 - `tool`: 検索、ファイル操作、code 実行、API 呼び出しなど、agent が外部へ作用する実行面
 - `workflow`: prompt、context、tool call、handoff、verify、review をつないだ作業手順
-- `guardrail`: input / output / tool call / 外部投入の前後に置く検査・停止条件
+- `guardrail`: input / output / tool call / result / 外部投入等の特定surfaceに置く検査・停止条件。適用surfaceを個別に確認し、review、verify、permission、human approvalの代替にはしない
 - `ChatGPT`: 要件整理、比較、レビュー観点の洗い出しに向く対話環境
 - `Codex CLI`: repo に対して実際の変更と verify を行う実行環境
 

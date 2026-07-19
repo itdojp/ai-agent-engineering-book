@@ -7,6 +7,8 @@
 - evidence bundle が必要か、不要ならその理由を説明できるか
 - モデル名、API、SDK、vendor 固有機能を扱う場合、model/runtime profile と公式 docs 確認日を残す場所を決めたか
 - AI / 外部サービスへ issue、PR、log、eval case、trace、evidence を投入する可能性がある場合、分類、redaction、provider 条件、approval 要否を確認したか
+- `docs/guardrail-coverage-matrix.md` で、external input / output / tool definition / call / execution / result / resource / trace / session / external service / protocol prompts / roots / sampling / elicitation の各surfaceにclassification、redaction、permission、approval、storage / retention、verificationを割り当てたか
+- 利用中runtimeのguardrailが効くsurface、効かないsurface、確認日を記録し、不明なsurfaceを `deny` または `escalate` にしたか
 - 参照している trace や過去 log が current-run verify の代わりになっていないか
 
 ## During Change
@@ -16,6 +18,8 @@
 - 実行した verify command と pass / fail を current run の情報として記録したか
 - 長時間タスクなら trace に残すべき handoff / retry が整理されているか
 - trace を残す場合、task / work-package id、run timestamp または run id、owner / handoff、retry / restart reason を残したか
+- tool definition、tool result、resourceをuntrusted inputとして扱い、次のcallへ渡す前にprovenanceとinstruction injectionを確認したか
+- hostile input、hostile tool output、tainted tool metadata、unsafe side effect、trace leakage、stale / sensitive session、external provider boundaryを `evals/guardrail-surface-cases.json` に従ってwalkthroughしたか
 
 ## Before Review
 - local verify を回したか
@@ -28,6 +32,7 @@
 - trace や screenshot に redaction / privacy consideration が必要か確認したか
 - model/runtime profile が変わった場合、eval または smoke check を再実行したか
 - AI / 外部サービス投入がある場合、投入データ、redaction、provider 条件、approval 判断を `Evidence / Approval` に残したか
+- `python3 scripts/check-guardrail-coverage.py --self-test` が成功し、必須surface / control / caseの欠落をnegative fixtureがrejectしたか
 - evidence が不要な場合、その理由を説明できるか
 - human approval が必要な点を明示したか
 - review body、inline comment、suggestion を確認し、未解決 review thread が 0 であることを確認する段取りがあるか

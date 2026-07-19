@@ -14,6 +14,7 @@ This directory contains the English counterparts for selected supporting documen
 - `docs/en/context-model.md`
 - `docs/en/context-budget.md`
 - `docs/en/context-risk-register.md`
+- `docs/en/guardrail-coverage-matrix.md`
 - `docs/en/session-memory-policy.md`
 - `docs/en/operating-model.md`
 - `docs/en/metrics.md`

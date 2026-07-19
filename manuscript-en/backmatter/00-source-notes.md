@@ -69,8 +69,9 @@ For CH07, CH11, and CH12, backmatter should explicitly name the operating-model 
 
 ### CH09 Foundations of Harness Engineering
 
-- Start with `scripts/init.sh`, `scripts/verify-sample.sh`, `sample-repo/docs/harness/single-agent-runbook.md`, `sample-repo/docs/harness/permission-policy.md`, and `sample-repo/docs/harness/done-criteria.md`. A single-agent harness is a bundle of start conditions and exit conditions, not a prompt variant.
-- If you add external sources, prefer official docs for the shell, CI runner, permission model, and the agent runtime's tool / guardrail / tracing behavior. Authority boundaries and external-input boundaries should come from the execution environment and provider terms, not from intuition.
+- Start with `scripts/init.sh`, `scripts/verify-sample.sh`, `docs/en/guardrail-coverage-matrix.md`, `evals/guardrail-surface-cases.json`, `sample-repo/docs/harness/single-agent-runbook.md`, `sample-repo/docs/harness/permission-policy.md`, and `sample-repo/docs/harness/done-criteria.md`. A single-agent harness is a bundle of start conditions and exit conditions, not a prompt variant.
+- OpenAI's official [Guardrails and human review](https://developers.openai.com/api/docs/guides/agents/guardrails-approvals) and [Tools](https://developers.openai.com/api/docs/guides/tools), and the [MCP specification 2025-11-25](https://modelcontextprotocol.io/specification/2025-11-25), were checked on 2026-07-19 UTC. Distinguish the attachment points for input, output, and function-tool guardrails, differences among tool types, and MCP prompts, resources, tools, sampling, roots, and elicitation surfaces. Do not replace review, verification, sandboxing, authorization, or human approval with a guardrail or root notification.
+- If you add external sources, prefer official docs for the shell, CI runner, permission model, and the agent runtime's tool / guardrail / tracing behavior. Authority boundaries and external-input boundaries should come from the execution environment and provider terms, not from intuition; retain the specification version and confirmation date.
 
 ### CH10 Build a Verification Harness
 

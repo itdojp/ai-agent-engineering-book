@@ -12,7 +12,7 @@ This file is the English counterpart of the repo-wide glossary and is used by th
 | planner | The role or agent that decomposes a work package and proposes order, dependencies, owned files, and verify strategy. |
 | workflow | The execution path that connects prompts, context, tool calls, handoffs, verify, and review. It is a broader evaluation unit than one prompt. |
 | tool | The execution surface an AI agent uses for search, file operations, code execution, or API calls. Its use is governed by the tool contract and permission policy. |
-| guardrail | A check or stop condition around input, output, tool calls, or external-service submission. It can block risky operations or unsafe data use, but it does not replace review or verify. |
+| guardrail | A check or stop condition on a specific surface such as input, output, tool call or result, or external-service submission. Confirm coverage per surface; it does not replace review, verification, permission, or approval. |
 | ChatGPT | A conversational interface used for requirements shaping, design exploration, comparison, and review-angle discovery. |
 | Codex CLI | A coding-agent execution environment that reads the repo, applies changes, runs commands, and gathers verification evidence. |
 | `AGENTS.md` | The repo entrypoint that defines local invariants and points to the next artifacts that must be read. |

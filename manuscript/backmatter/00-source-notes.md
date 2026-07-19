@@ -69,8 +69,9 @@ CH07、CH11、CH12 の後付けでは、`restart packet（Resume Packet）`、`P
 
 ### CH09 Harness Engineering の基礎
 
-- 最初に信頼するのは `scripts/init.sh`、`scripts/verify-sample.sh`、`sample-repo/docs/harness/single-agent-runbook.md`、`sample-repo/docs/harness/permission-policy.md`、`sample-repo/docs/harness/done-criteria.md` である。single-agent harness は prompt の言い換えではなく、開始条件と終了条件の束である。
-- 外部 source を足すなら、shell、CI runner、permission model、agent runtime の tool / guardrail / tracing docs を優先する。権限境界と外部投入境界は agent の印象論ではなく、実行環境と provider 条件で決める。
+- 最初に信頼するのは `scripts/init.sh`、`scripts/verify-sample.sh`、`docs/guardrail-coverage-matrix.md`、`evals/guardrail-surface-cases.json`、`sample-repo/docs/harness/single-agent-runbook.md`、`sample-repo/docs/harness/permission-policy.md`、`sample-repo/docs/harness/done-criteria.md` である。single-agent harness は prompt の言い換えではなく、開始条件と終了条件の束である。
+- OpenAI公式の [Guardrails and human review](https://developers.openai.com/api/docs/guides/agents/guardrails-approvals) と [Tools](https://developers.openai.com/api/docs/guides/tools)、[MCP specification 2025-11-25](https://modelcontextprotocol.io/specification/2025-11-25) を2026-07-19 UTCに確認した。input / output / function tool guardrailの適用位置、tool typeの差、MCPのprompts / resources / tools / sampling / roots / elicitationのsurfaceを区別し、guardrailやroot notificationでreview、verification、sandbox、authorization、human approvalを代替しない。
+- 外部 source を足すなら、shell、CI runner、permission model、agent runtime の tool / guardrail / tracing docs を優先する。権限境界と外部投入境界は agent の印象論ではなく、実行環境と provider 条件で決め、仕様の版と確認日を残す。
 
 ### CH10 Verification Harness を作る
 

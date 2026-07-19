@@ -5,6 +5,7 @@ goal: Harness Engineering の導入として、coding agent を動かす single-
 reader_outcomes:
   - single-agent harness の構成要素を説明できる
   - permission policy と escalation の必要性を理解する
+  - surface ごとの guardrail coverage と blind spot を説明できる
   - done criteria を明文化できる
 dependencies:
   - ch05
@@ -19,10 +20,13 @@ sections:
   - coding agent に仕事を最後までさせる条件
 exercises:
   - バグ修正タスク向けの single-agent runbook を設計する。
-  - permission policy と escalation rule を定義する。
+  - hostile input、tool output、trace leakageのcoverage matrixを作り、permission policyとescalation ruleへ接続する。
 artifacts:
   - scripts/init.sh
   - scripts/verify-sample.sh
+  - scripts/check-guardrail-coverage.py
+  - docs/guardrail-coverage-matrix.md
+  - evals/guardrail-surface-cases.json
   - sample-repo/docs/harness/single-agent-runbook.md
   - sample-repo/docs/harness/permission-policy.md
   - sample-repo/docs/harness/done-criteria.md
@@ -31,4 +35,6 @@ acceptance_criteria:
   - bad / good example を最低 1 組含む
   - 演習を 2 問含む
   - brief で参照する artifact が repo 上に存在する
+  - tool-independent contract と vendor / protocol profile が区別されている
+  - minimum adversarial cases の欠落を deterministic verifier が reject する
   - verify が通る

@@ -61,11 +61,11 @@ AIエージェント運用では、PR が「CI green だから完了」になり
 
 #### mergeからproduction確認までを閉じる
 
-review完了とmergeは、code changeを受け入れたことを示す。しかし、公開先へ正しいartifactが届き、期待するbehaviorとmetricが維持されたことまでは示さない。`docs/operating-model.md` は、`Review Complete`、`Production Ready`、`Deployment Approved`、`Deployed`、`Production Confirmed` を別の状態として扱う。environmentの承認はdeployしてよいという判断であり、deploy jobのsuccessもproduction正常性の証明ではない。
+review 完了と merge は、code change を受け入れたことを示す。しかし、公開先へ正しい artifact が届き、期待する behavior と metric が維持されたことまでは示さない。`docs/operating-model.md` は、`Review Complete`、`Production Ready`、`Deployment Approved`、`Deployed`、`Production Confirmed` を別の状態として扱う。environment の承認は deploy してよいという判断であり、deploy job の success も production 正常性の証明ではない。
 
-productionへ影響するPRでは、merge前にtarget URL、merge後のSHA/version、semantic marker、代表route、metricのbaseline/threshold/window、owner、halt/rollback/restart条件を記録する。merge後は対象SHAのdeploymentとworkflowを照合し、HTTP、marker、metricを確認する。集約statusと対象deploymentが食い違う場合は、対象SHAの証拠を優先し、食い違いを説明できなければ完了させない。
+production へ影響する PR では、merge 前に target URL、merge 後の SHA/version、semantic marker、代表 route、metric の baseline/threshold/window、owner、halt/rollback/restart 条件を記録する。merge 後は対象 SHA の deployment と workflow を照合し、HTTP、marker、metric を確認する。集約 status と対象 deployment が食い違う場合は、対象 SHA の証拠を優先し、食い違いを説明できなければ完了させない。
 
-deploymentがfailed/unknown、markerが不一致、代表routeが異常、またはmetricがthresholdを超えた場合は `Halted` とする。後続SHAにより対象runがcancelされた場合は、後続SHAが対象changeを含み、同じroute/marker/metric契約を満たしたときだけ `Superseded` evidenceで元のwork packageを確認できる。rollbackは履歴改変ではなく、review済みのrevert PR等による新しいmain commitを既定にする。過去runのrerunは元のSHA/refを使うため、mainと公開物を乖離させる既定rollbackには向かない。rollback後も新しいSHAに対して同じproduction確認を繰り返し、原因、是正、再検証、再開判断が揃ってから次へ進む。
+deployment が failed/unknown、marker が不一致、代表 route が異常、または metric が threshold を超えた場合は `Halted` とする。後続 SHA により対象 run が `cancelled` となった場合は、後続 SHA が対象 change を含み、同じ route/marker/metric 契約を満たしたときだけ `Superseded` evidence で元の work package を確認できる。rollback は履歴改変ではなく、review 済みの revert PR 等による新しい main commit を既定にする。過去 run の rerun は元の SHA/ref を使うため、main と公開物を乖離させる既定 rollback には向かない。rollback 後も新しい SHA に対して同じ production 確認を繰り返し、原因、是正、再検証、再開判断が揃ってから次へ進む。
 
 ### 3. repo hygiene と AI slop 対策
 AIエージェント運用では、良い差分だけでなく低品質な差分も高速に増える。この蓄積が AI slop である。AI slop は派手なバグだけではない。stale docs、path 切れ、孤立した task brief、verify script と実態のずれ、表記ゆれ、説明だけ厚いが使われない docs も含む。

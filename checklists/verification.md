@@ -33,6 +33,24 @@
 - review body、inline comment、suggestion を確認し、未解決 review thread が 0 であることを確認する段取りがあるか
 - skipped check がある場合、その理由を `Remaining Gaps` に残したか
 
+## Production Gate（該当する場合）
+
+### Before Merge / Production-ready Plan
+- target environmentと公開URLを記録したか
+- merge後のSHA/versionの記録場所とproductionで照合するsemantic markerを決めたか
+- deploy owner、production confirmation owner、必要な承認者を決めたか
+- root smoke、代表route、期待HTTP status / content markerを決めたか
+- metricのbaseline、threshold、window、source、ownerを決めたか
+- halt条件、rollback手段、restart条件、evidence locationを決めたか
+
+### After Merge / Production Evidence
+- 対象SHA/versionとdeployment/workflow runが一致しているか
+- deployment approval、deployment success、production confirmationを別々に記録したか
+- rootと代表routeのHTTP status、semantic markerを確認したか
+- metricを定義したwindowで確認したか、対象外なら `N/A` と理由を残したか
+- owner、UTC timestamp、観測値、evidence URLをPRまたはlinked Issueへ記録したか
+- rollback後は新しいmain SHAのdeployment、HTTP、marker、metricを再確認したか
+
 ## Stop Instead Of Merge
 - 現在の diff と無関係な verify failure が残っている
 - evidence が必要な変更なのに current run の証跡がない
@@ -40,3 +58,6 @@
 - approval が必要な変更を、承認なしで進めている
 - review comment / suggestion / unresolved thread が残っているのに merge しようとしている
 - model/runtime profile が変わったのに eval や smoke check を再実行していない
+- production-ready planが未記入なのにproductionへ影響する変更をmergeしようとしている
+- deploymentがfailed / unknown、SHAまたはmarkerが不一致、代表routeが異常、metricがthresholdを超えているのに完了扱いにしようとしている
+- deployment successまたはapprovalだけでproduction confirmationを代替している

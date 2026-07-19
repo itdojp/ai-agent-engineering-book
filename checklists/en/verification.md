@@ -33,6 +33,24 @@
 - Is there a plan to inspect review bodies, inline comments, suggestions, and confirm zero unresolved review threads?
 - If any check was skipped, is that decision recorded in `Remaining Gaps`?
 
+## Production Gate (When Applicable)
+
+### Before Merge / Production-ready Plan
+- Is the target environment and public URL recorded?
+- Is there a location for the post-merge SHA/version and a semantic marker to compare in production?
+- Are the deploy owner, production-confirmation owner, and required approver identified?
+- Are the root smoke, representative routes, and expected HTTP status / content markers defined?
+- Does the metric have a baseline, threshold, window, source, and owner?
+- Are halt conditions, rollback method, restart conditions, and evidence location defined?
+
+### After Merge / Production Evidence
+- Do the target SHA/version and deployment/workflow run match?
+- Are deployment approval, deployment success, and production confirmation recorded separately?
+- Were the root and representative-route HTTP status and semantic markers checked?
+- Was the metric checked for the defined window, or recorded as `N/A` with a reason?
+- Are owner, UTC timestamp, observed values, and evidence URLs recorded in the PR or linked issue?
+- After rollback, were deployment, HTTP, markers, and metrics rechecked for the new main SHA?
+
 ## Stop Instead Of Merge
 - Does an unrelated verify failure remain unresolved?
 - Is current-run evidence missing even though the change requires it?
@@ -40,3 +58,6 @@
 - Are there changes that require approval before merge?
 - Do review comments, suggestions, or unresolved threads remain while merge is being attempted?
 - Did the model/runtime profile change without rerunning evals or smoke checks?
+- Is production-affecting work being merged without a completed production-ready plan?
+- Is the work being marked complete while deployment is failed/unknown, SHA or marker mismatches, a representative route fails, or a metric exceeds its threshold?
+- Is deployment success or approval being used as a substitute for production confirmation?

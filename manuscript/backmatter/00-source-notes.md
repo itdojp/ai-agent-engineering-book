@@ -84,5 +84,6 @@ CH07、CH11、CH12 の後付けでは、`restart packet（Resume Packet）`、`P
 
 ### CH12 運用モデルと組織導入
 
-- 最初に信頼するのは `docs/operating-model.md`、`docs/metrics.md`、`checklists/repo-hygiene.md`、`.github/pull_request_template.md` である。運用モデルは Lead / Operator / Reviewer、approval boundary、review budget、cadence、cleanup の組で読む。
-- 外部 source を足すなら、組織が採用する review policy、release policy、metrics definition、GitHub review / Actions / secret handling の公式文書を優先する。導入判断をモデル比較だけで閉じず、review completion gate と公開反映確認まで含める。
+- 最初に信頼するのは `docs/operating-model.md`、`docs/metrics.md`、`checklists/verification.md`、`checklists/repo-hygiene.md`、`.github/pull_request_template.md` である。運用モデルは Lead / Operator / Reviewer / Delivery Owner、approval boundary、review budget、production gate、cadence、cleanup の組で読む。
+- deployment環境、承認、履歴、workflow rerunの挙動は、GitHub公式の [Deploying with GitHub Actions](https://docs.github.com/en/actions/how-tos/deploy/configure-and-manage-deployments/control-deployments)、[Managing environments for deployment](https://docs.github.com/en/actions/how-tos/deploy/configure-and-manage-deployments/manage-environments)、[Viewing deployment history](https://docs.github.com/en/actions/how-tos/deploy/configure-and-manage-deployments/view-deployment-history)、[Re-running workflows and jobs](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/re-run-workflows-and-jobs) を2026-07-19 UTCに確認した。approval、deployment success、production confirmationは別の証拠として扱い、historical rerunがoriginal runの`GITHUB_SHA`/`GITHUB_REF`を使う点をrollback設計へ反映する。
+- 外部 source を足すなら、組織が採用する review policy、release policy、metrics definition、GitHub review / Actions / secret handling の公式文書を優先する。導入判断をモデル比較だけで閉じず、review completion gate、対象SHAのdeployment、HTTP/semantic marker、metricによるproduction確認まで含める。

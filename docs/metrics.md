@@ -33,6 +33,22 @@ throughput の自慢ではなく、どこで運用が詰まり、どの artifact
 - eval rerun coverage
   - prompt、model/runtime profile、tool policy 変更時に eval / smoke check が再実行されているかを見る
 
+## Production Delivery
+
+productionへ影響するwork packageだけを分母にし、Delivery Ownerが週次またはrelease単位で記録する。`N/A`を0件として扱わず、対象外理由を残す。
+
+| 指標 | 定義 | window / owner | 介入の目安 |
+|---|---|---|---|
+| production confirmation latency | merge timestampから`Production Confirmed` timestampまでの時間 | work package単位 / Delivery Owner | 定義したSLO超過でdeploy、smoke、metric待ちのどこかを分類する |
+| production confirmation rate | window内にproductionへ影響したmerged work packageを分母、期限内に`Production Confirmed`となった件数を分子とする | 週次またはrelease単位 / Delivery Owner | 100%未満なら未確認案件を完了扱いにせず棚卸しする |
+| deployment failure / unknown count | 対象SHAのdeploymentがfailure、cancelled、または定義したtimeout後もunknownだった件数 | 週次 / Operator | 1件以上でcauseとretry scopeを記録する |
+| marker mismatch count | expected SHA/version/semantic markerとproduction responseが不一致だった件数 | deployment単位 / Delivery Owner | 1件以上でrolloutをhaltする |
+| post-deploy metric regression count | 事前定義したbaseline/threshold/windowを逸脱したdeployment件数 | deploymentの観測window / Delivery Owner | 1件以上でrollback判断を行う |
+| rollback rate | productionへ影響したdeploymentを分母、rollback開始件数を分子とする | release単位 / Lead | 上昇時はproduction-ready gateとchange sizeを見直す |
+| rollback recovery time | `Rollback in Progress`開始からrollback後の`Production Confirmed`までの時間 | rollback単位 / Delivery Owner | 目標超過時はrollback手順とevidence取得を改善する |
+
+metricは、名前だけでなくbaseline、threshold、window、source、ownerが揃った場合だけ判定に使う。trafficが少なく数値metricを判定できない場合も、HTTPとsemantic markerを省略せず、metricを `N/A: low traffic` のように理由付きで記録する。
+
 ## Hygiene
 - stale docs count
   - entropy cleanup が追いついているかを見る
@@ -93,6 +109,12 @@ throughput の自慢ではなく、どこで運用が詰まり、どの artifact
   - model / API / SDK 変更時の確認日記録と eval 再実行を merge 前 gate に戻す
 - external-input exception count が増えたら
   - redaction policy、provider 条件確認、approval boundary を見直す
+- production confirmation rate が100%未満、またはproduction confirmation latencyがSLOを超えたら
+  - merge済みを完了扱いにせず、deploy、HTTP/marker、metricのどこで待っているか分類する
+- deployment failure / unknown、marker mismatch、post-deploy metric regression が1件以上なら
+  - rolloutをhaltし、対象SHAのevidenceを保存してrollbackまたは是正を判断する
+- rollback rateまたはrollback recovery timeが悪化したら
+  - production-ready gate、change size、revert手順、確認ownerを見直す
 - stale docs count、evidence freshness failures、hygiene backlog age が悪化したら
   - cleanup 専用の work package を先に開く
 
@@ -105,5 +127,8 @@ throughput の自慢ではなく、どこで運用が詰まり、どの artifact
 - review completion rate が低い原因は、コメント未返信なのか、suggestion 未処理なのか、thread 解決漏れなのか
 - model/runtime profile 変更時に eval rerun が抜けていないか
 - AI / 外部サービス投入の例外が redaction / approval / provider 条件のどこで増えているか
+- mergeからproduction confirmationまでの遅延を、deploy、HTTP/marker、metricのどこで説明できるか
+- deployment成功だけでproduction confirmationを代替していないか
+- rollback後に新しいmain SHAとproduction markerを再確認したか
 - repo hygiene の悪化が次の作業速度を落としていないか
 - stale draft と stale docs を同時に増やしていないか

@@ -11,6 +11,7 @@ The minimum operating model for putting AI agents into team workflows. It fixes 
 - do not treat a diff without current-run verify as review-ready
 - when the review budget is exceeded, reduce the queue before opening new work
 - make entropy cleanup part of the cadence instead of leaving it for later
+- record review completion, deployment approval, and production confirmation as separate decisions
 
 ## Runtime-managed capability and team-owned duty
 
@@ -79,6 +80,79 @@ The key test is not whether the runtime feels convenient. The key test is how mu
 - check docs drift, artifact drift, and scope drift
 - decide whether the PR is mergeable or whether more verify is required
 
+### Delivery Owner
+
+- finalize the target, marker, metric, and halt / rollback / restart conditions in the production-ready plan
+- inspect the target deployment and production evidence, then record either `Production Confirmed` or `Halted`
+- record rollback and restart decisions with owner, timestamp, and evidence location
+
+In a one-person operation, the same person may hold Lead, Operator, Reviewer, and Delivery Owner roles. That person must not collapse review completion, deployment approval, and production confirmation into one checkbox. Keep separate timestamps, target SHAs, and evidence for each decision.
+
+## Delivery State Model
+
+A merge closes code review; it does not prove production success. A work package that affects production moves through the following states.
+
+| State | Entry condition | Owner | Required evidence | Exit condition |
+|---|---|---|---|---|
+| `Review Complete` | review bodies, inline comments, and suggestions handled; zero unresolved threads; green CI | Reviewer | review responses, thread status, CI URL | merge decision recorded |
+| `Production Ready` | the production-ready record below is complete and rollback is possible | Delivery Owner | target, SHA/version, routes/markers, metric, owner, rollback plan | deployment start approved |
+| `Deployment Approved` | required environment or equivalent protection conditions passed, or non-applicability recorded | Approver | approval/deployment record or `N/A` reason | deployment job started |
+| `Deployed` | deployment job for the target artifact succeeded | Operator | deployment and workflow URL for the target SHA | production smoke started |
+| `Production Confirmed` | HTTP, semantic markers, representative routes, and metrics match expectations | Delivery Owner | confirmation record with owner and timestamp | work package may close |
+| `Halted` | deployment failed/is unknown, marker mismatch, route failure, or metric breach | Delivery Owner | halt reason, observations, impact, next decision | rollback or remediation chosen |
+| `Rollback in Progress` | approved rollback started | Operator | rollback change such as a revert PR and deployment URL | rollback production rechecked |
+
+`Deployment Approved` is a control decision that allows a change to enter an environment. It does not prove deployment success or production health. `Deployed` proves only that an artifact was sent. Do not claim completion until `Production Confirmed`.
+
+## Production-ready Gate
+
+Before merge, record the following in the PR or linked issue. For a non-applicable change, write `N/A` and the reason.
+
+- target environment and public URL
+- where the post-merge SHA/version will be recorded and which semantic marker production must expose
+- deploy owner, production-confirmation owner, and approver when one is required
+- root smoke plus representative routes and expected HTTP status / content marker
+- metric name, baseline, allowed threshold, observation window, and source
+- halt conditions, rollback method, and restart conditions
+- locations for workflow, deployment, HTTP, and metric evidence
+
+## Post-deploy Confirmation
+
+The Delivery Owner checks evidence tied to the target SHA instead of relying on an aggregate status or a screen that merely appears to be current.
+
+1. Match deployment status and workflow run to the target SHA/version.
+2. Run an HTTP smoke against the target URL and check representative-route status.
+3. Compare a semantic marker such as SHA, version, or release-specific text rather than relying only on the title.
+4. Observe the predefined metric for its complete observation window.
+5. Record owner, UTC timestamp, observed values, and evidence URLs in the linked issue or PR.
+
+If repository-level aggregate status disagrees with the target deployment, record the discrepancy and use the target-SHA deployment, workflow, and public URL/marker as the decision evidence. If the discrepancy cannot be explained, move to `Halted`.
+
+## Halt, Rollback, and Restart
+
+| Trigger | Action | Evidence that blocks completion | Restart condition |
+|---|---|---|---|
+| deployment `failure` / `cancelled` / prolonged `unknown` | move to `Halted` and classify the cause before rerun | workflow/deployment URL, log, target SHA | cause and retry scope approved |
+| SHA/version/marker mismatch | stop traffic or further rollout | expected/actual marker and HTTP response | correct artifact deployed and rechecked |
+| representative-route failure | record impact and decide rollback | route, status, response marker | root and representative routes healthy |
+| metric exceeds threshold | preserve the window and roll back | baseline, threshold, actual value, window | post-rollback or post-fix window is healthy |
+
+Use a new main commit such as a reviewed revert PR as the default rollback; do not rewrite history. Rerunning a historical source-built Pages workflow uses the original run's SHA/ref and can make production diverge from main, so a historical rerun is not the default rollback. Restart only after cause, remediation, re-verification, and an explicit restart decision are present.
+
+## Deployment Scenario Walkthrough
+
+### Success
+
+Complete review, create the production-ready record, and merge. The target-SHA deployment succeeds; the root and representative route return HTTP 200; the semantic marker matches; and the metric stays within threshold. The Delivery Owner records timestamped evidence and moves the work package to `Production Confirmed`.
+
+### Deployment Failure or Unknown
+
+If deployment fails or remains unknown beyond the defined timeout, move to `Halted`. Do not close the work merely because CI was green or merge completed. Preserve the run/deployment URL, failed stage, target SHA, and impact. Start a new run only after the cause and retry scope are approved.
+
+### Marker or Metric Regression and Rollback
+
+Even if deployment itself succeeds, a marker mismatch or metric breach moves the work to `Rollback in Progress`. Review and merge a revert PR, then deploy the new main SHA. Repeat the same HTTP, marker, and metric checks after rollback. Do not begin another rollout until root cause, remediation, re-verification, and the restart decision are all recorded.
+
 ## Review Budget
 
 - one reviewer should hold at most two deep reviews at once
@@ -99,8 +173,9 @@ The key test is not whether the runtime feels convenient. The key test is how mu
 2. prepare the task brief and related artifacts
 3. let the agent implement and run verify
 4. let humans review and approve
-5. record metrics and learnings after merge
-6. run weekly entropy cleanup
+5. for production-affecting work, confirm the production-ready plan before merge and deployment
+6. confirm production evidence for the target SHA, then record metrics and learnings
+7. run weekly entropy cleanup
 
 ## Weekly Review
 

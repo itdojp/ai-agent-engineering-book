@@ -9,6 +9,7 @@ AIエージェントをチーム運用へ載せるための最小 operating mode
 - current-run verify がない差分は review-ready と見なさない
 - review budget を超えたら新規着手より queue 解消を優先する
 - entropy cleanup を cadence に組み込み、後回しにしない
+- review 完了、deployment 承認、production 確認を別の判断として記録する
 
 ## Runtime-managed capability と team-owned duty
 
@@ -70,6 +71,75 @@ runtime は mechanism の提供者であり、policy の決定者ではない。
 - docs drift、artifact drift、scope 逸脱を確認する
 - merge 可能か、追加 verify が必要かを判定する
 
+### Delivery Owner
+- production-ready plan の target、marker、metric、halt / rollback / restart 条件を確定する
+- 対象 deployment と production evidence を確認し、`Production Confirmed` または `Halted` を記録する
+- rollback と再開の判断、owner、timestamp、evidence location を残す
+
+1人運用では、同じ人が Lead、Operator、Reviewer、Delivery Owner を兼任してよい。ただし、review 完了、deployment 承認、production 確認を1つのチェックで代替してはならない。各判断の時刻、対象SHA、根拠を分けて残す。
+
+## Delivery State Model
+
+merge はcode reviewの終了であり、production成功の証拠ではない。productionへ影響するwork packageは、次の状態を順に通る。
+
+| 状態 | entry condition | owner | 必須 evidence | exit condition |
+|---|---|---|---|---|
+| `Review Complete` | review body / inline / suggestionを処理し、unresolved thread 0、CI green | Reviewer | review response、thread、CI URL | merge可否を判断した |
+| `Production Ready` | 下記production-ready recordが埋まり、rollback可能 | Delivery Owner | target、SHA/version、route/marker、metric、owner、rollback plan | deployment開始を承認した |
+| `Deployment Approved` | 必要なenvironment等の保護条件を通過、または適用不要を記録 | 承認者 | approval/deployment recordまたは`N/A`理由 | deployment jobが開始した |
+| `Deployed` | 対象artifactのdeployment jobがsuccess | Operator | 対象SHAのdeploymentとworkflow URL | production smokeを開始した |
+| `Production Confirmed` | HTTP、semantic marker、代表route、metricが期待値内 | Delivery Owner | owner/timestamp付きconfirmation record | work packageを完了できる |
+| `Halted` | deploymentがfailed/unknown、marker不一致、route異常、metric逸脱 | Delivery Owner | halt理由、観測値、影響、次の判断 | rollbackまたは是正を決めた |
+| `Rollback in Progress` | 承認済みrollbackを開始 | Operator | revert PR等のrollback change、deployment URL | rollback後のproductionを再確認した |
+
+`Deployment Approved` は変更を環境へ送ってよいというcontrol decisionであり、deployment成功やproduction正常性の証明ではない。`Deployed` もartifactが送られたことだけを示し、`Production Confirmed` までは完了扱いにしない。
+
+## Production-ready Gate
+
+merge前にPRまたはlinked Issueへ次を記録する。該当しない変更は `N/A` と理由を残す。
+
+- target environmentと公開URL
+- merge後に確定するSHA/versionの記録場所と、productionで照合するsemantic marker
+- deploy owner、production confirmation owner、承認者（必要な場合）
+- root smokeと代表route、期待するHTTP status / content marker
+- metric名、baseline、許容threshold、観測window、取得元
+- halt条件、rollback手段、restart条件
+- workflow、deployment、HTTP、metric evidenceの保存場所
+
+## Post-deploy Confirmation
+
+Delivery Ownerは、集約statusや「最新らしい」画面だけでなく、対象SHAへ紐づく証拠を確認する。
+
+1. 対象SHA/versionのdeployment statusとworkflow runを照合する。
+2. target URLのHTTP smokeと、代表routeのHTTP statusを確認する。
+3. titleだけでなく、SHA、version、release固有文言等のsemantic markerを照合する。
+4. 事前に定義したmetricを観測window全体で確認する。
+5. owner、UTC timestamp、観測値、evidence URLをlinked IssueまたはPRへ記録する。
+
+repository全体の集約statusと対象deploymentが食い違う場合は、食い違い自体を記録し、対象SHAのdeployment、workflow、公開URL/markerを正本として判定する。食い違いを説明できない場合は `Halted` とする。
+
+## Halt, Rollback, and Restart
+
+| trigger | action | completionを止めるevidence | restart condition |
+|---|---|---|---|
+| deployment `failure` / `cancelled` / 長時間`unknown` | `Halted`、再実行前に原因を分類 | workflow/deployment URL、log、対象SHA | 原因と再試行範囲が承認済み |
+| SHA/version/marker不一致 | trafficや追加rolloutを停止 | expected/actual marker、HTTP response | 正しいartifactをdeployして再確認済み |
+| 代表route異常 | 影響範囲を記録してrollback判断 | route、status、response marker | rootと代表routeが正常 |
+| metricがthreshold超過 | 観測windowを保存してrollback | baseline、threshold、actual、window | rollbackまたは修正後のwindowが正常 |
+
+rollbackは履歴改変ではなく、revert PR等の新しいmain commitを既定とする。source-built Pagesで過去workflowをrerunすると、original runのSHA/refで再実行され、mainと公開物が乖離し得る。そのためhistorical rerunを既定rollbackにしない。restartは、原因、是正、再検証、明示的な再開判断が揃った場合だけ行う。
+
+## Deployment Scenario Walkthrough
+
+### Success
+PRのreviewが完了し、production-ready recordを作る。merge後、対象SHAのdeploymentがsuccessで、root/代表routeがHTTP 200、semantic markerが一致し、metricがthreshold内である。Delivery Ownerがowner/timestamp付き証跡を残して `Production Confirmed` とする。
+
+### Deployment Failure or Unknown
+deploymentがfailureまたは定義したtimeout後もunknownなら `Halted` とする。CI greenやmerge済みだけを理由に完了させない。run/deployment URL、失敗stage、対象SHA、影響を保存し、原因と再試行範囲を承認してから新しいrunを開始する。
+
+### Marker or Metric Regression and Rollback
+deployment自体がsuccessでもmarker不一致またはmetric逸脱なら `Rollback in Progress` とする。revert PRをreview/mergeし、新しいmain SHAのdeploymentを実行する。rollback後も同じHTTP、marker、metric確認を行う。根本原因、是正、再検証、再開判断が揃うまで次のrolloutを開始しない。
+
 ## Review Budget
 - reviewer 1 人あたり同時に深く見る PR は 2 本まで
 - evidence bundle が必要な PR は reviewer ごとに 1 本まで
@@ -87,8 +157,9 @@ runtime は mechanism の提供者であり、policy の決定者ではない。
 2. task brief と関連 artifact を揃える
 3. agent が実装と verify を進める
 4. Human が review / approval を行う
-5. merge 後に metrics と learnings を記録する
-6. 週次で entropy cleanup を行う
+5. productionへ影響する場合はproduction-ready planを確認してmerge/deployする
+6. 対象SHAのproduction evidenceを確認し、metricsとlearningsを記録する
+7. 週次で entropy cleanup を行う
 
 ## Weekly Review
 - PR cycle time と stale draft 数を確認する

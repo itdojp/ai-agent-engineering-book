@@ -47,6 +47,7 @@ Before merge / production-ready plan:
 
 After merge / production evidence (update the merged PR body or linked issue):
 - Target SHA and deployment/workflow: `N/A — reason`
+- Superseded run / successor SHA inclusion / both run URLs: `N/A — reason`
 - HTTP/semantic-marker observations: `N/A — reason`
 - Metric observation and window: `N/A — reason`
 - Production confirmation or halt decision / owner / UTC timestamp: `N/A — reason`

@@ -44,7 +44,7 @@ Use only production-affecting work packages as the denominator. The Delivery Own
 |---|---|---|---|
 | `production confirmation latency` | time from merge timestamp to `Production Confirmed` timestamp | per work package / Delivery Owner | when the defined SLO is exceeded, classify delay as deployment, smoke, or metric wait |
 | `production confirmation rate` | numerator: production-affecting merged work packages confirmed within the deadline; denominator: all production-affecting merged work packages in the window | weekly or per release / Delivery Owner | below 100%, inventory unconfirmed work and do not count it complete |
-| `deployment failure / unknown count` | target-SHA deployments that failed, were cancelled, or stayed unknown beyond the defined timeout | weekly / Operator | at one or more, record cause and retry scope |
+| `deployment failure / unknown count` | target-SHA deployments that failed, were cancelled without explanation, or stayed unknown beyond the defined timeout; excludes `Superseded` runs confirmed through a successor deployment containing the target change | weekly / Operator | at one or more, record cause and retry scope |
 | `marker mismatch count` | cases where the expected SHA/version/semantic marker disagreed with the production response | per deployment / Delivery Owner | at one or more, halt rollout |
 | `post-deploy metric regression count` | deployments that breached the predefined baseline/threshold/window | deployment observation window / Delivery Owner | at one or more, make a rollback decision |
 | `rollback rate` | numerator: rollbacks started; denominator: production-affecting deployments | per release / Lead | when rising, revisit the production-ready gate and change size |

@@ -45,6 +45,7 @@
 
 ### After Merge / Production Evidence
 - Do the target SHA/version and deployment/workflow run match?
+- If a successor run cancelled the target run, are successor inclusion, both run URLs, and successor-deployment checks recorded as `Superseded` evidence?
 - Are deployment approval, deployment success, and production confirmation recorded separately?
 - Were the root and representative-route HTTP status and semantic markers checked?
 - Was the metric checked for the defined window, or recorded as `N/A` with a reason?
@@ -61,3 +62,4 @@
 - Is production-affecting work being merged without a completed production-ready plan?
 - Is the work being marked complete while deployment is failed/unknown, SHA or marker mismatches, a representative route fails, or a metric exceeds its threshold?
 - Is deployment success or approval being used as a substitute for production confirmation?
+- Is a `cancelled` run being treated as `Superseded` or successful without successor-SHA inclusion and production confirmation?

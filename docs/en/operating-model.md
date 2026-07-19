@@ -95,10 +95,11 @@ A merge closes code review; it does not prove production success. A work package
 | State | Entry condition | Owner | Required evidence | Exit condition |
 |---|---|---|---|---|
 | `Review Complete` | review bodies, inline comments, and suggestions handled; zero unresolved threads; green CI | Reviewer | review responses, thread status, CI URL | merge decision recorded |
-| `Production Ready` | the production-ready record below is complete and rollback is possible | Delivery Owner | target, SHA/version, routes/markers, metric, owner, rollback plan | deployment start approved |
+| `Production Ready` | the production-ready plan below is complete and rollback is possible | Delivery Owner | target, SHA/version, routes/markers, metric, owner, rollback plan | deployment start approved |
 | `Deployment Approved` | required environment or equivalent protection conditions passed, or non-applicability recorded | Approver | approval/deployment record or `N/A` reason | deployment job started |
 | `Deployed` | deployment job for the target artifact succeeded | Operator | deployment and workflow URL for the target SHA | production smoke started |
-| `Production Confirmed` | HTTP, semantic markers, representative routes, and metrics match expectations | Delivery Owner | confirmation record with owner and timestamp | work package may close |
+| `Superseded` | a later SHA cancelled the target run and includes the target change | Operator | target/successor SHA ancestry and both run URLs | production smoke started against the successor deployment |
+| `Production Confirmed` | HTTP, semantic markers, representative routes, and metrics match expectations on the target SHA or a qualifying successor | Delivery Owner | confirmation record with owner and timestamp | work package may close |
 | `Halted` | deployment failed/is unknown, marker mismatch, route failure, or metric breach | Delivery Owner | halt reason, observations, impact, next decision | rollback or remediation chosen |
 | `Rollback in Progress` | approved rollback started | Operator | rollback change such as a revert PR and deployment URL | rollback production rechecked |
 
@@ -120,7 +121,7 @@ Before merge, record the following in the PR or linked issue. For a non-applicab
 
 The Delivery Owner checks evidence tied to the target SHA instead of relying on an aggregate status or a screen that merely appears to be current.
 
-1. Match deployment status and workflow run to the target SHA/version.
+1. Match deployment status and workflow run to the target SHA/version. If a successor run cancels the target run, verify that the successor SHA has the target commit as an ancestor or otherwise includes the target change, then record both SHAs and run URLs as `Superseded` evidence.
 2. Run an HTTP smoke against the target URL and check representative-route status.
 3. Compare a semantic marker such as SHA, version, or release-specific text rather than relying only on the title.
 4. Observe the predefined metric for its complete observation window.
@@ -128,11 +129,14 @@ The Delivery Owner checks evidence tied to the target SHA instead of relying on 
 
 If repository-level aggregate status disagrees with the target deployment, record the discrepancy and use the target-SHA deployment, workflow, and public URL/marker as the decision evidence. If the discrepancy cannot be explained, move to `Halted`.
 
+Do not classify `cancelled` automatically as either failure or `Superseded`. A successor deployment may confirm the original work package only when it includes the target change, succeeds, and satisfies the same route/marker/metric contract. Move to `Halted` when the successor excludes the change, also fails, or cannot be proven to include the change.
+
 ## Halt, Rollback, and Restart
 
 | Trigger | Action | Evidence that blocks completion | Restart condition |
 |---|---|---|---|
-| deployment `failure` / `cancelled` / prolonged `unknown` | move to `Halted` and classify the cause before rerun | workflow/deployment URL, log, target SHA | cause and retry scope approved |
+| deployment `failure` / prolonged `unknown` / unexplained `cancelled` | move to `Halted` and classify the cause before rerun | workflow/deployment URL, log, target SHA | cause and retry scope approved |
+| intentional `cancelled` by a successor SHA | verify inclusion and move to `Superseded` | target/successor SHA, both run URLs, ancestry evidence | routes/markers/metrics confirmed on successor deployment |
 | SHA/version/marker mismatch | stop traffic or further rollout | expected/actual marker and HTTP response | correct artifact deployed and rechecked |
 | representative-route failure | record impact and decide rollback | route, status, response marker | root and representative routes healthy |
 | metric exceeds threshold | preserve the window and roll back | baseline, threshold, actual value, window | post-rollback or post-fix window is healthy |
@@ -143,7 +147,7 @@ Use a new main commit such as a reviewed revert PR as the default rollback; do n
 
 ### Success
 
-Complete review, create the production-ready record, and merge. The target-SHA deployment succeeds; the root and representative route return HTTP 200; the semantic marker matches; and the metric stays within threshold. The Delivery Owner records timestamped evidence and moves the work package to `Production Confirmed`.
+Complete review, create the production-ready plan, and merge. The target-SHA deployment succeeds; the root and representative route return HTTP 200; the semantic marker matches; and the metric stays within threshold. The Delivery Owner records timestamped evidence and moves the work package to `Production Confirmed`. If a successor SHA cancels the target run, record that the successor includes the target change and satisfies the same deployment checks, then move from `Superseded` to `Production Confirmed`.
 
 ### Deployment Failure or Unknown
 

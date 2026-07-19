@@ -45,6 +45,7 @@
 
 ### After Merge / Production Evidence
 - 対象SHA/versionとdeployment/workflow runが一致しているか
+- 対象runが後続runにcancelされた場合、後続SHAが対象changeを含むこと、両run URL、後続deploymentの確認結果を `Superseded` evidenceとして残したか
 - deployment approval、deployment success、production confirmationを別々に記録したか
 - rootと代表routeのHTTP status、semantic markerを確認したか
 - metricを定義したwindowで確認したか、対象外なら `N/A` と理由を残したか
@@ -61,3 +62,4 @@
 - production-ready planが未記入なのにproductionへ影響する変更をmergeしようとしている
 - deploymentがfailed / unknown、SHAまたはmarkerが不一致、代表routeが異常、metricがthresholdを超えているのに完了扱いにしようとしている
 - deployment successまたはapprovalだけでproduction confirmationを代替している
+- `cancelled`を、後続SHAの包含関係とproduction確認なしに `Superseded` または成功として扱っている

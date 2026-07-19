@@ -69,7 +69,7 @@ Review completion and merge show that the code change was accepted. They do not 
 
 For a production-affecting PR, record the target URL, post-merge SHA/version, semantic marker, representative routes, metric baseline/threshold/window, owner, and halt/rollback/restart conditions before merge. After merge, match the deployment and workflow to the target SHA, then check HTTP, markers, and metrics. If aggregate status disagrees with the target deployment, prefer target-SHA evidence and do not complete the work when the discrepancy cannot be explained.
 
-Move to `Halted` when deployment fails or stays unknown, markers mismatch, representative routes fail, or metrics exceed their threshold. Use a reviewed new main commit such as a revert PR as the default rollback rather than rewriting history. A historical rerun uses the original SHA/ref and is therefore a poor default when it can make main and production diverge. After rollback, repeat production confirmation against the new SHA. Resume only after cause, remediation, re-verification, and the restart decision are recorded.
+Move to `Halted` when deployment fails or stays unknown, markers mismatch, representative routes fail, or metrics exceed their threshold. If a successor SHA cancels the target run, use `Superseded` evidence for the original work package only when the successor includes the target change and satisfies the same route/marker/metric contract. Use a reviewed new main commit such as a revert PR as the default rollback rather than rewriting history. A historical rerun uses the original SHA/ref and is therefore a poor default when it can make main and production diverge. After rollback, repeat production confirmation against the new SHA. Resume only after cause, remediation, re-verification, and the restart decision are recorded.
 
 ## 3. Repo Hygiene and AI Slop Control
 AI-agent operations accelerate good diffs and bad diffs at the same time. The accumulated low-quality residue is AI slop. It includes more than obvious bugs. It also includes stale docs, broken paths, orphaned task briefs, drift between verify scripts and the repo, terminology inconsistency, and long explanations that are no longer tied to real artifacts.
@@ -162,6 +162,7 @@ The point of this example is that adoption succeeds or fails based on whether ro
 ## Referenced Artifacts
 - `docs/en/operating-model.md`
 - `docs/en/metrics.md`
+- `checklists/en/verification.md`
 - `checklists/en/repo-hygiene.md`
 - `.github/pull_request_template.md`
 

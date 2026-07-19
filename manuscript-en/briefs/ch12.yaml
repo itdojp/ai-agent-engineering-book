@@ -1,11 +1,12 @@
 id: ch12
 title: Operating Model and Organizational Adoption
 part: part-03-harness
-goal: Define the operating model and hygiene needed to introduce AI agents into a team.
+goal: Define the operating model, production gate, and hygiene needed to introduce AI agents into a team.
 reader_outcomes:
   - Make human responsibilities explicit
   - Explain the tradeoff between review budget and throughput
   - Design repo hygiene and entropy cleanup operations
+  - Design gates from merge through production confirmation, halt, rollback, and restart
 dependencies:
   - ch09
   - ch10
@@ -13,15 +14,17 @@ dependencies:
 sections:
   - Human responsibilities that remain
   - Review budget and throughput
+  - Delivery states from merge through production confirmation
   - Repo hygiene and AI slop control
   - Metrics and retrospectives
   - Adoption roadmap
 exercises:
-  - Define an operating model for a three-person team.
+  - Define a three-person operating model with review completion, a production-ready plan, post-deploy confirmation, rollback / restart ownership, and three scenarios.
   - Create a weekly entropy cleanup checklist.
 artifacts:
   - docs/en/operating-model.md
   - docs/en/metrics.md
+  - checklists/en/verification.md
   - checklists/en/repo-hygiene.md
   - .github/pull_request_template.md
 acceptance_criteria:
@@ -29,4 +32,5 @@ acceptance_criteria:
   - It includes at least one bad / good example pair
   - It includes exactly two exercises
   - All referenced artifacts exist in the repo
+  - Success, deployment failure, and metric-regression / rollback scenarios are traceable
   - verify passes

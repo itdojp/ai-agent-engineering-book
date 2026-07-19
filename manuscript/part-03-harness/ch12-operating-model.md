@@ -5,6 +5,7 @@ status: draft
 artifacts:
   - docs/operating-model.md
   - docs/metrics.md
+  - checklists/verification.md
   - checklists/repo-hygiene.md
   - .github/pull_request_template.md
 dependencies:
@@ -106,7 +107,7 @@ bad:
 ```text
 AIエージェントが速いので、issue の粒度を大きくし、review は人手が空いたときにまとめて行う。
 trace や verify log は細かすぎるので見ない。metrics は PR 数だけを見る。
-CIがgreenでmergeできたので、deployment approvalとproduction確認も完了したことにする。
+CI が green で merge できたので、deployment approval と production 確認も完了したことにする。
 ```
 
 この運用では throughput だけが先に増え、review budget、failure analysis、repo hygiene が崩れる。結果として PR は増えるが、merge 後の修正も増える。

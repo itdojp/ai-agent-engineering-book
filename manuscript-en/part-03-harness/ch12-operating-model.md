@@ -6,6 +6,7 @@ source_ja: manuscript/part-03-harness/ch12-operating-model.md
 artifacts:
   - docs/en/operating-model.md
   - docs/en/metrics.md
+  - checklists/en/verification.md
   - checklists/en/repo-hygiene.md
   - .github/pull_request_template.md
 dependencies:

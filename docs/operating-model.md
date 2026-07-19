@@ -80,7 +80,7 @@ runtime は mechanism の提供者であり、policy の決定者ではない。
 
 ## Delivery State Model
 
-merge はcode reviewの終了であり、production成功の証拠ではない。productionへ影響するwork packageは、次の状態を順に通る。
+merge は code review の終了であり、production 成功の証拠ではない。production へ影響する work package は、次の状態を順に通る。
 
 | 状態 | entry condition | owner | 必須 evidence | exit condition |
 |---|---|---|---|---|
@@ -161,8 +161,8 @@ deployment自体がsuccessでもmarker不一致またはmetric逸脱なら `Roll
 2. task brief と関連 artifact を揃える
 3. agent が実装と verify を進める
 4. Human が review / approval を行う
-5. productionへ影響する場合はproduction-ready planを確認してmerge/deployする
-6. 対象SHAのproduction evidenceを確認し、metricsとlearningsを記録する
+5. production へ影響する場合は production-ready plan を確認して merge / deploy する
+6. 対象 SHA の production evidence を確認し、metrics と learnings を記録する
 7. 週次で entropy cleanup を行う
 
 ## Weekly Review

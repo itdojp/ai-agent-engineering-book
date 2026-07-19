@@ -27,7 +27,7 @@ for path in "${required[@]}"; do
   fi
 done
 
-python3 "$ROOT/scripts/check-guardrail-coverage.py" --negative-self-test
+python3 "$ROOT/scripts/check-guardrail-coverage.py" --self-test
 python3 "$ROOT/scripts/check-guardrail-coverage.py" --cases "$ROOT/evals/guardrail-surface-cases.json"
 
 PYTHONPATH="$SAMPLE/src" python3 -m unittest discover -s "$SAMPLE/tests" -v

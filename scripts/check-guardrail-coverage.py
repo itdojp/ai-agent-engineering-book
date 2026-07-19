@@ -427,7 +427,10 @@ def main(argv: Optional[List[str]] = None) -> int:
         "--self-test",
         dest="negative_self_test",
         action="store_true",
-        help="run in-memory rejection checks for a missing surface and control",
+        help=(
+            "run in-memory fail-closed checks for missing surfaces, controls, and cases; "
+            "case mappings; and fixture/evidence path and marker constraints"
+        ),
     )
     args = parser.parse_args(argv)
 

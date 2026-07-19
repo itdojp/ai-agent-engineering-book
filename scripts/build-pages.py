@@ -196,6 +196,10 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Run isolated reader-resource source, route, navigation, and negative-contract checks.",
     )
+    parser.add_argument(
+        "--build-revision",
+        help="Immutable source revision to expose in generated pages and build-revision.txt.",
+    )
     return parser.parse_args()
 
 
@@ -654,7 +658,7 @@ def rendered_body(page: Page, pages: list[Page]) -> str:
     return page.body_html
 
 
-def page_chrome(page: Page, body: str, current_search_placeholder: str) -> str:
+def page_chrome(page: Page, body: str, current_search_placeholder: str, build_revision: str) -> str:
     css_main = rel_link(page.output_rel, Path("assets") / "css" / "main.css")
     css_syntax = rel_link(page.output_rel, Path("assets") / "css" / "syntax-highlighting.css")
     css_custom = rel_link(page.output_rel, Path("assets") / "css" / "book-custom.css")
@@ -674,6 +678,7 @@ def page_chrome(page: Page, body: str, current_search_placeholder: str) -> str:
         "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
         f"<meta name=\"description\" content=\"{html.escape(page_desc)}\">"
         f"<meta name=\"author\" content=\"{html.escape(SITE_AUTHOR)}\">"
+        f"<meta name=\"book-build-revision\" content=\"{html.escape(build_revision)}\">"
         f"<link rel=\"canonical\" href=\"{html.escape(page_url)}\">"
         f"<meta property=\"og:title\" content=\"{html.escape(title)}\">"
         f"<meta property=\"og:description\" content=\"{html.escape(page_desc)}\">"
@@ -786,6 +791,7 @@ def render_page(
     previous_page: Page | None,
     next_page: Page | None,
     counterpart: Page | None,
+    build_revision: str,
 ) -> None:
     spec = BOOK_SPECS[page.language]
     first_chapter = next(candidate for candidate in pages if candidate.page_kind == "chapter")
@@ -823,7 +829,10 @@ def render_page(
     )
     target = output_dir / page.output_rel
     target.parent.mkdir(parents=True, exist_ok=True)
-    target.write_text(page_chrome(page, body, spec["search_placeholder"]), encoding="utf-8")
+    target.write_text(
+        page_chrome(page, body, spec["search_placeholder"], build_revision),
+        encoding="utf-8",
+    )
 
 
 def validate_troubleshooting_flow(language: str, text: str) -> None:
@@ -1000,6 +1009,15 @@ def copy_assets(output_dir: Path) -> None:
     (output_dir / ".nojekyll").write_text("", encoding="utf-8")
 
 
+def validate_build_revision(value: str | None) -> str:
+    if value is None or not value.strip():
+        raise SystemExit("--build-revision is required when building the Pages site")
+    revision = value.strip()
+    if not re.fullmatch(r"[A-Za-z0-9._-]+", revision):
+        raise SystemExit("--build-revision must contain only letters, digits, dot, underscore, or hyphen")
+    return revision
+
+
 def build_counterpart_map(books: dict[str, list[Page]]) -> dict[tuple[str, str], Page]:
     lookup: dict[tuple[str, str], Page] = {}
     for language, pages in books.items():
@@ -1032,11 +1050,13 @@ def main() -> None:
         run_reader_resource_negative_regressions()
         print("reader-resource source and negative contracts look consistent")
         return
+    build_revision = validate_build_revision(args.build_revision)
     output_dir = Path(args.output).resolve()
     if output_dir.exists():
         shutil.rmtree(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
     copy_assets(output_dir)
+    (output_dir / "build-revision.txt").write_text(f"{build_revision}\n", encoding="utf-8")
 
     books = {language: collect_pages(language) for language in ("ja", "en")}
     validate_page_paths(books)
@@ -1048,7 +1068,15 @@ def main() -> None:
             other_language = "en" if language == "ja" else "ja"
             counterpart = lookup.get((other_language, page.logical_id))
             previous_page, next_page = pagers[language][page.output_rel]
-            render_page(output_dir, pages, page, previous_page, next_page, counterpart)
+            render_page(
+                output_dir,
+                pages,
+                page,
+                previous_page,
+                next_page,
+                counterpart,
+                build_revision,
+            )
 
     print(f"pages site built at {output_dir}")
 

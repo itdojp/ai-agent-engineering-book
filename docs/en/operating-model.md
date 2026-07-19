@@ -110,7 +110,7 @@ A merge closes code review; it does not prove production success. A work package
 Before merge, record the following in the PR or linked issue. For a non-applicable change, write `N/A` and the reason.
 
 - target environment and public URL
-- where the post-merge SHA/version will be recorded and which semantic marker production must expose
+- where the post-merge SHA/version will be recorded and which immutable marker production must expose; for a source-built site, stamp the SHA/version into a meta tag or `build-revision.txt` and do not use a fixed title or body text as the marker
 - deploy owner, production-confirmation owner, and approver when one is required
 - root smoke plus representative routes and expected HTTP status / content marker
 - metric name, baseline, allowed threshold, observation window, and source
@@ -123,7 +123,7 @@ The Delivery Owner checks evidence tied to the target SHA instead of relying on 
 
 1. Match deployment status and workflow run to the target SHA/version. If a successor run cancels the target run, verify that the successor SHA has the target commit as an ancestor or otherwise includes the target change, then record both SHAs and run URLs as `Superseded` evidence.
 2. Run an HTTP smoke against the target URL and check representative-route status.
-3. Compare a semantic marker such as SHA, version, or release-specific text rather than relying only on the title.
+3. Compare an immutable marker such as a SHA/version stamped at build time. A fixed title or pre-existing body text can also match a stale deployment and is not sufficient on its own.
 4. Observe the predefined metric for its complete observation window.
 5. Record owner, UTC timestamp, observed values, and evidence URLs in the linked issue or PR.
 

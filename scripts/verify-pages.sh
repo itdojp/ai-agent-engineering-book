@@ -15,8 +15,13 @@ python -m pip install --quiet --upgrade pip
 python -m pip install --quiet -r "$ROOT/requirements-pages.txt"
 
 OUT="$TMPDIR/site"
+TEST_REVISION="0123456789abcdef0123456789abcdef01234567"
 python "$ROOT/scripts/build-pages.py" --verify-reader-resources
-python "$ROOT/scripts/build-pages.py" --output "$OUT"
+if python "$ROOT/scripts/build-pages.py" --output "$TMPDIR/missing-revision" >/dev/null 2>&1; then
+  echo "pages build accepted a missing immutable revision"
+  exit 1
+fi
+python "$ROOT/scripts/build-pages.py" --output "$OUT" --build-revision "$TEST_REVISION"
 
 required=(
   "index.html"
@@ -44,6 +49,7 @@ required=(
   "assets/js/theme.js"
   "assets/js/code-copy-lightweight.js"
   "assets/images/favicon.svg"
+  "build-revision.txt"
   ".nojekyll"
 )
 
@@ -69,6 +75,9 @@ grep -q "Close the path from merge to production confirmation" "$OUT/en/chapters
 grep -q "Production Confirmed" "$OUT/en/chapters/ch12/index.html"
 grep -q "Superseded" "$OUT/en/chapters/ch12/index.html"
 grep -q 'meta name="author" content="株式会社アイティードゥ"' "$OUT/index.html"
+grep -q "meta name=\"book-build-revision\" content=\"$TEST_REVISION\"" "$OUT/index.html"
+grep -q "meta name=\"book-build-revision\" content=\"$TEST_REVISION\"" "$OUT/chapters/ch12/index.html"
+test "$(cat "$OUT/build-revision.txt")" = "$TEST_REVISION"
 grep -q 'link rel="canonical" href="https://itdojp.github.io/ai-agent-engineering-book/"' "$OUT/index.html"
 grep -q 'meta property="og:title"' "$OUT/index.html"
 grep -q 'meta name="twitter:card" content="summary"' "$OUT/index.html"

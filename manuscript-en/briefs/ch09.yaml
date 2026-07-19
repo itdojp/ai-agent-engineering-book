@@ -5,6 +5,7 @@ goal: Introduce Harness Engineering by defining a single-agent harness for codin
 reader_outcomes:
   - Explain the components of a single-agent harness
   - Understand why permission policy and escalation matter
+  - Explain guardrail coverage and blind spots per surface
   - Make done criteria explicit
 dependencies:
   - ch05
@@ -19,10 +20,13 @@ sections:
   - What lets a coding agent finish the work
 exercises:
   - Design a single-agent runbook for a bugfix task.
-  - Define a permission policy and escalation rule.
+  - Build a coverage matrix for hostile input, tool output, and trace leakage, then connect it to the permission policy and escalation rule.
 artifacts:
   - scripts/init.sh
   - scripts/verify-sample.sh
+  - scripts/check-guardrail-coverage.py
+  - docs/en/guardrail-coverage-matrix.md
+  - evals/guardrail-surface-cases.json
   - sample-repo/docs/harness/single-agent-runbook.md
   - sample-repo/docs/harness/permission-policy.md
   - sample-repo/docs/harness/done-criteria.md
@@ -31,4 +35,6 @@ acceptance_criteria:
   - It includes at least one bad / good example pair
   - It includes exactly two exercises
   - All referenced artifacts exist in the repo
+  - The tool-independent contract is distinct from vendor and protocol profiles
+  - A deterministic verifier rejects missing minimum adversarial cases
   - verify passes

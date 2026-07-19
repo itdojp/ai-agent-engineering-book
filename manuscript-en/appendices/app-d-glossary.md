@@ -30,7 +30,7 @@ The order is deliberate. If the prompt contract is weak, adding more context onl
 - `planner`: the role that decomposes a work package and proposes order, dependencies, owned files, and verify strategy
 - `tool`: the execution surface for search, file operations, code execution, API calls, and other external effects
 - `workflow`: the work path connecting prompts, context, tool calls, handoffs, verify, and review
-- `guardrail`: a check or stop condition placed around input, output, tool calls, or external-service submission
+- `guardrail`: a check or stop condition on a specific surface such as input, output, tool call or result, or external-service submission; confirm coverage per surface, and do not use it to replace review, verification, permission, or human approval
 - `ChatGPT`: a conversational environment for shaping requirements, comparing options, and surfacing review angles
 - `Codex CLI`: an execution environment for making repo changes, running commands, and collecting verification evidence
 

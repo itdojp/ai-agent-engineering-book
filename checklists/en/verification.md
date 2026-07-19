@@ -7,6 +7,8 @@
 - If an evidence bundle is required, can you explain that requirement before editing?
 - If the work mentions a model name, API, SDK, or vendor-specific feature, have you chosen where to record the model/runtime profile and official-doc confirmation date?
 - If issues, PRs, logs, eval cases, traces, or evidence may enter an AI or external service, have you checked classification, redaction, provider terms, and approval requirements?
+- In `docs/en/guardrail-coverage-matrix.md`, did you assign classification, redaction, permission, approval, storage / retention, and verification to external input, output, tool definition, call, execution, result, resource, trace, session, external-service, and protocol prompt, root, sampling, and elicitation surfaces?
+- Did you record which surfaces the current runtime guardrail covers or does not cover and its confirmation date, then make unknown surfaces return `deny` or `escalate`?
 - Are you sure that a referenced trace or old log is not being treated as a substitute for current-run verify?
 
 ## During Change
@@ -16,6 +18,8 @@
 - Have you recorded the verify command and pass / fail result as current-run information?
 - For a long-running task, have you organized the handoff or retry events that should be kept in a trace?
 - If you keep a trace, have you recorded the task / work-package id, run timestamp or run id, owner / handoff, and retry / restart reason?
+- Did you treat tool definitions, tool results, and resources as untrusted input and check provenance and instruction injection before the next call?
+- Did you walk through hostile input, hostile tool output, tainted tool metadata, unsafe side effects, trace leakage, stale or sensitive sessions, and external-provider boundaries using `evals/guardrail-surface-cases.json`?
 
 ## Before Review
 - Have you run local verify?
@@ -28,6 +32,7 @@
 - Have you checked whether traces or screenshots need redaction / privacy treatment?
 - If the model/runtime profile changed, did you rerun the eval or smoke check?
 - If AI / external-service submission is involved, did you record the submitted data class, redaction, provider terms, and approval decision under `Evidence / Approval`?
+- Did `python3 scripts/check-guardrail-coverage.py --self-test` pass, including negative fixtures that reject a missing required surface, control, or case?
 - If evidence is not required, can you explain why?
 - Have you called out the points that still require human approval?
 - Is there a plan to inspect review bodies, inline comments, suggestions, and confirm zero unresolved review threads?

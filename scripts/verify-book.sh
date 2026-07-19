@@ -81,6 +81,8 @@ for path in "${required[@]}"; do
   fi
 done
 
+python3 "$ROOT/scripts/check-guardrail-coverage.py" --self-test
+python3 "$ROOT/scripts/check-guardrail-coverage.py" --cases "$ROOT/evals/guardrail-surface-cases.json"
 python3 "$ROOT/scripts/run-prompt-evals.py"
 python3 -S "$ROOT/scripts/build-pages.py" --verify-reader-resources
 

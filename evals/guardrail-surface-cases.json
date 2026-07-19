@@ -1,0 +1,194 @@
+{
+  "surfaces": [
+    {
+      "id": "external-input",
+      "controls": {
+        "classification": "Classify source, trust, and data class before prompt construction.",
+        "redaction": "Remove secrets, personal data, and unreleased content before use.",
+        "permission": "Allowlist source, task scope, and permitted reader.",
+        "approval": "Escalate restricted data or unknown instructions before proceeding.",
+        "storage-retention": "Separate raw and sanitized input and define the deletion deadline.",
+        "verification": "Check provenance, prompt injection indicators, and redaction evidence."
+      }
+    },
+    {
+      "id": "model-output",
+      "controls": {
+        "classification": "Reclassify output for its destination and intended use.",
+        "redaction": "Remove secrets, personal data, internal material, and unverified claims.",
+        "permission": "Separate permissions for publication, merge, and reuse as arguments.",
+        "approval": "Require approval for irreversible decisions or external publication.",
+        "storage-retention": "Retain only the required final output and limit intermediate retention.",
+        "verification": "Check schema, facts, citations, prohibited data, and acceptance criteria."
+      }
+    },
+    {
+      "id": "tool-definition",
+      "controls": {
+        "classification": "Treat names, descriptions, schemas, and annotations as untrusted metadata.",
+        "redaction": "Sanitize metadata before it is placed into instructions or traces.",
+        "permission": "Allowlist registry, server, version, capability, and destination.",
+        "approval": "Approve new, changed, or unknown tools before activation.",
+        "storage-retention": "Cache source, version, confirmation date, and expiry metadata.",
+        "verification": "Check schema, capability, side effects, provenance, and trusted source."
+      }
+    },
+    {
+      "id": "tool-call",
+      "controls": {
+        "classification": "Classify arguments, paths, queries, and payloads independently.",
+        "redaction": "Redact secrets and unnecessary restricted data from arguments and logs.",
+        "permission": "Apply actor and tool allowlists plus path, host, and operation limits.",
+        "approval": "Approve high-risk arguments and restricted outbound payloads.",
+        "storage-retention": "Store the decision and sanitized summary instead of raw secrets.",
+        "verification": "Check schema, bounds, path traversal, destination, and minimization."
+      }
+    },
+    {
+      "id": "tool-execution",
+      "controls": {
+        "classification": "Assign a risk class to read, write, delete, deploy, and purchase operations.",
+        "redaction": "Prevent sensitive values from entering side-effect evidence or command output.",
+        "permission": "Use least privilege, sandboxing, and an explicit target allowlist.",
+        "approval": "Obtain approval immediately before an irreversible side effect.",
+        "storage-retention": "Keep immutable evidence of actor, target, approval, time, and result.",
+        "verification": "Check preconditions, target, postconditions, and rollback readiness."
+      }
+    },
+    {
+      "id": "tool-result",
+      "controls": {
+        "classification": "Reclassify stdout, API responses, database results, and web results as untrusted.",
+        "redaction": "Remove secrets and irrelevant restricted data before forwarding or retaining results.",
+        "permission": "Re-authorize forwarding to another tool or service.",
+        "approval": "Approve forwarding restricted results or using them for a side effect.",
+        "storage-retention": "Do not retain the full result by default; define evidence retention.",
+        "verification": "Check provenance, injection, secrets, schema, and staleness."
+      }
+    },
+    {
+      "id": "resource-content",
+      "controls": {
+        "classification": "Classify repository, resource, web, and attachment content by trust level.",
+        "redaction": "Redact sensitive content before it crosses the next surface.",
+        "permission": "Allowlist paths, domains, resource URIs, and reader roles.",
+        "approval": "Escalate out-of-scope or restricted resources before use.",
+        "storage-retention": "Record source, hash, retrieval date, TTL, and deletion conditions.",
+        "verification": "Check provenance, content type, integrity, injection, and freshness."
+      }
+    },
+    {
+      "id": "trace-log",
+      "controls": {
+        "classification": "Classify prompts, arguments, results, and stack traces before storage or sharing.",
+        "redaction": "Redact secrets, personal data, credentials, and sensitive payloads.",
+        "permission": "Restrict trace viewers, export targets, and telemetry providers.",
+        "approval": "Approve external trace export and other disclosure of restricted evidence.",
+        "storage-retention": "Define minimum events, access, retention, deletion, and provider terms.",
+        "verification": "Scan leakage and link run, task, evidence, and current-run verification."
+      }
+    },
+    {
+      "id": "session-memory",
+      "controls": {
+        "classification": "Classify memory on write and restore and separate facts from hypotheses.",
+        "redaction": "Remove secrets and irrelevant conversation before persistence or reuse.",
+        "permission": "Enforce task, repository, tenant, and owner boundaries.",
+        "approval": "Approve reuse across a boundary or when scope and freshness are uncertain.",
+        "storage-retention": "Define owner, TTL, refresh, invalidation, and deletion method.",
+        "verification": "Check source of truth, freshness, scope, contamination, and revoked credentials."
+      }
+    },
+    {
+      "id": "external-service",
+      "controls": {
+        "classification": "Record payload, destination, jurisdiction, and data class before sending.",
+        "redaction": "Minimize and redact secrets, personal data, and unreleased information.",
+        "permission": "Allowlist provider, model, region, purpose, and egress destination.",
+        "approval": "Escalate restricted data or unknown provider terms before submission.",
+        "storage-retention": "Confirm retention, logging, training use, subprocessors, and deletion.",
+        "verification": "Verify terms date, payload summary, response provenance, and egress evidence."
+      }
+    },
+    {
+      "id": "protocol-prompts-roots",
+      "controls": {
+        "classification": "Treat server prompts, prompt arguments, and root URIs as untrusted protocol input.",
+        "redaction": "Remove sensitive prompt arguments and avoid exposing unnecessary path or repository details.",
+        "permission": "Allowlist the server, prompt, and root URI and enforce the boundary with host access controls.",
+        "approval": "Require explicit approval before using an unknown prompt or expanding a configured root.",
+        "storage-retention": "Record prompt source, version, root scope, confirmation date, and expiry.",
+        "verification": "Check prompt provenance and injection and confirm roots remain inside the configured host boundary."
+      }
+    },
+    {
+      "id": "protocol-sampling-elicitation",
+      "controls": {
+        "classification": "Classify model requests, requests for human input, and form fields independently.",
+        "redaction": "Redact unnecessary secrets, personal data, and restricted context before submission.",
+        "permission": "Restrict the requester, model or destination, and fields that may be requested.",
+        "approval": "Display the request and destination and require explicit consent before proceeding.",
+        "storage-retention": "Separate retention decisions for prompts, responses, and approval records.",
+        "verification": "Check requested data, model parameters, approval evidence, and returned content."
+      }
+    }
+  ],
+  "cases": [
+    {
+      "id": "hostile-input",
+      "surface": "external-input",
+      "threat": "An untrusted instruction attempts to override task scope or bypass redaction.",
+      "required_controls": ["classification", "redaction", "permission", "approval", "storage-retention", "verification"],
+      "expected_decision": "escalate",
+      "verification_evidence": [{"path": "docs/guardrail-coverage-matrix.md", "contains": "`hostile-input`"}]
+    },
+    {
+      "id": "hostile-tool-output",
+      "surface": "tool-result",
+      "threat": "A tool result contains prompt injection, secrets, or instructions for a later tool.",
+      "required_controls": ["classification", "redaction", "permission", "approval", "storage-retention", "verification"],
+      "expected_decision": "deny",
+      "verification_evidence": [{"path": "docs/guardrail-coverage-matrix.md", "contains": "`hostile-tool-output`"}]
+    },
+    {
+      "id": "tainted-tool-metadata",
+      "surface": "tool-definition",
+      "threat": "A changed tool description misrepresents capability or hides a side effect.",
+      "required_controls": ["classification", "redaction", "permission", "approval", "storage-retention", "verification"],
+      "expected_decision": "escalate",
+      "verification_evidence": [{"path": "docs/guardrail-coverage-matrix.md", "contains": "`tainted-tool-metadata`"}]
+    },
+    {
+      "id": "unsafe-side-effect",
+      "surface": "tool-execution",
+      "threat": "A proposed delete, deploy, purchase, or write operation lacks a verified target or approval.",
+      "required_controls": ["classification", "redaction", "permission", "approval", "storage-retention", "verification"],
+      "expected_decision": "deny",
+      "verification_evidence": [{"path": "docs/guardrail-coverage-matrix.md", "contains": "`unsafe-side-effect`"}]
+    },
+    {
+      "id": "trace-leakage",
+      "surface": "trace-log",
+      "threat": "A trace or telemetry export would expose secrets, personal data, or restricted prompt content.",
+      "required_controls": ["classification", "redaction", "permission", "approval", "storage-retention", "verification"],
+      "expected_decision": "deny",
+      "verification_evidence": [{"path": "docs/guardrail-coverage-matrix.md", "contains": "`trace-leakage`"}]
+    },
+    {
+      "id": "stale-sensitive-session",
+      "surface": "session-memory",
+      "threat": "Stale or cross-task memory contains sensitive instructions or revoked credentials.",
+      "required_controls": ["classification", "redaction", "permission", "approval", "storage-retention", "verification"],
+      "expected_decision": "escalate",
+      "verification_evidence": [{"path": "docs/guardrail-coverage-matrix.md", "contains": "`stale-sensitive-session`"}]
+    },
+    {
+      "id": "external-provider-boundary",
+      "surface": "external-service",
+      "threat": "Provider, region, retention, logging, or training-use terms are unknown for restricted data.",
+      "required_controls": ["classification", "redaction", "permission", "approval", "storage-retention", "verification"],
+      "expected_decision": "deny",
+      "verification_evidence": [{"path": "docs/guardrail-coverage-matrix.md", "contains": "`external-provider-boundary`"}]
+    }
+  ]
+}

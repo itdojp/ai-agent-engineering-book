@@ -10,7 +10,7 @@
 | planner | work package を分解し、順序、依存、owned files、verify 方針を提案する役割または agent |
 | workflow | prompt、context、tool call、handoff、verify、review をつないだ実行手順。単発 prompt より広い評価単位 |
 | tool | AI agent が検索、ファイル操作、code 実行、API 呼び出しなどを行うための実行面。使用可否は tool contract と permission policy で決める |
-| guardrail | input、output、tool call、外部投入の前後で危険な操作や不適切なデータ利用を止める検査・停止条件。review や verify の代替ではない |
+| guardrail | input、output、tool call / result、外部投入等の特定surfaceで危険な操作や不適切なデータ利用を止める検査・停止条件。適用surfaceを個別に確認し、review、verify、permission、approvalの代替にしない |
 | ChatGPT | 要件整理、設計検討、比較、レビュー観点の洗い出しに使う対話インターフェース |
 | Codex CLI | repo を読んで変更し、コマンド実行と verify を行う coding agent 実行環境 |
 | `AGENTS.md` | repo entrypoint。対象領域で外してはいけない不変条件と、次に読むべき artifact への入口を定義する |

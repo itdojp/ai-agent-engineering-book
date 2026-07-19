@@ -13,5 +13,7 @@
 | Resume drift | `Progress Note` を読んだだけで再開し、live context を再取得しない | 古い verify 結果や stale state を前提に作業を続ける | resume 時に verify / status command を再実行し、summary を source of truth にしない |
 | Long-context hoarding | window が広いことを理由に何でも保持する | compact、re-fetch、persist の判断が消える | keep verbatim / summarize / compact / re-fetch / persist を明示する |
 | Provider / model drift | model、API、SDK、runtime、tool set の確認日がない | eval の差分が prompt 改善か product surface 変更か分からない | model/runtime profile と official docs 確認日を PR / evidence に残し、変更時は eval を再実行する |
-| External input overexposure | issue、PR、log、trace、evidence を分類せず AI / 外部サービスへ投入する | secret でなくても個人情報、未公開仕様、脆弱性情報、内部判断が漏れる | external input boundary を置き、redaction、provider 条件、approval、保存先を確認する |
-| Guardrail blind spot | guardrail がすべての hosted tool、function tool、trace、session に効くと思い込む | 適用外 surface で危険な tool call やデータ投入が通る | guardrail coverage を tool surface ごとに確認し、未対応範囲は permission policy と human approval で止める |
+| External input overexposure | issue、PR、log、trace、evidence を分類せず AI / 外部サービスへ投入する | secret でなくても個人情報、未公開仕様、脆弱性情報、内部判断が漏れる | `docs/guardrail-coverage-matrix.md` のexternal-input / external-service行に従い、classification、redaction、provider条件、approval、保存先、retention、verificationを確認する |
+| Guardrail blind spot | guardrail がすべての hosted tool、function tool、resource、trace、session に効くと思い込む | 適用外surfaceで危険なtool call、tool resultのinstruction injection、データ投入が通る | coverageをsurfaceごとに確認し、不明または未対応の範囲はpermission policyで `deny` / `escalate` にする |
+| Tainted tool metadata / result | tool description、annotation、stdout、web / MCP resourceを信頼済み命令として扱う | 悪意あるinstructionがtool discoveryやresult経由で次のcallを起動する | metadataとresultをexternal inputとして再分類し、trusted source、schema、provenance、destinationを検証する |
+| Trace / session retention gap | prompt、arguments、results、過去memoryをredactionやTTLなしで保存・復元する | trace漏えい、task間汚染、stale context、revoked credentialの再利用が起きる | 保存時と復元時に再分類し、閲覧者、TTL、削除、freshness、source-of-truth、leakage scanを確認する |

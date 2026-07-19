@@ -6,6 +6,9 @@ source_ja: manuscript/part-03-harness/ch09-harness-fundamentals.md
 artifacts:
   - scripts/init.sh
   - scripts/verify-sample.sh
+  - scripts/check-guardrail-coverage.py
+  - docs/en/guardrail-coverage-matrix.md
+  - evals/guardrail-surface-cases.json
   - sample-repo/docs/harness/single-agent-runbook.md
   - sample-repo/docs/harness/permission-policy.md
   - sample-repo/docs/harness/done-criteria.md
@@ -28,7 +31,7 @@ Modern runtimes may provide convenience features such as background execution, h
 ## Learning Objectives
 - Explain the components of a single-agent harness
 - Understand why permission policy and escalation matter
-- Explain the boundary for AI / external-service submission and tool guardrails
+- Explain guardrail coverage and blind spots per tool surface and external-service boundary
 - Make done criteria explicit
 
 ## Outline
@@ -48,7 +51,7 @@ In this repo, the single-agent harness has seven parts:
 | init | fixes what to read first and which verify command to use | `scripts/init.sh` |
 | work boundary | limits what the current task may touch | task brief, `sample-repo/docs/harness/single-agent-runbook.md` |
 | permission policy | separates autonomous changes from approval-required changes | `sample-repo/docs/harness/permission-policy.md` |
-| external input boundary | checks classification, redaction, provider terms, and guardrail coverage before AI / external-service submission | permission policy and `checklists/en/verification.md` |
+| external input boundary | checks classification, redaction, provider terms, and per-surface guardrail coverage before AI / external-service submission | `docs/en/guardrail-coverage-matrix.md`, permission policy, and `checklists/en/verification.md` |
 | done criteria | defines `done`, `blocked`, and `needs-human-approval` | `sample-repo/docs/harness/done-criteria.md` |
 | verify command | fixes the minimum local validation | `scripts/verify-sample.sh` |
 | report format | standardizes what must be reported at finish | runbook and done criteria |
@@ -90,7 +93,28 @@ The key question is not whether the agent is trustworthy in general. The key que
 
 AI / external-service submission does not become safe just because secrets are absent. Issues, PRs, logs, eval cases, traces, and evidence bundles may contain customer data, personal data, sensitive data, unpublished specifications, vulnerability information, or internal decision traces. Before sending them to an external API, hosted tool, web search, tracing surface, or eval judge, confirm the data classification, redaction, provider retention / training-use / logging terms, storage location, and approver.
 
-Treat that check as the `external input boundary`. This boundary covers not only whether a tool call is allowed, but also what granularity may be sent, where output may be stored, and what trace may be retained. Guardrails sit before and after the boundary to block secret values, personal data, out-of-scope tool calls, and approval-required operations. They do not replace final review, current-run verify, or human approval. Use the official docs for the runtime in use to confirm which tool surfaces, hosted tools, function tools, traces, and sessions the guardrail actually covers, and keep uncovered areas stopped by the permission policy.
+Treat that check as the `external input boundary`. This boundary covers not only whether a tool call is allowed, but also what granularity may be sent, where output may be stored, and what trace may be retained. Guardrails sit before and after the boundary to block secret values, personal data, out-of-scope tool calls, and approval-required operations. They do not replace final review, current-run verify, or human approval.
+
+`docs/en/guardrail-coverage-matrix.md` divides this boundary into external input, model output, tool definition, tool call, tool execution, tool result, resource, trace, session, external-service, protocol prompts / roots, and protocol sampling / elicitation surfaces. Check classification, redaction, permission, approval, storage / retention, and verification independently at each surface. In particular, tool definitions, tool results, server prompts, and resource content are external input, not trusted instructions. Do not close a side effect at argument inspection; require immediate approval, least privilege, a postcondition, and rollback evidence.
+
+| Surface | Minimum controls | Representative blind spot |
+|---|---|---|
+| external input | provenance, classification, redaction | mid-chain retrieval and tool results can sit outside an ingress guardrail |
+| model output | destination-specific reclassification plus schema and fact checks | intermediate-agent output and tool arguments can sit outside final-output inspection |
+| tool definition | trusted registry, version, and capability checks | descriptions and annotations can contain instruction injection |
+| tool call | permission checks for arguments, paths, hosts, and payloads | teams can assume the same coverage for unattached tool types |
+| tool execution | least privilege, immediate approval, and postconditions | argument checks do not enforce OS permissions or irreversible side effects |
+| tool result | reclassification as untrusted input plus provenance checks | stdout, web, or MCP results can become the next instruction |
+| resource | path, domain, and URI allowlists plus integrity and freshness | file or resource retrieval can use a path outside tool-call guardrails |
+| trace / log | redaction, viewer restrictions, retention, and leakage scans | tracing SDKs, CI logs, and artifact uploads may not be inspected automatically |
+| session / memory | task boundary, TTL, refresh / invalidation, and source-of-truth checks | persisted secrets and stale context survive ingress checks |
+| external service | provider, purpose, region, retention, and training-use checks | a local guardrail cannot enforce provider storage or subprocessor behavior |
+| protocol prompts / roots | server, prompt, and root allowlists plus prompt provenance and host ACLs or sandboxes | prompt discovery does not establish instruction trust, and root notification does not enforce a filesystem boundary |
+| protocol sampling / elicitation | request and destination display, explicit approval, and field restrictions | the protocol does not guarantee a host consent UI or policy enforcement |
+
+State what the coverage applies to. If a runtime applies input guardrails only at chain ingress, output guardrails only to the final agent, or tool guardrails only to attached function tools, then retrieval, hosted tools, MCP resources, intermediate agents, traces, and sessions need separate controls. Check official runtime documentation and make the permission policy return `deny` or `escalate` for an unknown or uncovered surface.
+
+The minimum walkthrough is fixed in `evals/guardrail-surface-cases.json`. It covers hostile input, hostile tool output, tainted tool metadata, unsafe side effects, trace leakage, stale or sensitive sessions, and external-provider boundaries with required controls, expected decisions, and verification evidence. `scripts/check-guardrail-coverage.py` rejects fixtures that omit a required surface or control so that prose cannot drift away from the verification contract.
 
 Work boundaries matter for the same reason. In `BUG-001`, the agent should begin with the task brief, the repo map, the architecture doc, and the relevant tests. At this stage, it should not wander across the entire repo. A smaller work package produces a smaller verify unit and a safer rollback unit.
 
@@ -148,7 +172,7 @@ Even when task briefs, context packs, and skills are present, the last ten perce
 | init | reading order and verify command | `./scripts/init.sh sample-repo/tasks/BUG-001-brief.md` | confusion at task start |
 | work boundary | task scope and editable surface | task brief, runbook | scope expansion |
 | permission policy | approval-required changes | `sample-repo/docs/harness/permission-policy.md` | unauthorized contract changes |
-| external input boundary | AI / external-service submission and guardrail coverage | permission policy and verification checklist | sensitive data or out-of-scope tool use |
+| external input boundary | AI / external-service submission and per-surface guardrail coverage | `docs/en/guardrail-coverage-matrix.md`, permission policy, and verification checklist | sensitive data or out-of-scope tool use |
 | done criteria | `done / blocked / needs-human-approval` | `sample-repo/docs/harness/done-criteria.md` | ambiguous finish conditions |
 | verify command | minimum validation line | `./scripts/verify-sample.sh` | stopping before verification |
 | report format | `Changed Files`, `Verification`, `Remaining Gaps` | runbook, done criteria | non-reviewable completion reports |
@@ -176,6 +200,7 @@ requires approval.
 Classify and redact issue, PR, log, and evidence data before sending it to AI or external services.
 You may say `done` only if `sample-repo/docs/harness/done-criteria.md`
 is satisfied and `./scripts/verify-sample.sh` passes.
+Put the `Exit State` first.
 Report `Changed Files`, `Verification`, and `Remaining Gaps`.
 ```
 
@@ -217,17 +242,20 @@ The point of this example is not automation theater. The point is to show that H
 
 ## Exercises
 1. Design a single-agent runbook for a bugfix task.
-2. Define a permission policy and escalation rule.
+2. Build a coverage matrix for hostile input, tool output, and trace leakage, then connect it to the permission policy and escalation rule.
 
 ## Referenced Artifacts
 - `scripts/init.sh`
 - `scripts/verify-sample.sh`
+- `scripts/check-guardrail-coverage.py`
+- `docs/en/guardrail-coverage-matrix.md`
+- `evals/guardrail-surface-cases.json`
 - `sample-repo/docs/harness/single-agent-runbook.md`
 - `sample-repo/docs/harness/permission-policy.md`
 - `sample-repo/docs/harness/done-criteria.md`
 
 ## Source Notes / Further Reading
-- To revisit this chapter, start with `scripts/init.sh`, `sample-repo/docs/harness/single-agent-runbook.md`, `sample-repo/docs/harness/permission-policy.md`, and `sample-repo/docs/harness/done-criteria.md`. Read the single-agent harness as a bundle of init, work boundary, permission policy, external-input boundary, done criteria, verify command, and report format rather than as a prompt variant.
+- To revisit this chapter, start with `scripts/init.sh`, `docs/en/guardrail-coverage-matrix.md`, `evals/guardrail-surface-cases.json`, `sample-repo/docs/harness/single-agent-runbook.md`, `sample-repo/docs/harness/permission-policy.md`, and `sample-repo/docs/harness/done-criteria.md`. Read the single-agent harness as a bundle of init, work boundary, permission policy, external-input boundary, done criteria, verify command, and report format rather than as a prompt variant.
 - For the backmatter path, see `manuscript-en/backmatter/00-source-notes.md` under `### CH09 Foundations of Harness Engineering` and `manuscript-en/backmatter/01-reading-guide.md` under `## Verification, Reliability, and Operations`.
 
 ## Chapter Summary
